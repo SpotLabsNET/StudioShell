@@ -1,0 +1,24 @@
+﻿TOPIC
+    about_StudioShell_Data_Panes
+
+SHORT DESCRIPTION
+    StudioShell extends the Visual Studio IDE with simple visualization 
+    controls.
+
+LONG DESCRIPTION
+	StudioShell adds a Data Panes window to the Visual Studio IDE.  This window 
+	contains a collection of grids and charts that have been created from the
+	StudioShell environment.
+	
+	Each data pane is identified by its name, and you can create as many data 
+	panes as you need.  
+	
+	You can create a new data pane using the out-grid or out-chart cmdlet.
+	
+	For more information, please see the out-grid and out-chart cmdlets.
+
+SEE ALSO
+    out-grid
+    out-chart
+    out-html
+

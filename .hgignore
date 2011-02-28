@@ -1,0 +1,12 @@
+syntax: regexp
+
+\.suo$
+\.user$
+setup.exe$
+\.msi$
+\.db$
+_ReSharper
+_Upgrade
+obj
+bin
+CodeOwls.StudioShell.Setup

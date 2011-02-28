@@ -1,0 +1,41 @@
+﻿TOPIC
+    about_StudioShell_Host_Requirements
+
+SHORT DESCRIPTION
+    StudioShell is designed to use used from a variety of suitable hosts.
+    This topic outlines the requirements of a suitable host.
+
+LONG DESCRIPTION
+	StudioShell is not tightly coupled to its own console.  Instead it is 
+	meant to be used from a variety of consoles, allowing you to take
+	advantage of other powerful PowerShell hosts available in Visual
+	Studio.
+	
+	A suitable host for StudioShell must have the following properties:
+	
+	1. the host is loaded in the Visual Studio process;
+	2. the Visual Studio process has the StudioShell add-in loaded;
+	3. the host's System.Management.Automation.Host.PSHost implementation
+		supports the IHostSupportsInteractiveSession interface; 
+		specifically, the Runspace property is supported, but the runspace
+		pushing methods and properties are optional.
+		
+VERIFYING YOUR HOST
+	To verify if a PowerShell host can support StudioShell, open the host
+	console and type the following command:
+	
+		test-studioShellHost.ps1
+		
+	If the command fails to execute, or if the command executes and returns 
+	false, your host will not be able to load StudioShell.
+	
+USING STUDIOSHELL IN OTHER HOSTS
+	Once you verify that your host can use StudioShell, you can add StudioShell
+	features to your host by typing the following:
+	
+		start-studioShell.ps1	
+	
+SEE ALSO
+	about_StudioShell    
+	test-studioShellHost.ps1
+	start-studioShell.ps1
