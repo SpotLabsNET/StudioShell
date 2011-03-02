@@ -315,13 +315,15 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\Visual Studio 2008\Addins\StudioShell - For Testing.AddIn">
+      <Link>StudioShell - For Testing.AddIn</Link>
+    </Content>
     <Content Include="license.txt" />
     <Content Include="readme.txt" />
     <Content Include="StudioShell.VS2010.Testing.AddIn" />
     <Content Include="Module\StudioShell\en-US\about_StudioShell_Solution_Modules.help.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="StudioShell.VS2008.Testing.AddIn" />
     <Content Include="StudioShell.VS2010.AddIn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
