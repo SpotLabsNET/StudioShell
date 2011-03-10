@@ -1,4 +1,4 @@
-#
+﻿#
 #   Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
 #
 #   Licensed under the Microsoft Reciprocal License (Ms-RL) (the "License");
@@ -19,52 +19,40 @@
 param(
 	[string] 
 	[parameter( Mandatory=$false )]
-	# the name of the output pane where output will be sent; defaults to 'StudioShell'
+	# the name of the output pipe where output will be sent; defaults to 'StudioShell'
 	$name = 'StudioShell',
 	
+	[string] 
+	[parameter( Mandatory=$false )]
+	# the name of the output pipe where output will be sent; defaults to 'StudioShell'
+	$endOfStream = 'EOS',
+
 	[string]
 	[parameter( mandatory=$true, valueFromPipeline=$true )]
 	# the string to write to the output pane
 	$inputObject
 );
 
+$script:pipe;
+$script:writer;
+begin
+{
+	add-type -assembly system.core | out-null; 
+	$script:pipe = new-object System.IO.Pipes.NamedPipeClientStream($name)
+	$script:pipe.Connect();
+
+	$script:writer = new-object System.IO.StreamWriter -arg $script:pipe;
+}
 process
 {
-	$pane = $null;
-	$path = "dte:/outputPanes/$name";
-	if( -not( test-path $path ) )
-	{
-		write-debug "creating new output pane at $path";
-		$pane = new-item $path;
-	}
-
-	$pane = get-item $path;
-
-	if( -not( $inputObject -match '[`r`n]+$' ) )
-	{
-		$inputObject += "`n";
-	}	
-	
-	$pane.outputString( ( $inputObject -replace ,'' ) );
+	$script:writer.WriteLine( $inputObject.ToString() );
 }
-
-<#
-.SYNOPSIS 
-Writes a string to an output pane.
-
-.DESCRIPTION
-Writes a string to a named output window pane.  
-
-By default, output is written to the 'StudioShell' output window pane.  You can specify a different output window pane using the -name parameter.
-
-.INPUTS
-A string value to write to the output pane.
-
-.OUTPUTS
-None.
-
-.EXAMPLE
-C:\PS> get-date | out-outputpane;
-
-
-#>
+end
+{
+	$script:writer.WriteLine( $endOfStream );
+	$script:writer.Dispose();
+	
+	$script:pipe.Close();
+	$script:pipe.Dispose();
+	$script:pipe = $null;
+}

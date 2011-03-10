@@ -18,6 +18,7 @@
 
 $script:solutionProfileScript = 'profile.ps1';
 $script:perSolutionScripts = @();
+$script:currentSolutionModule;
 	     
 function clear-SolutionScriptRepository()
 {
@@ -122,17 +123,17 @@ function import-solutionModule
 	}
 	
 	write-verbose "importing module at '$local:slnModulePath' ...";
-	import-module $local:slnModulePath;
+
+	$script:currentSolutionModule = import-module $local:slnModulePath -passthru;
 }
 
 function remove-solutionModule
 {
-	$local:slnModuleName = get-solutionModuleName;
-	write-debug "checking for existence of solution module named '$local:slnModuleName' ...";
-	if( get-module $slnModuleName )
+	if( $script:currentSolutionModule )
 	{
-		write-verbose "removing solution module named '$local:slnModuleName' ...";
-		remove-module $local:slnModuleName;
+		write-verbose "removing solution module $($script:currentSolutionModule.Name)";
+		$script:currentSolutionModule | remove-module;
+		$script:currentSolutionModule = $null;
 	}
 }
 
@@ -165,8 +166,8 @@ function remove-solutionModule
 		event = 'BeforeClosing';
 		action = { 
 			write-debug 'solution closing detected...';
-			clear-SolutionScriptRepository; 
 			remove-solutionModule; 
+			clear-SolutionScriptRepository; 			
 		};
 	}	
 ) | foreach {

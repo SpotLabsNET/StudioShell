@@ -20,6 +20,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Management.Automation;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Windows.Forms;
 
@@ -250,12 +251,25 @@ namespace CodeOwls.StudioShell
                 {
                     return _type;
                 }
-                
-                _type = 
-                (from asm in AppDomain.CurrentDomain.GetAssemblies()
-                 from type in asm.GetExportedTypes()
-                 where type.FullName == _psPropertyInfo.TypeNameOfValue
-                 select type).FirstOrDefault();
+
+                var asms = AppDomain.CurrentDomain.GetAssemblies();
+                foreach( var asm in asms )
+                {
+                    try
+                    {
+                        var foundType = (from type in asm.GetExportedTypes()
+                                         where type.FullName == _psPropertyInfo.TypeNameOfValue
+                                         select type).FirstOrDefault();
+                        if( null != foundType )
+                        {
+                            _type = foundType;
+                            break;
+                        }
+                    }
+                    catch 
+                    {
+                    }
+                }
                 
                 if( null == _type )
                 {
