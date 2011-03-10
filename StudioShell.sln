@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionResources", "SolutionResources", "{4A18610A-DE9A-49CE-B480-BDD332E557CA}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\csheader.txt = Resources\csheader.txt
+		Resources\psheader.txt = Resources\psheader.txt
+		Resources\xmlheader.txt = Resources\xmlheader.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOwls.PowerShell.WinForms", "PowerShellConsole\CodeOwls.PowerShell.WinForms.csproj", "{91F5B843-B1BC-4F80-BBD5-245878D7329F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOwls.StudioShell", "PStudioShell\CodeOwls.StudioShell.csproj", "{8CC0BA4F-42CE-48A0-8B3D-4A6DF433FD08}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CodeOwls.StudioShell.Setup", "CodeOwls.StudioShell.Setup\CodeOwls.StudioShell.Setup.vdproj", "{983DB3C5-A554-4446-850E-CC5293E7769F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug-Test|Any CPU = Debug-Test|Any CPU
+		FxCop-Release|Any CPU = FxCop-Release|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91F5B843-B1BC-4F80-BBD5-245878D7329F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91F5B843-B1BC-4F80-BBD5-245878D7329F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91F5B843-B1BC-4F80-BBD5-245878D7329F}.Debug-Test|Any CPU.ActiveCfg = Debug|Any CPU
+		{91F5B843-B1BC-4F80-BBD5-245878D7329F}.Debug-Test|Any CPU.Build.0 = Debug|Any CPU
+		{91F5B843-B1BC-4F80-BBD5-245878D7329F}.FxCop-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91F5B843-B1BC-4F80-BBD5-245878D7329F}.FxCop-Release|Any CPU.Build.0 = Release|Any CPU
+		{91F5B843-B1BC-4F80-BBD5-245878D7329F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91F5B843-B1BC-4F80-BBD5-245878D7329F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CC0BA4F-42CE-48A0-8B3D-4A6DF433FD08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CC0BA4F-42CE-48A0-8B3D-4A6DF433FD08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CC0BA4F-42CE-48A0-8B3D-4A6DF433FD08}.Debug-Test|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CC0BA4F-42CE-48A0-8B3D-4A6DF433FD08}.Debug-Test|Any CPU.Build.0 = Debug|Any CPU
+		{8CC0BA4F-42CE-48A0-8B3D-4A6DF433FD08}.FxCop-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CC0BA4F-42CE-48A0-8B3D-4A6DF433FD08}.FxCop-Release|Any CPU.Build.0 = Release|Any CPU
+		{8CC0BA4F-42CE-48A0-8B3D-4A6DF433FD08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CC0BA4F-42CE-48A0-8B3D-4A6DF433FD08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{983DB3C5-A554-4446-850E-CC5293E7769F}.Debug|Any CPU.ActiveCfg = Debug
+		{983DB3C5-A554-4446-850E-CC5293E7769F}.Debug-Test|Any CPU.ActiveCfg = Debug
+		{983DB3C5-A554-4446-850E-CC5293E7769F}.FxCop-Release|Any CPU.ActiveCfg = Release
+		{983DB3C5-A554-4446-850E-CC5293E7769F}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
