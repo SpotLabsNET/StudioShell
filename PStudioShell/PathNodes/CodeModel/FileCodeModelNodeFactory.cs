@@ -23,7 +23,6 @@ using CodeOwls.StudioShell.PathNodes.CodeModel;
 using CodeOwls.StudioShell.Utility;
 using EnvDTE;
 using EnvDTE80;
-using log4net;
 using CodeOwls.StudioShell.DTE;
 
 namespace CodeOwls.StudioShell.PathNodes
