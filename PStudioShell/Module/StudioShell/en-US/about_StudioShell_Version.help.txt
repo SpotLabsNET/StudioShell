@@ -1,0 +1,49 @@
+﻿TOPIC
+    about_StudioShell_Version
+
+VERSION
+    You are running version 1.0.1 of StudioShell.
+
+CHANGE LOG
+  Description
+    The changelog documents the changes placed in each release of 
+	StudioShell.  Each item is identified by its codeplex work item 
+	number(s) if available.
+
+1.0.1 
+  Resolved Issues
+	1: Tab completion and history walking have been hardened in the console.
+
+	2,6: Solution Folders are now recognized as containers in the console.
+
+	5: Solution Modules are now unloaded automatically if the 
+		"AutoManageSolutionProfiles" setting is enabled.
+
+	9: The PowerShell AllUsersCurrentHost is no longer loaded.  The 
+		"LoadPowerShellProfiles" setting now only applies
+		to your Current User profile script located at 
+		~\documents\windowspowershell\profile.ps1.
+
+	11: Data panes (visualizations) now reliably appear in VS2010.
+
+	12: The default console window now consumes all available client area of
+		the tool window at startup.
+
+  Added Features
+	10: Project item properties are now avaialble in the path heirarchy.
+		See dte:/solution/projects/<project>/<file>/properties.
+
+	The locals and arguments nodes under the stack frame tree now add missing
+		quotes to strings when you attempt to set an expression value.
+
+	The default PowerShell module path is now added to the process environment
+		when StudioShell is started.
+	  
+1.0.0 
+  Initial Release
+
+SEE ALSO
+    http://studioshell.codeplex.com
+    http://www.studioshell.org
+    about_StudioShell_License
+    PSDTE
