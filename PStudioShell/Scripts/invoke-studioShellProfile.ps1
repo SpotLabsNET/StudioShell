@@ -60,7 +60,6 @@ function invoke-PowerShellProfiles()
 		write-debug 'invoking PowerShell profiles ...'
 		try
 		{
-			. invoke-profile $profile.AllUsersPowershellHost;
 			. invoke-profile $profile.CurrentUserPowershellHost;
 		}
 		finally

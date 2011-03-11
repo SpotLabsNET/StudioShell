@@ -33,6 +33,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1BD78D9FB6CD10CE33375CDAD1362FE3"
+        "OwnerKey" = "8:_E5FB1DDC7457F203332E08AAFB90DFB7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1BD78D9FB6CD10CE33375CDAD1362FE3"
+        "OwnerKey" = "8:_BCE8281A6A888EFED5684B5D7A90B36A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1BD78D9FB6CD10CE33375CDAD1362FE3"
+        "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1CDB004B67391BE207086969455E5EA3"
         "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
         "MsmSig" = "8:_UNDEFINED"
@@ -95,24 +113,6 @@
         {
         "MsmKey" = "8:_3C06428AD8F94A28B9AC494A43095939"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5B331A3C9B6004ABB89E88CC451CC0B3"
-        "OwnerKey" = "8:_9701B3ED2F0EDB032EA7BA23E8A57303"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5B331A3C9B6004ABB89E88CC451CC0B3"
-        "OwnerKey" = "8:_9F597A0D333619988A43B38DE753B6A5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5B331A3C9B6004ABB89E88CC451CC0B3"
-        "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -189,12 +189,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9701B3ED2F0EDB032EA7BA23E8A57303"
-        "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9DA861298AE6F85878FEF4CA14C0B654"
         "OwnerKey" = "8:_A445B562AC95D12F22E5115655F907A8"
         "MsmSig" = "8:_UNDEFINED"
@@ -215,12 +209,6 @@
         {
         "MsmKey" = "8:_9DA861298AE6F85878FEF4CA14C0B654"
         "OwnerKey" = "8:_2CFCF6D4BD3B5630EF78D2DEEF8073DC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9F597A0D333619988A43B38DE753B6A5"
-        "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -279,26 +267,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B91CF55DF03A8C416D6DA6F944EDE8DB"
-        "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_BAC43132A0E62D02E5669B64C72C6C87"
         "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_CB7170C653F705413E02F45315109AAB"
-        "OwnerKey" = "8:_ECF69514DDF1C76A322EA8D57AEA5ACC"
+        "MsmKey" = "8:_BCE8281A6A888EFED5684B5D7A90B36A"
+        "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_CB7170C653F705413E02F45315109AAB"
         "OwnerKey" = "8:_E0F56AFD7B052CBE31D044A627BDD379"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CB7170C653F705413E02F45315109AAB"
+        "OwnerKey" = "8:_ECF69514DDF1C76A322EA8D57AEA5ACC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -363,6 +351,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E5FB1DDC7457F203332E08AAFB90DFB7"
+        "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_ECF69514DDF1C76A322EA8D57AEA5ACC"
         "OwnerKey" = "8:_D65AF5DFF129444981FE2D93F1E86FB2"
         "MsmSig" = "8:_UNDEFINED"
@@ -388,6 +382,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CB7170C653F705413E02F45315109AAB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BAC43132A0E62D02E5669B64C72C6C87"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -406,25 +406,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9F597A0D333619988A43B38DE753B6A5"
+        "OwnerKey" = "8:_BCE8281A6A888EFED5684B5D7A90B36A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9701B3ED2F0EDB032EA7BA23E8A57303"
+        "OwnerKey" = "8:_E5FB1DDC7457F203332E08AAFB90DFB7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5B331A3C9B6004ABB89E88CC451CC0B3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B91CF55DF03A8C416D6DA6F944EDE8DB"
+        "OwnerKey" = "8:_1BD78D9FB6CD10CE33375CDAD1362FE3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -455,12 +449,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_ECF69514DDF1C76A322EA8D57AEA5ACC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CB7170C653F705413E02F45315109AAB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -614,7 +602,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:3.5.30729"
+                "FrameworkVersion" = "8:3.5.30729 "
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
                 }
@@ -676,6 +664,37 @@
                     }
                 }
             "SourcePath" = "8:VSLangProj90.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1BD78D9FB6CD10CE33375CDAD1362FE3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_1BD78D9FB6CD10CE33375CDAD1362FE3"
+                    {
+                    "Name" = "8:System.Management.Automation.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Management.Automation.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
@@ -857,37 +876,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5B331A3C9B6004ABB89E88CC451CC0B3"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_5B331A3C9B6004ABB89E88CC451CC0B3"
-                    {
-                    "Name" = "8:System.Management.Automation.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:System.Management.Automation.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_62CEA0642ECB78CB58F3DBBD93F04BAE"
             {
             "AssemblyRegister" = "3:1"
@@ -1052,37 +1040,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9701B3ED2F0EDB032EA7BA23E8A57303"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.PowerShell.ConsoleHost, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_9701B3ED2F0EDB032EA7BA23E8A57303"
-                    {
-                    "Name" = "8:Microsoft.PowerShell.ConsoleHost.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Microsoft.PowerShell.ConsoleHost.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9DA861298AE6F85878FEF4CA14C0B654"
             {
             "AssemblyRegister" = "3:1"
@@ -1097,37 +1054,6 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.VisualStudio.Shell.Interop.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9F597A0D333619988A43B38DE753B6A5"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CodeOwls.PowerShell.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_9F597A0D333619988A43B38DE753B6A5"
-                    {
-                    "Name" = "8:CodeOwls.PowerShell.WinForms.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CodeOwls.PowerShell.WinForms.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
@@ -1227,20 +1153,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B91CF55DF03A8C416D6DA6F944EDE8DB"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BAC43132A0E62D02E5669B64C72C6C87"
             {
             "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL"
+            "AssemblyIsInGAC" = "11:TRUE"
+            "AssemblyAsmDisplayName" = "8:EnvDTE90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_B91CF55DF03A8C416D6DA6F944EDE8DB"
+                    "_BAC43132A0E62D02E5669B64C72C6C87"
                     {
-                    "Name" = "8:log4net.dll"
+                    "Name" = "8:EnvDTE90.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:log4net.dll"
+            "SourcePath" = "8:EnvDTE90.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
@@ -1258,20 +1184,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BAC43132A0E62D02E5669B64C72C6C87"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BCE8281A6A888EFED5684B5D7A90B36A"
             {
             "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:TRUE"
-            "AssemblyAsmDisplayName" = "8:EnvDTE90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CodeOwls.PowerShell.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BAC43132A0E62D02E5669B64C72C6C87"
+                    "_BCE8281A6A888EFED5684B5D7A90B36A"
                     {
-                    "Name" = "8:EnvDTE90.dll"
+                    "Name" = "8:CodeOwls.PowerShell.WinForms.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:EnvDTE90.dll"
+            "SourcePath" = "8:CodeOwls.PowerShell.WinForms.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
@@ -1473,6 +1399,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E5FB1DDC7457F203332E08AAFB90DFB7"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.PowerShell.ConsoleHost, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_E5FB1DDC7457F203332E08AAFB90DFB7"
+                    {
+                    "Name" = "8:Microsoft.PowerShell.ConsoleHost.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Microsoft.PowerShell.ConsoleHost.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_ECF69514DDF1C76A322EA8D57AEA5ACC"
             {
             "AssemblyRegister" = "3:1"
@@ -1609,9 +1566,31 @@
         }
         "LaunchCondition"
         {
+            "{836E08B8-0285-4809-BA42-01DB6754A45D}:_2A39B4DF097943E7A79FE54C007B0431"
+            {
+            "Name" = "8:PowerShell Missing"
+            "Condition" = "8:POWERSHELL_OK"
+            "Message" = "8:PowerShell 2.0 is required to use StudioShell, but it is not installed on your local machine.  Would you like to open a web page to the PowerShell 2.0 download now?"
+            "InstallUrl" = "8:http://support.microsoft.com/kb/968929"
+            }
         }
         "Locator"
         {
+            "{39E1837C-0DB9-45A2-89C8-438377A77565}:_1422A96A95764C1D8D3CCD8F5584A1C4"
+            {
+            "Name" = "8:SearchForPosh2.0"
+            "Folder" = "8:[SystemFolder]\\windowspowershell\\v1.0"
+            "Depth" = "2:0"
+            "FileName" = "8:powershell.exe"
+            "MinVesion" = "8:6.0.0.0"
+            "MaxVersion" = "8:"
+            "MinSize" = "8:"
+            "MaxSize" = "8:"
+            "MinDate" = "8:"
+            "MaxDate" = "8:"
+            "Languages" = "8:"
+            "Property" = "8:POWERSHELL_OK"
+            }
         }
         "MsiBootstrapper"
         {
@@ -1623,7 +1602,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:StudioShell"
         "ProductCode" = "8:{F252D205-2EB8-4801-BFB9-D330AD26EDCA}"
-        "PackageCode" = "8:{2104831B-AC6E-42D4-8972-93EF4275D214}"
+        "PackageCode" = "8:{F628F0EE-BE66-4640-BC09-459D6ED60494}"
         "UpgradeCode" = "8:{D4680797-1E5D-442A-A513-C2648FB53805}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -2282,7 +2261,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D65AF5DFF129444981FE2D93F1E86FB2"
             {
-            "SourcePath" = "8:..\\PStudioShell\\obj\\Release\\CodeOwls.StudioShell.dll"
+            "SourcePath" = "8:..\\PStudioShell\\obj\\Debug\\CodeOwls.StudioShell.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_49213E7CCC924098AA8BCF92062AB82F"
