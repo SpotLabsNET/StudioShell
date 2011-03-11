@@ -6,9 +6,8 @@ SHORT DESCRIPTION
     profiles specific to StudioShell.
 
 LONG DESCRIPTION
-	StudioShell recognizes any standard PowerShell profile scripts you have on
-	your system.  For more information about these standard profile scripts,
-	type:
+	StudioShell recognizes your user PowerShell profile script.  For more 
+	information about this standard profile script, type:
 	
 		get-help about_Profiles
 		
@@ -31,8 +30,8 @@ LONG DESCRIPTION
 	where ~ represents the user's home directory.
 	
 	It is recommended that you create a user profile script instead of editing
-	the "All Users" profile script, since the "All Users" profile script may
-	contain script that is vital to certain StudioShell features.
+	the "All Users" profile script, since the "All Users" profile script contains 
+	script that is vital to certain StudioShell features.
 	
 CREATING YOUR STUDIOSHELL PROFILE SCRIPT
 

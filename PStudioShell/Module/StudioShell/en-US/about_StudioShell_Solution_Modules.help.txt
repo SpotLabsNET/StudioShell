@@ -32,6 +32,11 @@ LONG DESCRIPTION
 	and they are automatically removed as the solution is closed.  However, 
 	you can override this behavior by modifying the StudioShell settings.
 	
+NOTES
+	Solution modules are only imported when your console is open.  If you 
+	open the console after the solution is loaded in the IDE, the solution 
+	module will be imported once StudioShell is initialized.
+
 SEE ALSO
 	about_StudioShell_Settings
 
