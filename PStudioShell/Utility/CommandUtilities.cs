@@ -28,7 +28,7 @@ namespace CodeOwls.StudioShell.Utility
                         var value = command.GetNodeValue();
                         if (null != value)
                         {
-                            cmd = value as ShellCommand;
+                            cmd = value.Item as ShellCommand;
                         }
                     }
                 }

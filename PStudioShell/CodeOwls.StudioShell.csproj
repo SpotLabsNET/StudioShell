@@ -286,6 +286,7 @@
     <Compile Include="Utility\WindowKinds.cs" />
     <Compile Include="Variables\ActiveWindowVariable.cs" />
     <Compile Include="Variables\CurrentStackFrameVariable.cs" />
+    <Compile Include="Variables\DTEEventSource.cs" />
     <Compile Include="Variables\DTEPSVariable.cs" />
     <Compile Include="Variables\SelectedCodeElementVariable.cs" />
     <Compile Include="Variables\SelectedProjectItems.cs" />
