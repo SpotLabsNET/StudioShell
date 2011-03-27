@@ -206,7 +206,7 @@ SEE ALSO
     http://studioshell.codeplex.com
     http://www.studioshell.org
     about_StudioShell_License
-	about_StudioShell_Version
+    about_StudioShell_Version
     about_StudioShell_Profiles
     about_StudioShell_Settings
     about_StudioShell_Drives

@@ -318,6 +318,9 @@ namespace CodeOwls.StudioShell.PathNodes
 
             [Parameter()]
             public string Caption { get; set; }
+
+            [Parameter()]
+            public string Binding { get; set; }
         }
 
 
@@ -415,6 +418,11 @@ namespace CodeOwls.StudioShell.PathNodes
                 caption,
                 newItemValue
                 );
+
+            if( null != p.Binding )
+            {
+                shellCommand.Bindings = new object[] {(object) p.Binding};
+            }
 
             Command command = shellCommand.AsCommand();
             var ctl = command.AddControl(_commandBar, index) as CommandBarControl;

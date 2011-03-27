@@ -24,10 +24,16 @@ namespace CodeOwls.StudioShell.PathNodes.PropertyModel
 {
     class PropertyCollectionNodeFactory : CollectionNodeFactoryBase
     {
+        private readonly string _name;
         private Properties _properties;
 
-        public PropertyCollectionNodeFactory(Properties properties)
+        public PropertyCollectionNodeFactory(Properties properties) : this ("Properties", properties)
         {
+        }
+
+        public PropertyCollectionNodeFactory(string name, Properties properties)
+        {
+            _name = name;
             _properties = properties;
         }
 
@@ -40,7 +46,7 @@ namespace CodeOwls.StudioShell.PathNodes.PropertyModel
         }
         public override string Name
         {
-            get { return "Properties"; }
+            get { return _name; }
         }
     }
 }
