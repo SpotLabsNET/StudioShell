@@ -10,6 +10,16 @@ CHANGE LOG
 	StudioShell.  Each item is identified by its codeplex work item 
 	number(s) if available.
 
+Current TIP
+  Resolved Issues
+    7: clear-item is now supported in the default console
+
+	8: UI thread deadlocking has been addressed in all cases except nested 
+		consoles.
+
+	13: using shift-home and shift-end in default console selects from the 
+		current position to start-of-input and end-of-input respectively.
+
 1.0.1 
   Resolved Issues
 	1: Tab completion and history walking have been hardened in the console.
