@@ -20,6 +20,13 @@ Current TIP
 	13: using shift-home and shift-end in default console selects from the 
 		current position to start-of-input and end-of-input respectively.
 
+	14: tab completion now manages existing quotes and adds missing quotes 
+		to paths as required
+
+	using 'exit' in the default studioshell console now releases the existing
+		runspace.  re-opening the console will create a new runspace initialized 
+		to the default studioshell state.
+
 1.0.1 
   Resolved Issues
 	1: Tab completion and history walking have been hardened in the console.
