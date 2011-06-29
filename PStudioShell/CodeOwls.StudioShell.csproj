@@ -116,7 +116,6 @@
     <Compile Include="Utility\FunctionUtilities.cs" />
     <Compile Include="Utility\ImageAdapter.cs" />
     <Compile Include="Utility\Scripts.cs" />
-    <Compile Include="Utility\StudioShellInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="EnvDTE">
@@ -211,10 +210,6 @@
     </Content>
     <Content Include="Module\StudioShell\en-US\about_StudioShell_License.help.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\CodeOwls.StudioShell.dll-help.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Content>
     <Content Include="StudioShell.VS2008.AddIn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
