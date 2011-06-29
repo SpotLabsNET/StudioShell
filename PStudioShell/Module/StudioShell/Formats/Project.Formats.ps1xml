@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
    Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
 
@@ -91,12 +91,12 @@
         <View>
             <Name>projectchildren</Name>
             <ViewSelectedBy>
-              <TypeName>CodeOwls.StudioShell.DTE.ProjectModel.ShellProjectItem</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.ProjectModel.ShellSolutionFolder</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.ProjectModel.ShellProject</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.ProjectModel.ShellVSProject2</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.ProjectModel.ShellReference</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.ShellContainer</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellProjectItem</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellSolutionFolder</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellProject</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellVSProject2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellReference</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ShellContainer</TypeName>
             </ViewSelectedBy>
             <GroupBy>
                 <PropertyName>PSParentPath</PropertyName>
@@ -122,8 +122,8 @@
                 <TableRowEntries>
                     <TableRowEntry>
                       <EntrySelectedBy>
-                        <TypeName>CodeOwls.StudioShell.DTE.ProjectModel.ShellProject</TypeName>
-                        <TypeName>CodeOwls.StudioShell.DTE.ProjectModel.ShellVSProject2</TypeName>
+                        <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellProject</TypeName>
+                        <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellVSProject2</TypeName>
                       </EntrySelectedBy>
                         <TableColumnItems>
                           <TableColumnItem>
@@ -139,7 +139,7 @@
                     </TableRowEntry>
                   <TableRowEntry>
                     <EntrySelectedBy>
-                      <TypeName>CodeOwls.StudioShell.DTE.ProjectModel.ShellReference</TypeName>
+                      <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellReference</TypeName>
                     </EntrySelectedBy>
                     <TableColumnItems>
                       <TableColumnItem>

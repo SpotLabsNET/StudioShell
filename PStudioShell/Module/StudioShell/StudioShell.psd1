@@ -19,7 +19,7 @@
 @{
 
 # Script module or binary module file associated with this manifest
-ModuleToProcess = '../../codeowls.studioshell.dll'
+ModuleToProcess = '../../codeowls.studioshell.provider.dll'
 
 # Version number of this module.
 ModuleVersion = '1.0'
@@ -85,7 +85,8 @@ FormatsToProcess = 'formats\_Root.Formats.ps1xml',
                'formats\WindowConfiguration.Formats.ps1xml'
 
 # Modules to import as nested modules of the module specified in ModuleToProcess
-NestedModules = @('start-studioshell.ps1')
+NestedModules = '../../codeowls.studioshell.cmdlets.dll',
+				'start-studioshell.ps1'
 
 # Functions to export from this module
 FunctionsToExport = '*'

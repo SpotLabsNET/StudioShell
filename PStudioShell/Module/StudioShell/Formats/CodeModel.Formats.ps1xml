@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
    Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
 
@@ -72,27 +72,27 @@
         <View>
             <Name>CodeModelChildren</Name>
             <ViewSelectedBy>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.IShellCodeElement2</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.NullShellCodeElement2</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeAttribute</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeAttributeArgument</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeClass</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeDelegate</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeEnum</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeEvent</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeImport</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeInterface</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeMethod</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeModelElement</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeModelElement2</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeNamespace</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeParameter</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeProperty</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeProperty2</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeStruct</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeType</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeTypeReference</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CodeModel.ShellCodeVariable</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.IShellCodeElement2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.NullShellCodeElement2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeAttribute</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeAttributeArgument</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeClass</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeDelegate</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeEnum</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeEvent</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeImport</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeInterface</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeMethod</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeModelElement</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeModelElement2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeNamespace</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeParameter</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeProperty</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeProperty2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeStruct</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeType</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeTypeReference</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeVariable</TypeName>
             </ViewSelectedBy>
             <GroupBy>
                 <PropertyName>PSParentPath</PropertyName>

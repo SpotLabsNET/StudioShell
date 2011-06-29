@@ -13,7 +13,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
-#	profile.ps1 - static "All Users" profile script for studio shell
+#	profile.ps1 - static "All Users" profile script for StudioShell
 #	
 #	note that editing this file is NOT RECOMMENDED; instead create a
 #	user StudioShell profile script by following the instructions in 

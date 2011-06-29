@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
    Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
 
@@ -48,7 +48,7 @@
     <View>
       <Name>OutputPane</Name>
       <ViewSelectedBy>
-        <TypeName>CodeOwls.StudioShell.DTE.UI.ShellOutputPane</TypeName>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.UI.ShellOutputPane</TypeName>
       </ViewSelectedBy>
       <GroupBy>
         <PropertyName>PSParentPath</PropertyName>
