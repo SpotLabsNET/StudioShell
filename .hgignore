@@ -5,7 +5,9 @@ syntax: regexp
 setup.exe$
 \.msi$
 \.db$
+\.ndproj$
 _ReSharper
 _Upgrade
 obj
 bin
+NDepend

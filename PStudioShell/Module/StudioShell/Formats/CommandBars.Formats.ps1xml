@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
    Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
 
@@ -53,10 +53,10 @@
         <View>
             <Name>CommandBarChildren</Name>
             <ViewSelectedBy>
-              <TypeName>CodeOwls.StudioShell.DTE.CommandBars.ShellCommandBar</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CommandBars.ShellCommandBarButton</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CommandBars.ShellCommandBarComboBox</TypeName>
-              <TypeName>CodeOwls.StudioShell.DTE.CommandBars.ShellCommandBarPopup</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CommandBars.ShellCommandBar</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CommandBars.ShellCommandBarButton</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CommandBars.ShellCommandBarComboBox</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CommandBars.ShellCommandBarPopup</TypeName>
             </ViewSelectedBy>
             <GroupBy>
                 <PropertyName>PSParentPath</PropertyName>
@@ -113,7 +113,7 @@
                   </TableRowEntry>
                   <TableRowEntry>
                     <EntrySelectedBy>
-                      <TypeName>CodeOwls.StudioShell.DTE.CommandBars.ShellCommandBar</TypeName>
+                      <TypeName>CodeOwls.StudioShell.Paths.Items.CommandBars.ShellCommandBar</TypeName>
                     </EntrySelectedBy>
 
                     <TableColumnItems>

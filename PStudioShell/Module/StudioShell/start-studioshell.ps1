@@ -38,7 +38,8 @@ write-debug "local module root path is $local:root"
 
 # import the assembly into the module session so we can register the runspace with the add-in
 write-debug "connecting to StudioShell add in instance";
-[CodeOwls.StudioShell.Connect]::RegisterRunspace( $host.runspace );
+#[CodeOwls.StudioShell.Connect]::RegisterRunspace( $host.runspace );
+#[CodeOwls.StudioShell.Connect]::ConfigureRunspace( $host.runspace );
 
 # create module commands for each script under the scripts directory
 # content of each script file becomes a unique exported module function
@@ -53,10 +54,6 @@ ls $local:root/scripts | foreach {
 	write-verbose $local:fxn
 	invoke-expression $local:fxn;
 }
-
-write-host "Studio" -back darkblue -fore darkyellow -nonewline;
-write-host "Shell" -fore darkblue -back darkyellow;
-write-host "Copyright (c) 2011 Code Owls LLC, All Rights Reserved.";
 
 pop-preference;
 remove-module preferencestack;

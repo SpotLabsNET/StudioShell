@@ -14,6 +14,9 @@
 #   limitations under the License.
 #
 
+write-host "Studio" -back darkblue -fore darkyellow -nonewline;
+write-host "Shell" -fore darkblue -back darkyellow;
+write-host "Copyright (c) 2011 Code Owls LLC, All Rights Reserved.";
 
 import-module studioshell;
 . invoke-studioShellProfile.ps1;

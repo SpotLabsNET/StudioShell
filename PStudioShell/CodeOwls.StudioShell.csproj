@@ -76,7 +76,11 @@
       <HintPath>..\lib\2.0\System.Management.Automation.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Chart Controls\Assemblies\System.Windows.Forms.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -90,90 +94,9 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Cmdlets\OutChartCmdlet.cs" />
-    <Compile Include="Cmdlets\OutDataPaneCmdletBase.cs" />
-    <Compile Include="Cmdlets\OutHtmlCmdlet.cs" />
-    <Compile Include="Cmdlets\OutSubsetDataPaneCmdletBase.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeProperty.cs" />
-    <Compile Include="DTE\ProjectModel\ShellReference.cs" />
-    <Compile Include="Exceptions\CodeModelNodeDoesNotSupportItemTypeException.cs" />
-    <Compile Include="Exceptions\MamlHelpDocumentExistsButCannotBeLoadedException.cs" />
-    <Compile Include="Exceptions\NodeDoesNotSupportCmdletException.cs" />
-    <Compile Include="PathNodes\CodeModel\AccessLevel.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeAttributeArgumentNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeAttributeNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeClassNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeDelegateNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeEnumNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeEventNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeInterfaceNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeItemTypes.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeMethodNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeNamespaceNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeParameterNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodePropertyNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeStructNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeElementNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeVariableNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\MethodType.cs" />
-    <Compile Include="PathNodes\Debugger\BreakpointCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\Debugger\BreakpointNodeFactory.cs" />
-    <Compile Include="PathNodes\Debugger\ExpressionCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\Debugger\ExpressionNodeFactory.cs" />
-    <Compile Include="PathNodes\Debugger\ProcessCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\Debugger\ProcessNodeFactory.cs" />
-    <Compile Include="PathNodes\Debugger\StackFrameNodeFactory.cs" />
-    <Compile Include="PathNodes\Debugger\ThreadNodeFactory.cs" />
-    <Compile Include="PathNodes\DTE\AddInNodeCollectionFactory.cs" />
-    <Compile Include="PathNodes\DTE\SelectedCodeModelItemNodeFactory.cs" />
-    <Compile Include="PathNodes\DTE\SelectedProjectItemsNodeFactory.cs" />
-    <Compile Include="PathNodes\DTE\SelectedProjectsNodeFactory.cs" />
-    <Compile Include="PathNodes\IPathNode.cs" />
-    <Compile Include="PathNodes\IServiceProviderEx.cs" />
-    <Compile Include="PathNodes\ProjectModel\ReferenceCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\ProjectModel\ReferenceNodeFactory.cs" />
-    <Compile Include="PathNodes\PropertyModel\ColorableItemFontsAndColorsPropertyNodeFactory.cs" />
-    <Compile Include="PathNodes\PropertyModel\FontsAndColorsPropertyNodeFactory.cs" />
-    <Compile Include="PathNodes\PropertyModel\PropertyCategoryNodeFactory.cs" />
-    <Compile Include="PathNodes\PropertyModel\PropertyCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\PropertyModel\PropertyNodeFactory.cs" />
-    <Compile Include="PathNodes\PropertyModel\PropertyPageNodeFactory.cs" />
-    <Compile Include="PathNodes\UI\ErrorListNodeFactory.cs" />
-    <Compile Include="Provider\CachingPathNodeProcessor.cs" />
     <Compile Include="Configuration\ConsoleChoice.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
-    <Compile Include="DataPaneControls\DataChartControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DataPaneControls\DataChartControl.Designer.cs">
-      <DependentUpon>DataChartControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DTE\AddIns\ShellAddIn.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeAttribute.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeAttributeArgument.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeDelegate.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeEnum.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeEvent.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeMethod.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeParameter.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeProperty2.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeStruct.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeType.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeTypeReference.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeVariable.cs" />
-    <Compile Include="DTE\Debugger\ShellBreakpoint.cs" />
-    <Compile Include="DTE\Debugger\ShellDebugger.cs" />
-    <Compile Include="DTE\Debugger\ShellExpression.cs" />
-    <Compile Include="DTE\Debugger\ShellProcess.cs" />
-    <Compile Include="DTE\Debugger\ShellStackFrame.cs" />
-    <Compile Include="DTE\Debugger\ShellThread.cs" />
-    <Compile Include="Exceptions\CopyOrMoveToExistingItemException.cs" />
-    <Compile Include="Exceptions\ServiceUnavailableException.cs" />
     <Compile Include="Exceptions\StudioShellException.cs" />
-    <Compile Include="PathNodes\DTE\AddInNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\NewCodeElementItemParams.cs" />
-    <Compile Include="PathNodes\Debugger\DebuggerNodeFactory.cs" />
-    <Compile Include="PathNodes\ICopyItem.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -189,108 +112,11 @@
     <Compile Include="Connect.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataPaneControls\DataGridControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DataPaneControls\DataGridControl.Designer.cs">
-      <DependentUpon>DataGridControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DataPaneControls\DataPaneControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DataPaneControls\DataPaneControl.Designer.cs">
-      <DependentUpon>DataPaneControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Provider\Drive.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeClass.cs" />
-    <Compile Include="DTE\CodeModel\IShellCodeModelElement2.cs" />
-    <Compile Include="DTE\CodeModel\NullShellCodeModelElement2.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeImport.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeInterface.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeModelElement2.cs" />
-    <Compile Include="DTE\CodeModel\ShellCodeNamespace.cs" />
-    <Compile Include="DTE\CommandBars\ShellCommandBar.cs" />
-    <Compile Include="DTE\CommandBars\ShellCommandBarButton.cs" />
-    <Compile Include="DTE\CommandBars\ShellCommandBarComboBox.cs" />
-    <Compile Include="DTE\CommandBars\ShellCommandBarPopup.cs" />
-    <Compile Include="DTE\Commands\ShellCommand.cs" />
-    <Compile Include="DTE\ProjectModel\ShellSolutionFolder.cs" />
-    <Compile Include="DTE\PropertyModel\ShellColorableItem.cs" />
-    <Compile Include="DTE\PropertyModel\ShellProperty.cs" />
-    <Compile Include="DTE\ShellContainer.cs" />
-    <Compile Include="DTE\ShellDTE.cs" />
-    <Compile Include="DTE\ShellObjectFactory.cs" />
-    <Compile Include="DTE\ProjectModel\ShellProject.cs" />
-    <Compile Include="DTE\ProjectModel\ShellProjectItem.cs" />
-    <Compile Include="DTE\ShellSolution.cs" />
-    <Compile Include="DTE\ProjectModel\ShellVSProject2.cs" />
-    <Compile Include="DTE\Templates\ShellTemplate.cs" />
-    <Compile Include="DTE\UI\ShellErrorListItem.cs" />
-    <Compile Include="DTE\UI\ShellOutputPane.cs" />
-    <Compile Include="DTE\UI\ShellTaskList.cs" />
-    <Compile Include="DTE\UI\ShellWindow.cs" />
-    <Compile Include="DTE\UI\WindowConfiguration.cs" />
-    <Compile Include="Provider\IPathNodeProcessor.cs" />
-    <Compile Include="Cmdlets\OutGridCmdlet.cs" />
-    <Compile Include="Provider\PathNodeProcessor.cs" />
-    <Compile Include="PathNodes\CodeModel\CodeElementWithChildrenNodeFactory.cs" />
-    <Compile Include="PathNodes\CodeModel\FileCodeModelNodeFactory.cs" />
-    <Compile Include="PathNodes\CollectionNodeFactoryBase.cs" />
-    <Compile Include="PathNodes\CommandBars\CommandBarCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\CommandBars\CommandBarNodeFactory.cs" />
-    <Compile Include="PathNodes\Commands\CommandCollectionPathNodeFactory.cs" />
-    <Compile Include="PathNodes\Commands\CommandNodeFactory.cs" />
-    <Compile Include="PathNodes\Context.cs" />
-    <Compile Include="PathNodes\UI\ErrorListItemNodeFactory.cs" />
-    <Compile Include="PathNodes\IClearItem.cs" />
-    <Compile Include="PathNodes\IInvokeItem.cs" />
-    <Compile Include="PathNodes\INewItem.cs" />
-    <Compile Include="PathNodes\IRemoveItem.cs" />
-    <Compile Include="PathNodes\IRenameItem.cs" />
-    <Compile Include="PathNodes\ISetItem.cs" />
-    <Compile Include="PathNodes\NodeFactoryBase.cs" />
-    <Compile Include="PathNodes\UI\OutputPaneNodeFactory.cs" />
-    <Compile Include="PathNodes\UI\OutputPaneCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\PathNode.cs" />
-    <Compile Include="PathNodes\INodeFactory.cs" />
-    <Compile Include="PathNodes\ProjectModel\ProjectItemNodeFactory.cs" />
-    <Compile Include="PathNodes\ProjectModel\ProjectItemTemplateCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\ProjectModel\ProjectNodeFactory.cs" />
-    <Compile Include="PathNodes\PropertyModel\PropertyCategoriesNodeFactory.cs" />
-    <Compile Include="PathNodes\DTE\RootNodeFactory.cs" />
-    <Compile Include="PathNodes\DTE\SelectedItemsNodeFactory.cs" />
-    <Compile Include="PathNodes\ProjectModel\SolutionNodeFactory.cs" />
-    <Compile Include="PathNodes\ProjectModel\SolutionProjectsNodeFactory.cs" />
-    <Compile Include="PathNodes\UI\TaskItemCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\UI\TaskItemNodeFactory.cs" />
-    <Compile Include="PathNodes\UI\WindowCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\UI\WindowConfigurationCollectionNodeFactory.cs" />
-    <Compile Include="PathNodes\UI\WindowConfigurationNodeFactory.cs" />
-    <Compile Include="PathNodes\UI\WindowNodeFactory.cs" />
-    <Compile Include="Provider\Provider.cs" />
-    <Compile Include="Provider\PSObjectBindingList.cs" />
     <Compile Include="StatusBarAnimationState.cs" />
-    <Compile Include="Utility\CmdletHelpPathIDAttribute.cs" />
-    <Compile Include="Utility\ColorExtensions.cs" />
-    <Compile Include="Utility\CommandUtilities.cs" />
-    <Compile Include="Utility\DTEExtensions.cs" />
-    <Compile Include="Utility\EnvironmentConfiguration.cs" />
-    <Compile Include="Utility\EventArgs.cs" />
     <Compile Include="Utility\FunctionUtilities.cs" />
     <Compile Include="Utility\ImageAdapter.cs" />
-    <Compile Include="Utility\InternalErrorListProvider.cs" />
-    <Compile Include="Utility\PathStringExtensions.cs" />
     <Compile Include="Utility\Scripts.cs" />
     <Compile Include="Utility\StudioShellInfo.cs" />
-    <Compile Include="Utility\Singleton.cs" />
-    <Compile Include="Utility\WindowKinds.cs" />
-    <Compile Include="Variables\ActiveWindowVariable.cs" />
-    <Compile Include="Variables\CurrentStackFrameVariable.cs" />
-    <Compile Include="Variables\DTEEventSource.cs" />
-    <Compile Include="Variables\DTEPSVariable.cs" />
-    <Compile Include="Variables\SelectedCodeElementVariable.cs" />
-    <Compile Include="Variables\SelectedProjectItems.cs" />
-    <Compile Include="Variables\SelectedProjects.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="EnvDTE">
@@ -348,6 +174,14 @@
     <Content Include="Module\StudioShell\en-US\about_StudioShell_Version.help.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Module\StudioShell\en-US\CodeOwls.StudioShell.Provider.dll-help.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Module\StudioShell\en-US\CodeOwls.StudioShell.Cmdlets.dll-help.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="StudioShell.VS2010.AddIn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -380,6 +214,7 @@
     </Content>
     <Content Include="Module\StudioShell\en-US\CodeOwls.StudioShell.dll-help.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="StudioShell.VS2008.AddIn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -513,10 +348,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DataPaneControls\DataChartControl.resx">
-      <DependentUpon>DataChartControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
@@ -526,16 +357,36 @@
       <DependentUpon>SettingsControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataPaneControls\DataGridControl.resx">
-      <DependentUpon>DataGridControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DataPaneControls\DataPaneControl.resx">
-      <DependentUpon>DataPaneControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CodeOwls.PowerShell.Host\CodeOwls.PowerShell.Host.csproj">
+      <Project>{B975EFD5-7A18-4BD0-8711-38734C6F8EB1}</Project>
+      <Name>CodeOwls.PowerShell.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.PowerShell.Provider\CodeOwls.PowerShell.Provider.csproj">
+      <Project>{B352375B-7C58-4943-95C0-14871E17A208}</Project>
+      <Name>CodeOwls.PowerShell.Provider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.StudioShell.Cmdlets\CodeOwls.StudioShell.Cmdlets.csproj">
+      <Project>{CC11A6DB-0F1E-42D3-9352-B4A3C42DE5E4}</Project>
+      <Name>CodeOwls.StudioShell.Cmdlets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.StudioShell.Common\CodeOwls.StudioShell.Common.csproj">
+      <Project>{C7F94204-C1EC-4FC8-AF93-01C5E9E63671}</Project>
+      <Name>CodeOwls.StudioShell.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.StudioShell.Host\CodeOwls.StudioShell.Host.csproj">
+      <Project>{8226949E-1E8C-4D81-8ED6-9C4BD7CAEA1F}</Project>
+      <Name>CodeOwls.StudioShell.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.StudioShell.Paths\CodeOwls.StudioShell.Paths.csproj">
+      <Project>{39F26A21-934A-49D2-92F1-2BB4AAA6014F}</Project>
+      <Name>CodeOwls.StudioShell.Paths</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.StudioShell.Provider\CodeOwls.StudioShell.Provider.csproj">
+      <Project>{4746189D-AB42-4BD5-BFC2-21E871EC17A2}</Project>
+      <Name>CodeOwls.StudioShell.Provider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PowerShellConsole\CodeOwls.PowerShell.WinForms.csproj">
       <Project>{91F5B843-B1BC-4F80-BBD5-245878D7329F}</Project>
       <Name>CodeOwls.PowerShell.WinForms</Name>

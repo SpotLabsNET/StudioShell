@@ -27,6 +27,35 @@ using CodeOwls.StudioShell.DTE;
 
 namespace CodeOwls.StudioShell.PathNodes
 {
+
+    public class ProjectCodeModelNodeFactory : NodeFactoryBase
+    {
+        private readonly EnvDTE.CodeModel _codeModel;
+
+        public ProjectCodeModelNodeFactory(EnvDTE.CodeModel codeModel)
+        {
+            _codeModel = codeModel;
+        }
+
+        public override IPathNode GetNodeValue()
+        {
+            return new PathNode(new ShellContainer(this), Name, true);
+        }
+
+        public override IEnumerable<INodeFactory> GetNodeChildren()
+        {
+            foreach (CodeElement e in _codeModel.CodeElements)
+            {
+                var factory = FileCodeModelNodeFactory.CreateNodeFactoryFromCodeElement(e);
+                yield return factory;
+            }
+        }
+
+        public override string Name
+        {
+            get { return "CodeModel"; }
+        }
+    }
     [CmdletHelpPathID("CodeFile")]
     public class FileCodeModelNodeFactory : NodeFactoryBase, INewItem
     {
