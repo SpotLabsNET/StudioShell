@@ -18,9 +18,9 @@
 import-module preferencestack;
 get-studioShellSettings.ps1 | push-preference;
 
-if( -not( [environment]::commandLine -match "devenv.exe" ) )
+if( -not( [environment]::commandLine -match "devenv.exe" -or [environment]::commandLine -match "ssms.exe" ) )
 {
-	throw "The StudioShell module is only available from a PowerShell session hosted by Visual Studio.";
+	throw "The StudioShell module is only available from a PowerShell session hosted by the Visual Studio Shell.";
 }
 
 try
@@ -52,6 +52,12 @@ ls $local:root/scripts | foreach {
 	
 	write-verbose $local:fxn
 	invoke-expression $local:fxn;
+}
+
+# roundabout fix for NuGet weirdness
+if( $host.Name -match 'Package Manager Host' )
+{
+	[CodeOwls.StudioShell.Connect]::PrepareCommandsForCustomHost();
 }
 
 pop-preference;
