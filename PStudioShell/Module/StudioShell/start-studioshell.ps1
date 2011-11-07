@@ -38,8 +38,7 @@ write-debug "local module root path is $local:root"
 
 # import the assembly into the module session so we can register the runspace with the add-in
 write-debug "connecting to StudioShell add in instance";
-#[CodeOwls.StudioShell.Connect]::RegisterRunspace( $host.runspace );
-#[CodeOwls.StudioShell.Connect]::ConfigureRunspace( $host.runspace );
+[CodeOwls.StudioShell.Connect]::RegisterRunspace( $host.runspace );
 
 # create module commands for each script under the scripts directory
 # content of each script file becomes a unique exported module function

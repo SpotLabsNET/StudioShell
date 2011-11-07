@@ -22,11 +22,14 @@ param(
 	$settings
 )
 
+$script:profileDir = ~/documents/codeowlsllc.studioshell;
+$script:profileFile = $script:profileDir | join-path -child 'settings.txt';
+
 begin
 {
-	if( -not (test-path ~/documents/codeowlsllc.studioshell) )
+	if( -not (test-path $script:profileDir) )
 	{
-		mkdir ~/documents/CodeOwlsLLS.StudioShell;
+		mkdir $script:profileDir
 	}
 }
 
@@ -41,7 +44,7 @@ process
 		}
 		
 		"$name=" + $value;
-	} | Out-File ~/documents/codeowlsllc.studioshell/settings.txt
+	} | Out-File -filepath $script:profileFile
 }
 
 <#

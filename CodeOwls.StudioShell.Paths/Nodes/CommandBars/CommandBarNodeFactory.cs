@@ -414,7 +414,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             {
                 shellCommand.Bindings = new[] {(object) p.Binding};
             }
-
+            
             Command command = shellCommand.AsCommand();
             var ctl = command.AddControl(_commandBar, index) as CommandBarControl;
             return CommandBarControlNodeFactory.Create(ctl).GetNodeValue();
