@@ -15,8 +15,6 @@
 #
 
 
-
-$script:solutionProfileScript = 'profile.ps1';
 $script:perSolutionScripts = @();
 $script:currentSolutionModule;
 	     
@@ -131,6 +129,12 @@ function remove-solutionModule
 {
 	if( $script:currentSolutionModule )
 	{
+		write-verbose "attempting to invoke unregister-$($script:currentSolutionModule.Name)";
+		$cmdName = "unregister-$($script:currentSolutionModule.Name)";
+		get-command -module $script:currentColutionModule.Name -name $cmdName | 
+			select -expand Name | 
+			invoke-expression;
+
 		write-verbose "removing solution module $($script:currentSolutionModule.Name)";
 		$script:currentSolutionModule | remove-module;
 		$script:currentSolutionModule = $null;
@@ -143,7 +147,11 @@ function remove-solutionModule
 	#	event: the name of the event raised by the source object
 	#		on which to update the list of per-solution scripts
 	#	action: the scriptblock to execute on the event
-	@{
+
+	# manage solutionEvents.Opened:
+	#	update path to include project script repository
+	#	import the solution module, if present
+	@{	
 		source = $events.solutionEvents;
 		event = 'Opened';
 		action = { 
@@ -155,8 +163,8 @@ function remove-solutionModule
 			}
 			catch
 			{
-				write-debug 'an error has occurred...';
-				$_ | out-host;
+				write-debug 'an error has occurred during solution open event handling ...';
+				$_ | write-error;
 			}
 		};
 	},
@@ -174,7 +182,7 @@ function remove-solutionModule
 	write-verbose ('action: ' + $_.action );
 	
 	write-debug "registering to handle $($_.event) on $($_.source)";
-	register-objectEvent $_.source -eventname $_.event -action $_.action.GetNewClosure() | out-null;	
+	register-objectEvent $_.source -eventname $_.event -action $_.action | out-null;	
 };
 
 import-solutionModule;

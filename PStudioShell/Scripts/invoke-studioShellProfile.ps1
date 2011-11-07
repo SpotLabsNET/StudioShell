@@ -15,7 +15,7 @@
 #
 
 
-param()
+param( $profile )
 
 import-module preferencestack;
 get-studioShellSettings.ps1 | push-preference;
@@ -123,6 +123,6 @@ None.
 .LINK
 about_StudioShell
 about_StudioShell_Profiles
-get-help PSDTE
+PSDTE
 start-studioshell
 #>
