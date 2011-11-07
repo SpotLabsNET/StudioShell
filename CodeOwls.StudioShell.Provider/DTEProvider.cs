@@ -70,9 +70,37 @@ namespace CodeOwls.StudioShell.Provider
 
         void ConfigureRunspace(SessionState sessionState)
         {
+            AddRunspaceVariables(sessionState);
+
+        }
+
+        private void AddRunspaceVariables(SessionState sessionState)
+        {
             PSVariable[] psv = GetStudioShellPSVariables();
 
-            psv.ToList().ForEach(sessionState.PSVariable.Set);
+            var warns = new List<string>();
+            psv.ToList().ForEach(v =>
+                                     {
+                                         if (null != sessionState.PSVariable.Get(v.Name))
+                                         {
+                                             if ("dte" != v.Name)
+                                             {
+                                                 warns.Add(v.Name);
+                                             }
+                                             return;
+                                         }
+
+                                         sessionState.PSVariable.Set(v);
+                                     });
+            if (warns.Any())
+            {
+                sessionState.InvokeCommand.InvokeScript(
+                    String.Format(
+                        "write-warning 'The following StudioShell variables could not be defined because the variables names are already in use: `${0}'",
+                        String.Join(", `$", warns.ToArray())
+                        )
+                    );
+            }
         }
 
         private static DTEEventSource EventSource;

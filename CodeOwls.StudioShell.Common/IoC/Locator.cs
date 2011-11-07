@@ -7,21 +7,21 @@ namespace CodeOwls.StudioShell.Common.IoC
 {
     public static class Locator
     {
-        static Dictionary< Type, object > _map = new Dictionary<Type, object>();
+        static Dictionary< string, object > _map = new Dictionary<string, object>();
 
         public static T Get<T>()
         {
-            if( ! _map.ContainsKey( typeof(T)))
+            if( ! _map.ContainsKey( typeof(T).FullName ))
             {
                 return default(T);
             }
 
-            return (T) _map[typeof (T)];
+            return (T) _map[typeof (T).FullName];
         }
 
         public static void Set<T>( T impl )
         {
-            _map[typeof (T)] = impl;
+            _map[typeof (T).FullName] = impl;
         }
 
         public static T GetService<T>()

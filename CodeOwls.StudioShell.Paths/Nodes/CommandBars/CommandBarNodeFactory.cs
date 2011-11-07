@@ -233,8 +233,11 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             ShellCommand shellCommand = CommandUtilities.GetOrCreateCommand(context, _popup.Application as DTE2, caption,
                                                                             newItemValue);
             Command command = shellCommand.AsCommand();
-
-            var ctl = command.AddControl(_popup.CommandBar, index) as CommandBarControl;
+            string n = command.Name;
+            var cid = command.ID;
+            var guid = command.Guid;
+            
+            var ctl = command.AddControl(_popup.CommandBar, index) as CommandBarControl;            
             return CommandBarControlNodeFactory.Create(ctl).GetNodeValue();
         }
 
