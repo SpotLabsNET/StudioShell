@@ -2,7 +2,7 @@
     about_StudioShell_Version
 
 VERSION
-    You are running version 1.0.1 of StudioShell.
+    You are running version 1.2 of StudioShell.
 
 CHANGE LOG
   Description
@@ -10,7 +10,23 @@ CHANGE LOG
 	StudioShell.  Each item is identified by its codeplex work item 
 	number(s) if available.
 
-Current TIP
+1.2
+  Resolved Issues
+	using 'exit' hides the console; reinitializing the runspace proved
+	to cause unintented side-effects when the UI has been altered with
+	custom script commands
+
+  Added Features
+    The AddIns node prohibits access to the AddIn.Instance property;
+		accessing this property causes VisualStudio to crash
+
+	Improved support for usage from NuGet.
+
+	Integrated NuGet Packaging with StudioShell build.
+
+	Support for SQL Server Management Studio.
+
+1.1 (private testing release)
   Resolved Issues
     7: clear-item is now supported in the default console
 
