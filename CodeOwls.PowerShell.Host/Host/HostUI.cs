@@ -195,7 +195,7 @@ namespace CodeOwls.PowerShell.Host.Host
                             _control.Write(
                                 String.Format("[{0}]", c),
                                 color,
-                                _control.ConsoleBackColor);
+                                back);
 
                             _control.Write(String.Format(" {0}  ", choice.Label.Replace("&", String.Empty)), color, back);
                             ++choiceIndex;

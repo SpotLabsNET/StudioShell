@@ -4,9 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionResources", "SolutionResources", "{4A18610A-DE9A-49CE-B480-BDD332E557CA}"
 	ProjectSection(SolutionItems) = preProject
 		Resources\csheader.txt = Resources\csheader.txt
-		IntegrationTests.testsettings = IntegrationTests.testsettings
 		Resources\psheader.txt = Resources\psheader.txt
-		UnitTests.testsettings = UnitTests.testsettings
 		Resources\xmlheader.txt = Resources\xmlheader.txt
 	EndProjectSection
 EndProject
@@ -19,8 +17,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOwls.StudioShell.Provider", "CodeOwls.StudioShell.Provider\CodeOwls.StudioShell.Provider.csproj", "{4746189D-AB42-4BD5-BFC2-21E871EC17A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOwls.StudioShell.Cmdlets", "CodeOwls.StudioShell.Cmdlets\CodeOwls.StudioShell.Cmdlets.csproj", "{CC11A6DB-0F1E-42D3-9352-B4A3C42DE5E4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOwls.StudioShell.AddIn", "CodeOwls.StudioShell.AddIn\CodeOwls.StudioShell.AddIn.csproj", "{8B921502-BFF9-43A6-B0C7-81F56685F21F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOwls.PowerShell.Host", "CodeOwls.PowerShell.Host\CodeOwls.PowerShell.Host.csproj", "{B975EFD5-7A18-4BD0-8711-38734C6F8EB1}"
 EndProject
@@ -85,14 +81,6 @@ Global
 		{CC11A6DB-0F1E-42D3-9352-B4A3C42DE5E4}.FxCop-Release|Any CPU.Build.0 = Release|Any CPU
 		{CC11A6DB-0F1E-42D3-9352-B4A3C42DE5E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC11A6DB-0F1E-42D3-9352-B4A3C42DE5E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B921502-BFF9-43A6-B0C7-81F56685F21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B921502-BFF9-43A6-B0C7-81F56685F21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B921502-BFF9-43A6-B0C7-81F56685F21F}.Debug-Test|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B921502-BFF9-43A6-B0C7-81F56685F21F}.Debug-Test|Any CPU.Build.0 = Debug|Any CPU
-		{8B921502-BFF9-43A6-B0C7-81F56685F21F}.FxCop-Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B921502-BFF9-43A6-B0C7-81F56685F21F}.FxCop-Release|Any CPU.Build.0 = Release|Any CPU
-		{8B921502-BFF9-43A6-B0C7-81F56685F21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B921502-BFF9-43A6-B0C7-81F56685F21F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B975EFD5-7A18-4BD0-8711-38734C6F8EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B975EFD5-7A18-4BD0-8711-38734C6F8EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B975EFD5-7A18-4BD0-8711-38734C6F8EB1}.Debug-Test|Any CPU.ActiveCfg = Debug|Any CPU

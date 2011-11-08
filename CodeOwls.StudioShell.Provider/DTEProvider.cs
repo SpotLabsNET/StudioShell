@@ -60,7 +60,7 @@ namespace CodeOwls.StudioShell.Provider
                 new List<PSDriveInfo>
                     {
                         new DTEDrive(
-                            new PSDriveInfo("DTE", ProviderInfo, "dte:/", "DTE Drive", null),
+                            new PSDriveInfo("DTE", ProviderInfo, String.Empty, "DTE Drive", null),
                             PathNodeProcessor,
                             DTE2
                             )

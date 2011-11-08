@@ -12,19 +12,64 @@ CHANGE LOG
 
 1.2
   Resolved Issues
-	using 'exit' hides the console; reinitializing the runspace proved
+	Using 'exit' hides the console; reinitializing the runspace proved
 	to cause unintented side-effects when the UI has been altered with
 	custom script commands
 
+	10: The default console warning and error color selections are 
+		readible (color on black background)
+
+	17: Slashes are normalized as backslashes (\) in PSDTE paths even though 
+		forward slashes (/) are clearly superior.
+
+		In addition, the dte:/ drive name is no longer present in the 
+		PSPath information returned by the provider.
+		
+		For more information on this path issue see:
+		http://www.nivot.org/post/2010/03/05/PowerShellThePatchworkOfPathsPSPathsAndProviderPaths.aspx
+
+	19: Variables are now tested for existence before attempting to
+		create them to avoid errors; e.g., the $dte variable is already 
+		defined in the NuGet Package Manager Console, and attempting
+		to redefine the variable results in an error.
+
+		A list of variables that cannot be defined is still issued
+		in a warning to the console, with one exception - if the $dte
+		variable already exists, it is assumed to be the root DTE
+		variable for the Visual Studio Shell and no warning is
+		issued.
+
   Added Features
-    The AddIns node prohibits access to the AddIn.Instance property;
-		accessing this property causes VisualStudio to crash
+    Accessing AddIns no longer crashes VisualStudio.  The AddIns node 
+		now closes access to the AddIn.Instance property; accessing this 
+		property apparantly causes VisualStudio to crash.
 
-	Improved support for usage from NuGet.
+	Improved support for usage from NuGet.  All of the StudioShell PSDTE
+		functionality is available from the NuGet Package Manager Console once
+		you import the StudioShell module.  Previously, menu items and commands 
+		added via the DTE drive would be created, but would never execute if
+		created from the package manager console.  
+		
+		See http://studioshell.codeplex.com/discussions/255426 and
+		http://studioshell.codeplex.com/discussions/255413
 
-	Integrated NuGet Packaging with StudioShell build.
+	Integrated NuGet Packaging with StudioShell build.  StudioShell can now
+		be installed via NuGet.  Search for the package named "StudioShell".
 
-	Support for SQL Server Management Studio.
+	Support for SQL Server Management Studio (SSMS) installations.  SSMS support
+		is experimental at the moment.  Moreover, several key path nodes are not
+		supported by SSMS and are therefore not available on the DTE drive: 
+
+		* the project hive cannot be manipulated because the SSMS object model
+		  does not support it.
+
+		* there is no code model implemented for T-SQL, and therefore there are
+		  no code model hives in the DTE drive in SSMS.
+
+		* it is very likely that other portions of the DTE drive are 
+		  non-functional or at least unstable.
+		  
+		  You have been warned, use with caution.
 
 1.1 (private testing release)
   Resolved Issues
@@ -43,6 +88,11 @@ CHANGE LOG
 		runspace.  re-opening the console will create a new runspace initialized 
 		to the default studioshell state.
 
+  Added Features
+    Project item properties are now available in the DTE hive:
+	    ls dte:/solution/projects/MyProject/Program.cs/itemproperties
+
+		See http://studioshell.codeplex.com/discussions/248899
 1.0.1 
   Resolved Issues
 	1: Tab completion and history walking have been hardened in the console.
