@@ -92,6 +92,12 @@
     <Reference Include="VSLangProj90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CodeOwls.AssemblyInfo.cs">
+      <Link>CodeOwls.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\CodeOwls.StudioShell.AssemblyInfo.cs">
+      <Link>CodeOwls.StudioShell.AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

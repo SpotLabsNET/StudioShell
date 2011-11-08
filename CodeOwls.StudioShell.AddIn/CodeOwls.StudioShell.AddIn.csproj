@@ -40,6 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CodeOwls.AssemblyInfo.cs">
+      <Link>CodeOwls.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\CodeOwls.StudioShell.AssemblyInfo.cs">
+      <Link>CodeOwls.StudioShell.AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
