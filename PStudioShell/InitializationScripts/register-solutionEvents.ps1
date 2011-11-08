@@ -152,7 +152,7 @@ function remove-solutionModule
 	#	update path to include project script repository
 	#	import the solution module, if present
 	@{	
-		source = $events.solutionEvents;
+		source = $solutionEvents;
 		event = 'Opened';
 		action = { 
 			write-debug 'solution open detected...';
@@ -170,7 +170,7 @@ function remove-solutionModule
 	},
 	
 	@{
-		source = $events.solutionEvents;
+		source = $solutionEvents;
 		event = 'BeforeClosing';
 		action = { 
 			write-debug 'solution closing detected...';
