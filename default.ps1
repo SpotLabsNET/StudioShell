@@ -13,12 +13,12 @@ properties {
 	$config = 'Debug'; 	
 	$keyContainer = '';
 	$slnFile = @(
-		'./StudioShell.sln'
+		'./src/StudioShell.sln'
 	);	
-    $targetPath = "./PStudioShell/bin";
-    $nugetSource = "./NuGet";
+    $targetPath = "./src/CodeOwls.StudioShell/CodeOwls.StudioShell/bin";
+    $nugetSource = "./src/NuGet";
     $metadataAssembly = 'CodeOwls.StudioShell.dll'
-    $currentReleaseNotesPath = '.\PStudioShell\bin\Module\StudioShell\en-US\about_StudioShell_Version.help.txt'
+    $currentReleaseNotesPath = '.\src\CodeOwls.StudioShell\CodeOwls.StudioShell\bin\Module\StudioShell\en-US\about_StudioShell_Version.help.txt'
 };
 
 $framework = '4.0'
