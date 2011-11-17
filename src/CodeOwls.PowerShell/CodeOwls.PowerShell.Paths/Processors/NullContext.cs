@@ -5,6 +5,7 @@ using System.Management.Automation;
 using System.Security.AccessControl;
 using System.Text;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
+using CodeOwls.PowerShell.Provider.PathNodes;
 
 namespace CodeOwls.PowerShell.Paths.Processors
 {
@@ -152,6 +153,16 @@ namespace CodeOwls.PowerShell.Paths.Processors
         public IPathNodeProcessor PathProcessor
         {
             get { return null; }
+        }
+
+        public Version PathTopologyVersion
+        {
+            get { return new Version(1,0); }
+        }
+
+        public INodeFactory ResolvePath(string path)
+        {
+            return null;
         }
     }
 }

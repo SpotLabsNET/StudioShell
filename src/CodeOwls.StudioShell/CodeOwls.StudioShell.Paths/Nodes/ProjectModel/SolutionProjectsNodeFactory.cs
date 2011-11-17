@@ -31,7 +31,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
     [CmdletHelpPathID("SolutionProjects")]
     public class SolutionProjectsNodeFactory : NodeFactoryBase, INewItem
     {
-        private readonly DTE2 _dte;
+        protected readonly DTE2 _dte;
 
         public SolutionProjectsNodeFactory(DTE2 dte)
         {

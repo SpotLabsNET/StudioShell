@@ -75,6 +75,7 @@
     <Compile Include="PathNode.cs" />
     <Compile Include="Processors\NullContext.cs" />
     <Compile Include="Processors\PathNodeProcessorBase.cs" />
+    <Compile Include="Processors\PathNodeProcessorDecorator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

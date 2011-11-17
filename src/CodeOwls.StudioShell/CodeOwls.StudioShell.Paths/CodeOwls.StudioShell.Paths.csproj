@@ -150,6 +150,7 @@
     <Compile Include="Nodes\CodeModel\FileCodeModelNodeFactory.cs" />
     <Compile Include="Nodes\CodeModel\MethodType.cs" />
     <Compile Include="Nodes\CodeModel\NewCodeElementItemParams.cs" />
+    <Compile Include="Nodes\CodeModel\ProjectCodeModelNodeFactory.cs" />
     <Compile Include="Nodes\CollectionNodeFactoryBase.cs" />
     <Compile Include="Nodes\CommandBars\CommandBarCollectionNodeFactory.cs" />
     <Compile Include="Nodes\CommandBars\CommandBarNodeFactory.cs" />
@@ -171,11 +172,15 @@
     <Compile Include="Nodes\DTE\SelectedItemsNodeFactory.cs" />
     <Compile Include="Nodes\DTE\SelectedProjectItemsNodeFactory.cs" />
     <Compile Include="Nodes\DTE\SelectedProjectsNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectCodeModelNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectItemCodeModelNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectItemNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectItemTemplateCollectionNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectNodeFactoryBase.cs" />
     <Compile Include="Nodes\ProjectModel\ReferenceCollectionNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ReferenceNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\SolutionCodeModelNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\SolutionNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\SolutionProjectsNodeFactory.cs" />
     <Compile Include="Nodes\PropertyModel\ColorableItemFontsAndColorsPropertyNodeFactory.cs" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Management.Automation;
 using System.Text;
 using CodeOwls.PowerShell.Paths.Processors;
+using CodeOwls.StudioShell.Common.Configuration;
 using EnvDTE80;
 
 namespace CodeOwls.StudioShell.Provider
@@ -15,7 +16,15 @@ namespace CodeOwls.StudioShell.Provider
         public DTEDrive(PSDriveInfo driveInfo, DTE2 dte) : base(driveInfo)
         {
             _dte = dte;
+            PathTopologyVersion = DefaultPathTopologyVersion;
         }
+
+        public Version DefaultPathTopologyVersion
+        {
+            get { return SettingsManager.Settings.DefaultPathTopologyVersion; }
+        }
+
+        public Version PathTopologyVersion { get; set; }
 
         internal DTE2 ApplicationObject
         {
