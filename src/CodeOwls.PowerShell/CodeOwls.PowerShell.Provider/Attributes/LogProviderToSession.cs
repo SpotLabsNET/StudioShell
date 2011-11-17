@@ -35,24 +35,37 @@ namespace CodeOwls.PowerShell.Provider.Attributes
             {
                 parameters = String.Join("; ", args.Arguments.ToList().ConvertAll(a => (a ?? "null").ToString()).ToArray());
             }
-            cmdlet.WriteDebug( 
-                String.Format(
-                    "{0} >> Entering {1} ( {2} )", 
-                    args.Instance.GetType().FullName, 
-                    args.Method.Name,
-                    parameters));
+            try
+            {
+                cmdlet.WriteDebug(
+                    String.Format(
+                        "{0} >> Entering {1} ( {2} )",
+                        args.Instance.GetType().FullName,
+                        args.Method.Name,
+                        parameters));
+            }
+            catch
+            {               
+            }
         }
 
         public override void OnExit(MethodExecutionArgs args)
         {            
             var cmdlet = args.Instance as CmdletProvider;
-            if (null == cmdlet)
+            if (null == cmdlet )
             {
                 return;
             }
 
-            cmdlet.WriteDebug(String.Format("{0} << Returning {2} from {1}", args.Instance.GetType().FullName,
-                                                args.Method.Name, args.ReturnValue ?? "null"));            
+            try
+            {
+                cmdlet.WriteDebug(String.Format("{0} << Returning {2} from {1}", args.Instance.GetType().FullName,
+                                                args.Method.Name, args.ReturnValue ?? "null"));
+            }
+            catch
+            {
+
+            }
         }
 
         public override void OnException(MethodExecutionArgs args)
@@ -63,12 +76,18 @@ namespace CodeOwls.PowerShell.Provider.Attributes
                 return;
             }
 
-            cmdlet.WriteDebug(
-                String.Format(
-                    "{0} !! Exception in {1}: {2}", 
-                    args.Instance.GetType().FullName, 
-                    args.Method.Name, 
-                    args.Exception ));
+            try
+            {
+                cmdlet.WriteDebug(
+                    String.Format(
+                        "{0} !! Exception in {1}: {2}",
+                        args.Instance.GetType().FullName,
+                        args.Method.Name,
+                        args.Exception));
+            }
+            catch
+            {                
+            }
         }
     }
 }

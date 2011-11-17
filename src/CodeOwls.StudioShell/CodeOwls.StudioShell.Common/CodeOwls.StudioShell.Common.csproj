@@ -35,6 +35,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\2.0\System.Management.Automation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -47,6 +51,11 @@
     <Compile Include="..\..\CodeOwls.StudioShell.AssemblyInfo.cs">
       <Link>Properties\CodeOwls.StudioShell.AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Configuration\ConsoleChoice.cs" />
+    <Compile Include="Configuration\PathTopologyVersions.cs" />
+    <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Configuration\SettingsManager.cs" />
+    <Compile Include="Configuration\StartupLogLevel.cs" />
     <Compile Include="Exceptions\CodeModelNodeDoesNotSupportItemTypeException.cs" />
     <Compile Include="Exceptions\ServiceUnavailableException.cs" />
     <Compile Include="Exceptions\StudioShellException.cs" />
@@ -54,9 +63,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\ColorExtensions.cs" />
     <Compile Include="Utility\EventArgs.cs" />
+    <Compile Include="Utility\Scripts.cs" />
     <Compile Include="Utility\Singleton.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

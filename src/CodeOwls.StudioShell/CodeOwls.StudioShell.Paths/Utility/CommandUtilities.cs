@@ -21,7 +21,7 @@ namespace CodeOwls.StudioShell.Paths.Utility
                 // locate an existing command by path
                 try
                 {
-                    var command = context.PathProcessor.ResolvePath(stringValue);
+                    var command = context.ResolvePath(stringValue);
                     if (null != command)
                     {
                         var value = command.GetNodeValue();
@@ -38,8 +38,8 @@ namespace CodeOwls.StudioShell.Paths.Utility
                 // locate an existing command by name
                 if (null == cmd)
                 {
-                    var node = context.PathProcessor.ResolvePath("dte:/commands");
-                    var factory = node.Resolve(stringValue);
+                    var node = context.ResolvePath("dte:/commands");
+                    var factory = node.Resolve(context, stringValue);
                     if (null != factory)
                     {
                         var value = factory.GetNodeValue();

@@ -34,15 +34,22 @@ CHANGE LOG
 		to redefine the variable results in an error.
 
 		A list of variables that cannot be defined is still issued
-		in a warning to the console, with one exception - if the $dte
-		variable already exists, it is assumed to be the root DTE
-		variable for the Visual Studio Shell and no warning is
-		issued.
+		in a debug message to the console, with one exception - 
+		if the $dte variable already exists, it is assumed to be 
+		the root DTE variable for the Visual Studio Shell and no 
+		message is issued.
 
-  Added Features
+  Added Features    
+	The Cancel Executing Pipeline command actually works now.  At some
+		point while toying with NuGet support, I had disabled this command
+		functionality.  In addition, the pipeline monitoring backing the
+		command is now off of the main UI thread; this makes canceling pipes
+		that are leveraging UI-thread items (such as Visual Studio) more
+		responsive.
+
     Accessing AddIns no longer crashes VisualStudio.  The AddIns node 
 		now closes access to the AddIn.Instance property; accessing this 
-		property apparantly causes VisualStudio to crash.
+		property apparantly causes Visual Studio to crash.  Don't know why.
 
 	Improved support for usage from NuGet.  All of the StudioShell PSDTE
 		functionality is available from the NuGet Package Manager Console once
@@ -54,7 +61,8 @@ CHANGE LOG
 		http://studioshell.codeplex.com/discussions/255413
 
 	Integrated NuGet Packaging with StudioShell build.  StudioShell can now
-		be installed via NuGet.  Search for the package named "StudioShell".
+		be installed via NuGet.  Search for the package named "StudioShell" in
+		the public NuGet package repository.
 
 	Support for SQL Server Management Studio (SSMS) installations.  SSMS support
 		is experimental at the moment.  Moreover, several key path nodes are not
@@ -69,9 +77,37 @@ CHANGE LOG
 		* it is very likely that other portions of the DTE drive are 
 		  non-functional or at least unstable.
 		  
-		  You have been warned, use with caution.
+		You have been warned, use with _extreme caution_.
 
-1.1 (private testing release)
+  DTE Drive Path Topology Changes
+    The code model is now isolated from project items.  In previous versions, the
+	code model was available as a hive beneath each particular project item:
+
+	dte:/solution/projects/<project name>/<item name>/codemodel
+
+	Project item properties were available in a peer of the code model node:
+
+	dte:/solution/projects/<project name>/<item name>/itemproperties
+
+	This path topology proved inefficient for working with project items.  The
+	code model hive is generally massive in comparison, making recursive 
+	operations targeting the project items cumbersome and slow.  E.g.,:
+
+	ls dte:/solution/projects -recurse -include 'packages.config'
+
+	Moving the code model addresses this issue, and provides a cleaner
+	and simpler path topology.  Project items remain in the same location:
+
+	dte:/solution/projects/<project name>/<item name>/itemproperties
+
+	The code model hive is now available under the following node:
+
+	dte:/solution/codemodel/<project name>/<item name>/
+
+	The code model is still organized by project and file, which is necessary
+	to permit modifying operations to the code model.
+
+1.1 (private release)
   Resolved Issues
     7: clear-item is now supported in the default console
 
@@ -89,6 +125,25 @@ CHANGE LOG
 		to the default studioshell state.
 
   Added Features
+    Added support for unregister-<SolutionModuleName> function in solution
+		modules.  This function will be invoked just before the module
+		is removed from the session.  The existing mechanism for catching
+		the unload event for the solution module proved too difficult for
+		the author to remember reliably:
+
+		$m = $MyInvocation.MyCommand.ScriptBlock.Module;
+		$m.OnRemove = {
+			# ...
+		}
+
+		This method still works of course, but you can now opt for the
+		simpler and more understandable:
+		
+		function unregister-MySolutionModule
+		{
+			#..
+		}
+
     Project item properties are now available in the DTE hive:
 	    ls dte:/solution/projects/MyProject/Program.cs/itemproperties
 

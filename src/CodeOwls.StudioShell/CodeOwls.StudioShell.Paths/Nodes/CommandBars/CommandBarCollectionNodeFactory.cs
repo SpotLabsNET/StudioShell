@@ -41,7 +41,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             get { return "commandBars"; }
         }
 
-        public override INodeFactory Resolve(string nodeName)
+        public override INodeFactory Resolve(IContext context, string nodeName)
         {
             CommandBar cmdbar = null;
 
@@ -55,7 +55,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
 
             if (null == cmdbar)
             {
-                return base.Resolve(nodeName);
+                return base.Resolve(context, nodeName);
             }
 
             return new CommandBarNodeFactory(cmdbar);

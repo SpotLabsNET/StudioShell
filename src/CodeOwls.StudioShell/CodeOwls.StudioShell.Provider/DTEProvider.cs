@@ -6,6 +6,7 @@ using System.Management.Automation;
 using System.Management.Automation.Provider;
 using System.Text;
 using CodeOwls.PowerShell.Paths.Processors;
+using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.StudioShell.Common.IoC;
 using CodeOwls.StudioShell.Common.Utility;
 using CodeOwls.StudioShell.Provider.Variables;
@@ -37,6 +38,11 @@ namespace CodeOwls.StudioShell.Provider
             get { return Locator.Get<DTE2>(); }
         }
 
+        protected override PowerShell.Provider.PathNodeProcessors.IContext CreateContext(string path, bool recurse)
+        {
+            return new Context( this, PSDriveInfo, PathNodeProcessor, DynamicParameters, DTEDrive.PathTopologyVersion, recurse );
+        }
+
         protected override IPathNodeProcessor PathNodeProcessor
         {
             get { return new PathNodeProcessor( DTE2 ); }
@@ -56,7 +62,7 @@ namespace CodeOwls.StudioShell.Provider
                 return drive;
             }
 
-            return new DTEDrive(drive, DTE2 );
+            return new DTEDrive( drive, DTE2 );
         }
 
         protected override Collection<PSDriveInfo> InitializeDefaultDrives()

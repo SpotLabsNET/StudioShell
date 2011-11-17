@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.PowerShell.Provider.PathNodes;
 
 namespace CodeOwls.PowerShell.Paths.Processors
@@ -11,7 +12,7 @@ namespace CodeOwls.PowerShell.Paths.Processors
     {
         protected abstract INodeFactory Root { get; }
 
-        public INodeFactory ResolvePath(string path)
+        public INodeFactory ResolvePath(IContext context, string path)
         {
             Regex re = new Regex(@"^[-_a-z0-9:]+:/?");
             path = path.ToLowerInvariant().Replace('\\', '/');
@@ -23,7 +24,7 @@ namespace CodeOwls.PowerShell.Paths.Processors
 
             foreach (var nodeMoniker in nodeMonikers)
             {
-                factory = factory.Resolve(nodeMoniker);
+                factory = factory.Resolve(context, nodeMoniker);
                 if (null == factory)
                 {
                     break;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Management.Automation;
 using System.Security.AccessControl;
@@ -27,6 +28,7 @@ namespace CodeOwls.PowerShell.Provider.PathNodeProcessors
         void WriteSecurityDescriptorObject(ObjectSecurity securityDescriptor, string path);
         void WriteError(ErrorRecord errorRecord);
         bool Stopping { get; }
+        INodeFactory ResolvePath(string path);
         SessionState SessionState { get; }
         ProviderIntrinsics InvokeProvider { get; }
         CommandInvocationIntrinsics InvokeCommand { get; }
@@ -37,6 +39,6 @@ namespace CodeOwls.PowerShell.Provider.PathNodeProcessors
         IEnumerable<string> Include { get; }
         IEnumerable<string> Exclude { get; }
         object DynamicParameters { get; }
-        IPathNodeProcessor PathProcessor { get; }
+        Version PathTopologyVersion { get; }
     }
 }

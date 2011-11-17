@@ -101,15 +101,12 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Configuration\ConsoleChoice.cs" />
-    <Compile Include="Configuration\SettingsManager.cs" />
     <Compile Include="Exceptions\StudioShellException.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Configuration\SettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -304,6 +301,9 @@
     <Content Include="Module\StudioShell\Scripts\out-pipe.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Module\StudioShell\Scripts\use-pathTopologyVersion.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\ONE.bmp" />
     <None Include="Resources\PSIcon.png" />
