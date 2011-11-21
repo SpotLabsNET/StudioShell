@@ -15,9 +15,9 @@
 #
 
 
-[CmdletBinding()]
+[CmdletBinding(DefaultParameterSetName='byversion')]
 param( 
-	[parameter( Mandatory=$true, ParameterSetName="byversion" )]
+	[parameter( Mandatory=$true, ParameterSetName="byversion", Position=1 )]
 	[version] 
 	# the version of StudioShell path topology to use
 	$version,
@@ -102,6 +102,9 @@ This example changes the DTE path topology to match the 1.0 StudioShell release.
 C:\PS> use-pathTopologyVersion -current
 
 This example sets the DTE path topology to match the currently installed StudioShell version.
+
+.LINK
+get-pathTopologyVersion
 
 .LINK
 PSDTE

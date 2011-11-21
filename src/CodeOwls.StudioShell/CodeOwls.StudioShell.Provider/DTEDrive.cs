@@ -23,7 +23,7 @@ namespace CodeOwls.StudioShell.Provider
         {
             get { return SettingsManager.Settings.DefaultPathTopologyVersion; }
         }
-
+        
         public Version PathTopologyVersion { get; set; }
 
         internal DTE2 ApplicationObject

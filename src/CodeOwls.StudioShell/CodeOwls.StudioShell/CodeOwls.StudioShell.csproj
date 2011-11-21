@@ -301,6 +301,9 @@
     <Content Include="Module\StudioShell\Scripts\out-pipe.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Module\StudioShell\Scripts\get-pathTopologyVersion.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Module\StudioShell\Scripts\use-pathTopologyVersion.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -8,7 +8,14 @@ namespace CodeOwls.StudioShell.Common.Configuration
 {
     public static class PathTopologyVersions
     {
-        static readonly Version V1 = new Version( 1,0,1 );
+        static readonly Version V1 = new Version( 1,0 );
+
+        static readonly Version Current = SettingsManager.Settings.DefaultPathTopologyVersion;
+
+        public static Version[] GetAll()
+        {
+            return new[] {V1, Current};
+        }
 
         /// <summary>
         /// Identifies whether the specified path topology version supports the solution-level code model
