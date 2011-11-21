@@ -39,6 +39,8 @@ CHANGE LOG
 		the root DTE variable for the Visual Studio Shell and no 
 		message is issued.
 
+	23: Project folders now support the ability to add new items.
+
   Added Features    
 	The Cancel Executing Pipeline command actually works now.  At some
 		point while toying with NuGet support, I had disabled this command
