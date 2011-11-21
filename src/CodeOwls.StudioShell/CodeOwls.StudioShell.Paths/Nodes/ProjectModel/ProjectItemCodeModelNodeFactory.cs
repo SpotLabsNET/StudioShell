@@ -6,7 +6,7 @@ using EnvDTE;
 
 namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
 {
-    public class ProjectItemCodeModelNodeFactory : ProjectItemNodeFactory
+    class ProjectItemCodeModelNodeFactory : ProjectItemNodeFactory
     {
         public ProjectItemCodeModelNodeFactory(ProjectItem item) : base(item)
         {

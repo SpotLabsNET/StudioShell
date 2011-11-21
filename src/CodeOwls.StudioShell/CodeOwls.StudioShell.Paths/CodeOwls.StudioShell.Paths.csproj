@@ -172,9 +172,12 @@
     <Compile Include="Nodes\DTE\SelectedItemsNodeFactory.cs" />
     <Compile Include="Nodes\DTE\SelectedProjectItemsNodeFactory.cs" />
     <Compile Include="Nodes\DTE\SelectedProjectsNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\NewProjectItemManager.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectCodeModelNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectFolderItemNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectItemCodeModelNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectItemNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectItemNodeFactoryBase.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectItemTemplateCollectionNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectNodeFactoryBase.cs" />
