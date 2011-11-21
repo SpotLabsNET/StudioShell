@@ -37,12 +37,12 @@ namespace CodeOwls.PowerShell.Provider.Attributes
             }
             try
             {
-                cmdlet.WriteDebug(
-                    String.Format(
-                        "{0} >> Entering {1} ( {2} )",
-                        args.Instance.GetType().FullName,
-                        args.Method.Name,
-                        parameters));
+                var s = String.Format(
+                    "[{0}] >> Entering [{1}] ( [{2}] )",
+                    args.Instance.GetType().FullName,
+                    args.Method.Name,
+                    parameters);
+                cmdlet.WriteDebug(s);
             }
             catch
             {               
@@ -59,8 +59,12 @@ namespace CodeOwls.PowerShell.Provider.Attributes
 
             try
             {
-                cmdlet.WriteDebug(String.Format("{0} << Returning {2} from {1}", args.Instance.GetType().FullName,
-                                                args.Method.Name, args.ReturnValue ?? "null"));
+                var s = String.Format(
+                    "[{0}] << Returning [{2}] from [{1}]",
+                    args.Instance.GetType().FullName,
+                    args.Method.Name,
+                    args.ReturnValue ?? "null");
+                cmdlet.WriteDebug( s );
             }
             catch
             {
@@ -80,7 +84,7 @@ namespace CodeOwls.PowerShell.Provider.Attributes
             {
                 cmdlet.WriteDebug(
                     String.Format(
-                        "{0} !! Exception in {1}: {2}",
+                        "[{0}] !! Exception in [{1}]: [{2}]",
                         args.Instance.GetType().FullName,
                         args.Method.Name,
                         args.Exception));
