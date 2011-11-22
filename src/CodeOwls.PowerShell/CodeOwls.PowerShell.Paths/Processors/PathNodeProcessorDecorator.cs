@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.PowerShell.Provider.PathNodes;
 
@@ -14,7 +15,7 @@ namespace CodeOwls.PowerShell.Paths.Processors
 
         #region Implementation of IPathNodeProcessor
 
-        public virtual INodeFactory ResolvePath( IContext context, string path)
+        public virtual IEnumerable<INodeFactory> ResolvePath( IContext context, string path)
         {
             return _basePathNodeProcessor.ResolvePath( context, path);
         }

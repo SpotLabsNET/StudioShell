@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Management.Automation;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.StudioShell.Paths.Items.Commands;
@@ -39,10 +40,10 @@ namespace CodeOwls.StudioShell.Paths.Utility
                 if (null == cmd)
                 {
                     var node = context.ResolvePath("dte:/commands");
-                    var factory = node.Resolve(context, stringValue);
-                    if (null != factory)
+                    var factories = node.Resolve(context, stringValue);
+                    if (null != factories && factories.Any())
                     {
-                        var value = factory.GetNodeValue();
+                        var value = factories.First().GetNodeValue();
                         if (null != value)
                         {
                             cmd = value.Item as ShellCommand;
