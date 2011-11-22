@@ -22,11 +22,10 @@ namespace CodeOwls.PowerShell.Paths.Processors
 
             var nodeMonikers = path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
 
-            IEnumerable<INodeFactory> factories = null;
-            for (var m = 0; m < nodeMonikers.Count(); ++m )
-            {
-                var nodeMoniker = nodeMonikers[m];
+            IEnumerable<INodeFactory> factories = new[] {factory};
 
+            foreach (var nodeMoniker in nodeMonikers )
+            {
                 factories = factory.Resolve(context, nodeMoniker);
                 if (null == factories || !factories.Any())
                 {
