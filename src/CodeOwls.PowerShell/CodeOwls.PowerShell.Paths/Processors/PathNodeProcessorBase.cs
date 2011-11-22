@@ -12,7 +12,7 @@ namespace CodeOwls.PowerShell.Paths.Processors
     {
         protected abstract INodeFactory Root { get; }
 
-        public INodeFactory ResolvePath(IContext context, string path)
+        public IEnumerable<INodeFactory> ResolvePath(IContext context, string path)
         {
             Regex re = new Regex(@"^[-_a-z0-9:]+:/?");
             path = path.ToLowerInvariant().Replace('\\', '/');
@@ -22,17 +22,21 @@ namespace CodeOwls.PowerShell.Paths.Processors
 
             var nodeMonikers = path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var nodeMoniker in nodeMonikers)
+            IEnumerable<INodeFactory> factories = null;
+            for (var m = 0; m < nodeMonikers.Count(); ++m )
             {
-                factory = factory.Resolve(context, nodeMoniker);
-                if (null == factory)
+                var nodeMoniker = nodeMonikers[m];
+
+                factories = factory.Resolve(context, nodeMoniker);
+                if (null == factories || !factories.Any())
                 {
-                    break;
+                    return null;
                 }
+
+                factory = factories.First();
             }
 
-            return factory;
-
+            return factories;
         }
     }
 }

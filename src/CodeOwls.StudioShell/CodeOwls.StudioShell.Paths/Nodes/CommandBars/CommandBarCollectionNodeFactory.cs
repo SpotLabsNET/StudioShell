@@ -41,7 +41,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             get { return "commandBars"; }
         }
 
-        public override INodeFactory Resolve(IContext context, string nodeName)
+        public override IEnumerable<INodeFactory> Resolve(IContext context, string nodeName)
         {
             CommandBar cmdbar = null;
 
@@ -53,12 +53,10 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             {
             }
 
-            if (null == cmdbar)
+            if (null != cmdbar)
             {
-                return base.Resolve(context, nodeName);
+                yield return new CommandBarNodeFactory(cmdbar);
             }
-
-            return new CommandBarNodeFactory(cmdbar);
         }
 
         public override IEnumerable<INodeFactory>  GetNodeChildren( IContext context )
