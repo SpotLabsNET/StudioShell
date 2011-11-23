@@ -19,9 +19,24 @@ namespace CodeOwls.StudioShell.Common.IoC
             return (T) _map[typeof (T).FullName];
         }
 
+        public static object Get(string typeName)
+        {
+            object impl;
+            if( ! _map.TryGetValue( typeName, out impl) )
+            {
+                return null;
+            }
+            return impl;
+        }
+
         public static void Set<T>( T impl )
         {
             _map[typeof (T).FullName] = impl;
+        }
+
+        public static void Set(string typeName, object impl)
+        {
+            _map[typeName] = impl;
         }
 
         public static T GetService<T>()

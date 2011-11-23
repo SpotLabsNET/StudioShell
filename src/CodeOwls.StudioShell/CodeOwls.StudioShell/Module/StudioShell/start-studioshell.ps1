@@ -14,27 +14,48 @@
 #   limitations under the License.
 #
 
+$local:root = $myInvocation.MyCommand.Path | split-path;
+write-debug "local module root path is $local:root"
+
+$cmdline = [environment]::commandLine;
+if( $cmdline -match 'powershell.exe' )
+{
+	# bootstrap assemblies and environment  changes
+	ls "$($local:root)\..\..\*.dll" | foreach { 
+		write-debug "loading assembly $_";
+		[reflection.assembly]::loadFrom( $_.fullName ); 
+	}
+	[CodeOwls.StudioShell.Host.EnvironmentConfiguration]::UpdateEnvironmentForModule();
+
+	$typeName = 'EnvDTE80.DTE2';
+	if( -not $dte )
+	{
+		$dte = [CodeOwls.StudioShell.Common.IoC.Locator]::Get( $typeName )
+	}
+
+	if( -not $dte )
+	{
+		$dte = new-object -com 'VisualStudio.DTE';
+		[CodeOwls.StudioShell.Common.IoC.Locator]::Set( $typeName, $dte );
+	}
+}
 
 import-module preferencestack;
 get-studioShellSettings.ps1 | push-preference;
 
-if( -not( [environment]::commandLine -match "devenv.exe" -or [environment]::commandLine -match "ssms.exe" ) )
-{
-	throw "The StudioShell module is only available from a PowerShell session hosted by the Visual Studio Shell.";
+if( ( $cmdline -match "devenv.exe" -or [environment]::$cmdline -match "ssms.exe" ) )
+{	
+	try
+	{
+		write-debug 'testing for presence of StudioShell add-in...';
+		[CodeOwls.StudioShell.Connect] | out-null;
+	}
+	catch
+	{
+		throw "The StudioShell Add-In is not loaded.  Please make sure you have the add-in enabled.";
+	}
 }
 
-try
-{
-	write-debug 'testing for presence of StudioShell add-in...';
-	[CodeOwls.StudioShell.Connect] | out-null;
-}
-catch
-{
-	throw "The StudioShell Add-In is not loaded.  Please make sure you have the add-in enabled.";
-}
-
-$local:root = $myInvocation.MyCommand.Path | split-path;
-write-debug "local module root path is $local:root"
 
 # import the assembly into the module session so we can register the runspace with the add-in
 write-debug "connecting to StudioShell add in instance";
