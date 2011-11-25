@@ -89,19 +89,36 @@ namespace CodeOwls.PowerShell.Host.Host
                                                             Collection<FieldDescription> descriptions)
         {
             _control.WriteLine(String.Empty);
-            _control.WriteLine(caption);
-            _control.WriteLine(message);
+
+            if( ! String.IsNullOrEmpty( caption ) )
+            {
+                _control.WriteLine(caption);
+            }
+            if (!String.IsNullOrEmpty(message))
+            {
+                _control.WriteLine(message);
+            }
 
             var results = new Dictionary<string, PSObject>();
 
             descriptions.ToList().ForEach(
                 d =>
                     {
-                        var prompt = (d.Label + ": ").Replace("&", String.Empty);
-                        _control.WritePrompt(prompt);
-                        _control.CommandEnteredEvent.WaitOne();
+                        bool isSecure = d.ParameterTypeFullName == typeof (SecureString).FullName;
 
-                        results[d.Name] = _control.ReadLine().Trim().ToPSObject();
+                        var label = String.IsNullOrEmpty( d.Label ) ? d.Name : d.Label;
+                        var prompt = (label + ": ").Replace("&", String.Empty);
+                        _control.WritePrompt(prompt);
+                        
+                        if (isSecure)
+                        {
+                            results[d.Name] = ReadLineAsSecureString().ToPSObject();
+                        }
+                        else
+                        {
+                            _control.CommandEnteredEvent.WaitOne();
+                            results[d.Name] = _control.ReadLine().Trim().ToPSObject();                            
+                        }
                     }
                 );
 
