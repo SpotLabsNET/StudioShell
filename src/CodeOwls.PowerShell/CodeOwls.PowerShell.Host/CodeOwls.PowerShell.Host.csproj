@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CodeOwls.PowerShell.Host</RootNamespace>
     <AssemblyName>CodeOwls.PowerShell.Host</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -55,6 +55,7 @@
     <Compile Include="AutoComplete\DriveListAutoCompleteProvider.cs" />
     <Compile Include="AutoComplete\IAutoCompleteProvider.cs" />
     <Compile Include="AutoComplete\IAutoCompleteWalker.cs" />
+    <Compile Include="AutoComplete\NullAutoCompleteWalker.cs" />
     <Compile Include="AutoComplete\PowerShellTabExansionAutoCompleteProvider.cs" />
     <Compile Include="AutoComplete\ProviderPathAutoCompleteProvider.cs" />
     <Compile Include="CommandCompleteEventArgs.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="History\HistoryStack.cs" />
     <Compile Include="History\HistoryStackWalker.cs" />
     <Compile Include="History\IHistoryStackWalker.cs" />
+    <Compile Include="History\NullHistoryStackWalker.cs" />
     <Compile Include="Host\Host.cs" />
     <Compile Include="Host\HostRawUI.cs" />
     <Compile Include="Host\HostUI.cs" />
