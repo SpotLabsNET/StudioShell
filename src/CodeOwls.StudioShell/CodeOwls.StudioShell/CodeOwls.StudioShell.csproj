@@ -181,6 +181,23 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\BreakpointCollection.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeClass.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeEnum.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeEvent.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeFile.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeInterface.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeMethod.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeNamespace.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\Command.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CommandBarCollection.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CommandBarControl.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CommandCollection.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\ErrorTaskCollection.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\Project.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\ReferenceCollection.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\SolutionProjects.xml" />
+    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\TaskCollection.xml" />
     <Content Include="StudioShell.VS2010.AddIn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
