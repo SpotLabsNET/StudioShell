@@ -38,7 +38,7 @@ function do-updateHeaders( $headerPrefix, $pattern )
 
 do-updateHeaders 'cs' '*.cs';
 do-updateHeaders 'ps' '*.ps1','*.psm1','*.psd1';
-do-updateHeaders 'xml' '*.xml','*.resx','*.addin','do-updateHeaders 'ps' '*.ps1','*.psm1','*.psd1';*.nuspec';
+do-updateHeaders 'xml' '*.xml','*.resx','*.addin','*.nuspec'
 
 
 
