@@ -17,9 +17,19 @@
 $local:root = $myInvocation.MyCommand.Path | split-path;
 write-debug "local module root path is $local:root"
 
+Write-Debug "updating environment...";
+
+$env:Path += ";$($local:root)\Scripts;$($local:root)\bin\Scripts";
+$env:PSModulePath += ";$($local:root)";
+
+import-module PreferenceStack;
+get-studioShellSettings.ps1 | push-preference;
+
 $cmdline = [environment]::commandLine;
 if( $cmdline -match 'powershell.exe' )
 {
+	Write-Debug "Commandline [$cmdline] appears to be a general powershell console";
+	
 	# bootstrap assemblies and environment  changes
 	ls "$($local:root)\..\..\*.dll" | foreach { 
 		write-debug "loading assembly $_";
@@ -39,9 +49,6 @@ if( $cmdline -match 'powershell.exe' )
 		[CodeOwls.StudioShell.Common.IoC.Locator]::Set( $typeName, $dte );
 	}
 }
-
-import-module preferencestack;
-get-studioShellSettings.ps1 | push-preference;
 
 if( ( $cmdline -match "devenv.exe" -or [environment]::$cmdline -match "ssms.exe" ) )
 {	

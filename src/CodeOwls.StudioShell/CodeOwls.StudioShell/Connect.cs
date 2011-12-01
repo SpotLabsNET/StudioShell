@@ -48,6 +48,7 @@ using CodeOwls.StudioShell.Utility;
 using Microsoft.VisualStudio.Shell;
 using stdole;
 using Command=EnvDTE.Command;
+using Debugger = System.Diagnostics.Debugger;
 using ICommandExecutor = CodeOwls.PowerShell.Host.Executors.ICommandExecutor;
 
 namespace CodeOwls.StudioShell
@@ -186,8 +187,9 @@ namespace CodeOwls.StudioShell
 	        {
                 object[] contextGUIDS = new object[] { };
                 Commands2 commands = (Commands2)_applicationObject.Commands;
-                
-                //Add a command to the Commands collection:
+
+                SafeDeleteCommand("CodeOwls.StudioShell.Connect.StudioShell");
+
 	            Command command = commands.AddNamedCommand2(_addInInstance, 
 	                                                        "StudioShell", "StudioShell", "Opens Studio Shell", 
 	                                                        false, 1, 
@@ -201,6 +203,7 @@ namespace CodeOwls.StudioShell
 	                command.AddControl(viewPopup.CommandBar, 1);
 	            }
 
+                SafeDeleteCommand("CodeOwls.StudioShell.Connect.Execute");
 	            command = commands.AddNamedCommand2(_addInInstance,
 	                                                "Execute", "Exceute", "Executes PowerShell from a Macro",
 	                                                false, 0,
@@ -209,6 +212,7 @@ namespace CodeOwls.StudioShell
 	                                                (int)vsCommandStyle.vsCommandStyleText, 
 	                                                vsCommandControlType.vsCommandControlTypeButton);
 
+                SafeDeleteCommand("CodeOwls.StudioShell.Connect.Cancel");
 	            command = commands.AddNamedCommand2(_addInInstance,
 	                                                "Cancel", "Cancel Executing Pipeline", "Cancels the Currently Executing Studio Shell Pipeline",
 	                                                false, 2,
@@ -228,6 +232,17 @@ namespace CodeOwls.StudioShell
 	            //If we are here, then the exception is probably because a command with that name
 	            //  already exists. If so there is no need to recreate the command and we can 
 	            //  safely ignore the exception.
+	        }
+	    }
+
+	    private void SafeDeleteCommand(string cmdName)
+	    {
+	        try
+	        {
+	            _applicationObject.Commands.Item( cmdName ).Delete();
+	        }
+	        catch
+	        {
 	        }
 	    }
 
