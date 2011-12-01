@@ -28,7 +28,7 @@ function prompt()
            
 #additional profile and environment initialization scripts
 
-$local:root = $myInvocation.MyCommand.Path | split-path | join-path -child 'InitializationScripts';
+$local:root = $myInvocation.MyCommand.Path | split-path | join-path -child '../InitializationScripts';
 write-debug "profile initialization script repository path is $local:root";
 
 # registers drive aliases for common dte access points

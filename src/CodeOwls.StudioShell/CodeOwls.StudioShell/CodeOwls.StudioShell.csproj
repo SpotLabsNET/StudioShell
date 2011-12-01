@@ -167,163 +167,12 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_Solution_Modules.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_Version.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\CodeOwls.StudioShell.Provider.dll-help.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\CodeOwls.StudioShell.Cmdlets.dll-help.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\BreakpointCollection.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeClass.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeEnum.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeEvent.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeFile.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeInterface.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeMethod.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CodeNamespace.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\Command.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CommandBarCollection.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CommandBarControl.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\CommandCollection.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\ErrorTaskCollection.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\Project.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\ReferenceCollection.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\SolutionProjects.xml" />
-    <Content Include="Module\StudioShell\en-US\ProviderCmdlets\TaskCollection.xml" />
     <Content Include="StudioShell.VS2010.AddIn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_Profiles.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_Settings.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_Drives.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_Variables.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_Data_Panes.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_Commands.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_Host_Requirements.help.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\en-US\about_StudioShell_License.help.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="StudioShell.VS2008.AddIn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="InitializationScripts\register-contextMenuItems.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="InitializationScripts\register-drives.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\PreferenceStack\PreferenceStack.psm1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\Debugger.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\write-prompt.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\start-studioshell.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\remove-nullSplatted.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\CodeModel.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\CommandBars.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\Commands.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\FontsAndColors.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\Project.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\Settings.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\_Root.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\Window.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\WindowConfiguration.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\get-colorString.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\get-projectType.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\get-taskIconNames.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\get-taskPriorities.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\open-file.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\out-outputPane.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\out-taskList.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\select-first.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\StudioShell.psd1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\OutputPanes.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\Tasks.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Formats\Errors.Formats.ps1xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Module\StudioShell\Scripts\out-pipe.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Module\StudioShell\Scripts\get-pathTopologyVersion.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Module\StudioShell\Scripts\use-pathTopologyVersion.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\ONE.bmp" />
     <None Include="Resources\PSIcon.png" />
@@ -331,39 +180,12 @@
     <Content Include="Resources\studioshell.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\test-studioShellHost.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\start-studioShell.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\invoke-studioShellProfile.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="InitializationScripts\register-solutionEvents.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\save-studioShellSettings.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\get-studioShellSettings.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\PSIconStop.bmp" />
     <Content Include="Resources\PSIconAnimated.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="profile.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="UserProfile\settings.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\PSIcon.bmp" />
     <None Include="Resources\PSIcon.ico" />
-    <Content Include="UserProfile\profile.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
@@ -410,9 +232,7 @@
       <Name>CodeOwls.PowerShell.WinForms</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Module\StudioShell\InitializationScripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
