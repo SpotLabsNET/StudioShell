@@ -29,11 +29,11 @@ $cmdline = [environment]::commandLine;
 if( $cmdline -match 'powershell.exe' )
 {
 	Write-Debug "Commandline [$cmdline] appears to be a general powershell console";
-	
+	Write-Warning "Bootstrapping a new instance of Visual Studio.  Please be patient as this may take a little while...";
 	# bootstrap assemblies and environment  changes
-	ls "$($local:root)\..\..\*.dll" | foreach { 
+	ls "$($local:root)\bin\*.dll" | foreach { 
 		write-debug "loading assembly $_";
-		[reflection.assembly]::loadFrom( $_.fullName ); 
+		[reflection.assembly]::loadFrom( $_.fullName ) | Out-Null; 
 	}
 	[CodeOwls.StudioShell.Host.EnvironmentConfiguration]::UpdateEnvironmentForModule();
 
