@@ -19,7 +19,7 @@ write-debug "local module root path is $local:root"
 
 Write-Debug "updating environment...";
 
-$env:Path += ";$($local:root)\Scripts;$($local:root)\bin\Scripts";
+$env:Path += ";$($local:root)\Scripts;$($local:root)\bin\Scripts;C:\Program Files (x86)\Common Files\microsoft shared\MSEnv\PublicAssemblies";
 $env:PSModulePath += ";$($local:root)";
 
 import-module PreferenceStack;
@@ -29,11 +29,11 @@ $cmdline = [environment]::commandLine;
 if( $cmdline -match 'powershell.exe' )
 {
 	Write-Debug "Commandline [$cmdline] appears to be a general powershell console";
-	Write-Warning "Bootstrapping a new instance of Visual Studio.  Please be patient as this may take a little while...";
+
 	# bootstrap assemblies and environment  changes
 	ls "$($local:root)\bin\*.dll" | foreach { 
 		write-debug "loading assembly $_";
-		[reflection.assembly]::loadFrom( $_.fullName ) | Out-Null; 
+		[reflection.assembly]::loadFrom( $_.fullName ) | out-null; 
 	}
 	[CodeOwls.StudioShell.Host.EnvironmentConfiguration]::UpdateEnvironmentForModule();
 
@@ -45,8 +45,9 @@ if( $cmdline -match 'powershell.exe' )
 
 	if( -not $dte )
 	{
+		Write-Warning "Bootstrapping a new instance of Visual Studio.  Please be patient as this may take a little while...";
 		$dte = new-object -com 'VisualStudio.DTE';
-		[CodeOwls.StudioShell.Common.IoC.Locator]::Set( $typeName, $dte );
+		[CodeOwls.StudioShell.Common.IoC.Locator]::Set( $typeName, $dte );				
 	}
 }
 
