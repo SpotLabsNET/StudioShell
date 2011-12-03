@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <!--
    Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
 
@@ -17,7 +17,7 @@
 <Configuration>
   <Controls>
     <Control>
-      <Name>Task-GroupingFormat</Name>
+      <Name>AddIn-GroupingFormat</Name>
       <CustomControl>
         <CustomEntries>
           <CustomEntry>
@@ -46,13 +46,13 @@
 
   <ViewDefinitions>
     <View>
-      <Name>Task</Name>
+      <Name>Error</Name>
       <ViewSelectedBy>
-        <TypeName>CodeOwls.StudioShell.Paths.Items.UI.ShellTaskItem</TypeName>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.AddIns.ShellAddIn</TypeName>
       </ViewSelectedBy>
       <GroupBy>
         <PropertyName>PSParentPath</PropertyName>
-        <CustomControlName>Task-GroupingFormat</CustomControlName>
+        <CustomControlName>AddIn-GroupingFormat</CustomControlName>
       </GroupBy>
       <TableControl>
         <TableHeaders>
@@ -62,29 +62,19 @@
             <Width>10</Width>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Displayed</Label>
+            <Label>Connected</Label>
             <Alignment>center</Alignment>
             <Width>9</Width>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Priority</Label>
-            <Alignment>left</Alignment>
-            <Width>10</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Category</Label>
-            <Alignment>left</Alignment>
-            <Width>20</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Task</Label>
+            <Label>Description</Label>
             <Alignment>left</Alignment>
             <Width>35</Width>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Name</Label>
             <Alignment>left</Alignment>
-            <Width>15</Width>
+            <Width>10</Width>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -94,19 +84,13 @@
                 <PropertyName>SSItemMode</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <ScriptBlock>if($_.Displayed){'*'}</ScriptBlock>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Priority</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Category</PropertyName>
+                <ScriptBlock>if($_.Connected){'*'}</ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Description</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Name</PropertyName>
+                <PropertyName>PSChildName</PropertyName>
               </TableColumnItem>
 
             </TableColumnItems>

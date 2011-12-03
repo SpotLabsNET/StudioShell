@@ -37,7 +37,7 @@ namespace CodeOwls.PowerShell.Host.Executors
 
         private bool IsRunspaceBusy
         {
-            get { return _runspace.RunspaceAvailability == RunspaceAvailability.Busy; }
+            get { return _runspace.RunspaceAvailability != RunspaceAvailability.Available; }
         }
 
         public event EventHandler<EventArgs<Exception>> PipelineException;
@@ -123,7 +123,8 @@ namespace CodeOwls.PowerShell.Host.Executors
         public Collection<PSObject> ExecuteCommand(string command, Dictionary<string, object> inputs,
                                                    out Exception error, ExecutionOptions options)
         {
-            var cmd = new Command(command, true, false);
+            var isscript = null == inputs || !inputs.Any();
+            var cmd = new Command(command, isscript, false);
 
             if (null != inputs && inputs.Any())
             {
@@ -191,13 +192,13 @@ namespace CodeOwls.PowerShell.Host.Executors
 
                 try
                 {
-                    WaitWhileRunspaceIsBusy();
-
                     _currentPipeline = tempPipeline;
 
                     Exception exception = null;
                     try
                     {
+                        WaitWhileRunspaceIsBusy();
+                    
                         tempPipeline.InvokeAsync();
                         tempPipeline.Input.Close();
 

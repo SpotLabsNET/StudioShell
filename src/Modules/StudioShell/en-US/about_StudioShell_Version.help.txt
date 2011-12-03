@@ -14,7 +14,20 @@ CHANGE LOG
   Resolved Issues
 	Using 'exit' hides the console; reinitializing the runspace proved
 	to cause unintented side-effects when the UI has been altered with
-	custom script commands
+	custom script commands.
+	
+	Visual Studio command objects are now guaranteed to always have a name.  
+	Previously commands that didn't have name were unreferenceable, but would
+	appear in the list of items in the command path node.  This would disrupt
+	the console output and falsely show multiple containers under the command
+	node.  Nameless commands are now identified by their numeric ID value.
+	
+	Formats are now defined and working for the following path nodes:
+	  * project templates
+	  * project item templates
+	  * tasks
+	  * errors
+	  * addins
 
 	10: The default console warning and error color selections are 
 		readible (color on black background)
@@ -72,10 +85,12 @@ CHANGE LOG
 
 	Support for using the PSDTE provider outside of Visual Studio.  You can now
 		load the PSDTE provider in a standard PowerShell console and get access
-		to the DTE: drive without running Visual Studio explicitly.  Support for
-		this scenario should be considered beta; some aspects of the DTE: drive
-		behave differently outside of Visual Studio.  In addition, the visualization
-		cmdlets available in StudioShell do not work from the console.
+		to the DTE: drive without running Visual Studio explicitly.  
+		
+		Support for	this scenario should be considered beta; some aspects of 
+		the DTE: drive behave differently outside of Visual Studio.  In 
+		addition, the visualization	cmdlets available in StudioShell do not work 
+		from the console.
 
 	Support for SQL Server Management Studio (SSMS) installations.  SSMS support
 		is experimental at the moment.  Moreover, several key path nodes are not
@@ -93,7 +108,10 @@ CHANGE LOG
 		You have been warned, use with _extreme caution_.
 
   DTE Drive Path Topology Changes
-    The code model is now isolated from project items.  In previous versions, the
+    
+	Code Model Relocation
+	
+	The code model is now isolated from project items.  In previous versions, the
 	code model was available as a hive beneath each particular project item:
 
 	dte:/solution/projects/<project name>/<item name>/codemodel
@@ -119,6 +137,13 @@ CHANGE LOG
 
 	The code model is still organized by project and file, which is necessary
 	to permit modifying operations to the code model.
+	
+	Selected Items Reorganization
+
+  	Previously the SelectedItems path node listed currently selected code model
+	elements individually; in this release the SelectedItems node is expanded with 
+	a new CodeModel container node that houses the currently selected code model
+	objects.
 
 1.1 (private release)
   Resolved Issues

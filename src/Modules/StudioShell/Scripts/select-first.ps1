@@ -16,7 +16,11 @@
 
 
 [CmdletBinding()]
-param( 
+param( 	
+	[Parameter( ValueFromPipeline = $true )]
+	[Object] 
+	$InputObject, 
+
 	[Parameter()]
 	[scriptblock] 
 	# the conditional to apply to each input element; defaults to {$_}
@@ -33,7 +37,7 @@ process
 	if( ! $script:found -and ( &$predicate ) )  
 	{  
 		$script:found = $true;  
-        $script:item = $_;  
+        $script:item = $inputObject;  
 	}  
 }  
 end  

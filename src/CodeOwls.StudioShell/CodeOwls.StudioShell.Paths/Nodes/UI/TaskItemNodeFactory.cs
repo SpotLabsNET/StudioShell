@@ -37,7 +37,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.UI
 
         public override string Name
         {
-            get { return _item.SubCategory; }
+            get { return _item.GetHashCode().ToString(); }
         }
 
         public override IPathNode GetNodeValue()
