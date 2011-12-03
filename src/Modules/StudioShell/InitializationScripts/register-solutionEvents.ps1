@@ -53,7 +53,7 @@ function update-SolutionScriptRepository()
 	{
 		write-debug 'updating per-solution script repository';
 		
-		$script:sln = get-item dte:solution;		
+		$script:sln = get-item dte:/solution;		
 		$script:path = $env:path;
 					
 		if( $script:sln.FileName )

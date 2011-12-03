@@ -49,6 +49,7 @@
       <Name>Window</Name>
       <ViewSelectedBy>
         <TypeName>CodeOwls.StudioShell.Paths.Items.PropertyModel.ShellProperty</TypeName>
+		<TypeName>CodeOwls.StudioShell.Paths.Items.ShellContainer</TypeName>
       </ViewSelectedBy>
       <GroupBy>
         <PropertyName>PSParentPath</PropertyName>

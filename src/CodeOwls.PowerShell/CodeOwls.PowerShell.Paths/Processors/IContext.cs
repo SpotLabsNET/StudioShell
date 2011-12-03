@@ -55,5 +55,6 @@ namespace CodeOwls.PowerShell.Provider.PathNodeProcessors
         IEnumerable<string> Exclude { get; }
         object DynamicParameters { get; }
         Version PathTopologyVersion { get; }
+        string Path { get; }
     }
 }

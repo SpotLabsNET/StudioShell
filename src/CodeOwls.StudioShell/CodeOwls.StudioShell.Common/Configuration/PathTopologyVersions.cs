@@ -18,12 +18,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using CodeOwls.PowerShell.Paths.Extensions;
+using CodeOwls.PowerShell.Provider.PathNodeProcessors;
+using CodeOwls.StudioShell.Common.Utility;
 
 namespace CodeOwls.StudioShell.Common.Configuration
 {
     public static class PathTopologyVersions
     {
-        static readonly Version V1 = new Version( 1,0 );
+        static readonly Version V1 = new Version( 1,0,1 );
 
         static readonly Version Current = SettingsManager.Settings.DefaultPathTopologyVersion;
 
@@ -35,21 +38,31 @@ namespace CodeOwls.StudioShell.Common.Configuration
         /// <summary>
         /// Identifies whether the specified path topology version supports the solution-level code model
         /// </summary>
-        /// <param name="version">The path topology version.</param>
+        /// <param name="context">The context for the path topology.</param>
         /// <returns>True if the path topology version supports a solution-level code model; false if it does not.</returns>
-        public static bool SupportsSolutionCodeModel( Version version )
+        public static bool SupportsSolutionCodeModel( IContext context )
         {
-            return version > V1;
+            return context.PathTopologyVersion > V1;
         }
 
         /// <summary>
-        /// Identifies whether the specified path topology version supports the project item-level code model
+        /// Identifies whether the specified context supports the project item-level code model.  
         /// </summary>
-        /// <param name="version">The path topology version.</param>
-        /// <returns>True if the path topology version supports a project item code model; false if it does not.</returns>
-        public static bool SupportsProjectItemCodeModel(Version version)
+        /// <param name="context">The context for the path topology.</param>
+        /// <returns>True if the path operation context supports a project item code model; false if it does not.</returns>
+        public static bool SupportsProjectItemCodeModel( IContext context )
         {
-            return version <= V1;
+            return (context.PathTopologyVersion <= V1) || context.Path.ContainsNodeName(NodeNames.SelectedItems);
+        }
+
+        /// <summary>
+        /// Identifies whether the specified path topology version supports a CodeModel element under the selectedItems path node.
+        /// </summary>
+        /// <param name="context">The context for the path topology.</param>
+        /// <returns>True if the path topology context supports a CodeModel collection element in the selectedItems node; false if it does not.</returns>
+        public static bool SupportsSelectedCodeModelItemContainer(IContext context)
+        {
+            return context.PathTopologyVersion > V1;
         }
     }
 }

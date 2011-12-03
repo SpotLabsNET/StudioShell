@@ -33,7 +33,7 @@ if( $cmdline -match 'powershell.exe' )
 	# bootstrap assemblies and environment  changes
 	ls "$($local:root)\bin\*.dll" | foreach { 
 		write-debug "loading assembly $_";
-		[reflection.assembly]::loadFrom( $_.fullName ) | out-null; 
+		[reflection.assembly]::loadFrom( $_.fullName ) | Out-Null; 
 	}
 	[CodeOwls.StudioShell.Host.EnvironmentConfiguration]::UpdateEnvironmentForModule();
 
@@ -49,6 +49,8 @@ if( $cmdline -match 'powershell.exe' )
 		$dte = new-object -com 'VisualStudio.DTE';
 		[CodeOwls.StudioShell.Common.IoC.Locator]::Set( $typeName, $dte );				
 	}
+	
+	$dte = $null;
 }
 
 if( ( $cmdline -match "devenv.exe" -or [environment]::$cmdline -match "ssms.exe" ) )

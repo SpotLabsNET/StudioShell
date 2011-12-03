@@ -19,7 +19,9 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
 {
     internal class ProviderPathAutoCompleteProvider : CommandAutoCompleteProvider
     {
-        private const string Command = @"resolve-path '{0}' | split-path -leaf";
+        private const string Command =
+            @"( resolve-path '{0}' | select -exp path ) -replace ([regex]::escape( $pwd.path +'\') +'?'),'.\'";
+
 
         public ProviderPathAutoCompleteProvider(Executor executor) : base(Command, executor)
         {

@@ -71,6 +71,7 @@ TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
 FormatsToProcess = 'formats\_Root.Formats.ps1xml', 
+				'formats\AddIns.Formats.ps1xml',
 				'formats\CodeModel.Formats.ps1xml', 
                'formats\CommandBars.Formats.ps1xml', 
                'formats\Commands.Formats.ps1xml', 
@@ -81,6 +82,7 @@ FormatsToProcess = 'formats\_Root.Formats.ps1xml',
                'formats\Project.Formats.ps1xml', 
                'formats\Settings.Formats.ps1xml', 
                'formats\Tasks.Formats.ps1xml',
+			   'formats\Templates.Formats.ps1xml',
                'formats\Window.Formats.ps1xml', 
                'formats\WindowConfiguration.Formats.ps1xml'
 

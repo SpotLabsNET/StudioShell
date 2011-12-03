@@ -33,7 +33,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
     public abstract class ProjectItemNodeFactoryBase : NodeFactoryBase, IRemoveItem, IRenameItem, ICopyItem
     {
         protected readonly ProjectItem _item;
-
+        
         protected ProjectItemNodeFactoryBase(ProjectItem item)
         {
             _item = item;
@@ -259,7 +259,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
                 }
             }
 
-            if (PathTopologyVersions.SupportsProjectItemCodeModel( context.PathTopologyVersion ))
+            if (PathTopologyVersions.SupportsProjectItemCodeModel( context ))
             {
                 if (null != _item.FileCodeModel)
                 {

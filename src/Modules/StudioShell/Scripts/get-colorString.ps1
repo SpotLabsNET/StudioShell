@@ -23,13 +23,14 @@ param(
 	$color 
 )
 
-function get-ColorKey( [System.Drawing.Color] $c )
-{
-	"RBG({0},{1},{2})" -f $c.R, $c.G, $c.B;
-}
-
 process
 {
+	function get-ColorKey( [System.Drawing.Color] $c )
+	{
+		"RBG({0},{1},{2})" -f $c.R, $c.G, $c.B;
+	}
+
+
 	if( $color.IsNamedColor ) 
 	{
 		return $color.Name;

@@ -44,7 +44,10 @@ namespace CodeOwls.StudioShell.Paths.Nodes.Commands
 
         public override string Name
         {
-            get { return _command.Name.MakeSafeForPath(); }
+            get
+            {
+                return _command.GetSafeName().MakeSafeForPath();
+            }
         }
 
         public object RemoveItemParameters

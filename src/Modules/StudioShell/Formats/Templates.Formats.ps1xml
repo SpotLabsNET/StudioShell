@@ -17,7 +17,7 @@
 <Configuration>
     <Controls>
         <Control>
-            <Name>Command-GroupingFormat</Name>
+            <Name>Template-GroupingFormat</Name>
                     <CustomControl>
                         <CustomEntries>
                             <CustomEntry>
@@ -27,15 +27,16 @@
                                         <CustomItem>
                                           <Text>Location: </Text>
                                           <ExpressionBinding>
-                                            <PropertyName>PSParentPath</PropertyName>
+                                            <ScriptBlock>$_.PSParentPath</ScriptBlock>
                                           </ExpressionBinding>
                                           <NewLine/>
+                                          
                                           <Text>Available Operations: </Text>
                                           <ExpressionBinding>
                                             <ScriptBlock>(get-item $_.PSParentPath).SSItemMode</ScriptBlock>
                                           </ExpressionBinding>
                                           <NewLine/>
-                                        </CustomItem> 
+                                        </CustomItem>                                       
                                     </Frame>
                                 </CustomItem>
                             </CustomEntry>
@@ -46,32 +47,30 @@
 
     <ViewDefinitions>
         <View>
-            <Name>CommandsChildren</Name>
+            <Name>templatechildren</Name>
             <ViewSelectedBy>
-              <TypeName>CodeOwls.StudioShell.Paths.Items.Commands.ShellCommand</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.Templates.ShellTemplate</TypeName>
             </ViewSelectedBy>
             <GroupBy>
                 <PropertyName>PSParentPath</PropertyName>
-                <CustomControlName>Command-GroupingFormat</CustomControlName>  
+                <CustomControlName>Template-GroupingFormat</CustomControlName>  
             </GroupBy>
             <TableControl>
                 <TableHeaders>
                   <TableColumnHeader>
+                    <Label>          </Label>
+                    <Alignment>Left</Alignment>
                     <Width>10</Width>
-                    <Label>        </Label>
-                    <Alignment>left</Alignment>
                   </TableColumnHeader>
                   <TableColumnHeader>
-                    <Width>24</Width>
-                    <Label>Bindings</Label>
-                    <Alignment>left</Alignment>
-                  </TableColumnHeader>
-                  <TableColumnHeader>
-                    <Width>64</Width>
-                    <Label>Name</Label>
-                    <Alignment>left</Alignment>
-                  </TableColumnHeader>
-
+                        <Width>15</Width>
+						            <Label>Group</Label>
+                        <Alignment>left</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>30</Width>
+                        <Label>Name</Label>
+                    </TableColumnHeader>                    
                 </TableHeaders>
                 <TableRowEntries>
                   <TableRowEntry>
@@ -80,12 +79,11 @@
                         <PropertyName>SSItemMode</PropertyName>
                       </TableColumnItem>
                       <TableColumnItem>
-                        <PropertyName>Bindings</PropertyName>
+                        <ScriptBlock>$_.Language | split-path -leaf</ScriptBlock>
                       </TableColumnItem>
                       <TableColumnItem>
                         <PropertyName>PSChildName</PropertyName>
                       </TableColumnItem>
-
                     </TableColumnItems>
                   </TableRowEntry>
                 </TableRowEntries>

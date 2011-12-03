@@ -55,7 +55,7 @@ namespace CodeOwls.StudioShell.Provider
 
         protected override PowerShell.Provider.PathNodeProcessors.IContext CreateContext(string path, bool recurse)
         {
-            return new Context( this, PSDriveInfo, PathNodeProcessor, DynamicParameters, DTEDrive.PathTopologyVersion, recurse );
+            return new Context( this, path, PSDriveInfo, PathNodeProcessor, DynamicParameters, DTEDrive.PathTopologyVersion, recurse );
         }
 
         protected override IPathNodeProcessor PathNodeProcessor

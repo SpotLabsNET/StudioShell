@@ -13,3 +13,4 @@ bin
 NDepend
 \.cache
 ~$
+_local
