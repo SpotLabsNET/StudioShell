@@ -16,6 +16,7 @@
 
 using System.Collections.Generic;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
+using CodeOwls.StudioShell.Common.Utility;
 using EnvDTE;
 using CodeOwls.PowerShell.Provider.PathNodes;
 
@@ -26,7 +27,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.PropertyModel
         private readonly string _name;
         private readonly Properties _properties;
 
-        public PropertyCollectionNodeFactory(Properties properties) : this("Properties", properties)
+        public PropertyCollectionNodeFactory(Properties properties) : this(NodeNames.Properties, properties)
         {
         }
 

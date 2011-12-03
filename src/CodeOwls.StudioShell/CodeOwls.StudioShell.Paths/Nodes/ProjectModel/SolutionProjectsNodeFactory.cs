@@ -21,6 +21,7 @@ using System.Management.Automation;
 using CodeOwls.PowerShell.Provider.Attributes;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.PowerShell.Provider.PathNodes;
+using CodeOwls.StudioShell.Common.Utility;
 using CodeOwls.StudioShell.Paths.Items;
 using EnvDTE;
 using EnvDTE80;
@@ -40,7 +41,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
 
         public override string Name
         {
-            get { return "projects"; }
+            get { return NodeNames.Projects; }
         }
 
         #region Implementation of INewItem
