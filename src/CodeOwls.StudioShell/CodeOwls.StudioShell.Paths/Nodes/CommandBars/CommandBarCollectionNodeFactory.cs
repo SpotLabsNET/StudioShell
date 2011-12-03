@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Management.Automation;
 using CodeOwls.PowerShell.Provider.Attributes;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
+using CodeOwls.StudioShell.Common.Utility;
 using CodeOwls.StudioShell.Paths.Items.CommandBars;
 using CodeOwls.PowerShell.Provider.PathNodes;
 using Microsoft.VisualStudio.CommandBars;
@@ -38,7 +39,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
 
         public override string Name
         {
-            get { return "commandBars"; }
+            get { return NodeNames.CommandBars; }
         }
 
         public override IEnumerable<INodeFactory> Resolve(IContext context, string nodeName)

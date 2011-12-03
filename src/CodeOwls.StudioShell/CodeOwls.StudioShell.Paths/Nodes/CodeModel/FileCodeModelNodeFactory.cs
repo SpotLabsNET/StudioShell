@@ -22,6 +22,7 @@ using CodeOwls.PowerShell.Provider.Attributes;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.PowerShell.Provider.PathNodes;
 using CodeOwls.StudioShell.Common.Exceptions;
+using CodeOwls.StudioShell.Common.Utility;
 using CodeOwls.StudioShell.Paths.Items;
 using CodeOwls.StudioShell.Paths.Utility;
 using EnvDTE;
@@ -42,7 +43,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CodeModel
 
         public override string Name
         {
-            get { return "CodeModel"; }
+            get { return NodeNames.CodeModel; }
         }
 
         #region INewItem Members

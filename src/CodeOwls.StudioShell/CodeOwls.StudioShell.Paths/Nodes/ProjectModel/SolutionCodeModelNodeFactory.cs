@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using CodeOwls.PowerShell.Provider.Attributes;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.PowerShell.Provider.PathNodes;
+using CodeOwls.StudioShell.Common.Utility;
 using EnvDTE;
 using EnvDTE80;
 
@@ -31,7 +32,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
 
         public override string Name
         {
-            get { return "codemodel"; }
+            get { return NodeNames.CodeModel; }
         }
 
         public override IEnumerable<INodeFactory> GetNodeChildren(IContext context)

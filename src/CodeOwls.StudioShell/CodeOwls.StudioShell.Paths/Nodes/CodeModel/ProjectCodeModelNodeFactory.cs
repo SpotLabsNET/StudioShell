@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.PowerShell.Provider.PathNodes;
+using CodeOwls.StudioShell.Common.Utility;
 using CodeOwls.StudioShell.Paths.Items;
 using EnvDTE;
 
@@ -32,7 +33,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CodeModel
 
         public override string Name
         {
-            get { return "CodeModel"; }
+            get { return NodeNames.CodeModel; }
         }
 
         public override IPathNode GetNodeValue()
