@@ -28,6 +28,7 @@ CHANGE LOG
 	  * tasks
 	  * errors
 	  * addins
+	  * fonts / color settings
 
 	10: The default console warning and error color selections are 
 		readible (color on black background)
