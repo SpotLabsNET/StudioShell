@@ -13,7 +13,3 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
-if( get-module studioshell )
-{
-    remove-module studioshell;
-}
