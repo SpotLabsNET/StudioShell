@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include Variables.wxi?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="PersonalFolder">
+        <Directory Id="WindowsPowershell" Name="WindowsPowershell">
+          <Component Id="C_WindowsPowerShell" Guid="{9B8EBD94-4C01-4D6F-85F7-4D6FAED27F02}">
+            <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_WindowsPowerShell" Value="1" KeyPath="yes" />
+            <RemoveFolder Id="WindowsPowershell" On="uninstall"/>
+          </Component>
+          <Directory Id="Modules" Name="Modules">
+            <Component Id="C_Modules" Guid="{19261A57-EBB1-4799-828B-DF62BE912752}">
+              <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Modules" Value="1" KeyPath="yes" />
+              <RemoveFolder Id="Modules" On="uninstall"/>
+            </Component>
+
+            <Directory Id="SS_ModuleFolder" Name="StudioShell">
+
+              <Component Id="C_start_studioshell.ps1" Guid="19ea13fb-2045-4521-961f-5be6497f8e12">
+                <File Id="F_start_studioshell.ps1" Source="$(var.StudioShellModuleRootPath)\\start-studioshell.ps1" />
+                <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_start-studioshell.ps1" Value="1" KeyPath="yes" />
+                <RemoveFolder Id="SS_ModuleFolder" On="uninstall"/>
+              </Component>
+
+              <Component Id="C_StudioShell.psd1" Guid="866bd145-90bc-4e3c-a6ba-3b47a3f65f65">
+                <File Id="F_StudioShell.psd1" Source="$(var.StudioShellModuleRootPath)\\StudioShell.psd1" />
+                <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_StudioShell.psd1" Value="1" KeyPath="yes" />
+              </Component>
+
+              <Directory Id="SS_ModuleBinFolder" Name="bin">
+                <Component Id="C_CodeOwls.PowerShell.Host.dll" Guid="e06b9cac-4a44-4b94-9b53-ac3bfc93bc09">
+                  <File Id="F_CodeOwls.PowerShell.Host.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.PowerShell.Host.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.PowerShell.Host.dll" Value="1" KeyPath="yes" />
+                  <RemoveFolder Id="SS_ModuleBinFolder" On="uninstall"/>
+                </Component>
+                <Component Id="C_CodeOwls.PowerShell.Host.pdb" Guid="fb2292b6-99fc-4340-b78c-6a8cac7ce341">
+                  <File Id="F_CodeOwls.PowerShell.Host.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.PowerShell.Host.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.PowerShell.Host.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.PowerShell.Paths.dll" Guid="7d563731-9bfb-4477-a836-d23132921e6d">
+                  <File Id="F_CodeOwls.PowerShell.Paths.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.PowerShell.Paths.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.PowerShell.Paths.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.PowerShell.Paths.pdb" Guid="94fc4c66-c124-4c7a-9b64-7f7b98cd4db7">
+                  <File Id="F_CodeOwls.PowerShell.Paths.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.PowerShell.Paths.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.PowerShell.Paths.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.PowerShell.Provider.dll" Guid="b91d930c-494c-4da2-8df5-c3de7563bdd2">
+                  <File Id="F_CodeOwls.PowerShell.Provider.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.PowerShell.Provider.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.PowerShell.Provider.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.PowerShell.Provider.pdb" Guid="e0746192-81f9-49af-9aec-b8e75a4ecd6f">
+                  <File Id="F_CodeOwls.PowerShell.Provider.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.PowerShell.Provider.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.PowerShell.Provider.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.PowerShell.WinForms.dll" Guid="2870b9ac-4ba7-4148-88b2-a6f7add84020">
+                  <File Id="F_CodeOwls.PowerShell.WinForms.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.PowerShell.WinForms.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.PowerShell.WinForms.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.PowerShell.WinForms.pdb" Guid="e7e00069-e776-4f06-9441-df5cf03a9ec7">
+                  <File Id="F_CodeOwls.PowerShell.WinForms.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.PowerShell.WinForms.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.PowerShell.WinForms.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Cmdlets.dll" Guid="f0d298d5-9d0f-4eee-baf3-36231808ab5c">
+                  <File Id="F_CodeOwls.StudioShell.Cmdlets.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Cmdlets.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Cmdlets.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Cmdlets.pdb" Guid="c9b83b59-58c7-4aad-801a-71b6fb2245de">
+                  <File Id="F_CodeOwls.StudioShell.Cmdlets.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Cmdlets.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Cmdlets.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Common.dll" Guid="45f5e57d-523b-4667-9875-b262ce563bc7">
+                  <File Id="F_CodeOwls.StudioShell.Common.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Common.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Common.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Common.pdb" Guid="245ee819-763c-4bde-9884-8a76aaf67529">
+                  <File Id="F_CodeOwls.StudioShell.Common.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Common.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Common.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.dll" Guid="7eb20273-c4e9-452b-ab1b-fb2e6054d600">
+                  <File Id="F_CodeOwls.StudioShell.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Host.dll" Guid="7adadda8-4bd0-44b4-a11b-136f6003b027">
+                  <File Id="F_CodeOwls.StudioShell.Host.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Host.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Host.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Host.pdb" Guid="5d8110e5-b4b3-486d-ab93-f9485ecf79cc">
+                  <File Id="F_CodeOwls.StudioShell.Host.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Host.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Host.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Paths.dll" Guid="67333c48-0ff1-4a4f-8916-b3bf1f4a897a">
+                  <File Id="F_CodeOwls.StudioShell.Paths.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Paths.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Paths.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Paths.pdb" Guid="82424b37-cbb7-43d8-b950-33517135a403">
+                  <File Id="F_CodeOwls.StudioShell.Paths.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Paths.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Paths.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.pdb" Guid="99857886-6d04-4e79-bddd-4393d350fbad">
+                  <File Id="F_CodeOwls.StudioShell.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Provider.dll" Guid="f40ff998-7c18-43ed-9814-379e6e429e78">
+                  <File Id="F_CodeOwls.StudioShell.Provider.dll" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Provider.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Provider.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Provider.pdb" Guid="fc8442f2-7cf5-4344-9409-d43202c71dd7">
+                  <File Id="F_CodeOwls.StudioShell.Provider.pdb" Source="$(var.StudioShellModuleRootPath)\\bin\CodeOwls.StudioShell.Provider.pdb" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Provider.pdb" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_EnvDTE.dll" Guid="98220d24-80d3-43bd-95bc-08221dcbfe25">
+                  <File Id="F_EnvDTE.dll" Source="$(var.StudioShellModuleRootPath)\\bin\EnvDTE.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_EnvDTE.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_EnvDTE80.dll" Guid="4568a122-f844-4fb7-93b2-d6a68f4ff495">
+                  <File Id="F_EnvDTE80.dll" Source="$(var.StudioShellModuleRootPath)\\bin\EnvDTE80.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_EnvDTE80.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_EnvDTE90.dll" Guid="a0a3dccc-03a1-4caa-a984-30711a4ed63b">
+                  <File Id="F_EnvDTE90.dll" Source="$(var.StudioShellModuleRootPath)\\bin\EnvDTE90.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_EnvDTE90.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Extensibility.dll" Guid="f8e878d9-739e-4427-b44f-d004ff603410">
+                  <File Id="F_Extensibility.dll" Source="$(var.StudioShellModuleRootPath)\\bin\Extensibility.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Extensibility.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Microsoft.VisualStudio.CommandBars.dll" Guid="0c0e3239-9bd9-4633-9623-07699c7c4125">
+                  <File Id="F_Microsoft.VisualStudio.CommandBars.dll" Source="$(var.StudioShellModuleRootPath)\\bin\Microsoft.VisualStudio.CommandBars.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Microsoft.VisualStudio.CommandBars.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Microsoft.VisualStudio.OLE.Interop.dll" Guid="4952e8cc-1c19-413a-bc7d-709aab1a5cdc">
+                  <File Id="F_Microsoft.VisualStudio.OLE.Interop.dll" Source="$(var.StudioShellModuleRootPath)\\bin\Microsoft.VisualStudio.OLE.Interop.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Microsoft.VisualStudio.OLE.Interop.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Microsoft.VisualStudio.OLE.Interop.xml" Guid="c7586080-47df-45b7-a67c-2f3791ae9721">
+                  <File Id="F_Microsoft.VisualStudio.OLE.Interop.xml" Source="$(var.StudioShellModuleRootPath)\\bin\Microsoft.VisualStudio.OLE.Interop.xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Microsoft.VisualStudio.OLE.Interop.xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Microsoft.VisualStudio.Shell.dll" Guid="c3216123-f0a1-4097-bc1f-1b6a184ecfb2">
+                  <File Id="F_Microsoft.VisualStudio.Shell.dll" Source="$(var.StudioShellModuleRootPath)\\bin\Microsoft.VisualStudio.Shell.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Microsoft.VisualStudio.Shell.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Microsoft.VisualStudio.Shell.Interop.8.0.dll" Guid="05847384-2032-478d-925e-922a50d0d06c">
+                  <File Id="F_Microsoft.VisualStudio.Shell.Interop.8.0.dll" Source="$(var.StudioShellModuleRootPath)\\bin\Microsoft.VisualStudio.Shell.Interop.8.0.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Microsoft.VisualStudio.Shell.Interop.8.0.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Microsoft.VisualStudio.Shell.Interop.8.0.xml" Guid="94dfbf34-3ff9-4921-bbb0-26acebb64984">
+                  <File Id="F_Microsoft.VisualStudio.Shell.Interop.8.0.xml" Source="$(var.StudioShellModuleRootPath)\\bin\Microsoft.VisualStudio.Shell.Interop.8.0.xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Microsoft.VisualStudio.Shell.Interop.8.0.xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Microsoft.VisualStudio.Shell.Interop.dll" Guid="33cd1025-ca61-42f2-9e65-9a8a3eb7c8b2">
+                  <File Id="F_Microsoft.VisualStudio.Shell.Interop.dll" Source="$(var.StudioShellModuleRootPath)\\bin\Microsoft.VisualStudio.Shell.Interop.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Microsoft.VisualStudio.Shell.Interop.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Microsoft.VisualStudio.Shell.Interop.xml" Guid="ad0e0fa1-75bf-4166-b4c4-d4664e43ed9e">
+                  <File Id="F_Microsoft.VisualStudio.Shell.Interop.xml" Source="$(var.StudioShellModuleRootPath)\\bin\Microsoft.VisualStudio.Shell.Interop.xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Microsoft.VisualStudio.Shell.Interop.xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Microsoft.VisualStudio.Shell.xml" Guid="b9859161-d918-4262-83fc-2376b6bf70c9">
+                  <File Id="F_Microsoft.VisualStudio.Shell.xml" Source="$(var.StudioShellModuleRootPath)\\bin\Microsoft.VisualStudio.Shell.xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Microsoft.VisualStudio.Shell.xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_PostSharp.dll" Guid="fb713127-6a13-4e10-ae3b-9abf9db48b35">
+                  <File Id="F_PostSharp.dll" Source="$(var.StudioShellModuleRootPath)\\bin\PostSharp.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_PostSharp.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_PostSharp.xml" Guid="ddfe2e0d-1f4a-4959-b328-23bb17f311a4">
+                  <File Id="F_PostSharp.xml" Source="$(var.StudioShellModuleRootPath)\\bin\PostSharp.xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_PostSharp.xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_ss_profile.ps1" Guid="4f700783-41cd-47f9-b083-9145a298c366">
+                  <File Id="F_ss_profile.ps1" Source="$(var.StudioShellModuleRootPath)\\bin\profile.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_profile.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_StudioShell.VS2008.AddIn" Guid="3a5f2730-3dad-4e3d-8eab-0ef793027ee9">
+                  <File Id="F_StudioShell.VS2008.AddIn" Source="$(var.StudioShellModuleRootPath)\\bin\StudioShell.VS2008.AddIn" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_StudioShell.VS2008.AddIn" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_StudioShell.VS2010.AddIn" Guid="b966e0b2-b952-466f-9623-edd64c09e3ac">
+                  <File Id="F_StudioShell.VS2010.AddIn" Source="$(var.StudioShellModuleRootPath)\\bin\StudioShell.VS2010.AddIn" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_StudioShell.VS2010.AddIn" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_System.Windows.Forms.DataVisualization.dll" Guid="2eb14d14-8317-46c1-a997-ae9eac7b6a6d">
+                  <File Id="F_System.Windows.Forms.DataVisualization.dll" Source="$(var.StudioShellModuleRootPath)\\bin\System.Windows.Forms.DataVisualization.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_System.Windows.Forms.DataVisualization.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_System.Windows.Forms.DataVisualization.xml" Guid="bd542d12-0d3a-4d90-ba23-6780bea3d526">
+                  <File Id="F_System.Windows.Forms.DataVisualization.xml" Source="$(var.StudioShellModuleRootPath)\\bin\System.Windows.Forms.DataVisualization.xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_System.Windows.Forms.DataVisualization.xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_VSLangProj.dll" Guid="fc291a31-25dc-43b9-8729-593605c4ea84">
+                  <File Id="F_VSLangProj.dll" Source="$(var.StudioShellModuleRootPath)\\bin\VSLangProj.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_VSLangProj.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_VSLangProj2.dll" Guid="1731fcb7-4262-4ee4-bbad-c64f7e464687">
+                  <File Id="F_VSLangProj2.dll" Source="$(var.StudioShellModuleRootPath)\\bin\VSLangProj2.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_VSLangProj2.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_VSLangProj80.dll" Guid="eff3c87e-f6b6-440a-8b2b-5575c8d7eb88">
+                  <File Id="F_VSLangProj80.dll" Source="$(var.StudioShellModuleRootPath)\\bin\VSLangProj80.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_VSLangProj80.dll" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_VSLangProj90.dll" Guid="a96b1740-add5-4d0e-ba93-e039112bbbdb">
+                  <File Id="F_VSLangProj90.dll" Source="$(var.StudioShellModuleRootPath)\\bin\VSLangProj90.dll" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_VSLangProj90.dll" Value="1" KeyPath="yes" />
+                </Component>
+
+                <Directory Id="SS_ModuleBinScriptsFolder" Name="Scripts">
+                  <Component Id="C_get_studioShellSettings.ps1" Guid="2a43f8b5-0f00-4390-970e-877a6413560e">
+                    <File Id="F_get_studioShellSettings.ps1" Source="$(var.StudioShellModuleRootPath)\\bin\scripts\get-studioShellSettings.ps1" />
+                    <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_get-studioShellSettings.ps1" Value="1" KeyPath="yes" />
+                    <RemoveFolder Id="SS_ModuleBinScriptsFolder" On="uninstall"/>
+                  </Component>
+                  <Component Id="C_invoke_studioShellProfile.ps1" Guid="deaa9e63-db33-425a-842a-6897260daa20">
+                    <File Id="F_invoke_studioShellProfile.ps1" Source="$(var.StudioShellModuleRootPath)\\bin\scripts\invoke-studioShellProfile.ps1" />
+                    <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_invoke-studioShellProfile.ps1" Value="1" KeyPath="yes" />
+                  </Component>
+                  <Component Id="C_save_studioShellSettings.ps1" Guid="de112d1a-47a9-46c8-ba5d-a5de96768491">
+                    <File Id="F_save_studioShellSettings.ps1" Source="$(var.StudioShellModuleRootPath)\\bin\scripts\save-studioShellSettings.ps1" />
+                    <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_save-studioShellSettings.ps1" Value="1" KeyPath="yes" />
+                  </Component>
+                  <Component Id="C_internal_start_studioShell.ps1" Guid="c56ed75e-e21f-4554-95c3-062906a2bfcf">
+                    <File Id="F_internal_start_studioShell.ps1" Source="$(var.StudioShellModuleRootPath)\\bin\scripts\start-studioShell.ps1" />
+                    <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_start-studioShell.ps1" Value="1" KeyPath="yes" />
+                  </Component>
+                  <Component Id="C_test_studioShellHost.ps1" Guid="c75964ab-3bb6-495c-aec8-8184ac526ed1">
+                    <File Id="F_test_studioShellHost.ps1" Source="$(var.StudioShellModuleRootPath)\\bin\scripts\test-studioShellHost.ps1" />
+                    <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_test-studioShellHost.ps1" Value="1" KeyPath="yes" />
+                  </Component>
+
+                </Directory>
+                <Directory Id="SS_ModuleBinResourcesFolder" Name="Resources">
+                  <Component Id="C_PSIconAnimated.bmp" Guid="9d352b27-d854-4fd4-aff6-82b46d108e22">
+                    <File Id="F_PSIconAnimated.bmp" Source="$(var.StudioShellModuleRootPath)\\bin\Resources\PSIconAnimated.bmp" />
+                    <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_PSIconAnimated.bmp" Value="1" KeyPath="yes" />
+                    <RemoveFolder Id="SS_ModuleBinResourcesFolder" On="uninstall"/>
+                  </Component>
+                  <Component Id="C_studioshell.ico" Guid="fa798b7a-0922-4c5e-9cba-6d9988fcebbd">
+                    <File Id="F_studioshell.ico" Source="$(var.StudioShellModuleRootPath)\\bin\Resources\studioshell.ico" />
+                    <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_studioshell.ico" Value="1" KeyPath="yes" />
+                  </Component>
+
+                </Directory>
+                <Directory Id="SS_ModuleBinProfileFolder" Name="UserProfile">
+                  <Component Id="C_profile.ps1" Guid="aea0ebea-5912-4d3b-b6ca-18bfb49ef115">
+                    <File Id="F_profile.ps1" Source="$(var.StudioShellModuleRootPath)\\bin\UserProfile\profile.ps1" />
+                    <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_profile.ps1" Value="1" KeyPath="yes" />
+                    <RemoveFolder Id="SS_ModuleBinProfileFolder" On="uninstall"/>
+                  </Component>
+                  <Component Id="C_settings.txt" Guid="fda4edc7-48fb-4956-b5bd-c963a8900a32">
+                    <File Id="F_settings.txt" Source="$(var.StudioShellModuleRootPath)\\bin\UserProfile\settings.txt" />
+                    <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_settings.txt" Value="1" KeyPath="yes" />
+                  </Component>
+
+                </Directory>
+              </Directory>
+              <Directory Id="SS_ModuleHelpFolder" Name="en-US">
+                <Component Id="C_about_StudioShell.help.txt" Guid="6c9fa854-5668-4564-94d3-b8207517990b">
+                  <File Id="F_about_StudioShell.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell.help.txt" Value="1" KeyPath="yes" />
+                  <RemoveFolder Id="SS_ModuleHelpFolder" On="uninstall"/>
+                </Component>
+                <Component Id="C_about_StudioShell_Commands.help.txt" Guid="886243d8-2522-45ad-8ce5-15ca518d31fa">
+                  <File Id="F_about_StudioShell_Commands.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_Commands.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_Commands.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_about_StudioShell_Data_Panes.help.txt" Guid="6b29e8fc-9103-4b55-a970-870f95445aeb">
+                  <File Id="F_about_StudioShell_Data_Panes.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_Data_Panes.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_Data_Panes.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_about_StudioShell_Drives.help.txt" Guid="d399bcc8-ca28-48ce-9c1a-7b7cc396bdcf">
+                  <File Id="F_about_StudioShell_Drives.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_Drives.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_Drives.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_about_StudioShell_Host_Requirements.help.txt" Guid="8807f9ed-99fb-47d3-9482-634fd149a9f1">
+                  <File Id="F_about_StudioShell_Host_Requirements.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_Host_Requirements.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_Host_Requirements.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_about_StudioShell_License.help.txt" Guid="cd57ba29-c5e1-454f-8a60-78401aefc166">
+                  <File Id="F_about_StudioShell_License.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_License.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_License.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_about_StudioShell_Profiles.help.txt" Guid="4ee739da-26a4-4118-b12a-011c9f247df5">
+                  <File Id="F_about_StudioShell_Profiles.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_Profiles.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_Profiles.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_about_StudioShell_Settings.help.txt" Guid="159bc62a-672e-449c-8f3e-52bd43c35a9e">
+                  <File Id="F_about_StudioShell_Settings.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_Settings.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_Settings.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_about_StudioShell_Solution_Modules.help.txt" Guid="b4f70c56-0106-417d-a32f-26fb098c473b">
+                  <File Id="F_about_StudioShell_Solution_Modules.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_Solution_Modules.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_Solution_Modules.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_about_StudioShell_Variables.help.txt" Guid="f96fd766-e422-4aeb-8523-0200f6f034f5">
+                  <File Id="F_about_StudioShell_Variables.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_Variables.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_Variables.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_about_StudioShell_Version.help.txt" Guid="a9393e82-ab15-4f67-aaea-a34111954f98">
+                  <File Id="F_about_StudioShell_Version.help.txt" Source="$(var.StudioShellModuleRootPath)\\en-US\about_StudioShell_Version.help.txt" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_about_StudioShell_Version.help.txt" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Cmdlets.dll_help.xml" Guid="26c9bea7-9612-425f-8c4a-7b58b3f8638d">
+                  <File Id="F_CodeOwls.StudioShell.Cmdlets.dll_help.xml" Source="$(var.StudioShellModuleRootPath)\\en-US\CodeOwls.StudioShell.Cmdlets.dll-help.xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Cmdlets.dll-help.xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CodeOwls.StudioShell.Provider.dll_help.xml" Guid="7f762871-09db-4b10-8103-cfa71f7c4478">
+                  <File Id="F_CodeOwls.StudioShell.Provider.dll_help.xml" Source="$(var.StudioShellModuleRootPath)\\en-US\CodeOwls.StudioShell.Provider.dll-help.xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeOwls.StudioShell.Provider.dll-help.xml" Value="1" KeyPath="yes" />
+                </Component>
+
+              </Directory>
+              <Directory Id="SS_ModuleFormatsFolder" Name="Formats">
+                <Component Id="C_AddIns.Formats.ps1xml" Guid="b7deeb9b-abc2-4fb2-a5d8-062fd3aa6d2c">
+                  <File Id="F_AddIns.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\AddIns.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_AddIns.Formats.ps1xml" Value="1" KeyPath="yes" />
+                  <RemoveFolder Id="SS_ModuleFormatsFolder" On="uninstall"/>
+                </Component>
+                <Component Id="C_CodeModel.Formats.ps1xml" Guid="d97c1c2d-acb1-423f-9e98-484c9782dddc">
+                  <File Id="F_CodeModel.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\CodeModel.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CodeModel.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_CommandBars.Formats.ps1xml" Guid="8ed04a3d-59b0-4cd2-9ae5-e31b2afc6db8">
+                  <File Id="F_CommandBars.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\CommandBars.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_CommandBars.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Commands.Formats.ps1xml" Guid="83fa34dd-3482-4c24-8926-3b1cb07c4104">
+                  <File Id="F_Commands.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\Commands.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Commands.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Debugger.Formats.ps1xml" Guid="4a30c2b3-1db9-451f-a633-1695ff0dcbce">
+                  <File Id="F_Debugger.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\Debugger.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Debugger.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Errors.Formats.ps1xml" Guid="bb43ec90-f349-498d-9fee-63cd7b549b25">
+                  <File Id="F_Errors.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\Errors.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Errors.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_FontsAndColors.Formats.ps1xml" Guid="5f3a76f7-0fff-4811-83dc-1915221d34c8">
+                  <File Id="F_FontsAndColors.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\FontsAndColors.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_FontsAndColors.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_OutputPanes.Formats.ps1xml" Guid="dbe05f62-afc3-44ea-85c0-682d8a3854c3">
+                  <File Id="F_OutputPanes.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\OutputPanes.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_OutputPanes.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Project.Formats.ps1xml" Guid="d14795d0-1567-42ac-86bb-f9b9db8ddb94">
+                  <File Id="F_Project.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\Project.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Project.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Settings.Formats.ps1xml" Guid="52c5ba8b-1c20-4067-968a-4e70bc0e4c69">
+                  <File Id="F_Settings.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\Settings.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Settings.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Tasks.Formats.ps1xml" Guid="8350d1a0-8fbc-4eff-bd84-5a2de447ecde">
+                  <File Id="F_Tasks.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\Tasks.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Tasks.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Templates.Formats.ps1xml" Guid="6382eb7b-a328-49ce-81b0-6cf8c452b2a9">
+                  <File Id="F_Templates.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\Templates.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Templates.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_Window.Formats.ps1xml" Guid="b16d3916-9bd3-4380-99c2-db839ad48b2b">
+                  <File Id="F_Window.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\Window.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_Window.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_WindowConfiguration.Formats.ps1xml" Guid="5ef01a10-db17-42f0-8ddc-58c74bb38d84">
+                  <File Id="F_WindowConfiguration.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\WindowConfiguration.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_WindowConfiguration.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C__Root.Formats.ps1xml" Guid="31caa553-1901-4669-a09d-8058f5d45b17">
+                  <File Id="F__Root.Formats.ps1xml" Source="$(var.StudioShellModuleRootPath)\\Formats\_Root.Formats.ps1xml" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C__Root.Formats.ps1xml" Value="1" KeyPath="yes" />
+                </Component>
+
+              </Directory>
+              <Directory Id="SS_ModuleInitFolder" Name="InitializationScripts">
+                <Component Id="C_register_contextMenuItems.ps1" Guid="7d4bb43c-26a2-4dce-aad3-236cca54a0e8">
+                  <File Id="F_register_contextMenuItems.ps1" Source="$(var.StudioShellModuleRootPath)\\InitializationScripts\register-contextMenuItems.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_register-contextMenuItems.ps1" Value="1" KeyPath="yes" />
+                  <RemoveFolder Id="SS_ModuleInitFolder" On="uninstall"/>
+                </Component>
+                <Component Id="C_register_drives.ps1" Guid="65e32caf-b067-437c-b3ec-b7968940598b">
+                  <File Id="F_register_drives.ps1" Source="$(var.StudioShellModuleRootPath)\\InitializationScripts\register-drives.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_register-drives.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_register_solutionEvents.ps1" Guid="bb193f51-95f7-490e-aca4-d42288d9f718">
+                  <File Id="F_register_solutionEvents.ps1" Source="$(var.StudioShellModuleRootPath)\\InitializationScripts\register-solutionEvents.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_register-solutionEvents.ps1" Value="1" KeyPath="yes" />
+                </Component>
+
+              </Directory>
+              <Directory Id="SS_ModuleScriptsFolder" Name="Scripts">
+                <Component Id="C_get_colorString.ps1" Guid="7eff2baa-d86a-4819-84c1-2d6d1001fe32">
+                  <File Id="F_get_colorString.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\get-colorString.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_get-colorString.ps1" Value="1" KeyPath="yes" />
+                  <RemoveFolder Id="SS_ModuleScriptsFolder" On="uninstall"/>
+                </Component>
+                <Component Id="C_get_pathTopologyVersion.ps1" Guid="e1a48af7-4a2f-43a6-94a7-90778660c7ea">
+                  <File Id="F_get_pathTopologyVersion.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\get-pathTopologyVersion.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_get-pathTopologyVersion.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_get_projectType.ps1" Guid="89f97e3b-005d-4746-9ee6-ae6a72a6c403">
+                  <File Id="F_get_projectType.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\get-projectType.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_get-projectType.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_get_taskIconNames.ps1" Guid="3129479b-7583-4905-8fc6-4b41d786e5ac">
+                  <File Id="F_get_taskIconNames.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\get-taskIconNames.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_get-taskIconNames.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_get_taskPriorities.ps1" Guid="b08a3f0f-5638-4f15-86cc-387c43d818a7">
+                  <File Id="F_get_taskPriorities.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\get-taskPriorities.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_get-taskPriorities.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_open_file.ps1" Guid="51e8d06c-246b-401e-a993-90b4e0a22bec">
+                  <File Id="F_open_file.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\open-file.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_open-file.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_open_solution.ps1" Guid="b05a03ae-8882-4e13-a07a-c14fc40abed4">
+                  <File Id="F_open_solution.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\open-solution.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_open-solution.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_out_outputPane.ps1" Guid="0a9004df-dfef-4ce2-909e-186e1b642549">
+                  <File Id="F_out_outputPane.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\out-outputPane.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_out-outputPane.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_out_pipe.ps1" Guid="31a6022a-b38a-461b-a898-16bb7407c903">
+                  <File Id="F_out_pipe.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\out-pipe.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_out-pipe.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_out_taskList.ps1" Guid="905dcbef-c573-4487-a680-dcf84a69af7f">
+                  <File Id="F_out_taskList.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\out-taskList.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_out-taskList.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_remove_nullSplatted.ps1" Guid="8c9038b1-ef2f-4039-84a7-960f50d0005e">
+                  <File Id="F_remove_nullSplatted.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\remove-nullSplatted.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_remove-nullSplatted.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_select_first.ps1" Guid="4d66fbaf-cf34-4670-8f63-5c6191464828">
+                  <File Id="F_select_first.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\select-first.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_select-first.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_use_pathTopologyVersion.ps1" Guid="e7443773-42c9-48cb-aa42-367442a9699e">
+                  <File Id="F_use_pathTopologyVersion.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\use-pathTopologyVersion.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_use-pathTopologyVersion.ps1" Value="1" KeyPath="yes" />
+                </Component>
+                <Component Id="C_write_prompt.ps1" Guid="8e0ce924-22e5-4fa2-9d12-027e0959536c">
+                  <File Id="F_write_prompt.ps1" Source="$(var.StudioShellModuleRootPath)\\Scripts\write-prompt.ps1" />
+                  <RegistryValue Type="integer" Root="HKCU" Key="SOFTWARE\CodeOwlsLLC\StudioShell" Name="C_write-prompt.ps1" Value="1" KeyPath="yes" />
+                </Component>
+              </Directory>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+  </Fragment>
+</Wix>
