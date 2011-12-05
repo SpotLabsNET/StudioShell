@@ -11,6 +11,7 @@
 
 properties {
 	$config = 'Debug'; 	
+	$local = './_local';
 	$keyContainer = '';
 	$slnFile = @(
 		'./src/StudioShell.sln'
@@ -20,12 +21,16 @@ properties {
 	$moduleSource = "./src/Modules";
     $metadataAssembly = 'CodeOwls.StudioShell.dll'
     $currentReleaseNotesPath = '.\src\Modules\StudioShell\en-US\about_StudioShell_Version.help.txt'
+	$wixResourcePath = ".\src\CodeOwls.StudioShell.Setup.Wix\Resources";
+	$wixProjectPath = ".\src\CodeOwls.StudioShell.Setup.Wix";
 };
 
 $framework = '4.0'
 $private = "this is a private task not meant for external use";
 
 set-alias nuget ( './lib/nuget.exe' | resolve-path | select -expand path );
+set-alias light ( './lib/wix/light.exe' | resolve-path | select -expand path );
+set-alias candle ( './lib/wix/candle.exe' | resolve-path | select -expand path );
 
 function get-packageDirectory
 {
@@ -81,9 +86,9 @@ task __CreateNuGetPackageDirectory -description $private {
 }
 
 task __CreateLocalDataDirectory -description $private {
-	if( -not ( Test-Path ./_local ) )
+	if( -not ( Test-Path $local ) )
 	{
-		mkdir ./_local | Out-Null;
+		mkdir $local | Out-Null;
 	}
 }
 
@@ -154,8 +159,28 @@ task PackageModule -depends CleanModule,Build,__CreateModulePackageDirectory -de
 	assemble-moduleDocumentation;
 }
 
-task PackageMSI -depends Build,__CreatePackageDirectory -description "assembles the MSI distribution" {
+task PackageMSI -depends PackageModule -description "assembles the MSI distribution" {
+	$mp = get-modulePackageDirectory | Join-Path -ChildPath StudioShell;
+	$md = join-path $targetPath -ChildPath $metadataAssembly;
+	$version = ( get-item $md | select -exp versioninfo | select -exp productversion )
+	$varFilePath = Join-Path $wixProjectPath -ChildPath 'Variables.wxi';
+	$output = get-packageDirectory;
+	$resPath = $wixResourcePath | Resolve-Path;
+	
+@'
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define StudioShellModuleRootPath = "{0}" ?>
+  <?define ResourcePath = "{1}" ?>
+  <?define StudioShellVersion = "{2}" ?>
+</Include>
+'@ -f $mp,$resPath,$version | Out-File $varFilePath -Encoding UTF8;
 
+	#candle.exe -dDebug -d"DevEnvDir=c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\\" -dSolutionDir=C:\Users\beefarino\Documents\Project\cppstest\src\ -dSolutionExt=.sln -dSolutionFileName=StudioShell.sln -dSolutionName=StudioShell -dSolutionPath=C:\Users\beefarino\Documents\Project\cppstest\src\StudioShell.sln -dConfiguration=Debug -dOutDir=bin\Debug\ -dPlatform=x86 -dProjectDir=C:\Users\beefarino\Documents\Project\cppstest\src\CodeOwls.StudioShell.Setup.Wix\ -dProjectExt=.wixproj -dProjectFileName=CodeOwls.StudioShell.Setup.Wix.wixproj -dProjectName=CodeOwls.StudioShell.Setup.Wix -dProjectPath=C:\Users\beefarino\Documents\Project\cppstest\src\CodeOwls.StudioShell.Setup.Wix\CodeOwls.StudioShell.Setup.Wix.wixproj -dTargetDir=C:\Users\beefarino\Documents\Project\cppstest\src\CodeOwls.StudioShell.Setup.Wix\bin\Debug\ -dTargetExt=.msi -dTargetFileName=CodeOwls.StudioShell.Setup.Wix.msi -dTargetName=CodeOwls.StudioShell.Setup.Wix -dTargetPath=C:\Users\beefarino\Documents\Project\cppstest\src\CodeOwls.StudioShell.Setup.Wix\bin\Debug\CodeOwls.StudioShell.Setup.Wix.msi -out obj\Debug\ -arch x86 Components.wxs Product.wxs obj\Debug\Product.Generated.wxs
+	pushd $wixProjectPath
+	candle -out obj\Debug\ Components.wxs Product.wxs obj\Debug\Product.Generated.wxs
+	light -out "$output\CodeOwls.StudioShell.Setup.Wix.msi" -pdbout "$output\CodeOwls.StudioShell.Setup.Wix.wixpdb" -sice:ICE91 obj\Debug\Components.wixobj obj\Debug\Product.wixobj obj\Debug\Product.Generated.wixobj
+	popd
 }
 
 task PackageNuGet -depends PackageModule,__CreateNuGetPackageDirectory,CleanNuGet -description "assembles the nuget distribution" {
