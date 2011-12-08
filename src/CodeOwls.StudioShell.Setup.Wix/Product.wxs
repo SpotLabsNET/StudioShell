@@ -142,7 +142,7 @@
         <Data Column="Url">http://go.microsoft.com/fwlink/?LinkId=76617</Data>
       </Row>
     </CustomTable>
-    <Icon Id="_SSIcon" SourceFile="$(var.ResourcePath)\PSIcon.png" />
+    <Icon Id="_SSIcon" SourceFile="$(var.ResourcePath)\StudioShell.ico" />
     <Media Id="1" Cabinet="_CA173C716A7FB6C0877E7ED2EF915563" EmbedCab="yes" />
     <Property Id="VSDFrameworkVersion" Value="v3.5" />
     <Property Id="VSDAllowLaterFrameworkVersions" Value="False" />
