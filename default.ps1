@@ -60,6 +60,13 @@ function create-PackageDirectory( [Parameter(ValueFromPipeline=$true)]$packageDi
     }    
 }
 
+function get-StudioShellVersion
+{
+	$p = get-modulePackageDirectory;    
+    $md = join-path $p "StudioShell\bin\$metadataAssembly";
+    ( get-item $md | select -exp versioninfo | select -exp productversion );
+}
+
 task default -depends Install;
 
 # private tasks
@@ -179,7 +186,7 @@ task PackageMSI -depends PackageModule -description "assembles the MSI distribut
 	#candle.exe -dDebug -d"DevEnvDir=c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\\" -dSolutionDir=C:\Users\beefarino\Documents\Project\cppstest\src\ -dSolutionExt=.sln -dSolutionFileName=StudioShell.sln -dSolutionName=StudioShell -dSolutionPath=C:\Users\beefarino\Documents\Project\cppstest\src\StudioShell.sln -dConfiguration=Debug -dOutDir=bin\Debug\ -dPlatform=x86 -dProjectDir=C:\Users\beefarino\Documents\Project\cppstest\src\CodeOwls.StudioShell.Setup.Wix\ -dProjectExt=.wixproj -dProjectFileName=CodeOwls.StudioShell.Setup.Wix.wixproj -dProjectName=CodeOwls.StudioShell.Setup.Wix -dProjectPath=C:\Users\beefarino\Documents\Project\cppstest\src\CodeOwls.StudioShell.Setup.Wix\CodeOwls.StudioShell.Setup.Wix.wixproj -dTargetDir=C:\Users\beefarino\Documents\Project\cppstest\src\CodeOwls.StudioShell.Setup.Wix\bin\Debug\ -dTargetExt=.msi -dTargetFileName=CodeOwls.StudioShell.Setup.Wix.msi -dTargetName=CodeOwls.StudioShell.Setup.Wix -dTargetPath=C:\Users\beefarino\Documents\Project\cppstest\src\CodeOwls.StudioShell.Setup.Wix\bin\Debug\CodeOwls.StudioShell.Setup.Wix.msi -out obj\Debug\ -arch x86 Components.wxs Product.wxs obj\Debug\Product.Generated.wxs
 	pushd $wixProjectPath
 	candle -out obj\Debug\ Components.wxs Product.wxs obj\Debug\Product.Generated.wxs
-	light -out "$output\CodeOwls.StudioShell.Setup.Wix.msi" -pdbout "$output\CodeOwls.StudioShell.Setup.Wix.wixpdb" -sice:ICE91 obj\Debug\Components.wixobj obj\Debug\Product.wixobj obj\Debug\Product.Generated.wixobj
+	light -out "$output\StudioShell.$version.msi" -pdbout "$output\CodeOwls.StudioShell.Setup.Wix.wixpdb" -sice:ICE91 obj\Debug\Components.wixobj obj\Debug\Product.wixobj obj\Debug\Product.Generated.wixobj
 	popd
 }
 
