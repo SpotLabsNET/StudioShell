@@ -89,10 +89,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CodeOwls.AssemblyInfo.cs">
+    <Compile Include="..\..\CodeOwls.AssemblyInfo.cs">
       <Link>Properties\CodeOwls.AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\CodeOwls.PowerShell.AssemblyInfo.cs">
+    <Compile Include="..\..\CodeOwls.PowerShell.AssemblyInfo.cs">
       <Link>Properties\CodeOwls.PowerShell.AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Extensions.cs" />

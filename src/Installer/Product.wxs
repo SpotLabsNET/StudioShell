@@ -136,6 +136,7 @@
         <Data Column="Description">PowerShell 2.0 is required to use StudioShell, but it is not installed on your local machine.  Would you like to open a web page to the PowerShell 2.0 download now?</Data>
         <Data Column="Url">http://support.microsoft.com/kb/968929</Data>
       </Row>
+      
       <Row>
         <Data Column="Condition">VSDFXAvailable</Data>
         <Data Column="Description">[VSDNETURLMSG]</Data>
@@ -165,17 +166,44 @@
     <Property Id="ErrorDialog" Value="ErrorDialog" />
     <Property Id="SFF_UpFldrBtn" Value="UpFldrBtn" />
     <Property Id="SFF_NewFldrBtn" Value="NewFldrBtn" />
-    <Property Id="EulaForm_NextArgs" Value="ConfirmInstallForm" />
-    <Property Id="ConfirmInstallForm_PrevArgs" Value="EulaForm" />
+    <Property Id="__EulaForm_NextArgs" Value="ConfirmInstallForm" />
+    <Property Id="__ConfirmInstallForm_PrevArgs" Value="EulaForm" />
     <Property Id="AdminWelcomeForm_NextArgs" Value="AdminFolderForm" />
     <Property Id="AdminFolderForm_PrevArgs" Value="AdminWelcomeForm" />
     <Property Id="AdminFolderForm_NextArgs" Value="AdminConfirmInstallForm" />
     <Property Id="AdminConfirmInstallForm_PrevArgs" Value="AdminFolderForm" />
+    
+    <PropertyRef Id="IntegrateOptionsDlg_NextArgs" />
     <Property Id="POWERSHELL_OK">
       <DirectorySearch Id="_633BEEFA917543F084AE3165315689C2" Path="[SystemFolder]\windowspowershell\v1.0" Depth="0">
         <FileSearch Id="_633BEEFA917543F084AE3165315689C2" Name="powershell.exe" MinVersion="6.0.0.0" />
       </DirectorySearch>
     </Property>
+    <Property Id="VS2010_AVAILABLE">
+      <DirectorySearch Id="_133BEEFA917543F084AE3165315689C2" Path="[ProgramFilesFolder]\Microsoft Visual Studio 10.0\common7\ide" Depth="0">
+        <FileSearch Id="_133BEEFA917543F084AE3165315689C2" Name="devenv.exe" MinVersion="10.0.0.0" />
+      </DirectorySearch>
+    </Property>
+    <Property Id="VS2008_AVAILABLE">
+      <DirectorySearch Id="_233BEEFA917543F084AE3165315689C2" Path="[ProgramFilesFolder]\Microsoft Visual Studio 9.0\common7\ide" Depth="0">
+        <FileSearch Id="_233BEEFA917543F084AE3165315689C2" Name="devenv.exe" MinVersion="9.0.0.0" />
+      </DirectorySearch>
+    </Property>
+    <Property Id="SSMS2008_AVAILABLE">
+      <DirectorySearch Id="_333BEEFA917543F084AE3165315689C2" Path="[ProgramFilesFolder]\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE" Depth="0">
+        <FileSearch Id="_333BEEFA917543F084AE3165315689C2" Name="ssms.exe" />
+      </DirectorySearch>
+    </Property>
+    <Property Id="SSMS2010_AVAILABLE">
+      <DirectorySearch Id="_433BEEFA917543F084AE3165315689C2" Path="[ProgramFilesFolder]\Microsoft SQL Server\110\Tools\Binn\ManagementStudio" Depth="0">
+        <FileSearch Id="_433BEEFA917543F084AE3165315689C2" Name="ssms.exe" />
+      </DirectorySearch>
+    </Property>
+    
+    <Condition Message="There are no StudioShell-compatible hosts installed on your local machine.  Please install a compatible version of Visual Studio or SQL Management Studio and rerun this installer.">
+      <![CDATA[VS2010_AVAILABLE<>"" OR VS2008_AVAILABLE<>"" OR SSMS2010_AVAILABLE<>"" OR SSMS2008_AVAILABLE<>""]]>
+    </Condition>
+
     <UI>
       <RadioButtonGroup Property="AdminMaintenanceForm_Action">
         <RadioButton Height="17" Text="{\VSI_MS_Sans_Serif13.0_0_0}&amp;Repair [ProductName]" Value="Repair" Width="348" X="0" Y="0" />
@@ -726,6 +754,7 @@
         </Control>
       </Dialog>
     </UI>
+    <UIRef Id="IntegrateOptions_UI"/>
     <Upgrade Id="{D4680797-1E5D-442A-A513-C2648FB53805}">
       <UpgradeVersion Maximum="1.2" Property="PREVIOUSVERSIONSINSTALLED" />
       <UpgradeVersion Minimum="1.0.1" Property="NEWERPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="yes" />
