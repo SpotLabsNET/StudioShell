@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StudioShellScripts", "Studi
 		StudioShellScripts\update-projectFrameworkVersion.ps1 = StudioShellScripts\update-projectFrameworkVersion.ps1
 	EndProjectSection
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "CodeOwls.StudioShell.Setup.Wix", "CodeOwls.StudioShell.Setup.Wix\CodeOwls.StudioShell.Setup.Wix.wixproj", "{78ED8C04-FC4B-43E6-B6B4-DDA4B9DB145E}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "CodeOwls.StudioShell.Setup.Wix", "Installer\CodeOwls.StudioShell.Setup.Wix.wixproj", "{78ED8C04-FC4B-43E6-B6B4-DDA4B9DB145E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
