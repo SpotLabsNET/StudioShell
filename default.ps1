@@ -192,7 +192,7 @@ task PackageMSI -depends PackageModule -description "assembles the MSI distribut
 		candle -out "obj\$config\" $wxs
 	}
 	exec {
-		light -out "$output\StudioShell.$version.msi" -pdbout "$output\CodeOwls.StudioShell.Setup.Wix.wixpdb" -sice:ICE91 $wixobj 
+		light -out "$output\StudioShell.$version.msi" -pdbout "$output\CodeOwls.StudioShell.Setup.Wix.wixpdb" -sice:ICE91 -sice:ICE57 $wixobj 
 	}
 	popd
 }

@@ -55,6 +55,59 @@
                        Type="string"/>
 
       </Component>
+      <Component Id="C_REG_SSMS2008" Guid="f4c44e27-f691-4c2c-8eb6-df87861c0d72">
+        <Condition><![CDATA[INSTALL_SSMS2008<>""]]></Condition>
+        <RegistryValue Id="SSMS2008RegistryValue"
+                       
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
+                       Name="ProductName"
+                       Value="[ProductName]"
+                       Type="string"/>
+        <RegistryValue Id="SSMS2008RegistryValue1"
+                       
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
+                       Name="CommandLineSafe"
+                       Value="0"
+                       Type="integer"/>
+        <RegistryValue Id="SSMS2008RegistryValue2"
+                       
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
+                       Name="ProductDescription"
+                       Value="[ProductDescription]"
+                       Type="string"/>
+        <RegistryValue Id="SSMS2008RegistryValue3"
+                       
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
+                       Name="LoadBehavior"
+                       Value="1"
+                       Type="integer"/>
+        <RegistryValue Id="SSMS2008RegistryValue"
+                       KeyPath="yes"
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
+                       Name="SatelliteDllName"
+                       Value="CodeOwls.StudioShell.dll"
+                       Type="string"/>
+        <RegistryValue Id="SSMS2008RegistryValue"
+                       
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
+                       Name="SatelliteDllPath"
+                       Value="[PersonalFolder]\WindowsPowerShell\Modules\StudioShell\Bin"
+                       Type="string"/>
+
+      </Component>
+      
     </DirectoryRef>
   </Fragment>
 </Wix>

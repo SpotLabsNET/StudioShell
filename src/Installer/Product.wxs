@@ -19,108 +19,7 @@
     <Binary Id="UpFldrBtn" SourceFile="$(var.ResourcePath)\UpFldrBtn" />
     <Binary Id="NewFldrBtn" SourceFile="$(var.ResourcePath)\NewFldrBtn" />
     <Feature Id="DefaultFeature" ConfigurableDirectory="TARGETDIR" Level="1">
-      <ComponentRef Id='C_Modules' />
-      <ComponentRef Id='C_WindowsPowerShell' />
-      <ComponentRef Id='C_start_studioshell.ps1' />
-      <ComponentRef Id='C_StudioShell.psd1' />
-      <ComponentRef Id='C_CodeOwls.PowerShell.Host.dll' />
-      <ComponentRef Id='C_CodeOwls.PowerShell.Host.pdb' />
-      <ComponentRef Id='C_CodeOwls.PowerShell.Paths.dll' />
-      <ComponentRef Id='C_CodeOwls.PowerShell.Paths.pdb' />
-      <ComponentRef Id='C_CodeOwls.PowerShell.Provider.dll' />
-      <ComponentRef Id='C_CodeOwls.PowerShell.Provider.pdb' />
-      <ComponentRef Id='C_CodeOwls.PowerShell.WinForms.dll' />
-      <ComponentRef Id='C_CodeOwls.PowerShell.WinForms.pdb' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Cmdlets.dll' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Cmdlets.pdb' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Common.dll' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Common.pdb' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.dll' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Host.dll' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Host.pdb' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Paths.dll' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Paths.pdb' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.pdb' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Provider.dll' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Provider.pdb' />
-      <ComponentRef Id='C_EnvDTE.dll' />
-      <ComponentRef Id='C_EnvDTE80.dll' />
-      <ComponentRef Id='C_EnvDTE90.dll' />
-      <ComponentRef Id='C_Extensibility.dll' />
-      <ComponentRef Id='C_Microsoft.VisualStudio.CommandBars.dll' />
-      <ComponentRef Id='C_Microsoft.VisualStudio.OLE.Interop.dll' />
-      <ComponentRef Id='C_Microsoft.VisualStudio.OLE.Interop.xml' />
-      <ComponentRef Id='C_Microsoft.VisualStudio.Shell.dll' />
-      <ComponentRef Id='C_Microsoft.VisualStudio.Shell.Interop.8.0.dll' />
-      <ComponentRef Id='C_Microsoft.VisualStudio.Shell.Interop.8.0.xml' />
-      <ComponentRef Id='C_Microsoft.VisualStudio.Shell.Interop.dll' />
-      <ComponentRef Id='C_Microsoft.VisualStudio.Shell.Interop.xml' />
-      <ComponentRef Id='C_Microsoft.VisualStudio.Shell.xml' />
-      <ComponentRef Id='C_PostSharp.dll' />
-      <ComponentRef Id='C_PostSharp.xml' />
-      <ComponentRef Id='C_ss_profile.ps1' />
-      <ComponentRef Id='C_StudioShell.VS2008.AddIn' />
-      <ComponentRef Id='C_StudioShell.VS2010.AddIn' />
-      <ComponentRef Id='C_System.Windows.Forms.DataVisualization.dll' />
-      <ComponentRef Id='C_System.Windows.Forms.DataVisualization.xml' />
-      <ComponentRef Id='C_VSLangProj.dll' />
-      <ComponentRef Id='C_VSLangProj2.dll' />
-      <ComponentRef Id='C_VSLangProj80.dll' />
-      <ComponentRef Id='C_VSLangProj90.dll' />
-      <ComponentRef Id='C_get_studioShellSettings.ps1' />
-      <ComponentRef Id='C_invoke_studioShellProfile.ps1' />
-      <ComponentRef Id='C_save_studioShellSettings.ps1' />
-      <ComponentRef Id='C_internal_start_studioShell.ps1' />
-      <ComponentRef Id='C_test_studioShellHost.ps1' />
-      <ComponentRef Id='C_PSIconAnimated.bmp' />
-      <ComponentRef Id='C_studioshell.ico' />
-      <ComponentRef Id='C_profile.ps1' />
-      <ComponentRef Id='C_settings.txt' />
-      <ComponentRef Id='C_about_StudioShell.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_Commands.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_Data_Panes.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_Drives.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_Host_Requirements.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_License.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_Profiles.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_Settings.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_Solution_Modules.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_Variables.help.txt' />
-      <ComponentRef Id='C_about_StudioShell_Version.help.txt' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Cmdlets.dll_help.xml' />
-      <ComponentRef Id='C_CodeOwls.StudioShell.Provider.dll_help.xml' />
-      <ComponentRef Id='C_AddIns.Formats.ps1xml' />
-      <ComponentRef Id='C_CodeModel.Formats.ps1xml' />
-      <ComponentRef Id='C_CommandBars.Formats.ps1xml' />
-      <ComponentRef Id='C_Commands.Formats.ps1xml' />
-      <ComponentRef Id='C_Debugger.Formats.ps1xml' />
-      <ComponentRef Id='C_Errors.Formats.ps1xml' />
-      <ComponentRef Id='C_FontsAndColors.Formats.ps1xml' />
-      <ComponentRef Id='C_OutputPanes.Formats.ps1xml' />
-      <ComponentRef Id='C_Project.Formats.ps1xml' />
-      <ComponentRef Id='C_Settings.Formats.ps1xml' />
-      <ComponentRef Id='C_Tasks.Formats.ps1xml' />
-      <ComponentRef Id='C_Templates.Formats.ps1xml' />
-      <ComponentRef Id='C_Window.Formats.ps1xml' />
-      <ComponentRef Id='C_WindowConfiguration.Formats.ps1xml' />
-      <ComponentRef Id='C__Root.Formats.ps1xml' />
-      <ComponentRef Id='C_register_contextMenuItems.ps1' />
-      <ComponentRef Id='C_register_drives.ps1' />
-      <ComponentRef Id='C_register_solutionEvents.ps1' />
-      <ComponentRef Id='C_get_colorString.ps1' />
-      <ComponentRef Id='C_get_pathTopologyVersion.ps1' />
-      <ComponentRef Id='C_get_projectType.ps1' />
-      <ComponentRef Id='C_get_taskIconNames.ps1' />
-      <ComponentRef Id='C_get_taskPriorities.ps1' />
-      <ComponentRef Id='C_open_file.ps1' />
-      <ComponentRef Id='C_open_solution.ps1' />
-      <ComponentRef Id='C_out_outputPane.ps1' />
-      <ComponentRef Id='C_out_pipe.ps1' />
-      <ComponentRef Id='C_out_taskList.ps1' />
-      <ComponentRef Id='C_remove_nullSplatted.ps1' />
-      <ComponentRef Id='C_select_first.ps1' />
-      <ComponentRef Id='C_use_pathTopologyVersion.ps1' />
-      <ComponentRef Id='C_write_prompt.ps1' />
+      <ComponentGroupRef Id="StudioShellComponentGroup"/>
     </Feature>
     <CustomAction Id="DIRCA_TARGETDIR" Property="TARGETDIR" Value="[ProgramFilesFolder][Manufacturer]\[ProductName]" Execute="firstSequence" />
     <CustomAction Id="DIRCA_CheckFX" BinaryKey="MSVBDPCADLL" DllEntry="CheckFX" />
@@ -199,7 +98,17 @@
         <FileSearch Id="_433BEEFA917543F084AE3165315689C2" Name="ssms.exe" />
       </DirectorySearch>
     </Property>
-    
+    <Property Id="PROFILESCRIPT_EXISTS">
+      <DirectorySearch Id="_533BEEFA917543F084AE3165315689C2" Path="[PersonalFolder]\CodeOwlsLLC.StudioShell" Depth="0">
+        <FileSearch Id="_533BEEFA917543F084AE3165315689C2" Name="profile.ps1" />
+      </DirectorySearch>
+    </Property>
+    <Property Id="SETTINGSFILE_EXISTS">
+      <DirectorySearch Id="_733BEEFA917543F084AE3165315689C2" Path="[PersonalFolder]\CodeOwlsLLC.StudioShell" Depth="0">
+        <FileSearch Id="_733BEEFA917543F084AE3165315689C2" Name="settings.txt" />
+      </DirectorySearch>
+    </Property>
+
     <Condition Message="There are no StudioShell-compatible hosts installed on your local machine.  Please install a compatible version of Visual Studio or SQL Management Studio and rerun this installer.">
       <![CDATA[VS2010_AVAILABLE<>"" OR VS2008_AVAILABLE<>"" OR SSMS2010_AVAILABLE<>"" OR SSMS2008_AVAILABLE<>""]]>
     </Condition>

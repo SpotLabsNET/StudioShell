@@ -31,19 +31,19 @@
 
         <Control Id="DirectionsText" Type="Text" X="25" Y="65" Width="306" Height="40" Text="Please select the products in which you wish to enable StudioShell." TabSkip="yes" Transparent="yes" NoPrefix="yes" />
 
-        <Control Id="CkInstallVS2010" Type="CheckBox" Property="INSTALL_VS2010" CheckBoxValue="install" Text="Visual Studio 2010" X="50" Y="100" Height="10" Width="250">
+        <Control Id="CkInstallVS2010" Type="CheckBox" Property="INSTALL_VS2010" CheckBoxValue="install" Text="&amp;Visual Studio 2010" X="50" Y="100" Height="10" Width="250">
           <Condition Action="disable">VS2010_AVAILABLE=""</Condition>
           <Condition Action="enable">VS2010_AVAILABLE&lt;&gt;""</Condition>
         </Control>
-        <Control Id="CkInstallVS2008" Type="CheckBox" Property="INSTALL_VS2008" CheckBoxValue="install" Text="Visual Studio 2008" X="50" Y="130" Height="10" Width="250">
+        <Control Id="CkInstallVS2008" Type="CheckBox" Property="INSTALL_VS2008" CheckBoxValue="install" Text="V&amp;isual Studio 2008" X="50" Y="130" Height="10" Width="250">
           <Condition Action="disable">VS2008_AVAILABLE=""</Condition>
           <Condition Action="enable">VS2008_AVAILABLE&lt;&gt;""</Condition>
         </Control>
-        <Control Id="CkInstallSSMS2010" Type="CheckBox" Property="INSTALL_SSMS2010" CheckBoxValue="install" Text="SQL Management Studio 2010" X="50" Y="160" Height="10" Width="250">
+        <Control Id="CkInstallSSMS2010" Type="CheckBox" Property="INSTALL_SSMS2010" CheckBoxValue="install" Text="&amp;SQL Management Studio 2010" X="50" Y="160" Height="10" Width="250">
           <Condition Action="disable">SSMS2010_AVAILABLE=""</Condition>
           <Condition Action="enable">SSMS2010_AVAILABLE&lt;&gt;""</Condition>
         </Control>
-        <Control Id="CkInstallSSMS2008" Type="CheckBox" Property="INSTALL_SSMS2008" CheckBoxValue="install" Text="SQL Management Studio 2008" X="50" Y="190" Height="10" Width="250">
+        <Control Id="CkInstallSSMS2008" Type="CheckBox" Property="INSTALL_SSMS2008" CheckBoxValue="install" Text="S&amp;QL Management Studio 2008" X="50" Y="190" Height="10" Width="250">
           <Condition Action="disable">SSMS2008_AVAILABLE=""</Condition>
           <Condition Action="enable">SSMS2008_AVAILABLE&lt;&gt;""</Condition>
         </Control>
