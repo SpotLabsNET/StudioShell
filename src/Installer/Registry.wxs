@@ -1,168 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
-    <CustomAction Id="actionResetAddinVS2010" Script="jscript" Execute="deferred" Return="ignore" Impersonate="yes">      
-      <![CDATA[
-var shell = new ActiveXObject( "WScript.Shell" );
-var key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\VisualStudio\\10.0\\InstallDir";
-var path = shell.RegRead( key );
-shell.Run( '"' + path + 'DEVENV.EXE" /ResetAddIn CodeOwls.StudioShell.Connect /Command File.Exit' );             
-           ]]>
-    </CustomAction>
-    <CustomAction Id="actionResetAddinVS2008" Script="jscript" Execute="deferred" Return="ignore" Impersonate="yes">
-      <![CDATA[
-var shell = new ActiveXObject( "WScript.Shell" );
-var key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\VisualStudio\\9.0\\InstallDir";
-var path = shell.RegRead( key );
-shell.Run( '"' + path + 'DEVENV.EXE" /ResetAddIn CodeOwls.StudioShell.Connect /Command File.Exit' );             
-           ]]>
-    </CustomAction>
-
-    <ComponentGroup Id="ConsoleRegistryComponentGroup" />
+    <ComponentGroup Id="ConsoleRegistryComponentGroup">
+      <Component Id="cmpA7C0114BDF5E4E80AB3AAE2A261A1F41" Directory="StudioShellApplicationFolder" Guid="{8168376D-8376-4AA2-AF59-EC482F1053B5}">        
+        <RegistryValue Id="regConsoleIntegration" KeyPath="yes" Action="write" Root="HKCU" Key="SOFTWARE\Code Owls LLC\StudioShell\InstallState" Name="ConsoleIntegration" Value="1" Type="integer"/>
+        <Environment Id="envA7C0114BDF5E4E80AB3AAE2A261A1F41" Action="set" Part="last" Permanent="no" System="yes" Name="PSModulePath" Value="[ProgramFilesFolder]\Code Owls LLC" />
+      </Component>
+    </ComponentGroup>
     
     <ComponentGroup Id="VS2010RegistryComponentGroup">
-      <Component Id="C_REG_VS2010" Guid="f0e7b95242c7482d99281abee1cc5bc2" Directory="StudioShellApplicationFolder">
-        <Condition><![CDATA[INSTALL_VS2010<>""]]></Condition>
+      <Component Id="C_REG_VS2010" Guid="f0e7b95242c7482d99281abee1cc5bc2" Directory="StudioShellApplicationFolder">        
         <RegistryValue Id="VS2010RegistryValue0"
                        KeyPath="yes"
                        Action="write"
                        Root="HKLM"
                        Key="SOFTWARE\Microsoft\VisualStudio\10.0\AutomationOptions\LookInFolders"
                        Value=""
-                       Name="[TARGETDIR]bin"
+                       Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
                        Type="string"/>
       </Component>
     </ComponentGroup>
     <ComponentGroup Id="VS2008RegistryComponentGroup">
       <Component Id="C_REG_VS2008" Guid="f12301d69fd14e059aa09ed416592b4a" Directory="StudioShellApplicationFolder">
-        <Condition><![CDATA[INSTALL_VS2008<>""]]></Condition>
         <RegistryValue Id="VS2008RegistryValue0"
                        KeyPath="yes"
                        Action="write"
                        Root="HKLM"
                        Key="SOFTWARE\Microsoft\VisualStudio\9.0\AutomationOptions\LookInFolders"
                        Value=""
-                       Name="[TARGETDIR]bin"
+                       Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
                        Type="string"/>
       </Component>
     </ComponentGroup>
     <ComponentGroup Id="SSMS2010RegistryComponentGroup">
       <Component Id="C_REG_SSMS2010" Guid="ef2b93ea-1e0b-4ce6-9d73-90b17baa50fa" Directory="StudioShellApplicationFolder">
-        <Condition><![CDATA[INSTALL_SSMS2010<>""]]></Condition>
-
         <RegistryValue Id="SSMS2010RegistryValue"
                        KeyPath="yes"
                        Action="write"
                        Root="HKCU"
                        Key="Software\Microsoft\SQL Server Management Studio\11.0\AutomationOptions\LookInFolders"
                        Value=""
-                       Name="[TARGETDIR]bin"
-                       Type="string"/>
-        <!--
-         <RegistryValue Id="SSMS2010RegistryValue0"
-                       Action="write"
-                       Root="HKLM"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="ProductName"
-                       Value="[ProductName]"
-                       Type="string"/>
-        <RegistryValue Id="SSMS2010RegistryValue1"
-                       
-                       Action="write"
-                       Root="HKCU"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="CommandLineSafe"
-                       Value="0"
-                       Type="integer"/>
-        <RegistryValue Id="SSMS2010RegistryValue2"
-                       
-                       Action="write"
-                       Root="HKCU"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="ProductDescription"
-                       Value="[ProductDescription]"
-                       Type="string"/>
-        <RegistryValue Id="SSMS2010RegistryValue3"
-                       
-                       Action="write"
-                       Root="HKCU"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="LoadBehavior"
-                       Value="1"
-                       Type="integer"/>
-        <RegistryValue Id="SSMS2010RegistryValue4"
-                       KeyPath="yes"
-                       Action="write"
-                       Root="HKCU"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="SatelliteDllName"
-                       Value="CodeOwls.StudioShell.dll"
-                       Type="string"/>
-        <RegistryValue Id="SSMS2010RegistryValue5"
-                       
-                       Action="write"
-                       Root="HKCU"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="SatelliteDllPath"
-                       Value="[TARGETDIR]bin"
-                       Type="string"/>
-      -->
+                       Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
+                       Type="string"/>        
       </Component>
-    </ComponentGroup>
-    <ComponentGroup Id="SSMS2008RegistryComponentGroup">
-      <Component Id="C_REG_SSMS2008" Guid="f4c44e27-f691-4c2c-8eb6-df87861c0d72" Directory="StudioShellApplicationFolder">
-        <Condition><![CDATA[INSTALL_SSMS2008<>""]]></Condition>
-        <RegistryValue Id="SSMS2008RegistryValue0"
-                       
-                       Action="write"
-                       Root="HKLM"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="ProductName"
-                       Value="[ProductName]"
-                       Type="string"/>
-        <RegistryValue Id="SSMS2008RegistryValue1"
-                       
-                       Action="write"
-                       Root="HKLM"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="CommandLineSafe"
-                       Value="0"
-                       Type="integer"/>
-        <RegistryValue Id="SSMS2008RegistryValue2"
-                       
-                       Action="write"
-                       Root="HKLM"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="ProductDescription"
-                       Value="[ProductDescription]"
-                       Type="string"/>
-        <RegistryValue Id="SSMS2008RegistryValue3"
-                       
-                       Action="write"
-                       Root="HKLM"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="LoadBehavior"
-                       Value="1"
-                       Type="integer"/>
-        <RegistryValue Id="SSMS2008RegistryValue4"
-                       KeyPath="yes"
-                       Action="write"
-                       Root="HKLM"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="SatelliteDllName"
-                       Value="CodeOwls.StudioShell.dll"
-                       Type="string"/>
-        <RegistryValue Id="SSMS2008RegistryValue5"
-                       
-                       Action="write"
-                       Root="HKLM"
-                       Key="SOFTWARE\Microsoft\Microsoft SQL Server\110\Tools\Shell\AddIns\CodeOwls.StudioShell.Connect"
-                       Name="SatelliteDllPath"
-                       Value="[TARGETDIR]bin"
-                       Type="string"/>
-
-      </Component>
-      
     </ComponentGroup>
   </Fragment>
 </Wix>

@@ -192,7 +192,8 @@ task PackageMSI -depends PackageModule -description "assembles the MSI distribut
 		candle -out "obj\$config\" $wxs
 	}
 	exec {
-		light -out "$output\StudioShell.$version.msi" -pdbout "$output\CodeOwls.StudioShell.Setup.Wix.wixpdb" -sice:ICE91 -sice:ICE57 -ext lib\wix\WixUIExtension.dll $wixobj 
+		# disable ICE03: script text too long to fit in column		
+		light -out "$output\StudioShell.$version.msi" -pdbout "$output\CodeOwls.StudioShell.Setup.Wix.wixpdb"  -ext lib\wix\WixUIExtension.dll $wixobj 
 	}
 	popd
 }

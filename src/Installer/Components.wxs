@@ -11,26 +11,19 @@
     </Directory>
   </Fragment>
   <Fragment>
+    
     <ComponentGroup Id="StudioShellApplicationComponentGroup">
       <Component Id="cmpCodeOwlsFolder" Directory="CodeOwlsFolder" Guid="{2cc44b0c-3719-469d-85b0-8a413e81b488}">
         <RegistryValue Id="regCodeOwlsFolder" KeyPath="yes" Action="write" Root="HKCU" Key="SOFTWARE\Code Owls LLC\StudioShell\InstallState" Name="CodeOwlsFolder" Value="1" Type="integer"/>
         <RemoveFolder Id="CodeOwlsFolder" On="uninstall" />
       </Component>
 
-      <Component Id="cmpCBCAB7579617CC9BE49B28097248DDC5" Directory="StudioShellApplicationFolder" Guid="{610BC3D5-7346-43CC-A881-2358AB59C413}">
-        <RegistryValue Id="regfil5DB0DF71A4A437E9D14350F19541DD7A"  Action="write" Root="HKCU" Key="SOFTWARE\Code Owls LLC\StudioShell\InstallState" Name="fil5DB0DF71A4A437E9D14350F19541DD7A" Value="1" Type="integer"/>
+      <Component Id="cmpCBCAB7579617CC9BE49B28097248DDC5" Directory="StudioShellApplicationFolder" Guid="{610BC3D5-7346-43CC-A881-2358AB59C413}">        
 				<File Id="fil5DB0DF71A4A437E9D14350F19541DD7A" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\start-studioshell.ps1" />        
         <RemoveFolder Id="StudioShellApplicationFolder" On="uninstall" />
       </Component>
-      <Component Id="cmp6D00D41DF995942575BD51A535076B7B_0" Directory="StudioShellApplicationFolder" Guid="{8168376D-8376-4AA2-AF59-EC482F1053B5}">
-        <Condition>!ConsoleFeature=1</Condition>        
-        <File Id="filFB9B431E34B4283214829F71CE69B329_0" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\StudioShell.psd1" />
-        <Environment Id="envA7C0114BDF5E4E80AB3AAE2A261A1F41" Action="set" Part="last" Permanent="no" System="yes" Name="PSModulePath" Value="[ProgramFilesFolder]\Code Owls LLC">          
-        </Environment>
-      </Component>
-      <Component Id="cmp6D00D41DF995942575BD51A535076B7B_1" Directory="StudioShellApplicationFolder" Guid="921da01a19e14dcb89fe6a64866d7176">
-        <Condition>!ConsoleFeature=0</Condition>
-        <File Id="filFB9B431E34B4283214829F71CE69B329_1" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\StudioShell.psd1" />        
+      <Component Id="cmp6D00D41DF995942575BD51A535076B7B" Directory="StudioShellApplicationFolder" Guid="921da01a19e14dcb89fe6a64866d7176">        
+        <File Id="filFB9B431E34B4283214829F71CE69B329" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\StudioShell.psd1" />        
       </Component>
       <Component Id="cmp9B1C1EA0583DFDCE6C7C8C21857EEDF8" Directory="dir4A3E4B054700A7A34172F77811D2FDAD" Guid="{CC8EFDDB-997B-442B-983E-E257BCD0453A}">
         <Class Id="{12F6CCC3-0D06-37BC-B9F5-168012C3D700}" Context="InprocServer32" Description="CodeOwls.PowerShell.Host.CommandCompleteEventArgs" ThreadingModel="both" ForeignServer="mscoree.dll">
@@ -856,32 +849,6 @@
 				<File Id="fil26FE05310681985A2888E0A41C61BFDC" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\write-prompt.ps1" />
         <RemoveFolder Id="dirD39CEC022C6B982A21B17DB831DAEE2C" On="uninstall" />
       </Component>
-      <!--
-      <Component Id="cmpVS2010_Folder" Directory="VS2010Folder" Guid="8b54ac45-55fc-4f21-82e6-d3028eefb397">
-        <Condition><![CDATA[INSTALL_VS2010<>""]]></Condition>
-        
-        <RemoveFolder Id="VS2010Folder" On="uninstall" />        
-      </Component>
-      <Component Id="cmpVS2008_Folder" Directory="VS2008Folder" Guid="acc58ad7-2b50-411d-b624-735924b1f6c9">
-        <Condition><![CDATA[INSTALL_VS2008<>""]]></Condition>
-        
-        <RemoveFolder Id="VS2008Folder" On="uninstall" />
-      </Component>
-      
-      <Component Id="cmpVS2010_AddIn" Directory="VS2010AddInFolder" Guid="3c77933e-1d89-4b72-9ed9-4be5fb865c4b">
-        <Condition><![CDATA[INSTALL_VS2010<>""]]></Condition>
-        
-        <RemoveFolder Id="VS2010AddInFolder" On="uninstall" />
-        <File Id="_fil555D1ABD6A954DE863AF768F27CCEC2D" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.VS2010.AddIn" />
-      </Component>
-
-      <Component Id="cmpVS2008_AddIn" Directory="VS2008AddInFolder" Guid="ff555b47-5c73-496a-a291-dd68fea4297b">
-        <Condition><![CDATA[INSTALL_VS2008<>""]]></Condition>
-        
-        <RemoveFolder Id="VS2008AddInFolder" On="uninstall" />
-        <File Id="_fil3ABA3F7976C928CE4786644B7636E345" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.VS2008.AddIn" />
-      </Component>
-      -->
     </ComponentGroup>
   </Fragment>
   <Fragment>
