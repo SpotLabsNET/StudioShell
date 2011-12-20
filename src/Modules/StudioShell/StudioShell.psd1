@@ -88,7 +88,7 @@ FormatsToProcess = 'formats\_Root.Formats.ps1xml',
 
 # Modules to import as nested modules of the module specified in ModuleToProcess
 NestedModules = 'bin/codeowls.studioshell.cmdlets.dll',
-				'start-studioshell.ps1'
+				'start-studioshell.psm1'
 
 # Functions to export from this module
 FunctionsToExport = '*'

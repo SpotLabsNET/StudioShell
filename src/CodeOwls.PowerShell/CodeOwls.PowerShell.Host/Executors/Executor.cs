@@ -37,7 +37,10 @@ namespace CodeOwls.PowerShell.Host.Executors
 
         private bool IsRunspaceBusy
         {
-            get { return _runspace.RunspaceAvailability != RunspaceAvailability.Available; }
+            get
+            {
+                return _runspace.RunspaceAvailability != RunspaceAvailability.Available;
+            }
         }
 
         public event EventHandler<EventArgs<Exception>> PipelineException;
@@ -198,12 +201,32 @@ namespace CodeOwls.PowerShell.Host.Executors
                     try
                     {
                         WaitWhileRunspaceIsBusy();
-                    
-                        tempPipeline.InvokeAsync();
+
+                        try
+                        {
+                            tempPipeline.InvokeAsync();
+                        }
+                        catch (PSInvalidOperationException ioe)
+                        {
+                            /*
+                             * HACK: there seems to be some lag between the toggle of the runspace
+                             * availability state and the clearing of the runspace's current
+                             * pipeline state.  it's possible for the runspace to report it's available
+                             * for use and then raise a PSInvalidOperationException indicating that another
+                             * pipeline is currently executing.
+                             * 
+                             * This is a hacky way around the issue - wait 1/3 of a second for the 
+                             * runspace state to clear and try again.
+                             */
+                            if ( tempPipeline.PipelineStateInfo.State == PipelineState.NotStarted )
+                            {
+                                Thread.Sleep( 333 );
+                                tempPipeline.InvokeAsync();
+                            }
+                        }
                         tempPipeline.Input.Close();
 
-                        WaitWhilePipelineIsRunning(tempPipeline);
-                    
+                        WaitWhilePipelineIsRunning(tempPipeline);                    
 
                         exception = GetPipelineError(options, tempPipeline);
 
@@ -249,6 +272,7 @@ namespace CodeOwls.PowerShell.Host.Executors
 
         private void DoWait()
         {
+
         }
 
         private Exception GetPipelineError(ExecutionOptions options, Pipeline tempPipeline)
