@@ -106,7 +106,7 @@
                 <PropertyName>Description</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Name</PropertyName>
+                <PropertyName>PSChildName</PropertyName>
               </TableColumnItem>
 
             </TableColumnItems>

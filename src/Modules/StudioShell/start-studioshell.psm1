@@ -48,9 +48,13 @@ if( $cmdline -match 'powershell.exe' )
 		Write-Warning "Bootstrapping a new instance of Visual Studio.  Please be patient as this may take a little while...";
 		$dte = new-object -com 'VisualStudio.DTE';
 		[CodeOwls.StudioShell.Common.IoC.Locator]::Set( $typeName, $dte );				
+
+		$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
+			write-debug 'closing bootstrapped Visual Studio instance.'
+			$dte.Quit();
+			$dte = $null;
+		}
 	}
-	
-	$dte = $null;
 }
 
 if( ( $cmdline -match "devenv.exe" -or [environment]::$cmdline -match "ssms.exe" ) )

@@ -19,7 +19,7 @@
       </Component>
 
       <Component Id="cmpCBCAB7579617CC9BE49B28097248DDC5" Directory="StudioShellApplicationFolder" Guid="{610BC3D5-7346-43CC-A881-2358AB59C413}">        
-				<File Id="fil5DB0DF71A4A437E9D14350F19541DD7A" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\start-studioshell.ps1" />        
+				<File Id="fil5DB0DF71A4A437E9D14350F19541DD7A" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\start-studioshell.psm1" />        
         <RemoveFolder Id="StudioShellApplicationFolder" On="uninstall" />
       </Component>
       <Component Id="cmp6D00D41DF995942575BD51A535076B7B" Directory="StudioShellApplicationFolder" Guid="921da01a19e14dcb89fe6a64866d7176">        
