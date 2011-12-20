@@ -25,9 +25,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components.wxs" />
+    <Compile Include="CustomActions.wxs" />
     <Compile Include="Product.wxs" />
     <Compile Include="Registry.wxs" />
-    <Compile Include="UI.wxs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Variables.wxi" />

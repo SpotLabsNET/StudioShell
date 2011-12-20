@@ -14,11 +14,13 @@
              Manufacturer="Code Owls LLC" />
     <Binary Id="MSVBDPCADLL" SourceFile="$(var.ResourcePath)\MSVBDPCADLL" />
     <Binary Id="VSDNETCFG" SourceFile="$(var.ResourcePath)\VSDNETCFG" />
-    <Binary Id="StudioShellBannerBitmap" SourceFile="$(var.ResourcePath)\banner.png" />
-    <Binary Id="DefBannerBitmap" SourceFile="$(var.ResourcePath)\DefBannerBitmap" />
-    <Binary Id="UpFldrBtn" SourceFile="$(var.ResourcePath)\UpFldrBtn" />
-    <Binary Id="NewFldrBtn" SourceFile="$(var.ResourcePath)\NewFldrBtn" />
-    <Feature Id="DefaultFeature" AllowAdvertise="yes" Absent="disallow" Title="StudioShell $(var.StudioShellVersion) Core" ConfigurableDirectory="TARGETDIR" Level="1">
+
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.ResourcePath)\license.rtf"/>
+    <WixVariable Id="WixUIBannerBmp" Value="$(var.ResourcePath)\banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="$(var.ResourcePath)\dialog.bmp" />
+
+    <Feature Id="DefaultFeature" Display="expand" AllowAdvertise="yes" Absent="disallow" 
+             Title="StudioShell $(var.StudioShellVersion)" ConfigurableDirectory="TARGETDIR" Level="1">
       
       <ComponentGroupRef Id="StudioShellApplicationComponentGroup"/>
       
@@ -37,11 +39,8 @@
         <Condition Level="0">SSMS2010_AVAILABLE=""</Condition>
         <ComponentGroupRef Id="SSMS2010RegistryComponentGroup"/>
       </Feature>
-      <Feature Id="SSMS2008Feature" AllowAdvertise="yes" Absent="allow" Title="SQL Server Management Studio 2008 Integration" Level="1">
-        <Condition Level="0">SSMS2008_AVAILABLE=""</Condition>
-        <ComponentGroupRef Id="SSMS2008RegistryComponentGroup"/>
-      </Feature>
     </Feature>
+    
     <CustomAction Id="DIRCA_TARGETDIR" Property="TARGETDIR" Value="[ProgramFilesFolder][Manufacturer]\[ProductFolderName]" Execute="firstSequence" />
     <CustomAction Id="DIRCA_CheckFX" BinaryKey="MSVBDPCADLL" DllEntry="CheckFX" />
     <CustomAction Id="VSDCA_VsdLaunchConditions" BinaryKey="MSVBDPCADLL" DllEntry="VsdLaunchConditions" />
@@ -83,16 +82,8 @@
     <Property Id="EulaForm_Property" Value="No" />
     <Property Id="AdminMaintenanceForm_Action" Value="Repair" />
     
-    <Property Id="SFF_UpFldrBtn" Value="UpFldrBtn" />
-    <Property Id="SFF_NewFldrBtn" Value="NewFldrBtn" />
-    <Property Id="__EulaForm_NextArgs" Value="ConfirmInstallForm" />
-    <Property Id="__ConfirmInstallForm_PrevArgs" Value="EulaForm" />
-    <Property Id="AdminWelcomeForm_NextArgs" Value="AdminFolderForm" />
-    <Property Id="AdminFolderForm_PrevArgs" Value="AdminWelcomeForm" />
-    <Property Id="AdminFolderForm_NextArgs" Value="AdminConfirmInstallForm" />
-    <Property Id="AdminConfirmInstallForm_PrevArgs" Value="AdminFolderForm" />
-    
     <!--<PropertyRef Id="IntegrateOptionsDlg_NextArgs" />-->
+    <Property Id="CompanyFolderName" Value="Code Owls LLC" />
     <Property Id="ProductFolderName" Value="StudioShell" />
     <Property Id="POWERSHELL_OK">
       <DirectorySearch Id="_633BEEFA917543F084AE3165315689C2" Path="[SystemFolder]\windowspowershell\v1.0" Depth="0">
@@ -107,11 +98,6 @@
     <Property Id="VS2008_AVAILABLE">
       <DirectorySearch Id="_233BEEFA917543F084AE3165315689C2" Path="[ProgramFilesFolder]\Microsoft Visual Studio 9.0\common7\ide" Depth="0">
         <FileSearch Id="_233BEEFA917543F084AE3165315689C2" Name="devenv.exe" MinVersion="9.0.0.0" />
-      </DirectorySearch>
-    </Property>
-    <Property Id="SSMS2008_AVAILABLE">
-      <DirectorySearch Id="_333BEEFA917543F084AE3165315689C2" Path="[ProgramFilesFolder]\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE" Depth="0">
-        <FileSearch Id="_333BEEFA917543F084AE3165315689C2" Name="ssms.exe" />
       </DirectorySearch>
     </Property>
     <Property Id="SSMS2010_AVAILABLE">
@@ -131,16 +117,16 @@
     </Property>
 
     <Condition Message="There are no StudioShell-compatible hosts installed on your local machine.  Please install a compatible version of Visual Studio or SQL Management Studio and rerun this installer.">
-      <![CDATA[VS2010_AVAILABLE<>"" OR VS2008_AVAILABLE<>"" OR SSMS2010_AVAILABLE<>"" OR SSMS2008_AVAILABLE<>""]]>
+      <![CDATA[VS2010_AVAILABLE<>"" OR VS2008_AVAILABLE<>"" OR SSMS2010_AVAILABLE<>""]]>
     </Condition>
 
     <UIRef Id="WixUI_FeatureTree"/>
-    <WixVariable Id="WixUILicenseRtf" Value="$(var.ResourcePath)\license.rtf"/>
     
     <!--<UIRef Id="IntegrateOptions_UI"/>-->
     <InstallExecuteSequence>
       <Custom Action="actionResetAddinVS2010" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2010Feature=3</Custom>
       <Custom Action="actionResetAddinVS2008" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2008Feature=3</Custom>
+      <Custom Action="actionResetAddinSSMS2010" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !SSMS2010Feature=3</Custom>
     </InstallExecuteSequence>
   </Product>
 </Wix>
