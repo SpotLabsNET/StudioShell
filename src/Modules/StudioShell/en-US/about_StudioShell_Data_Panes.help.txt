@@ -17,6 +17,16 @@ LONG DESCRIPTION
 	
 	For more information, please see the out-grid and out-chart cmdlets.
 
+EXAMPLES
+
+	The code below creates a pie chart showing class size:
+	
+	ls dte:/solution/codemodel -recurse | `
+	  where {$_ -match 'property' -or $_ -match 'method'} | `
+	  group {$_.PSParentPath | split-path -leaf} | `
+	  out-chart -type pie -x Name -data Count
+	  
+
 SEE ALSO
     out-grid
     out-chart

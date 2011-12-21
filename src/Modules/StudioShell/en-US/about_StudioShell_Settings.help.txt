@@ -16,6 +16,14 @@ LONG DESCRIPTION
 	where ~ is the user's home directory.  The settings file is a key=value
 	formatted file, suitable for passing to the ConvertFrom-StringData cmdlet.
 	
+	The settings.txt file format is as follows:
+	
+		AutoManagePerSolutionModules=[True|False]
+		ConsoleChoice=[StudioShell|OldSkool]
+		LoadPowerShellProfiles=[True|False]
+		LoadStudioShellProfiles=[True|False]
+		StartupLogLevel=[None|Debug Only|Verbose]
+	
 	To manipulate these settings from your PowerShell session, use the 
 	get-studioShellSettings.ps1 and save-studioShellSettings.ps1 scripts.
 	
@@ -25,8 +33,8 @@ SETTINGS
 	
 	The "default" console option results in a console window that is dockable 
 	in the Visual Studio IDE.  However, the console is subjected to various
-	threading limitations and can seem slow or choppy.  In the settings.txt
-	file, this console choice is named "StudioShell".
+	threading and memoty limitations and may seem slow or choppy.  In the 
+	settings.txt file, this console choice is named "StudioShell".
 	
 	The "old school" console option results in a normal PowerShell window.
 	This window does not dock in the IDE, but it is not subject to the same
@@ -34,7 +42,7 @@ SETTINGS
 	"old school" console has risk - if you exit the console or close the 
 	console window, it is likely that Visual Studio will crash or exit without
 	saving your work.  In the settings.txt file, this console choice is 
-	named "OldSkool".
+	named "OldSkool".	
   
   Profile Options
 	You can control whether StudioShell attempts to load various profile 
@@ -48,12 +56,16 @@ SETTINGS
 	The "Load StudioShell Profile Scripts" option controls whether the profile
 	scripts specific to StudioShell are loaded.  In the settings.txt file, this
 	setting is named "LoadStudioShellProfiles" and can have a value of True or
-	False.
+	False.		
 	
+  Solution Modules
 	The "Load Solution Modules" option controls whether StudioShell will
 	attempt to load solution modules.  In the settings.txt file, this 
 	setting is named "AutoManagePerSolutionModules" and can have a value of 
 	True or	False.
+	
+	This setting is named "AutoManagePerSolutionModules" in the settings.txt 
+	file.
 	
   Startup Options
 	StudioShell can output various levels of logs while it is starting up.  
@@ -73,6 +85,10 @@ SETTINGS
 NOTES
 	Any modifications made after the StudioShell session has started will not
 	take effect until you restart Visual Studio.
+	
+	These settings apply ONLY to the default StudioShell host and have no 
+	effect when using the StudioShell module from other hosts, such as
+	NuGet or PowerShell.exe.
 	
 SEE ALSO
 	ConvertFrom-StringData

@@ -12,9 +12,17 @@ CHANGE LOG
 
 1.2
   Resolved Issues
-	Using 'exit' hides the console; reinitializing the runspace proved
-	to cause unintented side-effects when the UI has been altered with
-	custom script commands.
+	The user's home drive is no longer assumed to be the same drive on which
+	StudioShell is installed.  Previously scripts used the "home folder" ~
+	assuming it always referenced the user's home folder (a la the Linux 
+	meaning of ~) which is typically c:\users\<username>.  If StudioShell is
+	installed on the C: drive, but the user's home drive is, say, H:, the 
+	settings data and profile scripts would not be accessed properly, resulting
+	in strange behavior in the console.
+	
+	The 'exit' command just hides the console; reinitializing the runspace 
+	proved to cause unintented side-effects when the UI has been altered with
+	custom script commands. 
 	
 	Visual Studio command objects are now guaranteed to always have a name.  
 	Previously commands that didn't have name were unreferenceable, but would
@@ -82,7 +90,8 @@ CHANGE LOG
 
 	Integrated NuGet Packaging with StudioShell build.  StudioShell can now
 		be installed via NuGet.  Search for the package named "StudioShell" in
-		the public NuGet package repository.
+		the public NuGet package repository.  For more information see
+		about_StudioShell_NuGet.
 
 	Support for using the PSDTE provider outside of Visual Studio.  You can now
 		load the PSDTE provider in a standard PowerShell console and get access
@@ -91,7 +100,7 @@ CHANGE LOG
 		Support for	this scenario should be considered beta; some aspects of 
 		the DTE: drive behave differently outside of Visual Studio.  In 
 		addition, the visualization	cmdlets available in StudioShell do not work 
-		from the console.
+		from the console.				
 
 	Support for SQL Server Management Studio (SSMS) installations.  SSMS support
 		is experimental at the moment.  Moreover, several key path nodes are not
@@ -223,4 +232,5 @@ SEE ALSO
     http://studioshell.codeplex.com
     http://www.studioshell.org
     about_StudioShell_License
+	about_StudioShell_NuGet
     PSDTE

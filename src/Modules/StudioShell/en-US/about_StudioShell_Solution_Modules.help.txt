@@ -36,7 +36,18 @@ NOTES
 	Solution modules are only imported when your console is open.  If you 
 	open the console after the solution is loaded in the IDE, the solution 
 	module will be imported once StudioShell is initialized.
+	
+	Solution modules are enabled by default in the standard StudioShell host.
+	If you import the solution module in another host, such as NuGet or
+	PowerShell.exe, you will need to enable this feature manually.  You
+	can do this with the following script:
+	
+	. ( get-module StudioShell | `
+		select -expand Path | `
+		split-path -parent | `
+		join-path -child '..\InitializationScripts\register-solutionevents.ps1' )
+
 
 SEE ALSO
 	about_StudioShell_Settings
-
+	about_StudioShell_Host_Requirements
