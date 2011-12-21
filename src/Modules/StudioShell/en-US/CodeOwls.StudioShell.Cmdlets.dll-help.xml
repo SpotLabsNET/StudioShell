@@ -42,23 +42,25 @@
             <maml:description>
               <maml:para>The type of chart to create.  Can be &quot;area&quot;, &quot;bar&quot;, &quot;column&quot;, &quot;line&quot;, &quot;pie&quot;, &quot;point&quot;, or &quot;spline&quot;.</maml:para>
             </maml:description>
-            <command:parameterValue required="name" variableLength="false">String</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           </command:parameter>
 
           <command:parameter require="true" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
             <maml:name>GroupAxis</maml:name>
             <maml:description>
               <maml:para>The property to use as the category axis.  E.g., in a bar chart, this property would contain the name under each bar.</maml:para>
+			  <maml:para>Aliases: X, Label, Group, Category.</maml:para>
             </maml:description>
-            <command:parameterValue required="name" variableLength="false">String</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           </command:parameter>
           
           <command:parameter require="true" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
-            <maml:name>DataAxis</maml:name>
+            <maml:name>Include</maml:name>
             <maml:description>
               <maml:para>The properties to use as the data axis.  E.g., in a bar chart, this property would contain the numeric value for each bar.</maml:para>
+			  <maml:para>Aliases: Columns, Property, DataAxis, Y.</maml:para>
             </maml:description>
-            <command:parameterValue required="name" variableLength="false">String[]</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           </command:parameter>
           
           <command:parameter require="true" variableLength="true" globbing="false" pipelineInput="true" postion="Named">
@@ -66,7 +68,7 @@
             <maml:description>
               <maml:para>The data to display in the chart.</maml:para>
             </maml:description>
-            <command:parameterValue required="name" variableLength="false">PSObject</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
           </command:parameter>
           
           <command:parameter require="false" variableLength="false" globbing="false" pipelineInput="false" postion="0">
@@ -95,8 +97,9 @@
 
         <command:parameter require="true" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
           <maml:name>GroupAxis</maml:name>
-          <maml:description>
-            <maml:para>The property to use as the category axis.  E.g., in a bar chart, this property would contain the name under each bar.</maml:para>
+          <maml:description>            
+			<maml:para>The property to use as the category axis.  E.g., in a bar chart, this property would contain the name under each bar.</maml:para>
+			  <maml:para>Aliases: X, Label, Group, Category.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -107,9 +110,10 @@
         </command:parameter>
 
         <command:parameter require="true" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
-          <maml:name>DataAxis</maml:name>
+          <maml:name>Include</maml:name>
           <maml:description>
             <maml:para>The properties to use as the data axes.  E.g., in a bar chart, this property would contain the numeric value for each bar.</maml:para>
+			<maml:para>Aliases: Columns, Property, DataAxis, Y.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -201,7 +205,7 @@
         <command:example>
           <maml:title>--------------  EXAMPLE 2 --------------</maml:title>
           <maml:introduction>
-            <maml:para>DTE:\Solution\Projects\MyProject&amp;gt;</maml:para>
+            <maml:para>DTE:\Solution\CodeModel\MyProject&amp;gt;</maml:para>
           </maml:introduction>
           <dev:code>$allMethods = ls -recurse | where {  -match 'method' };
           $methodData = $allMethods | select-object Name,@{'Name'='ParameterCount';'Expression'={[int]@(.Parameters).Count}};
@@ -380,9 +384,9 @@
           <maml:introduction>
             <maml:para>C:\PS&amp;gt;</maml:para>
           </maml:introduction>
-          <dev:code>ls | out-grid</dev:code>
+          <dev:code>ls | out-grid -name files</dev:code>
           <dev:remarks>
-            <maml:para>Displays the contents of the current directory in a grid.</maml:para>
+            <maml:para>Displays the contents of the current directory in a grid.  The grid is placed in a data pane named &quot;files&quot;.  All properties of each file info item are displayed in the grid.</maml:para>
             <maml:para />
             <maml:para />
             <maml:para />
@@ -397,7 +401,7 @@
         <command:example>
           <maml:title>--------------  EXAMPLE 2 --------------</maml:title>
           <maml:introduction>
-            <maml:para>DTE:\Solution\Projects\MyProject\Program.cs\CodeModel&amp;gt;</maml:para>
+            <maml:para>DTE:\Solution\CodeModel\MyProject\Program.cs&amp;gt;</maml:para>
           </maml:introduction>
           <dev:code>ls -recurse | out-grid -include Name,Kind</dev:code>
           <dev:remarks>
@@ -445,7 +449,8 @@
         <dev:version />
       </command:details>
       <maml:description>
-        <maml:para>TODO Add Long description</maml:para>
+        <maml:para>Displays the contents of the pipeline in an HTML window.</maml:para>
+		<maml:para>The HTML window created by this cmdlet is a full Visual Studio tool window rather than a data pane.</maml:para>
       </maml:description>
       <command:syntax>
         <command:syntaxItem>
@@ -463,7 +468,7 @@
         <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
           <maml:name>Input</maml:name>
           <maml:description>
-            <maml:para>The data to display.  An HTML string is rendered without modification.  A collection of objects is formatted using ConvertTo-HTML.</maml:para>
+            <maml:para>The data to display.  If an HTML string is supplied, it is rendered without modification.  A collection of objects is formatted using ConvertTo-HTML.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
           <dev:type>

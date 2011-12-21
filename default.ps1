@@ -247,14 +247,21 @@ task Uninstall -description "uninstalls the module from the local user module re
 		$modulePath | ri -Recurse -force;
 	}
 
-	$addinFolder = "~/Documents/Visual Studio 2010/Addins";
-	$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
-
-	if( Test-Path $addinFilePath )
+	pushd $env:HOMEDRIVE;
+	try
 	{
-		Remove-Item $addinFilePath -force;
+		$addinFolder = "~/Documents/Visual Studio 2010/Addins";
+		$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
+
+		if( Test-Path $addinFilePath )
+		{
+			Remove-Item $addinFilePath -force;
+		}
 	}
-	
+	finally
+	{
+		popd;
+	}
 	if( test-path 'HKCU:\software\Microsoft\VisualStudio\10.0\PreloadAddinStateManaged' )
 	{				
 		Remove-ItemProperty -Path 'HKCU:\software\Microsoft\VisualStudio\10.0\PreloadAddinStateManaged' -Name *StudioShell*;
@@ -279,17 +286,25 @@ task InstallAddin -depends InstallModule -description "installs the VS 2010 add-
 	$profileSpec = join-path $addInInstallPath -child "UserProfile/profile.ps1";
 	$addinAssemblyPath = join-path $addInInstallPath -child "CodeOwls.StudioShell.dll";
 
-	$addinFolder = "~/Documents/Visual Studio 2010/Addins";
-	$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
-	$studioShellProfileFolder = "~/Documents/CodeOwlsLLC.StudioShell";
-	$profilePath = "~/Documents/CodeOwlsLLC.StudioShell/profile.ps1";
-	$settingsPath = "~/Documents/CodeOwlsLLC.StudioShell/settings.txt";
+	pushd $env:HOMEDRIVE;
+	try
+	{
+		$addinFolder = "~/Documents/Visual Studio 2010/Addins";
+		$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
+		$studioShellProfileFolder = "~/Documents/CodeOwlsLLC.StudioShell";
+		$profilePath = "~/Documents/CodeOwlsLLC.StudioShell/profile.ps1";
+		$settingsPath = "~/Documents/CodeOwlsLLC.StudioShell/settings.txt";
 
-	mkdir $studioShellProfileFolder,$addinFolder -erroraction silentlycontinue;
-	( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
+		mkdir $studioShellProfileFolder,$addinFolder -erroraction silentlycontinue;
+		( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
 
-	cp $settingsSpec $settingsPath;
-	cp $profileSpec $profilePath
+		cp $settingsSpec $settingsPath;
+		cp $profileSpec $profilePath
+	}
+	finally
+	{
+		popd;
+	}
 	
 	if( test-path 'HKCU:\software\Microsoft\VisualStudio\10.0\PreloadAddinStateManaged' )
 	{

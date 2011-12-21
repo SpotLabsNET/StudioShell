@@ -97,17 +97,40 @@ LONG DESCRIPTION
 
 	StudioShell includes two basic consoles - one that docks in the Visual 
 	Studio IDE and the default process I/O console.  However, StudioShell is 
-	designed to work with any suitable PowerShell console available in Visual
-	Studio.
+	designed to provide access to the Visual Studio extensibility features
+	in any PowerShell console.
 	
     For more information type:
     
         get-help about_StudioShell_Host_Requirements
 			
+USING STUDIOSHELL
+
+	StudioShell provides two consoles, an integrated console window that
+	docks in the Visual Studio UI, and the default process console that behaves
+	like the standard PowerShell executable.  However, you can use StudioShell 
+	from almost any PowerShell host.
+	
+  	From the StudioShell console:
+	
+		You do not need to do anything to use StudioShell features from one of 
+		the included consoles.  These consoles load the StudioShell module
+		automatically.
+	
+  	From NuGet, PowerGUI VSX, or the PowerShell console:
+	
+		Open your console and type:
+		
+			import-module studioshell
+		
+		This will load the studioshell module into your PowerShell host, run
+		any initialization scripts necessary, and set up the DTE
+		provider inside of your chosen host.
+
 GETTING STARTED
 
-	Once StudioShell is up, you can start poking around by typing the 
-	following:
+	Once the StudioShell module is loaded, you can start poking around by 
+	typing the following:
 	
 		cd dte:
 				
@@ -116,27 +139,34 @@ GETTING STARTED
 	
 		ls
 		
+	or
+	
+		dir
+		
 	to get a list of the major areas of Visual Studio you can access from 
 	the console:
 	
-			Container: PSDTE::dte:\
+
+	    Container: PSDTE::\
 
 
-				   Name                    
+		           Name                    
 		---------- ----                    
-		d  <       Debugger                
-		d+ <       windows                 
-		d+ <       windowconfigurations    
-		d  <       properties              
-		d+ <       commands                
-		d+ <       commandBars             
-		d+ <       OutputPanes             
-		d+ <       Tasks                   
-		d+ <       Errors                  
-		d  <       SelectedItems           
-		d  <       Templates               
 		d  <       AddIns                  
-		d  <       solution                
+		d+ <       CommandBars             
+		d+ <       Commands                
+		d  <       Debugger                
+		d+ <       Errors                  
+		d+ <       OutputPanes             
+		d  <       Properties              
+		d  <       SelectedItems           
+		d  <       Solution                
+		d+ <       Tasks                   
+		d  <       Templates               
+		d+ <       WindowConfigurations    
+		d  <       Windows                 
+
+
 	
 	StudioShell leverages common PowerShell cmdlets whenever possible.  One 
 	thing you should note is the sequence of characters in the left-most
@@ -196,7 +226,7 @@ QUICK EXAMPLE
 	3) In the StudioShell console, type the following (note that the example spans
 		several lines for readability, but you should enter this as one line):
 	
-		dir dte:/solution/projects -recurse | 
+		dir dte:/solution/codemodel -recurse | 
 			where { $_ -match 'class' } |
 			set-itemproperty -name Comment -value "updated by StudioShell"
 			
@@ -214,4 +244,5 @@ SEE ALSO
     about_StudioShell_Data_Panes
     about_StudioShell_Commands
     about_StudioShell_Host_Requirements
+	about_StudioShell_Solution_Modules
     PSDTE

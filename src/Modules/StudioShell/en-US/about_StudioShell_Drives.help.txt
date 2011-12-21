@@ -33,6 +33,12 @@ ADDITIONAL DRIVES
 	For a complete list of these drives, type:
 	
 		get-psdrive -psprovider psdte
+
+	You can also create your own drive from any valid path in the DTE: drive.
+	For example, this script will mount the breakpoints collection as a drive
+	named "bkpts:"
+	
+		new-psdrive -psprovider psdte -root 'dte:/debugger/breakpoints' -name 'bkpts'
 		
 SEE ALSO
 	PSDTE

@@ -53,23 +53,6 @@ LONG DESCRIPTION
 	
   IDE Events
     
-	$solutionEvents : the EnvDTE.SolutionEvents interface that exposes solution
-						events, such as solution opening and closing.
-						
-	$solutionItemsEvents : the EnvDTE.ProjectItemsEvents interface exposing
-							events raised during the management of solution-
-							level items.
-						
-	$projectEvents : the EnvDTE.ProjectsEvents interface exposing project 
-						events, such as adding or removing projects.
-						
-	$projectItemEvents : the EnvDTE.ProjectItemsEvents interface exposing 
-							project item events, such as adding or 
-							removing project items.
-                           
-    $selectionEvents : the EnvDTE.SelectionEvents interface exposing an event
-						raised when the current selection is changed.
-	
 	$buildEvents : the EnvDTE.BuildEvents interface exposing build events.
     
     $debuggerEvents : the EnvDTE.DebuggerEvents interface exposing various 
@@ -94,8 +77,25 @@ LONG DESCRIPTION
                            
 	$publishEvents : the EnvDTE.PublishEvents interface exposing events raised
 						during the publish task.
-						                           
+
+	$solutionEvents : the EnvDTE.SolutionEvents interface that exposes solution
+						events, such as solution opening and closing.
+						
+	$solutionItemsEvents : the EnvDTE.ProjectItemsEvents interface exposing
+							events raised during the management of solution-
+							level items.
+						
+	$projectEvents : the EnvDTE.ProjectsEvents interface exposing project 
+						events, such as adding or removing projects.
+						
+	$projectItemEvents : the EnvDTE.ProjectItemsEvents interface exposing 
+							project item events, such as adding or 
+							removing project items.
+                           
+    $selectionEvents : the EnvDTE.SelectionEvents interface exposing an event
+						raised when the current selection is changed.
+							                           
 SEE ALSO
-    about_StudioShell_Commands
+    about_StudioShell
 
 
