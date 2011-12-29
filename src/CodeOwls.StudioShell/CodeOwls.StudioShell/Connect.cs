@@ -668,7 +668,7 @@ namespace CodeOwls.StudioShell
                 
             }
 
-            Shell = null; 
+            //Shell = null; 
             //_toolWindow = null;
             //_consoleControl = null;
 	    }

@@ -90,8 +90,7 @@ CHANGE LOG
 
 	Integrated NuGet Packaging with StudioShell build.  StudioShell can now
 		be installed via NuGet.  Search for the package named "StudioShell" in
-		the public NuGet package repository.  For more information see
-		about_StudioShell_NuGet.
+		the public NuGet package repository.  
 
 	Support for using the PSDTE provider outside of Visual Studio.  You can now
 		load the PSDTE provider in a standard PowerShell console and get access
@@ -101,7 +100,7 @@ CHANGE LOG
 		the DTE: drive behave differently outside of Visual Studio.  In 
 		addition, the visualization	cmdlets available in StudioShell do not work 
 		from the console.				
-
+		
 	Support for SQL Server Management Studio (SSMS) installations.  SSMS support
 		is experimental at the moment.  Moreover, several key path nodes are not
 		supported by SSMS and are therefore not available on the DTE drive: 
@@ -232,5 +231,4 @@ SEE ALSO
     http://studioshell.codeplex.com
     http://www.studioshell.org
     about_StudioShell_License
-	about_StudioShell_NuGet
     PSDTE

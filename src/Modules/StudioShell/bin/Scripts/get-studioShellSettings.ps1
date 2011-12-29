@@ -68,7 +68,7 @@ These settings are stored in the user's home folder in the following location:
 None.
 
 .OUTPUTS
-System.Collections.Hashtable.  A table of StudioShell user-level settings.
+Object.  A hashtable or PSObject containing StudioShell user-level settings.
 
 .EXAMPLE
 C:\PS> get-studioShellSettings.ps1

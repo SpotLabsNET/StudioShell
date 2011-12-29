@@ -79,4 +79,28 @@ process
 	new-item dte:tasks -value $inputObject @a | out-null;
 }
 
-# REMOVE???
+<#
+.SYNOPSIS
+Outputs data to the Visual Studio task list.
+
+.DESCRIPTION
+Outputs data to the Visual Studio task list.
+
+.INPUTS
+String.  The task description to add to the task list.
+
+.OUTPUTS
+None.
+
+.EXAMPLE
+ls dte:/solution/codemodel -recurse | 
+  where {$_ -match 'class'} | 
+  select -expand Name | 
+  out-tasklist -category 'documentation' -checkable
+
+This example creates a new task for each class found in the currently loaded 
+solution.  The task category is 'documentation', the task list provides a 
+checkbox for each task, and each task description is set to the name of the 
+class.
+#>
+

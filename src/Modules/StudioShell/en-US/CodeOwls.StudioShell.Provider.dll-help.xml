@@ -39,7 +39,7 @@
 
       Directory Hierarchy
       -------------------
-      The directory hierarchy of the PSDTE provider for the local computer is outlined below.  Items listed [in brackets] represent variable content that will change based on the Visual Studio environment.
+      The current directory hierarchy of the PSDTE provider for the local computer is outlined below.  Items listed [in brackets] represent variable content that will change based on the Visual Studio environment.  For example, the contents of the DTE:/Solution/Projects node change based on the contents of the currently loaded solution.
 
       DTE:\
       --- AddIns\
@@ -60,22 +60,26 @@
       ------------- [property category heirarchy]\
       ------------------------------------------ [properties]
       --- SelectedItems\
-      ---------------- Class\
-      ---------------- Enum\
-      ---------------- Interface\
-      ---------------- Method\
-      ---------------- Namespace\
-      ---------------- ProjectItems\
-      ---------------- Projects\
-      ---------------- Property\
-      ---------------- Struct\
+	  ---------------- CodeModel\
+      ------------------------- Class\
+      ------------------------- Enum\
+      ------------------------- Interface\
+      ------------------------- Method\
+      ------------------------- Namespace\
+      ------------------------- Property\      
+	  ------------------------- Struct\
+	  ---------------- ProjectItems\
+      ---------------- Projects\      
       --- Solution\
+      ----------- CodeModel\
+	  -------------------- [projects]\
+	  ------------------------------ [project items]\
+	  --------------------------------------------- [code model heirarchy]\
       ----------- Projects\
       ------------------- [projects]\
       ----------------------------- References\
-      ----------------------------- [project items]\
-      -------------------------------------------- CodeModel\
-      ----------------------------------------------------- [code model heirarchy]\
+      ----------------------------- [project items]\      
+	  -------------------------------------------- [properties]\
       --- Tasks\
       --- Templates\
       ------------ ProjectItems\
@@ -84,6 +88,7 @@
       -------------------- [language or template classification name]\
       --- WindowConfigurations\
       --- Windows\
+
 
       Supported Item Operations
       -------------------------
@@ -220,7 +225,7 @@
             <para>This command uses the Set-Location command to change the current location to the code model of a specific file.  Use a backslash (\) or forward slash (/) to indicate a level of the DTE: drive.</para>
           </Introduction>
           <Code>
-            Set-Location -Path dte:/solution/project/MyProject/Main.cs/CodeModel
+            Set-Location -Path dte:/solution/CodeModel/MyProject/Main.cs
           </Code>
           <Remarks>
             <para>If you are not in the DTE: drive, begin the path with the drive name.
@@ -343,13 +348,13 @@
             <para>This command uses the Set-ItemProperty cmdlet to update the comment for a class in a project.</para>
           </Introduction>
           <Code>
-            set-itemproperty -path dte:/solution/projects/MyProject/Main.cs/CodeModel/Program/Program -name Comment -value ( get-date )
+            set-itemproperty -path dte:/solution/codemodel/MyProject/Main.cs/MyProgram/Program -name Comment -value ( get-date )
           </Code>
           <Remarks>
             <para>
               If you are in the DTE: drive, you can omit the drive name.
 
-              In this example the names MyProject, Main.cs, and Program are for example purposes only.  In practice you would use the names of your projects, files, and classes.
+              In this example the names MyProject, Main.cs, MyProgram, and Program are for example purposes only.  In practice you would use the names of your projects, files, namespaces, and classes.
             </para>
           </Remarks>
         </Example>
@@ -358,9 +363,59 @@
   </Tasks>
   <RelatedLinks>
     <navigationLink>
-      <linkText></linkText>
+      <linkText>about_StudioShell</linkText>
       <uri/>
     </navigationLink>
+	<navigationLink>
+      <linkText>about_StudioShell_License</linkText>
+      <uri/>
+    </navigationLink>
+	<navigationLink>
+      <linkText>about_StudioShell</linkText>
+      <uri/>
+    </navigationLink>
+    <navigationLink>
+      <linkText>about_StudioShell_License</linkText>
+      <uri/>
+    </navigationLink>
+    <navigationLink>
+      <linkText>about_StudioShell_Version</linkText>
+      <uri/>
+    </navigationLink>
+    <navigationLink>
+      <linkText>about_StudioShell_Item_Cmdlets</linkText>
+      <uri/>
+    </navigationLink>
+
+    <navigationLink>
+      <linkText>about_StudioShell_Profiles</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Settings</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Drives</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Variables</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Data_Panes</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Hosts</linkText>
+      <uri/>
+    </navigationLink>
+		<navigationLink>
+      <linkText>about_StudioShell_Solution_Modules</linkText>
+      <uri/>
+    </navigationLink>
+
   </RelatedLinks>
 
   <CmdletHelpPaths>

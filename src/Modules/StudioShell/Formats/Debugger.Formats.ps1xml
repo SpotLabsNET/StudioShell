@@ -253,7 +253,7 @@
                 <PropertyName>ID</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>PSChildName</PropertyName>
+                <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -354,7 +354,7 @@
                 <PropertyName>FunctionName</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>PSChildName</PropertyName>
+                <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

@@ -153,5 +153,11 @@ namespace CodeOwls.PowerShell.Host.Host
         public override void NotifyEndApplication()
         {
         }
+
+        public void ResetExitState()
+        {
+            _exitCode = 0;
+            _exitEvent.Reset();
+        }
     }
 }

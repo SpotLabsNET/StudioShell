@@ -26,14 +26,25 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
         public ProjectItemCodeModelNodeFactory(ProjectItem item) : base(item)
         {
         }
+
         public override IEnumerable<INodeFactory> GetNodeChildren(IContext context)
         {
             List<INodeFactory> factories = new List<INodeFactory>();
+            if (null != _item.ProjectItems)
+            {
+                foreach (ProjectItem item in _item.ProjectItems)
+                {
+                    factories.Add(new ProjectItemCodeModelNodeFactory(item));
+                }
+            }
+
             if (null != _item.FileCodeModel)
             {
-                var cm = new FileCodeModelNodeFactory(_item.FileCodeModel);
-                factories.AddRange( cm.GetNodeChildren( context ) );
+                var f = new FileCodeModelNodeFactory(_item.FileCodeModel);
+                factories.AddRange(f.GetNodeChildren(context));
             }
+
+
             return factories;
         }
     }

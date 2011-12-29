@@ -195,8 +195,9 @@ namespace CodeOwls.PowerShell.Host
                 switch (index)
                 {
                     case (0):
-                        InvokeShouldExit(_host.ExitCode);
-                        return;
+                        InvokeShouldExit(_host.ExitCode);       
+                        _host.ResetExitState();
+                        break;
                     case (1):
                         ExecuteConsoleCommand();
                         break;
@@ -211,6 +212,8 @@ namespace CodeOwls.PowerShell.Host
 
         private void ExecuteQueuedCommand()
         {
+            this._commandExecutor.RunspaceReady.WaitOne();
+
             var asynResult = Queue.Dequeue();
             Collection<PSObject> results = null;
             try
@@ -226,10 +229,22 @@ namespace CodeOwls.PowerShell.Host
 
         private void ExecuteConsoleCommand()
         {
+            this._commandExecutor.RunspaceReady.WaitOne();
+
             _historyStackWalker.Reset();
             _autoCompleteWalker.Reset();
 
             var input = _consoleWindow.ReadLine();
+
+            Collection<PSParseError> errors;
+            PSParser.Tokenize(input, out errors);
+            if( null != errors &&  errors.Any())
+            {
+                foreach( var error in errors)
+                {
+                    _consoleWindow.WriteErrorLine( "! " + error.Message );
+                }
+            }
 
             ExecuteCommand(input, ExecutionOptions.AddToHistory | ExecutionOptions.AddOutputter);
 
@@ -238,6 +253,7 @@ namespace CodeOwls.PowerShell.Host
 
         private void WritePrompt()
         {
+            this._commandExecutor.RunspaceReady.WaitOne(); 
             Exception error;
             var prompt = _commandExecutor.ExecuteAndGetStringResult("prompt", out error);
             WritePrompt(prompt);

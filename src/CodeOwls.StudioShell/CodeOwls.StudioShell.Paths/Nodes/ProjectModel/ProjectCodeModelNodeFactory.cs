@@ -32,7 +32,27 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
         {
             foreach (ProjectItem item in _project.ProjectItems)
             {
-                yield return new ProjectItemCodeModelNodeFactory(item);
+                if (item is Project)
+                {
+                    yield return new ProjectCodeModelNodeFactory(item as Project);
+                }
+
+                var projectItem = item as ProjectItem;
+
+                if (null != projectItem.SubProject)
+                {
+                    yield return new ProjectCodeModelNodeFactory(projectItem.SubProject);
+                }
+
+                if (null != item.FileCodeModel)
+                {
+                    yield return new ProjectItemCodeModelNodeFactory(item);
+                }
+
+                if (item.Kind == Constants.vsProjectItemKindPhysicalFolder)
+                {
+                    yield return new ProjectFolderCodeModelItemNodeFactory(item);
+                }
             }
         }
 

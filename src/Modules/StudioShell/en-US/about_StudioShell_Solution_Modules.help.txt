@@ -32,10 +32,43 @@ LONG DESCRIPTION
 	and they are automatically removed as the solution is closed.  However, 
 	you can override this behavior by modifying the StudioShell settings.
 	
+	
+	Running Scripts on Module Unload
+	--------------------------------
+	While it is possible to attach code to the OnRemove event for a solution
+	module, the syntax is cumbersome:
+	
+	$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
+		# ...		
+		write-host 'solution module has been unloaded'
+	}
+	
+	Frankly, the author has to Google how to do this every time he needs to 
+	use this feature, so a shortcut was added.  If your module exposes a
+	function named:
+	
+	unregister-<ModuleName>
+	
+	It will be invoked automatically during the module unload process.
+	
+	For example, if your solution is named 'MongoProvider' then your solution
+	module unregister function would be named:
+	
+	unregister-MongoProvider
+	
+	The function will be invoked with no parameters.  Below is an example of 
+	a complete unregister function for a solution module named 'MySolution'.
+	
+	function unregister-MySolution
+	{
+		write-host 'solution module has been unloaded'
+	}
+	
+	
 NOTES
 	Solution modules are only imported when your console is open.  If you 
 	open the console after the solution is loaded in the IDE, the solution 
-	module will be imported once StudioShell is initialized.
+	module will be imported immediately after StudioShell is initialized.
 	
 	Solution modules are enabled by default in the standard StudioShell host.
 	If you import the solution module in another host, such as NuGet or
@@ -50,4 +83,4 @@ NOTES
 
 SEE ALSO
 	about_StudioShell_Settings
-	about_StudioShell_Host_Requirements
+	about_StudioShell_Hosts

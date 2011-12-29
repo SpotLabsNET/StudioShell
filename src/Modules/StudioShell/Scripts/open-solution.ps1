@@ -15,7 +15,7 @@
 #
 
 param(
-	[Parameter(Mandatory=$true)]
+	[Parameter(Mandatory=$true, Position=0)]
 	[string]
 	# the file path of the solution to open
 	$path
@@ -28,4 +28,29 @@ if( -not( Test-Path $path ) )
 }
 
 Write-Debug "opening solution at path $path";
-$dte.Solution.Open( $path );
+$dte.Solution.Open( $path ) | Out-Null;
+
+<#
+.SYNOPSIS
+Opens a solution file (.SLN) in the IDE.
+
+.DESCRIPTION
+This function is a wrapper for opening a solution file (.SLN) in the Visual Studio IDE.
+
+.INPUTS
+None.
+
+.OUTPUTS
+None.
+
+.EXAMPLE
+open-solution -path 'c:\projects\myproject.sln'
+
+This example loads the first solution file at the path c:\projects\myproject.sln.
+
+.EXAMPLE
+$sln = ls *.sln
+open-solution -path $sln
+
+This example loads the first solution file it finds in the current directory.
+#>

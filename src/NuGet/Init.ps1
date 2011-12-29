@@ -15,51 +15,69 @@
 #
 param($installPath, $toolsPath, $package, $project)
 
-if( -not( Get-Module StudioShell -ListAvailable | where { $_.version -eq $package.Version } ) )
+try
 {
+	pushd $env:HOMEDRIVE;
+
 	try
 	{
-		pushd $env:HOMEDRIVE;
 		add-type -reference EnvDTE -typedef @'
-		/*
-		    Necessary to prevent Visual Studio from crashing when accessing 
-		    some of the AddIn object properties.  In particular, the Instance
-		    property seems to set off the crash bit in Visual Studio.
-		*/
-		    public class AddInConnector
-		    {
-		        public static void Connect(object dte)
-		        {
-		            EnvDTE.DTE _dte = dte as EnvDTE.DTE;
-		            _dte.AddIns.Update();
-		            foreach( EnvDTE.AddIn addIn in _dte.AddIns )
-		            {
-		                if( addIn.Name.Contains( "StudioShell" ) && ! addIn.Connected )
-		                {
-		                    addIn.Connected = true;
-		                }
-		            }
-		        }
-				
-				public static void Disconnect(object dte)
-		        {
-		            EnvDTE.DTE _dte = dte as EnvDTE.DTE;
-		            
-		            foreach( EnvDTE.AddIn addIn in _dte.AddIns )
-		            {
-		                if( addIn.Name.Contains( "StudioShell" ) )
-		                {
-		                    addIn.Connected = false;
-							addIn.Remove();
-		                }
-		            }
-					
-					_dte.AddIns.Update();
-		        }
-		    }    
+			/*
+				Necessary to prevent Visual Studio from crashing when accessing 
+				some of the AddIn object properties from PowerShell.  
+				In particular, the Instance property seems to set off Visual Studio.
+			*/
+				public class AddInConnector
+				{
+					public static void Connect(object dte)
+					{
+						EnvDTE.DTE _dte = dte as EnvDTE.DTE;
+						_dte.AddIns.Update();
+						foreach( EnvDTE.AddIn addIn in _dte.AddIns )
+						{
+							if( addIn.Name.Contains( "StudioShell" ) && ! addIn.Connected )
+							{
+								addIn.Connected = true;
+							}
+						}
+					}
+						
+					public static void Disconnect(object dte)
+					{
+						EnvDTE.DTE _dte = dte as EnvDTE.DTE;
+				            
+						foreach( EnvDTE.AddIn addIn in _dte.AddIns )
+						{
+							if( addIn.Name.Contains( "StudioShell" ) )
+							{
+								addIn.Connected = false;
+								
+								_dte.AddIns.Update();
+								return;
+							}
+						}				
+					}
+				}    
 '@;
-
-		$modulePath = $env:psmodulepath -split ';' -match [regex]::escape( (resolve-path ~) ) | select -First 1
+	}
+	catch
+	{
+	}
+	
+		$modulePath = $toolsPath;
+		#$modulePath = $env:PSModulePath | where {$_ -match (Resolve-Path ~)} | select -First 1;
+		#if( -not $modulePath )
+		#{
+		#	$modulePath = "~/documents/windowspowershell/modules";
+		#	if( -not( Test-Path $modulePath ) )
+		#	{
+		#		mkdir $modulePath;
+		#	}
+		#	
+		#	$modulePath = Resolve-Path $modulePath;
+		#	$env:PSModulePath = '"{0}";{1}' -f $modulePath,$env:PSModulePath;
+		#}
+		
 		$addinSpec = join-path $toolspath -child "StudioShell/bin/StudioShell.VS2010.AddIn";
 		$settingsSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/settings.txt";
 		$profileSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/profile.ps1";
@@ -71,6 +89,7 @@ if( -not( Get-Module StudioShell -ListAvailable | where { $_.version -eq $packag
 		$profilePath = "~/Documents/CodeOwlsLLC.StudioShell/profile.ps1";
 		$settingsPath = "~/Documents/CodeOwlsLLC.StudioShell/settings.txt";
 
+		Write-Debug "Tools Path: $toolspath"
 		Write-Debug "Module Path: $modulePath"
 		Write-Debug "AddIn Folder: $addinFolder"
 		Write-Debug "AddIn File Path: $addinFilePath"
@@ -78,42 +97,41 @@ if( -not( Get-Module StudioShell -ListAvailable | where { $_.version -eq $packag
 		Write-Debug "StudioShell Profile Path: $profilePath"
 		Write-Debug "Settings Path: $settingsPath"
 
-		if( -not $modulePath )
-		{
-			$modulePath = Resolve-Path ~/Documents/WindowsPowershell/Modules;	
-			$env:PSModulePath += ";$modulePath";
-		}
-
-		if( Get-Module StudioShell -ListAvailable )
+		if( Get-Module StudioShell )
 		{
 			Write-Debug "Disconnecting StudioShell Add-In";
 			[AddInConnector]::Disconnect( $dte );
 			
 			Write-Debug "Removing existing StudioShell module";
-			$studioShellModulePath = Join-Path $modulePath 'StudioShell';
-			Remove-Item $studioShellModulePath -Force -Recurse;
+			#Get-Module "StudioShell" | select -expand ModuleBase | Remove-Item -Recurse -Force;
+			Remove-Module studioshell;
 		}
 		
 		Write-Debug "Installing StudioShell module version $($package.Version)..."
 
-		mkdir $studioShellProfileFolder,$addinFolder -erroraction silentlycontinue;
-		mkdir $modulePath -erroraction silentlycontinue;
-
+		$modulePath,$studioShellProfileFolder,$addinFolder | where { -not( test-path $_ ) } | mkdir -erroraction silentlycontinue;
+		
 		( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
-
-		cp "$toolsPath/StudioShell" -Destination $modulePath -container -Recurse -force
-		cp $settingsSpec $settingsPath;
-		cp $profileSpec $profilePath
+		
+		#cp "$toolsPath/StudioShell" -Destination $modulePath -container -Recurse -force
+		
+		if( -not( Test-Path $settingsPath ) )
+		{
+			cp $settingsSpec $settingsPath;
+		}
+		if( -not( Test-Path $profilePath ) )
+		{
+			cp $profileSpec $profilePath
+		}
 
 		Write-Debug 'Connecting StudioShell Add-In'
-		[AddInConnector]::Connect( $dte );
-	}
-	finally
-	{
-		popd;
-	}
+		[AddInConnector]::Connect( $dte );	
+}
+finally
+{
+	popd;
 }
 
 Write-Debug 'Importing StudioShell module'
-import-module StudioShell;
+import-module "$modulePath/StudioShell";
 

@@ -646,10 +646,6 @@
 				<File Id="fil7B5007E8F67B8602205732FB9DFC86F2" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Scripts\start-studioShell.ps1" />
         <RemoveFolder Id="dirFE02E37F2F7C6ECB4AEA4C880C17021B" On="uninstall" />
       </Component>
-      <Component Id="cmpC1BD038D3225A4E79D079A65B169E97B" Directory="dirFE02E37F2F7C6ECB4AEA4C880C17021B" Guid="{A16803E1-EF14-43F1-BE0B-103B60F5BBAE}">
-        
-				<File Id="fil61C2E9A0E008BE601B3F2AAC791B755F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Scripts\test-studioShellHost.ps1" />
-      </Component>
 
       <Component Id="cmp131A93081D55BEE25ECE8A94447A7AA9" Directory="dir51D27AA6BB3DBD2190A61F43670DC869" Guid="{D08D33EC-DB50-4C60-832F-3EF855F99EE8}">
         
@@ -664,10 +660,6 @@
         
 				<File Id="fil9CD81ED0A3AB69FDDAE28426BB6C4492" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell.help.txt" />
       </Component>
-      <Component Id="cmp7FD725824D9B2C605F733D876668EB44" Directory="dirBDD021D4A750F370C5BABA9082501848" Guid="{A42E92A1-198A-4BEA-950D-891CAF7B8C95}">
-        
-				<File Id="fil6AF5EC2DB7AA8BC1F2DDA022953B2B82" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Commands.help.txt" />
-      </Component>
       <Component Id="cmpAA51A5C168F39391196900E45AB346C9" Directory="dirBDD021D4A750F370C5BABA9082501848" Guid="{05C691A6-916E-421B-9CB3-82F9F0C6971B}">
         
 				<File Id="fil5080BF257850F13687E32A66B49D4F90" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Data_Panes.help.txt" />
@@ -678,7 +670,23 @@
       </Component>
       <Component Id="cmp6C5A82F7BAB054556AD681400F0B8A4B" Directory="dirBDD021D4A750F370C5BABA9082501848" Guid="{31D01264-12BF-419B-986B-0F315F55D4C7}">
         
-				<File Id="fil4BAAF1D365A33416FE0A2D4F9899174F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Host_Requirements.help.txt" />
+				<File Id="fil4BAAF1D365A33416FE0A2D4F9899174F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Hosts.help.txt" />
+      </Component>
+      <Component Id="cmp1b68687b158c4aab953951359b13c5a5" Directory="dirBDD021D4A750F370C5BABA9082501848" Guid="1b68687b158c4aab953951359b13c5a5">
+
+        <File Id="fil1b68687b158c4aab953951359b13c5a5" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_NuGet.help.txt" />
+      </Component>
+      <Component Id="cmped6d0e97caae4d62b5e5d3a3a02dfb31" Directory="dirBDD021D4A750F370C5BABA9082501848" Guid="ed6d0e97caae4d62b5e5d3a3a02dfb31">
+
+        <File Id="filed6d0e97caae4d62b5e5d3a3a02dfb31" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_PowerShell.help.txt" />
+      </Component>
+      <Component Id="cmpc4a80286774d4930a205ab44f95cb211" Directory="dirBDD021D4A750F370C5BABA9082501848" Guid="c4a80286774d4930a205ab44f95cb211">
+
+        <File Id="filc4a80286774d4930a205ab44f95cb211" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_SSMS.help.txt" />
+      </Component>
+      <Component Id="cmp7038d87e40bc43579a62cea01d720889" Directory="dirBDD021D4A750F370C5BABA9082501848" Guid="7038d87e40bc43579a62cea01d720889">
+
+        <File Id="fil7038d87e40bc43579a62cea01d720889" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Item_Cmdlets.help.txt" />
       </Component>
       <Component Id="cmp28D82D5C54E65E27B154DE6E92CADC5D" Directory="dirBDD021D4A750F370C5BABA9082501848" Guid="{94A6DD5F-3DA8-43EE-B5E3-678ECDD59AEC}">
         
