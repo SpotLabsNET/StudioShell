@@ -133,7 +133,7 @@
                                 <ScriptBlock>get-projectType -kind $_.Kind </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>PSChildName</PropertyName>
+                              <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
                             </TableColumnItem>
                         </TableColumnItems>
                     </TableRowEntry>
@@ -162,7 +162,7 @@
                         <PropertyName>ItemType</PropertyName>
                       </TableColumnItem>
                       <TableColumnItem>
-                        <PropertyName>PSChildName</PropertyName>
+                        <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
                       </TableColumnItem>
                     </TableColumnItems>
                   </TableRowEntry>

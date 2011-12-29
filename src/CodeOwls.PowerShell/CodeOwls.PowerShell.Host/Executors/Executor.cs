@@ -202,12 +202,13 @@ namespace CodeOwls.PowerShell.Host.Executors
                     {
                         WaitWhileRunspaceIsBusy();
 
+                        tempPipeline.StateChanged += OnPipelineStateChange;
                         try
                         {
                             tempPipeline.InvokeAsync();
                         }
                         catch (PSInvalidOperationException ioe)
-                        {
+                        {                            
                             /*
                              * HACK: there seems to be some lag between the toggle of the runspace
                              * availability state and the clearing of the runspace's current
@@ -217,6 +218,10 @@ namespace CodeOwls.PowerShell.Host.Executors
                              * 
                              * This is a hacky way around the issue - wait 1/3 of a second for the 
                              * runspace state to clear and try again.
+                             * 
+                             * I've also tried adding a WaitWhilePipelineIsRunning method that spins
+                             * on a DoWait while the pipeline is not in the completed or failed state;
+                             * however this seems to slow the execution down considerably.  
                              */
                             if ( tempPipeline.PipelineStateInfo.State == PipelineState.NotStarted )
                             {
@@ -226,7 +231,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                         }
                         tempPipeline.Input.Close();
 
-                        WaitWhilePipelineIsRunning(tempPipeline);                    
+                        // WaitWhilePipelineIsRunning(tempPipeline);                    
 
                         exception = GetPipelineError(options, tempPipeline);
 
@@ -258,8 +263,36 @@ namespace CodeOwls.PowerShell.Host.Executors
             return collection;
         }
 
+        public readonly ManualResetEvent RunspaceReady = new ManualResetEvent(false);
+        private void OnPipelineStateChange(object sender, PipelineStateEventArgs e)
+        {
+            switch( e.PipelineStateInfo.State )
+            {
+                case( PipelineState.Completed ):
+                case( PipelineState.Failed) :
+                    {
+                        ((Pipeline)sender).StateChanged -= OnPipelineStateChange;
+                        RunspaceReady.Set();
+                        break;
+                    }
+                case( PipelineState.Running):
+                    {
+                        RunspaceReady.Reset();
+                        break;
+
+                    }
+                default:
+                    break;
+            }
+        }
+
         private void WaitWhilePipelineIsRunning(Pipeline tempPipeline)
         {
+            while( tempPipeline.PipelineStateInfo.State != PipelineState.Completed &&
+                tempPipeline.PipelineStateInfo.State != PipelineState.Failed )
+            {
+                DoWait();
+            }
         }
 
         private void WaitWhileRunspaceIsBusy()

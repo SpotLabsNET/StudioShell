@@ -30,7 +30,10 @@ if( $profile )
 Initializes StudioShell.
 
 .DESCRIPTION
-Invoke this command to load StudioShell in your Visual Studio PowerShell host.
+Dot-source this command to load StudioShell in your PowerShell session.
+
+This script imports the StudioShell PowerShell module and dot-sources
+the StudioShell profile scripts.
 
 .INPUTS
 None.
@@ -43,7 +46,7 @@ C:\PS> start-studioShell.ps1
 
 .LINK
 about_StudioShell
-about_StudioShell_Host_Requirements
+about_StudioShell_Hosts
 about_StudioShell_Settings
 about_StudioShell_Profiles
 get-help PSDTE

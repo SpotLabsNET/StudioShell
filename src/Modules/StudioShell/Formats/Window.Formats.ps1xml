@@ -106,7 +106,7 @@
                 <ScriptBlock>$_.Type -replace 'vsWindowType',''</ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>PSChildName</PropertyName>
+                <ScriptBlock>$_.PSChildName,$_.Caption | select -first 1</ScriptBlock>
               </TableColumnItem>
 
             </TableColumnItems>

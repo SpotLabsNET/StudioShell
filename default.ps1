@@ -1,10 +1,23 @@
-﻿# Copyright (c) 2011 Code Owls LLC
-# 
-# psake build script for StudioShell
+﻿#
+#   Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
 #
-# valid configurations:
-#  Debug
-#  Release
+#   Licensed under the Microsoft Reciprocal License (Ms-RL) (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#     http://www.opensource.org/licenses/ms-rl
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+# 
+# 	psake build script for StudioShell
+#
+# 	valid configurations:
+#  		Debug
+#  		Release
 #
 # notes:
 #
@@ -203,6 +216,7 @@ task PackageNuGet -depends PackageModule,__CreateNuGetPackageDirectory,CleanNuGe
     $mp = get-modulePackageDirectory;
 	$ngp = get-nugetPackageDirectory;
     $tools = join-path $ngp 'tools';
+	$content = Join-Path $ngp 'content';
     $md = join-path $tools "StudioShell\bin\$metadataAssembly";
     $spec = join-path $ngp 'studioshell.nuspec'
     
@@ -213,6 +227,8 @@ task PackageNuGet -depends PackageModule,__CreateNuGetPackageDirectory,CleanNuGe
     ls $mp | copy-item -dest $tools -recurse -force;
 	# copy nuget source scripts to tools folder
     ls $nugetSource -filter *.ps1 | copy-item -dest $tools -force;
+	# copy nuget reame to content folder
+    ls $nugetSource -filter *.txt | copy-item -dest $content -force;
 	# copy nuget nuspec file to nuget package folder
     ls $nugetSource -filter *.nuspec | copy-item -dest $ngp -force;
     
@@ -224,7 +240,7 @@ task PackageNuGet -depends PackageModule,__CreateNuGetPackageDirectory,CleanNuGe
 	# replace $id$ placeholder with assembly version info from addin assembly
     $c = $c -replace '\$id\$', ( get-item $md | select -exp versioninfo | select -exp productversion );
 	# replace $relnotes$ token with contents of current release notes help topic
-    $c = $c -replace '\$relnotes\$', ( gc $currentReleaseNotesPath );
+    $c = $c -replace '\$relnotes\$', ( ( gc $currentReleaseNotesPath ) | Out-String );
 	# reformat the spec file contents and write nuspec file
     $c = $c -join "`n";
     $c | out-file $spec -force;

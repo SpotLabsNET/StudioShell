@@ -120,13 +120,29 @@
       <![CDATA[VS2010_AVAILABLE<>"" OR VS2008_AVAILABLE<>"" OR SSMS2010_AVAILABLE<>""]]>
     </Condition>
 
+    <Upgrade Id="{D4680797-1E5D-442A-A513-C2648FB53805}">
+      <UpgradeVersion
+          Property="OLD_VERSION_FOUND"
+          Minimum="1.0.0.0"
+          Maximum="1.2.0.0"
+          IncludeMinimum="yes"
+          IncludeMaximum="no"
+          OnlyDetect="no"
+          IgnoreRemoveFailure="yes"
+          MigrateFeatures="yes"
+          Language="1033" />
+    </Upgrade>
+    
     <UIRef Id="WixUI_FeatureTree"/>
     
     <!--<UIRef Id="IntegrateOptions_UI"/>-->
     <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+      <InstallExecute After="RemoveExistingProducts" />
+      
       <Custom Action="actionResetAddinVS2010" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2010Feature=3</Custom>
       <Custom Action="actionResetAddinVS2008" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2008Feature=3</Custom>
-      <Custom Action="actionResetAddinSSMS2010" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !SSMS2010Feature=3</Custom>
+      <Custom Action="actionResetAddinSSMS2010" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !SSMS2010Feature=3</Custom>      
     </InstallExecuteSequence>
   </Product>
 </Wix>

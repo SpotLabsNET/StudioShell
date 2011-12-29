@@ -168,6 +168,7 @@
     <Compile Include="Nodes\DTE\SelectedProjectsNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\NewProjectItemManager.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectCodeModelNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectFolderCodeModelItemNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectFolderItemNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectItemCodeModelNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectItemNodeFactory.cs" />

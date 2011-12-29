@@ -65,7 +65,7 @@ namespace CodeOwls.PowerShell.Host.Utility
 
             v.Properties.Add(new PSNoteProperty("AllUsersAllHosts", AllUsersAllHosts));
             v.Properties.Add(new PSNoteProperty("AllUsersCurrentHost", AllUsersCurrentHost));
-            v.Properties.Add(new PSNoteProperty("CurrentUsersAllHosts", CurrentUserAllHosts));
+            v.Properties.Add(new PSNoteProperty("CurrentUserAllHosts", CurrentUserAllHosts));
             v.Properties.Add(new PSNoteProperty("CurrentUserCurrentHost", CurrentUserCurrentHost));
             // v.Properties.Add(new PSNoteProperty("AllUsersPowerShellHost", AllUsersPowerShellHost));
             v.Properties.Add(new PSNoteProperty("CurrentUserPowerShellHost", CurrentUserPowerShellHost));

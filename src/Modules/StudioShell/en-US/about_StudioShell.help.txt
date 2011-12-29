@@ -72,7 +72,8 @@ LONG DESCRIPTION
 	
 	For more information type:
 		
-		get-help about_StudioShell_Commands
+		get-help dte:/commands new-item
+		get-help dte:/commandbars new-item
 
   Data Visualizations
   
@@ -102,7 +103,7 @@ LONG DESCRIPTION
 	
     For more information type:
     
-        get-help about_StudioShell_Host_Requirements
+        get-help about_StudioShell_Hosts
 			
 USING STUDIOSHELL
 
@@ -221,13 +222,13 @@ GETTING STARTED
 
 QUICK EXAMPLE
 
-	1) Open a StudioShell console using the instructions in USING STUDIOSHELL.
+	1) Open the StudioShell console using the instructions in USING STUDIOSHELL.
 	2) Open a solution you've been working on recently.
 	3) In the StudioShell console, type the following (note that the example spans
 		several lines for readability, but you should enter this as one line):
 	
 		dir dte:/solution/codemodel -recurse | 
-			where { $_ -match 'class' } |
+			where { $_ -match 'class' } | 
 			set-itemproperty -name Comment -value "updated by StudioShell"
 			
 	This will place a comment before every class in your solution.
@@ -242,7 +243,6 @@ SEE ALSO
     about_StudioShell_Drives
     about_StudioShell_Variables
     about_StudioShell_Data_Panes
-    about_StudioShell_Commands
-    about_StudioShell_Host_Requirements
+    about_StudioShell_Hosts
 	about_StudioShell_Solution_Modules
     PSDTE
