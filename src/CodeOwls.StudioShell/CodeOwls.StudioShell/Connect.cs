@@ -122,7 +122,7 @@ namespace CodeOwls.StudioShell
                 return;
             }
 
-            var keepers = new[] {StudioShellExecuteCommandName, StudioShellCommandName, StudioShellCancelCommandName};
+            var keepers = new[] {StudioShellExecuteCommandName, StudioShellRestartCommandName, StudioShellCommandName, StudioShellCancelCommandName};
             List<Command> losers = new List<Command>();
 
             foreach( Command cmd in dte.Commands )
@@ -226,6 +226,20 @@ namespace CodeOwls.StudioShell
 	            {
 	                command.AddControl(viewPopup.CommandBar, 2);
 	            }
+
+                SafeDeleteCommand(StudioShellRestartCommandName);
+                command = commands.AddNamedCommand2(_addInInstance,
+                                                    "ResetRunspace", "Reset StudioShell", "Resets the StudioShell Runspace",
+                                                    false, 3,
+                                                    ref contextGUIDS,
+                                                    (int)vsCommandStatus.vsCommandStatusSupported,
+                                                    (int)vsCommandStyle.vsCommandStylePictAndText,
+                                                    vsCommandControlType.vsCommandControlTypeButton);
+
+                if ((command != null) && (viewPopup != null))
+                {
+                    command.AddControl(viewPopup.CommandBar, 2);
+                }
 	        }
 	        catch(System.ArgumentException)
 	        {
@@ -294,6 +308,7 @@ namespace CodeOwls.StudioShell
             if (null != Shell)
             {
                 Shell.Stop();
+                Shell.Dispose();
                 Shell = null;
             }
 		}
@@ -314,6 +329,19 @@ namespace CodeOwls.StudioShell
 					return;
 				}
 
+                if( commandName == StudioShellRestartCommandName )
+                {
+                    if (null != Shell )
+                    {
+                        status = (vsCommandStatus)(vsCommandStatus.vsCommandStatusSupported |
+                                  vsCommandStatus.vsCommandStatusEnabled);
+                    }
+                    else
+                    {
+                        status = (vsCommandStatus)vsCommandStatus.vsCommandStatusSupported;
+                    }
+                    return;
+                }
                 if (commandName == StudioShellCancelCommandName)
                 {
                     if( null != Shell && Shell.CurrentState == CommandExecutorState.Unavailable )
@@ -369,6 +397,13 @@ namespace CodeOwls.StudioShell
 				    handled = true;
 					return;
 				}
+
+                if( commandName == StudioShellRestartCommandName)
+                {
+                    RestartShell();
+                    handled = true;
+                    return;
+                }
 
                 if (commandName == StudioShellExecuteCommandName)
                 {
@@ -660,18 +695,30 @@ namespace CodeOwls.StudioShell
         {
             try
             {
-                //Shell.Stop();
                 _toolWindow.Visible = false;
             }
             catch
             {
                 
             }
-
-            //Shell = null; 
-            //_toolWindow = null;
-            //_consoleControl = null;
 	    }
+
+        void RestartShell()
+        {
+            try
+            {
+                Shell.Stop();
+                //_toolWindow.Visible = false;
+            }
+            catch
+            {
+            }
+
+            Shell.Dispose();
+            Shell = null; 
+            
+            ExecuteStudioShellCommand();
+        }
 
 	    private UISettings GetUISettings()
 	    {
@@ -698,6 +745,7 @@ namespace CodeOwls.StudioShell
 
         private static IRunnableCommandExecutor Shell;
 	    private string StudioShellCommandName = "CodeOwls.StudioShell.Connect.StudioShell";
+        private string StudioShellRestartCommandName = "CodeOwls.StudioShell.Connect.ResetRunspace";
         private string StudioShellDoNothingCommandName = "CodeOwls.StudioShell.Connect.DoNothing";
 	    private string StudioShellCancelCommandName = "CodeOwls.StudioShell.Connect.Cancel";
 	    private string StudioShellExecuteCommandName = "CodeOwls.StudioShell.Connect.Execute";

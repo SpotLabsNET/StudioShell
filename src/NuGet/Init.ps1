@@ -109,7 +109,7 @@ try
 		
 		Write-Debug "Installing StudioShell module version $($package.Version)..."
 
-		$modulePath,$studioShellProfileFolder,$addinFolder | where { -not( test-path $_ ) } | mkdir -erroraction silentlycontinue;
+		mkdir $modulePath,$studioShellProfileFolder,$addinFolder -erroraction silentlycontinue;
 		
 		( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
 		
