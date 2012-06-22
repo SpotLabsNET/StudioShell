@@ -81,7 +81,15 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
                 {
                     if ("folder" == itemTypeName.ToLowerInvariant())
                     {
-                        items.AddFolder(path, Constants.vsProjectItemKindPhysicalFolder);
+                        if (project.Object is SolutionFolder)
+                        {
+                            var folder = project.Object as SolutionFolder;
+                            folder.AddSolutionFolder(path);
+                        }
+                        else
+                        {
+                            items.AddFolder(path, Constants.vsProjectItemKindPhysicalFolder);
+                        }
                     }
                     else
                     {

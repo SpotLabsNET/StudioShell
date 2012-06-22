@@ -42,13 +42,25 @@ namespace CodeOwls.PowerShell.Host
         private HostUI _hostUi;
         private HostRawUI _rawUi;
         private Runspace _runspace;
-
+        private bool _disposed;
         private Thread _thread;
+        private readonly ManualResetEvent _threadStopEvent;
 
         public Shell(IConsole consoleWindow, ShellConfiguration shellConfiguration)
         {
+            _threadStopEvent = new ManualResetEvent(false);
             _consoleWindow = consoleWindow;
             _shellConfiguration = shellConfiguration;
+        }
+
+        public void Dispose()
+        {
+            if( _disposed )
+            {
+                return;
+            }
+            _disposed = true;
+            _threadStopEvent.Set();                                    
         }
 
         #region IRunnableCommandExecutor Members
@@ -71,17 +83,15 @@ namespace CodeOwls.PowerShell.Host
             var thread = _thread;
             _host.SetShouldExit(0);
 
-            if (!force)
+            if (force)
             {
-                return;
-            }
-
-            if (null != thread)
-            {
-                if (!thread.Join(2500))
+                if (null != thread)
                 {
-                    thread.Abort();
-                    thread.Join(5000);
+                    if (!thread.Join(2500))
+                    {
+                        thread.Abort();
+                        thread.Join(5000);
+                    }
                 }
             }
         }
@@ -188,7 +198,8 @@ namespace CodeOwls.PowerShell.Host
                                            {
                                                _host.ExitWaitHandle,
                                                _consoleWindow.CommandEnteredEvent,
-                                               Queue.WaitHandle
+                                               Queue.WaitHandle,
+                                               _threadStopEvent
                                            }.ToList().Where( f=>f != null).ToArray();
 
                 int index = WaitHandle.WaitAny(handles);
@@ -196,7 +207,7 @@ namespace CodeOwls.PowerShell.Host
                 {
                     case (0):
                         InvokeShouldExit(_host.ExitCode);       
-                        _host.ResetExitState();
+                        _host.ResetExitState();                        
                         break;
                     case (1):
                         ExecuteConsoleCommand();
@@ -204,6 +215,11 @@ namespace CodeOwls.PowerShell.Host
                     case (2):
                         ExecuteQueuedCommand();
                         break;
+                    case( 3 ):
+                        _runspace.Dispose();
+                        _threadStopEvent.Close();
+                        return;
+
                     default:
                         break;
                 }
@@ -227,6 +243,17 @@ namespace CodeOwls.PowerShell.Host
             }
         }
 
+        private Collection<PSObject> ExecuteCommand(string command, Dictionary<string, object> parameters, ExecutionOptions executionOptions)
+        {
+            Exception e;
+            var r = ExecuteCommand(command, parameters, executionOptions, out e);
+            if( null != e )
+            {
+                throw e;
+            }
+            return r;
+        }
+
         private void ExecuteConsoleCommand()
         {
             this._commandExecutor.RunspaceReady.WaitOne();
@@ -235,18 +262,25 @@ namespace CodeOwls.PowerShell.Host
             _autoCompleteWalker.Reset();
 
             var input = _consoleWindow.ReadLine();
+            Exception e;
 
-            Collection<PSParseError> errors;
-            PSParser.Tokenize(input, out errors);
-            if( null != errors &&  errors.Any())
+            ExecuteCommand(input, ExecutionOptions.AddToHistory | ExecutionOptions.AddOutputter, out e);
+            if( e is IncompleteParseException )
             {
-                foreach( var error in errors)
+                var lastInput = "+";
+                while (e is IncompleteParseException)
                 {
-                    _consoleWindow.WriteErrorLine( "! " + error.Message );
+                    WritePrompt(">> ");
+                    _consoleWindow.CommandEnteredEvent.WaitOne();
+                    lastInput = _consoleWindow.ReadLine();
+                    if( String.IsNullOrEmpty( lastInput ))
+                    {
+                        ExecuteCommand(input, ExecutionOptions.AddToHistory | ExecutionOptions.AddOutputter, out e);
+                    }
+
+                    input += Environment.NewLine + lastInput;
                 }
             }
-
-            ExecuteCommand(input, ExecutionOptions.AddToHistory | ExecutionOptions.AddOutputter);
 
             WritePrompt();
         }
@@ -255,7 +289,8 @@ namespace CodeOwls.PowerShell.Host
         {
             this._commandExecutor.RunspaceReady.WaitOne(); 
             Exception error;
-            var prompt = _commandExecutor.ExecuteAndGetStringResult("prompt", out error);
+            var prompt = _commandExecutor.ExecuteAndGetStringResult("prompt", out error) ?? String.Empty;
+            prompt = prompt.Trim(); 
             WritePrompt(prompt);
         }
 
@@ -265,19 +300,13 @@ namespace CodeOwls.PowerShell.Host
             {
                 return;
             }
-
-            prompt = prompt.Trim();
+            
             _consoleWindow.WritePrompt(prompt);
         }
 
-        private Collection<PSObject> ExecuteCommand(string input)
+        private Collection<PSObject> ExecuteCommand(string input, ExecutionOptions executionOptions, out Exception error)
         {
-            return ExecuteCommand(input, ExecutionOptions.None);
-        }
-
-        private Collection<PSObject> ExecuteCommand(string input, ExecutionOptions executionOptions)
-        {
-            Exception error;
+            error = null;
             var onx = CommandExecutionStateChange;
             if (null != onx)
             {
@@ -299,9 +328,9 @@ namespace CodeOwls.PowerShell.Host
 
 
         private Collection<PSObject> ExecuteCommand(string command, Dictionary<string, object> arguments,
-                                                    ExecutionOptions options)
+                                                    ExecutionOptions options, out Exception error)
         {
-            Exception error;
+            error = null;
             var onx = CommandExecutionStateChange;
             if (null != onx)
             {
@@ -354,7 +383,7 @@ namespace CodeOwls.PowerShell.Host
 
         private void OnPipelineException(object sender, EventArgs<Exception> e)
         {
-            _host.UI.WriteErrorLine(e.Data.ToString());
+            //_host.UI.WriteErrorLine(e.Data.ToString());
         }
 
         private void NotifyProgress(object sender, ProgressRecordEventArgs e)

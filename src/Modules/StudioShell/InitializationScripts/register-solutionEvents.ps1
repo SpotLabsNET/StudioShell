@@ -185,4 +185,5 @@ function remove-solutionModule
 	register-objectEvent $_.source -eventname $_.event -action $_.action | out-null;	
 };
 
+update-SolutionScriptRepository; 
 import-solutionModule;

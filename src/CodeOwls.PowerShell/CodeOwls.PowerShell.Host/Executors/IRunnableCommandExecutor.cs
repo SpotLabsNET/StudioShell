@@ -13,9 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
+using System;
+
 namespace CodeOwls.PowerShell.Host.Executors
 {
-    public interface IRunnableCommandExecutor : ICommandExecutor
+    public interface IRunnableCommandExecutor : ICommandExecutor, IDisposable
     {
         void Stop();
         void Stop(bool force);

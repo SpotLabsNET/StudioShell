@@ -49,7 +49,6 @@ namespace CodeOwls.StudioShell.Configuration
             this.components = new System.ComponentModel.Container();
             this.radioButtonDefaultConsole = new System.Windows.Forms.RadioButton();
             this.radioButtonOldSkoolConsole = new System.Windows.Forms.RadioButton();
-            this.radioButtonNoConsole = new System.Windows.Forms.RadioButton();
             this.radioButtonExecCommandConsole = new System.Windows.Forms.RadioButton();
             this.textBoxVSCommand = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -62,6 +61,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.restartNotice = new System.Windows.Forms.Label();
+            this.radioButtonNoConsole = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -77,7 +77,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.radioButtonDefaultConsole.TabStop = true;
             this.radioButtonDefaultConsole.Text = "Default";
             this.toolTip.SetToolTip(this.radioButtonDefaultConsole, "The default embedded console - functional, dockable, but subject to the UI thread" +
-                    "ing limitations in Visual Studio.");
+        "ing limitations in Visual Studio.");
             this.radioButtonDefaultConsole.UseVisualStyleBackColor = true;
             this.radioButtonDefaultConsole.CheckedChanged += new System.EventHandler(this.OnSelectedConsoleChanged);
             // 
@@ -94,21 +94,6 @@ namespace CodeOwls.StudioShell.Configuration
             this.radioButtonOldSkoolConsole.UseVisualStyleBackColor = true;
             this.radioButtonOldSkoolConsole.CheckedChanged += new System.EventHandler(this.OnSelectedConsoleChanged);
             // 
-            // radioButtonNoConsole
-            // 
-            this.radioButtonNoConsole.AutoSize = true;
-            this.radioButtonNoConsole.Location = new System.Drawing.Point(28, 68);
-            this.radioButtonNoConsole.Name = "radioButtonNoConsole";
-            this.radioButtonNoConsole.Size = new System.Drawing.Size(80, 17);
-            this.radioButtonNoConsole.TabIndex = 3;
-            this.radioButtonNoConsole.TabStop = true;
-            this.radioButtonNoConsole.Text = "No Console";
-            this.toolTip.SetToolTip(this.radioButtonNoConsole, "Choose this option if you are using StudioShell from another PowerShell console, " +
-                    "such as NuGet or PowerGUI VSX.");
-            this.radioButtonNoConsole.UseVisualStyleBackColor = true;
-            this.radioButtonNoConsole.Visible = false;
-            this.radioButtonNoConsole.CheckedChanged += new System.EventHandler(this.OnSelectedConsoleChanged);
-            // 
             // radioButtonExecCommandConsole
             // 
             this.radioButtonExecCommandConsole.AutoSize = true;
@@ -119,7 +104,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.radioButtonExecCommandConsole.TabStop = true;
             this.radioButtonExecCommandConsole.Text = "VS Command: ";
             this.toolTip.SetToolTip(this.radioButtonExecCommandConsole, "Runs the specified Visual Studio command when the StudioShell console is requeste" +
-                    "d.");
+        "d.");
             this.radioButtonExecCommandConsole.UseVisualStyleBackColor = true;
             this.radioButtonExecCommandConsole.Visible = false;
             this.radioButtonExecCommandConsole.CheckedChanged += new System.EventHandler(this.OnSelectedConsoleChanged);
@@ -156,7 +141,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.checkBoxLoadPowerShellProfiles.TabIndex = 0;
             this.checkBoxLoadPowerShellProfiles.Text = "Load PowerShell Profile Scripts";
             this.toolTip.SetToolTip(this.checkBoxLoadPowerShellProfiles, "Enable this option to load your standard PowerShell console profile scripts when " +
-                    "StudioShell is initialized.");
+        "StudioShell is initialized.");
             this.checkBoxLoadPowerShellProfiles.UseVisualStyleBackColor = true;
             // 
             // checkBoxLoadStudioShellProfileScripts
@@ -168,7 +153,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.checkBoxLoadStudioShellProfileScripts.TabIndex = 1;
             this.checkBoxLoadStudioShellProfileScripts.Text = "Load StudioShell Profile Scripts";
             this.toolTip.SetToolTip(this.checkBoxLoadStudioShellProfileScripts, "Enable this option to load StudioShell profile scripts when StudioShell is initia" +
-                    "lized.");
+        "lized.");
             this.checkBoxLoadStudioShellProfileScripts.UseVisualStyleBackColor = true;
             // 
             // checkBoxLoadSolutionProfileScripts
@@ -180,7 +165,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.checkBoxLoadSolutionProfileScripts.TabIndex = 2;
             this.checkBoxLoadSolutionProfileScripts.Text = "Load Solution Modules";
             this.toolTip.SetToolTip(this.checkBoxLoadSolutionProfileScripts, "Enable this option to allow StudioShell to automatically locate and load Solution" +
-                    " Profile scripts.");
+        " Profile scripts.");
             this.checkBoxLoadSolutionProfileScripts.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -236,6 +221,21 @@ namespace CodeOwls.StudioShell.Configuration
             this.restartNotice.TabIndex = 9;
             this.restartNotice.Text = "Note: Changes will not take effect until you restart Visual Studio.";
             // 
+            // radioButtonNoConsole
+            // 
+            this.radioButtonNoConsole.AutoSize = true;
+            this.radioButtonNoConsole.Location = new System.Drawing.Point(28, 68);
+            this.radioButtonNoConsole.Name = "radioButtonNoConsole";
+            this.radioButtonNoConsole.Size = new System.Drawing.Size(80, 17);
+            this.radioButtonNoConsole.TabIndex = 3;
+            this.radioButtonNoConsole.TabStop = true;
+            this.radioButtonNoConsole.Text = "No Console";
+            this.toolTip.SetToolTip(this.radioButtonNoConsole, "Choose this option if you are using StudioShell from another PowerShell console, " +
+        "such as NuGet or PowerGUI VSX.");
+            this.radioButtonNoConsole.UseVisualStyleBackColor = true;
+            this.radioButtonNoConsole.Visible = false;
+            this.radioButtonNoConsole.CheckedChanged += new System.EventHandler(this.OnSelectedConsoleChanged);
+            // 
             // SettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,7 +261,6 @@ namespace CodeOwls.StudioShell.Configuration
 
         private System.Windows.Forms.RadioButton radioButtonDefaultConsole;
         private System.Windows.Forms.RadioButton radioButtonOldSkoolConsole;
-        private System.Windows.Forms.RadioButton radioButtonNoConsole;
         private System.Windows.Forms.RadioButton radioButtonExecCommandConsole;
         private System.Windows.Forms.TextBox textBoxVSCommand;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -274,5 +273,6 @@ namespace CodeOwls.StudioShell.Configuration
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label restartNotice;
+        private System.Windows.Forms.RadioButton radioButtonNoConsole;
     }
 }

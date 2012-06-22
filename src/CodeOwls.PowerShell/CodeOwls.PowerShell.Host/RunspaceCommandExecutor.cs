@@ -25,7 +25,7 @@ namespace CodeOwls.PowerShell.Host
     public class RunspaceCommandExecutor : AsyncCommandExecutorBase, IRunnableCommandExecutor
     {
         private readonly Executor _executor;
-        private readonly Runspace _runspace;
+        private Runspace _runspace;
         private readonly ManualResetEvent _stopThreadEvent;
         private Thread _thread;
 
@@ -37,6 +37,15 @@ namespace CodeOwls.PowerShell.Host
 
             runspace.StateChanged += OnRunspaceStateChanged;
             _runspace = runspace;
+        }
+
+        public void Dispose()
+        {
+            if( null != _runspace )
+            {
+                _runspace.Dispose();
+                _runspace = null;
+            }
         }
 
         private void OnRunspaceStateChanged(object sender, RunspaceStateEventArgs e)

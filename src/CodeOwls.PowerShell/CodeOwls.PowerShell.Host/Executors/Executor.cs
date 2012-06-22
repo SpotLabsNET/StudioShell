@@ -205,7 +205,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                         tempPipeline.StateChanged += OnPipelineStateChange;
                         try
                         {
-                            tempPipeline.InvokeAsync();
+                            ExecutePipeline(options, tempPipeline);
                         }
                         catch (PSInvalidOperationException ioe)
                         {                            
@@ -226,16 +226,15 @@ namespace CodeOwls.PowerShell.Host.Executors
                             if ( tempPipeline.PipelineStateInfo.State == PipelineState.NotStarted )
                             {
                                 Thread.Sleep( 333 );
-                                tempPipeline.InvokeAsync();
+                                ExecutePipeline(options, tempPipeline);
                             }
                         }
                         tempPipeline.Input.Close();
 
                         // WaitWhilePipelineIsRunning(tempPipeline);                    
 
+                        collection = tempPipeline.Output.ReadToEnd(); 
                         exception = GetPipelineError(options, tempPipeline);
-
-                        collection = tempPipeline.Output.ReadToEnd();
                     }
                     catch( Exception e )
                     {
@@ -249,6 +248,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                     if (null != exception)
                     {
                         RaisePipelineExceptionEvent(exception);
+                        exceptionThrown = exception;
                     }
                 }
                 finally
@@ -263,6 +263,18 @@ namespace CodeOwls.PowerShell.Host.Executors
             return collection;
         }
 
+        private static void ExecutePipeline(ExecutionOptions options, Pipeline tempPipeline)
+        {
+            //if (options.HasFlag(ExecutionOptions.Synchronous))
+            //{
+            //    tempPipeline.Invoke();
+            //}
+            //else
+            {
+                tempPipeline.InvokeAsync();
+            }
+        }
+
         public readonly ManualResetEvent RunspaceReady = new ManualResetEvent(false);
         private void OnPipelineStateChange(object sender, PipelineStateEventArgs e)
         {
@@ -272,6 +284,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                 case( PipelineState.Failed) :
                     {
                         ((Pipeline)sender).StateChanged -= OnPipelineStateChange;
+
                         RunspaceReady.Set();
                         break;
                     }
@@ -314,11 +327,10 @@ namespace CodeOwls.PowerShell.Host.Executors
 
             if (null != tempPipeline.PipelineStateInfo.Reason)
             {
-                pipelineException = tempPipeline.PipelineStateInfo.Reason;
+                return tempPipeline.PipelineStateInfo.Reason;
             }
 
-            if (null == pipelineException &&
-                0 < tempPipeline.Error.Count)
+            if ( 0 < tempPipeline.Error.Count)
             {
                 var error = tempPipeline.Error.Read();
                 pipelineException = error as Exception;

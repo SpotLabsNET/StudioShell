@@ -23,5 +23,6 @@ namespace CodeOwls.PowerShell.Host.Executors
         None = 0,
         AddOutputter = 1,
         AddToHistory = 2,
+        Synchronous = 4,
     }
 }
