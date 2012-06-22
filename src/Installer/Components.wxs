@@ -612,10 +612,6 @@
         
 				<File Id="fil807DE04694ECBA5A2E75BD60E134126F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\System.Windows.Forms.DataVisualization.dll" />
       </Component>
-      <Component Id="cmpB0C2DB775A3CC9DF64D46A2581863B77" Directory="dir4A3E4B054700A7A34172F77811D2FDAD" Guid="{CD11E0C8-566A-4F92-A9D7-38A7673E79B5}">
-        
-				<File Id="filE29D0AF8F50E8CFDF1FE5B14E8F06D00" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\System.Windows.Forms.DataVisualization.xml" />
-      </Component>
       <Component Id="cmpD93C4D4551EE66E1307E7A24C460D0BE" Directory="dirDE8B276324E016C2066E24B1D0B63315" Guid="{156BBC25-EE8D-4077-9CD5-F6F138B7E166}">
         
 				<File Id="fil8AEC4EA6F3CCCFFD6BFD4B5CF433934B" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Resources\PSIconAnimated.bmp" />
