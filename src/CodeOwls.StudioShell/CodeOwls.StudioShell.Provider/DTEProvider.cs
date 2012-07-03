@@ -53,9 +53,11 @@ namespace CodeOwls.StudioShell.Provider
             get { return Locator.Get<DTE2>(); }
         }
 
-        protected override PowerShell.Provider.PathNodeProcessors.IContext CreateContext(string path, bool recurse)
+        protected override PowerShell.Provider.PathNodeProcessors.IContext CreateContext(string path, bool recurse, bool resolveFinalNodeFilterItems)
         {
-            return new Context( this, path, PSDriveInfo, PathNodeProcessor, DynamicParameters, DTEDrive.PathTopologyVersion, recurse );
+            var context = new Context( this, path, PSDriveInfo, PathNodeProcessor, DynamicParameters, DTEDrive.PathTopologyVersion, recurse );
+            context.ResolveFinalNodeFilterItems = resolveFinalNodeFilterItems;
+            return context;
         }
 
         protected override IPathNodeProcessor PathNodeProcessor
