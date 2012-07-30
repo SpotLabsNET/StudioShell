@@ -38,6 +38,34 @@
       <Name>WixUIExtension</Name>
     </WixExtension>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeOwls.PowerShell\CodeOwls.PowerShell.Host\CodeOwls.PowerShell.Host.csproj">
+      <Name>CodeOwls.PowerShell.Host</Name>
+      <Project>{b975efd5-7a18-4bd0-8711-38734c6f8eb1}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols</RefProjectOutputGroups>
+      <RefTargetDir>dir4A3E4B054700A7A34172F77811D2FDAD</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.PowerShell\CodeOwls.PowerShell.Paths\CodeOwls.PowerShell.Paths.csproj">
+      <Name>CodeOwls.PowerShell.Paths</Name>
+      <Project>{ed0453c7-c25a-4354-ac7a-046846d5e7ff}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols</RefProjectOutputGroups>
+      <RefTargetDir>dir4A3E4B054700A7A34172F77811D2FDAD</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.PowerShell\CodeOwls.PowerShell.Provider\CodeOwls.PowerShell.Provider.csproj">
+      <Name>CodeOwls.PowerShell.Provider</Name>
+      <Project>{b352375b-7c58-4943-95c0-14871e17a208}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols</RefProjectOutputGroups>
+      <RefTargetDir>dir4A3E4B054700A7A34172F77811D2FDAD</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
