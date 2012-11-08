@@ -27,7 +27,7 @@ begin
 	pushd $env:HOMEDRIVE;
 	try
 	{
-		$script:profileDir = ~/documents/codeowlsllc.studioshell;
+		$script:profileDir = '~/documents/codeowlsllc.studioshell';
 		$script:profileFile = $script:profileDir | join-path -child 'settings.txt';
 
 		if( -not (test-path $script:profileDir) )
