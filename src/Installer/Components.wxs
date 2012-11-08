@@ -621,10 +621,6 @@
 				<File Id="filFC1E727B8794BFA05EAA21BA188FC70E" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Resources\studioshell.ico" />
         <RemoveFolder Id="dirDE8B276324E016C2066E24B1D0B63315" On="uninstall" />
       </Component>
-      <Component Id="cmp85AB96DF6ADD84D8AD9937F68E0C5354" Directory="dirDE8B276324E016C2066E24B1D0B63315" Guid="{AE4902F8-1743-4A76-82E7-08B790537110}">
-        
-				<File Id="filCC21F0B9069B51D5A93B7F5DA20676EA" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Resources\Thumbs.db" />
-      </Component>
       <Component Id="cmpC971CC17E92AAC59BB694334C5C28690" Directory="dirFE02E37F2F7C6ECB4AEA4C880C17021B" Guid="{B8DF4748-EE4B-42B8-8F35-358FE5FEEC3C}">
         
 				<File Id="filBBECDF1EC966A671A78383030454DDB6" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Scripts\get-studioShellSettings.ps1" />
