@@ -34,10 +34,10 @@ $local:driveData.keys | foreach {
 	$local:path = $local:driveData[$_];
 	$local:driveName = ( $_ + ':' );
 	
-	write-verbose "mounting drive $_: at path $local:path";
+	write-verbose "mounting drive ${_}: at path $local:path";
 	new-psdrive -name $_ -psprovider PSDTE -root $path | out-null;
 	
-	write-verbose "defining shortcut function $_:";
+	write-verbose "defining shortcut function ${_}:";
 	new-item -path function: -name $local:driveName -value "set-location $($local:driveName)" | out-null;
 };
 

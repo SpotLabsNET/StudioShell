@@ -38,7 +38,7 @@ properties {
 	$wixProjectPath = ".\src\Installer";
 };
 
-$framework = '4.0'
+framework '4.0'
 $private = "this is a private task not meant for external use";
 
 set-alias nuget ( './lib/nuget.exe' | resolve-path | select -expand path );
@@ -254,7 +254,7 @@ task PackageNuGet -depends PackageModule,__CreateNuGetPackageDirectory,CleanNuGe
 
 # install tasks
 
-task Uninstall -description "uninstalls the module from the local user module repository" {
+task Uninstall -description "uninstalls the module from the local user module repository and the Visual Studio Addins" {
 	$modulePath = $Env:PSModulePath -split ';' | select -First 1 | Join-Path -ChildPath 'studioshell';
 	if( Test-Path $modulePath )
 	{
@@ -266,22 +266,26 @@ task Uninstall -description "uninstalls the module from the local user module re
 	pushd $env:HOMEDRIVE;
 	try
 	{
-		$addinFolder = "~/Documents/Visual Studio 2010/Addins";
-		$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
+        '2008','2010','2012' | ?{ test-path "~/documents/visual studio $_" } | %{
+		        $addinFolder = "~/Documents/Visual Studio $_/Addins";
+		        $addinFilePath = join-path $addinFolder -child "StudioShell.addin";
 
-		if( Test-Path $addinFilePath )
-		{
-			Remove-Item $addinFilePath -force;
-		}
+		        if( Test-Path $addinFilePath )
+		        {
+			        Remove-Item $addinFilePath -force;
+		        }
+        }
 	}
 	finally
 	{
 		popd;
 	}
-	if( test-path 'HKCU:\software\Microsoft\VisualStudio\10.0\PreloadAddinStateManaged' )
-	{				
-		Remove-ItemProperty -Path 'HKCU:\software\Microsoft\VisualStudio\10.0\PreloadAddinStateManaged' -Name *StudioShell*;
-	}
+    '10','11' | %{
+	    if( test-path "HKCU:\software\Microsoft\VisualStudio\$_.0\PreloadAddinStateManaged" )
+	    {				
+		    Remove-ItemProperty -Path "HKCU:\software\Microsoft\VisualStudio\$_.0\PreloadAddinStateManaged" -Name *StudioShell*;
+	    }
+    }
 }
 
 task Install -depends InstallModule,InstallAddin -description "installs the module and add-in to the local machine";
@@ -294,26 +298,31 @@ task InstallModule -depends PackageModule -description "installs the module to t
 	ls $packagePath | Copy-Item -recurse -Destination $modulePath -Force;	
 }
 
-task InstallAddin -depends InstallModule -description "installs the VS 2010 add-in to the local machine" {
+task InstallAddin -depends InstallModule -description "installs the Visua Studio add-in to the local machine" {
+
 	$addInInstallPath = $Env:PSModulePath -split ';' | select -First 1 | Join-Path -ChildPath "StudioShell\bin";
 	
-	$addinSpec = join-path $addInInstallPath -child "StudioShell.VS2010.AddIn";
 	$settingsSpec = join-path $addInInstallPath -child "UserProfile/settings.txt";
 	$profileSpec = join-path $addInInstallPath -child "UserProfile/profile.ps1";
 	$addinAssemblyPath = join-path $addInInstallPath -child "CodeOwls.StudioShell.dll";
 
 	pushd $env:HOMEDRIVE;
-	try
+    try
 	{
-		$addinFolder = "~/Documents/Visual Studio 2010/Addins";
-		$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
 		$studioShellProfileFolder = "~/Documents/CodeOwlsLLC.StudioShell";
 		$profilePath = "~/Documents/CodeOwlsLLC.StudioShell/profile.ps1";
 		$settingsPath = "~/Documents/CodeOwlsLLC.StudioShell/settings.txt";
 
-		mkdir $studioShellProfileFolder,$addinFolder -erroraction silentlycontinue;
-		( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
+		mkdir $studioShellProfileFolder -erroraction silentlycontinue;
 
+        '2008','2010','2012' | where { test-path "~/documents/Visual Studio $_" }  | % { 
+            $addinFolder = "~/Documents/Visual Studio $_/Addins";
+		    $addinFilePath = join-path $addinFolder -child "StudioShell.addin";
+		    $addinSpec = join-path $addInInstallPath -child "StudioShell.VS${_}.AddIn";
+        
+            mkdir $addinFolder -erroraction silentlycontinue;
+		    ( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
+        }
 		cp $settingsSpec $settingsPath;
 		cp $profileSpec $profilePath
 	}
@@ -322,9 +331,11 @@ task InstallAddin -depends InstallModule -description "installs the VS 2010 add-
 		popd;
 	}
 	
-	if( test-path 'HKCU:\software\Microsoft\VisualStudio\10.0\PreloadAddinStateManaged' )
-	{
-		# reset addin registry flags to force a reload of UI extensions
-		Remove-ItemProperty -Path 'HKCU:\software\Microsoft\VisualStudio\10.0\PreloadAddinStateManaged' -Name *StudioShell*;
-	}
+    '10','11' | %{
+	    if( test-path "HKCU:\software\Microsoft\VisualStudio\$_.0\PreloadAddinStateManaged" )
+	    {
+		    # reset addin registry flags to force a reload of UI extensions
+		    Remove-ItemProperty -Path "HKCU:\software\Microsoft\VisualStudio\$_.0\PreloadAddinStateManaged" -Name *StudioShell*;
+	    }
+    }
 }
