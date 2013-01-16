@@ -46,7 +46,10 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
             {
                 ++_index;
 
-                _index = Math.Min(_currentSuggestions.Count - 1, Math.Max(0, _index));
+                if (_index > _currentSuggestions.Count - 1)
+                {
+                    _index = 0;
+                }
             }
 
             return _currentSuggestions[_index];
@@ -64,7 +67,11 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
             if (!isReset)
             {
                 --_index;
-                _index = Math.Min(_currentSuggestions.Count - 1, Math.Max(0, _index));
+                if (_index < 0)
+                {
+                    _index = _currentSuggestions.Count - 1;
+                }
+
             }
 
             return _currentSuggestions[_index];

@@ -17,7 +17,7 @@
 <Extensibility xmlns="http://schemas.microsoft.com/AutomationExtensibility">
   <HostApplication>
     <Name>Microsoft Visual Studio</Name>
-    <Version>1.0</Version>
+    <Version>11.0</Version>
   </HostApplication>
   <Addin>
     <FriendlyName>StudioShell</FriendlyName>
