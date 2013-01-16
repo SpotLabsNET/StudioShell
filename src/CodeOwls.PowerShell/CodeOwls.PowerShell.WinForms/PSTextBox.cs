@@ -531,6 +531,7 @@ namespace CodeOwls.PowerShell.WinForms
             {
                 KeyEventHandler handler = (s, a) =>
                                               {
+                                                  a.Handled = true;
                                                   info.VirtualKeyCode = a.KeyValue;
                                                   info.Character =
                                                       (char)a.KeyValue;
