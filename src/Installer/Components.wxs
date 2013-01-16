@@ -42,7 +42,6 @@
           <ProgId Id="CodeOwls.PowerShell.Host.Configuration.UISettings" Description="CodeOwls.PowerShell.Host.Configuration.UISettings" />
         </Class>
         
-				<File Id="fil9FE5D3A9A3DB50DC575A6B8198ED77B7" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Host.dll" />
         <ProgId Id="Record" />
         <RegistryValue Root="HKCR" Key="CLSID\{12F6CCC3-0D06-37BC-B9F5-168012C3D700}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{12F6CCC3-0D06-37BC-B9F5-168012C3D700}\InprocServer32\1.2.0.0" Name="Class" Value="CodeOwls.PowerShell.Host.CommandCompleteEventArgs" Type="string" Action="write" />
@@ -110,10 +109,6 @@
         <RegistryValue Root="HKCR" Key="Record\{72C81A83-894E-39EF-BA29-9568A4339C1D}\1.2.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Record\{72C81A83-894E-39EF-BA29-9568A4339C1D}\1.2.0.0" Name="CodeBase" Value="file:///[#fil9FE5D3A9A3DB50DC575A6B8198ED77B7]" Type="string" Action="write" />
       </Component>
-      <Component Id="cmp349173A8D3E0EA80F0CE5D4201D9F320" Directory="dir4A3E4B054700A7A34172F77811D2FDAD" Guid="{0DE8CCF6-064E-4326-A492-3FBCB4EFBD5F}">
-        				
-				<File Id="fil16B199508AC6EA6285033D50507E3CD8" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Host.pdb" />
-      </Component>
       <Component Id="cmpDB7AD50A1419D447FBA1C1B37B8D4D3E" Directory="dir4A3E4B054700A7A34172F77811D2FDAD" Guid="{09EBF41F-55F4-421D-B203-5359C4B559AE}">
         <Class Id="{5FB2E143-A713-39F4-8EA9-B4C250BA9029}" Context="InprocServer32" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToExistingItemException" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToExistingItemException" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToExistingItemException" />
@@ -134,7 +129,6 @@
           <ProgId Id="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToDifferentContainerTypeException" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToDifferentContainerTypeException" />
         </Class>
         
-				<File Id="fil020C33F4F28A5C123C54D2CB8F87432F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Paths.dll" />
         <RegistryValue Root="HKCR" Key="CLSID\{5FB2E143-A713-39F4-8EA9-B4C250BA9029}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{5FB2E143-A713-39F4-8EA9-B4C250BA9029}\InprocServer32\1.2.0.0" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToExistingItemException" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{5FB2E143-A713-39F4-8EA9-B4C250BA9029}\InprocServer32\1.2.0.0" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
@@ -190,10 +184,7 @@
         <RegistryValue Root="HKCR" Key="CLSID\{FBE3E658-0868-33CD-A51C-3201AF278413}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{FBE3E658-0868-33CD-A51C-3201AF278413}\InprocServer32" Name="CodeBase" Value="file:///[#fil020C33F4F28A5C123C54D2CB8F87432F]" Type="string" Action="write" />
       </Component>
-      <Component Id="cmp5A0B0D7C950FB5E6380DF20B268CD6C9" Directory="dir4A3E4B054700A7A34172F77811D2FDAD" Guid="{A9C2A8BE-C629-47E8-9D16-00493357D554}">
-        
-				<File Id="fil50212F35FC579E307B0BF28EC640D3F2" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Paths.pdb" />
-      </Component>
+      
       <Component Id="cmp4DA5ADB998C867FAF721D21B454AF5ED" Directory="dir4A3E4B054700A7A34172F77811D2FDAD" Guid="{0F0A0011-1575-4C4D-ABB1-63F5CE711E4F}">
         <Class Id="{2A9A92AF-1759-3008-A7CE-C632C487290D}" Context="InprocServer32" Description="CodeOwls.PowerShell.Provider.Attributes.ManageSessionAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="CodeOwls.PowerShell.Provider.Attributes.ManageSessionAttribute" Description="CodeOwls.PowerShell.Provider.Attributes.ManageSessionAttribute" />
@@ -202,7 +193,6 @@
           <ProgId Id="CodeOwls.PowerShell.Provider.Attributes.LogProviderToSession" Description="CodeOwls.PowerShell.Provider.Attributes.LogProviderToSession" />
         </Class>
         
-				<File Id="fil50909E7DCEB2A845227DDC7357813AA7" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Provider.dll" />
         <RegistryValue Root="HKCR" Key="CLSID\{2A9A92AF-1759-3008-A7CE-C632C487290D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{2A9A92AF-1759-3008-A7CE-C632C487290D}\InprocServer32\1.2.0.0" Name="Class" Value="CodeOwls.PowerShell.Provider.Attributes.ManageSessionAttribute" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{2A9A92AF-1759-3008-A7CE-C632C487290D}\InprocServer32\1.2.0.0" Name="Assembly" Value="CodeOwls.PowerShell.Provider, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
@@ -222,10 +212,7 @@
         <RegistryValue Root="HKCR" Key="CLSID\{E624A877-09F7-3191-BC01-62F7C4150AFA}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{E624A877-09F7-3191-BC01-62F7C4150AFA}\InprocServer32" Name="CodeBase" Value="file:///[#fil50909E7DCEB2A845227DDC7357813AA7]" Type="string" Action="write" />
       </Component>
-      <Component Id="cmpEF623F0A853D0D49DCDD44AB0BE23451" Directory="dir4A3E4B054700A7A34172F77811D2FDAD" Guid="{432EB89F-CD0E-4E25-814E-E9932D3D7DFE}">
-        
-				<File Id="filBF8B395543206A27E3F8BCBEEDD01FAB" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Provider.pdb" />
-      </Component>
+
       <Component Id="cmpA83C0EBE9637AD7F23CF529DA8B693ED" Directory="dir4A3E4B054700A7A34172F77811D2FDAD" Guid="{2054FAFE-4812-4795-B3DA-610D77C0B805}">
         <Class Id="{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}" Context="InprocServer32" Description="CodeOwls.PowerShell.WinForms.PSTextBox" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="CodeOwls.PowerShell.WinForms.PSTextBox" Description="CodeOwls.PowerShell.WinForms.PSTextBox" />

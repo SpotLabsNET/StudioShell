@@ -285,7 +285,11 @@ namespace CodeOwls.PowerShell.WinForms
                 {
                     return;
                 }
-
+                var m = Regex.Match(_tabExpansionInput, @"(\s+)\S+");
+                if (m.Success)
+                {
+                    cmd = Regex.Replace(_tabExpansionInput, @"(\s+)\S+", "$1" + cmd);
+                }
                 Select(_promptPosition, EndOfLinePosition);
                 InsertText(cmd);
             }
