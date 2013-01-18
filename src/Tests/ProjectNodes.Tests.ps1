@@ -1,121 +1,64 @@
 . ./helpers.ps1
 
-Describe "Solution/Projects" {
+Describe "Solution/Projects/<project>" {
 
     new-solution;
+    $project = ( new-project ).pspath;
 
-    It "new-item create new projects" {
+    It "new-item class file" {
         $name = get-randomname
-        new-item -path dte:/solution/projects/$name -type ClassLibrary | out-null
-        test-path dte:/solution/projects/$name
+        new-item -path $project/$name.cs -type class -language csharp | out-null
+        assert{test-path $project/$name.cs}
+    }   
+    
+    It "new-item code file" {
+        $name = get-randomname
+        new-item -path $project/$name.cs -type codefile -language csharp | out-null
+        assert{test-path $project/$name.cs}
+    }
+       
+    It "new-item folder" {
+        $name = get-randomname
+        new-item -path $project/$name -type folder | out-null
+        assert{test-path $project/$name}
     }
     
-    It "new-item create new folders" {
+    It "remove-item folder -force" {
         $name = get-randomname
-        new-item dte:/solution/projects/$name -type folder | out-null
-        test-path dte:/solution/projects/$name
-    }
-
-    It "remove-item existing projects" {
-        $name = get-randomname
-        new-item dte:/solution/projects -type classlibrary -language csharp -name $name | out-null
+        new-item -path $project/$name -type folder | out-null
+        assert{ test-path $project/$name} | out-null
         
-        assert { test-path dte:/solution/projects/$name }
+        remove-item -path $project/$name -recurse -force;
         
-        remove-item dte:/solution/projects/$name -recurse -force;
+        assert{ -not( test-path $project/$name ) } 
+    }   
+    
+    It "remove-item folder" {
+        $name = get-randomname
+        new-item -path $project/$name -type folder | out-null
+        assert{ test-path $project/$name} | out-null
         
-        -not( test-path dte:/solution/projects/$name )
-    }
-
-    It "remove-item existing folders" {
+        remove-item -path $project/$name -recurse;
+        
+        assert{ -not( test-path $project/$name ) } 
+    }   
+    
+    It "remove-item code file" {
         $name = get-randomname
-        new-item dte:/solution/projects/$name -type folder | out-null
-        assert { test-path dte:/solution/projects/$name }
-        remove-item dte:/solution/projects/$name -recurse -force;
-        -not( test-path dte:/solution/projects/$name )
+        assert{ new-item -path $project/$name.cs -type codefile -language csharp } | out-null
+        
+        remove-item $project/$name.cs -recurse;
+        assert-false {test-path $project/$name.cs}
     }
-
-    It "get-childitem list project items" {
+    
+    It "rename-item project" {
         $name = get-randomname
-        new-item -path dte:/solution/projects/$name -type ClassLibrary | out-null
-        $items = dir dte:/solution/projects/$name;
-        $items.length -ne 0;        
-    }       
+        
+        rename-item $project -newname $name;
+        assert { -not( test-path $project ) -and ( test-path dte:/solution/projects/$name ) }
+        
+    }
+    
+
 }
-<#
-Describe "Solution/Projects/<folder>" {
-    
-    new-solution;
-    function new-folder {
-        $fn = get-randomname;
-        new-item -path "dte:/solution/projects/$fn" -type folder | out-null;
-        "dte:/solution/projects/$fn"
-    }
-    
-    It "new-item create new subprojects" {
-        $name = (get-randomname);
-        $folder = new-folder;
-        write-debug $folder;    
-        arrange {
-            new-item -path $folder/$name -type classlibrary
-        }
-        
-        assert {
-            test-path "$folder/$name"
-        }
 
-    }
-
-    It "new-item create new folders" {
-        $name = (get-randomname);
-        $folder = new-folder;
-        arrange {
-            new-item -path $folder -name $name -type folder
-        }
-        
-        assert {
-            test-path "$folder/$name"
-        }
-    }
-    
-    It "new-item create new class" {
-        $name = (get-randomname);
-        $folder = new-folder;
-        arrange {
-            new-item -path $folder -name $name -type 'class'
-        }
-        
-        assert {
-            test-path "$folder/$name"
-        }
-    }
-
-    It "remove-item project items" {
-        $name = (get-randomname);
-        $folder = new-folder;
-        arrange {
-            new-item -path $folder -name $name -type 'class'
-            assert { test-path "$folder/$name" }
-            remove-item -path $folder/$name -recurse -force;
-        }
-        
-        assert {
-            -not( test-path "$folder/$name" )
-        }
-    }
-    
-    It "should support remove-item for deleting existing folders" {
-        $name = (get-randomname);
-        $folder = new-folder;
-        arrange {
-            new-item -path $folder -name $name -type folder
-            assert { test-path "$folder/$name" }
-            remove-item -path $folder/$name -recurse -force;
-        }
-        
-        assert {
-            -not( test-path "$folder/$name" )
-        }
-    }
-}
-#>
