@@ -15,11 +15,13 @@
 */
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Text;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.PowerShell.Provider.PathNodes;
+using CodeOwls.StudioShell.Common.IoC;
 using EnvDTE;
 using EnvDTE80;
 
@@ -63,16 +65,21 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
 
         public static IPathNode NewItem(Project project, ProjectItems items, IContext context, string path, string itemTypeName, object newItemValue)
         {
-            if (context == null)
+            if (null == context)
             {
                 throw new ArgumentNullException("context");
+            }
+            if (null == project)
+            {
+                throw new ArgumentNullException("project");
             }
 
             var p = context.DynamicParameters as NewItemDynamicParameters;
 
-            Solution2 sln = project.DTE.Solution as Solution2;
+            DTE2 dte = project.DTE as DTE2;
+            Solution2 sln = dte.Solution as Solution2;
             ProjectItem item = null;
-            Events2 events2 = project.DTE.Events as Events2;
+            Events2 events2 = dte.Events as Events2;
             var callback = (_dispProjectItemsEvents_ItemAddedEventHandler)((a) => item = a);
             events2.ProjectItemsEvents.ItemAdded += callback;
             try
@@ -99,20 +106,53 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
                         }
                         if (String.IsNullOrEmpty(p.Language))
                         {
+                            const string csharp = "csharp";
+                            const string vb = "visualbasic";
+                            const string vcpp = "visualc++";
+                            const string jsharp = "jsharp";
                             var map = new Dictionary<string, string>
                                           {
-                                              {CodeModelLanguageConstants.vsCMLanguageCSharp, "csharp"},
-                                              {CodeModelLanguageConstants.vsCMLanguageVB, "visualbasic"},
-                                              {CodeModelLanguageConstants.vsCMLanguageVC, "visualc++"},
-                                              {CodeModelLanguageConstants.vsCMLanguageMC, "visualc++"},
-                                              {CodeModelLanguageConstants2.vsCMLanguageJSharp, "jsharp"},
+                                              {"cs", csharp},
+                                              {"vb", vb},
+                                              {"c#", csharp},
+                                              {"c++", vcpp},
+                                              {"c+", vcpp},
+                                              {"cpp", vcpp},
+                                              {csharp, csharp},
+                                              {vcpp, vcpp},
+                                              {vb,vb},
+                                              {jsharp,jsharp},
+                                              {CodeModelLanguageConstants.vsCMLanguageCSharp, csharp},
+                                              {CodeModelLanguageConstants.vsCMLanguageVB, vb},
+                                              {CodeModelLanguageConstants.vsCMLanguageVC, vcpp},
+                                              {CodeModelLanguageConstants.vsCMLanguageMC, vcpp},
+                                              {CodeModelLanguageConstants2.vsCMLanguageJSharp, jsharp},
                                           };
-                            var language = project.CodeModel.Language;
+
+                            string language = String.Empty;
+                            if (null != project.CodeModel && null != project.CodeModel.Language)
+                            {
+                                language = project.CodeModel.Language;
+                            }
                             p.Language = map.ContainsKey(language) ? map[language] : "csharp";
                         }
 
-                        var t = sln.GetProjectItemTemplate(itemTypeName, p.Language);
-                        items.AddFromTemplate(t, path);
+                        if (project.Object is SolutionFolder)
+                        {
+                            SolutionFolder folder = project.Object as SolutionFolder;
+                            var destinationPath = Path.Combine(
+                                Path.GetDirectoryName(sln.FullName),
+                                path
+                                );
+
+                            var n = sln.GetProjectTemplate(itemTypeName, p.Language);
+                            folder.AddFromTemplate(n, destinationPath, path);                            
+                        }
+                        else
+                        {
+                            var t = sln.GetProjectItemTemplate(itemTypeName, p.Language);
+                            items.AddFromTemplate(t, path);
+                        }
                     }
                 }
                 else if (!String.IsNullOrEmpty(p.ItemFilePath))
