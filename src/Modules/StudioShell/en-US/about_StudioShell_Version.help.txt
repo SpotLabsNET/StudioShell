@@ -2,13 +2,32 @@
     about_StudioShell_Version
 
 VERSION
-    You are running version 1.3 of StudioShell.
+    You are running version 1.5 of StudioShell.
 
 CHANGE LOG
   Description
     The changelog documents the changes placed in each release of 
 	StudioShell.  Each item is identified by its codeplex work item 
 	number(s) if available.
+
+1.5
+  Resolved Issues
+	Fixed rename-item implementation to work against multiple matched path nodes.
+
+	Fixed CanGet property logic in ShellCodeProperty2.
+
+	Removed dependency on PostSharp; this allows StudioShell and PostSharp to be
+	successfully used in the same instance of Visual Studio.
+
+	Fixed initialization script errors related to stricter variable interpolation
+	rules introduces in PowerShell v3.
+		
+  Added Features
+	Add-in and build install support for VS 2012.
+
+	Support for PowerShell v3.
+
+	Added Pester unit tests to source hive.
 
 1.3
   Resolved Issues

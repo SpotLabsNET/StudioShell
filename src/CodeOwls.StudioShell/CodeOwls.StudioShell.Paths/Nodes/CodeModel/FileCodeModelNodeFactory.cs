@@ -227,6 +227,9 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CodeModel
                 return null;
             }
 
+            // apparantly required to prevent an exception in VS
+            newItemParams.Position = Math.Max(newItemParams.Position, 0);
+
             return fileCodeModel2.AddImport(path, newItemParams.Position, String.Empty);
         }
 

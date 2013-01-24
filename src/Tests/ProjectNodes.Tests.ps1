@@ -5,16 +5,15 @@ Describe "Solution/Projects/<project>" {
     new-solution;
     $project = ( new-project ).pspath;
 
-    It "new-item class file" {
-        $name = get-randomname
-        new-item -path $project/$name.cs -type class -language csharp | out-null
-        assert{test-path $project/$name.cs}
-    }   
-    
-    It "new-item code file" {
-        $name = get-randomname
-        new-item -path $project/$name.cs -type codefile -language csharp | out-null
-        assert{test-path $project/$name.cs}
+    "Class","ClassDiagram","CodeFile","TextFile","XMLFile","XMLSchema","XSLTFile" | %{
+        It "new-item $($_)" {
+            $name = get-randomname;
+            verify { new-item -path $project/$_ -type $_ -language csharp }
+            
+            assert{ test-path $project/$_ } 
+        }
+
+        sleep -secon 2
     }
        
     It "new-item folder" {
