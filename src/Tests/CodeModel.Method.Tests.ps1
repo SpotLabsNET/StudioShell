@@ -17,7 +17,7 @@ Describe "Solution/CodeModel/../<method>" {
 
     It "new-item positional parameter" {
         verify { new-item -path $root/B -type parameter -membertype 'string' }
-        verify { new-item -path $root/C -type parameter -position 0 -membertype int }
+        verify { new-item -path $root/C -type parameter -position 1 -membertype int }
         assert { test-path -path $root/C }
     }
     
