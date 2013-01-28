@@ -73,17 +73,16 @@ Describe "Solution/CodeModel/../<class>" {
         assert { test-path "$root/EveryonesClass" }
     }
 
-    It "new-item interface" {
-        verify { new-item -path $root -name "IInterface" -access private -type interface }
-        assert { test-path $root/IInterface }
-    }
-
     It "new-item delegate" {
         verify { new-item -path $root -name "MyDelegate" -memberType 'void' -type delegate }
 
         assert { test-path "$root/MyDelegate" }
     }
     
+    It "errors on new-item interface" {
+        assert-error { new-item -path $root -name "IInterface" -access private -type interface }
+    }
+
     It "errors on new-item using" {
         assert-error { new-item -path $root -name 'System.IO' -position 0 -type import }
     }
