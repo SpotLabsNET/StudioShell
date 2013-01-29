@@ -45,7 +45,7 @@ try
 					public static void Disconnect(object dte)
 					{
 						EnvDTE.DTE _dte = dte as EnvDTE.DTE;
-				            
+
 						foreach( EnvDTE.AddIn addIn in _dte.AddIns )
 						{
 							if( addIn.Name.Contains( "StudioShell" ) )
@@ -64,68 +64,75 @@ try
 	{
 	}
 	
-		$modulePath = $toolsPath;
-		#$modulePath = $env:PSModulePath | where {$_ -match (Resolve-Path ~)} | select -First 1;
-		#if( -not $modulePath )
-		#{
-		#	$modulePath = "~/documents/windowspowershell/modules";
-		#	if( -not( Test-Path $modulePath ) )
-		#	{
-		#		mkdir $modulePath;
-		#	}
-		#	
-		#	$modulePath = Resolve-Path $modulePath;
-		#	$env:PSModulePath = '"{0}";{1}' -f $modulePath,$env:PSModulePath;
-		#}
-		
-		$addinSpec = join-path $toolspath -child "StudioShell/bin/StudioShell.VS2010.AddIn";
-		$settingsSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/settings.txt";
-		$profileSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/profile.ps1";
-		$addinAssemblyPath = join-path $modulePath -child "StudioShell/bin/CodeOwls.StudioShell.dll";
-
-		$addinFolder = "~/Documents/Visual Studio 2010/Addins";
-		$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
-		$studioShellProfileFolder = "~/Documents/CodeOwlsLLC.StudioShell";
-		$profilePath = "~/Documents/CodeOwlsLLC.StudioShell/profile.ps1";
-		$settingsPath = "~/Documents/CodeOwlsLLC.StudioShell/settings.txt";
-
-		Write-Debug "Tools Path: $toolspath"
-		Write-Debug "Module Path: $modulePath"
-		Write-Debug "AddIn Folder: $addinFolder"
-		Write-Debug "AddIn File Path: $addinFilePath"
-		Write-Debug "StudioShell Profile Folder: $studioShellProfileFolder"
-		Write-Debug "StudioShell Profile Path: $profilePath"
-		Write-Debug "Settings Path: $settingsPath"
-
-		if( Get-Module StudioShell )
+    write-debug "Home Path: $home";
+	$modulePath = $env:PSModulePath -split ';' -match [regex]::escape( $home ) | select -First 1;
+	if( -not $modulePath )
+	{
+		$modulePath = "~/documents/windowspowershell/modules" | resolve-path;
+		if( -not( Test-Path $modulePath ) )
 		{
-			Write-Debug "Disconnecting StudioShell Add-In";
-			[AddInConnector]::Disconnect( $dte );
-			
-			Write-Debug "Removing existing StudioShell module";
-			#Get-Module "StudioShell" | select -expand ModuleBase | Remove-Item -Recurse -Force;
-			Remove-Module studioshell;
+			mkdir $modulePath;
 		}
 		
-		Write-Debug "Installing StudioShell module version $($package.Version)..."
+		$modulePath = Resolve-Path $modulePath;
+		$env:PSModulePath = '"{0}";{1}' -f $modulePath,$env:PSModulePath;
+	}
+		
+    $vsversion = $env:visualStudioDir -split '\s+' | select -last 1;
+    if( '2010','2012' -notcontains $vsversion )
+    {
+        write-error "The current version of Visual Studio ($vsversion) is not supported";
+        throw "The current version of Visual Studio ($vsversion) is not supported";
+    }
 
-		mkdir $modulePath,$studioShellProfileFolder,$addinFolder -erroraction silentlycontinue;
-		
-		( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
-		
-		#cp "$toolsPath/StudioShell" -Destination $modulePath -container -Recurse -force
-		
-		if( -not( Test-Path $settingsPath ) )
-		{
-			cp $settingsSpec $settingsPath;
-		}
-		if( -not( Test-Path $profilePath ) )
-		{
-			cp $profileSpec $profilePath
-		}
+	$addinSpec = join-path $toolspath -child "StudioShell/bin/StudioShell.VS${vsversion}.AddIn";
+	$settingsSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/settings.txt";
+	$profileSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/profile.ps1";
+	$addinAssemblyPath = join-path $modulePath -child "StudioShell/bin/CodeOwls.StudioShell.dll";
 
-		Write-Debug 'Connecting StudioShell Add-In'
-		[AddInConnector]::Connect( $dte );	
+	$addinFolder = join-path $env:VisualStudioDir -child "Addins";
+	$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
+	$studioShellProfileFolder = "~/Documents/CodeOwlsLLC.StudioShell";
+	$profilePath = "~/Documents/CodeOwlsLLC.StudioShell/profile.ps1";
+	$settingsPath = "~/Documents/CodeOwlsLLC.StudioShell/settings.txt";
+
+	Write-Debug "Tools Path: $toolspath"
+	Write-Debug "Module Path: $modulePath"
+	Write-Debug "AddIn Folder: $addinFolder"
+	Write-Debug "AddIn File Path: $addinFilePath"
+	Write-Debug "StudioShell Profile Folder: $studioShellProfileFolder"
+	Write-Debug "StudioShell Profile Path: $profilePath"
+	Write-Debug "Settings Path: $settingsPath"
+
+	if( Get-Module StudioShell )
+	{
+		Write-Debug "Disconnecting StudioShell Add-In";
+		[AddInConnector]::Disconnect( $dte );
+		
+		Write-Debug "Removing existing StudioShell module";
+		Get-Module "StudioShell" | select -expand ModuleBase | Remove-Item -Recurse -Force;
+		Remove-Module studioshell;
+	}
+		
+	Write-Debug "Installing StudioShell module version $($package.Version)..."
+
+	mkdir $modulePath,$studioShellProfileFolder,$addinFolder -erroraction silentlycontinue;
+	
+	( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
+		
+	cp "$toolsPath/StudioShell" -Destination $modulePath -container -Recurse -force
+		
+	if( -not( Test-Path $settingsPath ) )
+	{
+		cp $settingsSpec $settingsPath;
+	}
+	if( -not( Test-Path $profilePath ) )
+	{
+		cp $profileSpec $profilePath
+	}
+
+	Write-Debug 'Connecting StudioShell Add-In'
+	[AddInConnector]::Connect( $dte );	
 }
 finally
 {
@@ -133,5 +140,5 @@ finally
 }
 
 Write-Debug 'Importing StudioShell module'
-import-module "$modulePath/StudioShell";
+import-module "StudioShell";
 
