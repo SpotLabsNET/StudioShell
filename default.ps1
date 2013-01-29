@@ -149,7 +149,7 @@ task Clean -depends __VerifyConfiguration,CleanNuGet,CleanModule -description "d
 
 task Rebuild -depends Clean,Build -description "runs a clean build";
 
-task Package -depends __PackageModule,__PackageNuGet,__PackageMSI -description "assembles distributions in the source hive"
+task Package -depends PackageModule,PackageNuGet,PackageMSI -description "assembles distributions in the source hive"
 
 # clean tasks
 
