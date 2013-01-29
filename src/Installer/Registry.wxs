@@ -4,7 +4,7 @@
     <ComponentGroup Id="ConsoleRegistryComponentGroup">
       <Component Id="cmpA7C0114BDF5E4E80AB3AAE2A261A1F41" Directory="StudioShellApplicationFolder" Guid="{8168376D-8376-4AA2-AF59-EC482F1053B5}">        
         <RegistryValue Id="regConsoleIntegration" KeyPath="yes" Action="write" Root="HKCU" Key="SOFTWARE\Code Owls LLC\StudioShell\InstallState" Name="ConsoleIntegration" Value="1" Type="integer"/>
-        <Environment Id="envA7C0114BDF5E4E80AB3AAE2A261A1F41" Action="set" Part="last" Permanent="no" System="yes" Name="PSModulePath" Value="[ProgramFilesFolder]\Code Owls LLC" />
+        <Environment Id="envA7C0114BDF5E4E80AB3AAE2A261A1F41" Action="set" Part="last" Permanent="no" System="yes" Name="PSModulePath" Value="[ProgramFilesFolder]\[CompanyFolderName]" />
       </Component>
     </ComponentGroup>
     
@@ -13,7 +13,7 @@
         <RegistryValue Id="VS2012RegistryValue0"
                        KeyPath="yes"
                        Action="write"
-                       Root="HKLM"
+                       Root="HKCU"
                        Key="SOFTWARE\Microsoft\VisualStudio\11.0\AutomationOptions\LookInFolders"
                        Value=""
                        Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
@@ -25,7 +25,7 @@
         <RegistryValue Id="VS2010RegistryValue0"
                        KeyPath="yes"
                        Action="write"
-                       Root="HKLM"
+                       Root="HKCU"
                        Key="SOFTWARE\Microsoft\VisualStudio\10.0\AutomationOptions\LookInFolders"
                        Value=""
                        Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
@@ -37,7 +37,7 @@
         <RegistryValue Id="VS2008RegistryValue0"
                        KeyPath="yes"
                        Action="write"
-                       Root="HKLM"
+                       Root="HKCU"
                        Key="SOFTWARE\Microsoft\VisualStudio\9.0\AutomationOptions\LookInFolders"
                        Value=""
                        Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
