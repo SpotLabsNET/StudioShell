@@ -44,6 +44,7 @@ $private = "this is a private task not meant for external use";
 set-alias nuget ( './lib/nuget.exe' | resolve-path | select -expand path );
 set-alias light ( './lib/wix/light.exe' | resolve-path | select -expand path );
 set-alias candle ( './lib/wix/candle.exe' | resolve-path | select -expand path );
+set-alias heat ( './lib/wix/heat.exe' | resolve-path | select -expand path );
 
 function get-packageDirectory
 {
@@ -148,7 +149,7 @@ task Clean -depends __VerifyConfiguration,CleanNuGet,CleanModule -description "d
 
 task Rebuild -depends Clean,Build -description "runs a clean build";
 
-task Package -depends __PackageModule,__PackageNuGet,__PackageMSI -description "assembles distributions in the source hive"
+task Package -depends PackageModule,PackageNuGet,PackageMSI -description "assembles distributions in the source hive"
 
 # clean tasks
 
@@ -298,7 +299,7 @@ task InstallModule -depends PackageModule -description "installs the module to t
 	ls $packagePath | Copy-Item -recurse -Destination $modulePath -Force;	
 }
 
-task InstallAddin -depends InstallModule -description "installs the Visua Studio add-in to the local machine" {
+task InstallAddin -depends InstallModule -description "installs the Visual Studio add-in to the local machine" {
 
 	$addInInstallPath = $Env:PSModulePath -split ';' | select -First 1 | Join-Path -ChildPath "StudioShell\bin";
 	
@@ -338,4 +339,12 @@ task InstallAddin -depends InstallModule -description "installs the Visua Studio
 		    Remove-ItemProperty -Path "HKCU:\software\Microsoft\VisualStudio\$_.0\PreloadAddinStateManaged" -Name *StudioShell*;
 	    }
     }
+}
+
+task Harvest -depends PackageModule -description "Harvests the packaged module into WIX components and files" {
+    $packagePath = get-modulePackageDirectory | Join-Path -ChildPath StudioShell;
+    $output = $local | resolve-path | select -exp path;
+    $harvestXslt = join-path $wixProjectPath -child 'harvest.xslt' | resolve-path | select -exp path;
+    $harvestXslt;
+    heat dir $packagePath -srd -var var.StudioShellModuleRootPath -gg -g1 -sfrag -cg StudioShellApplicationComponentGroup -t "$harvestXslt" -out "$output\harvest.wxs"
 }
