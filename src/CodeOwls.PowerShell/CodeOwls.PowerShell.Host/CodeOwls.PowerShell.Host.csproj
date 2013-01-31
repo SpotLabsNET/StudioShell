@@ -56,7 +56,8 @@
     <Compile Include="AutoComplete\IAutoCompleteProvider.cs" />
     <Compile Include="AutoComplete\IAutoCompleteWalker.cs" />
     <Compile Include="AutoComplete\NullAutoCompleteWalker.cs" />
-    <Compile Include="AutoComplete\PowerShellTabExansionAutoCompleteProvider.cs" />
+    <Compile Include="AutoComplete\PowerShellTabExpansionAutoCompleteProvider.cs" />
+    <Compile Include="AutoComplete\PowerShellTabExpansion2AutoCompleteProvider.cs" />
     <Compile Include="AutoComplete\ProviderPathAutoCompleteProvider.cs" />
     <Compile Include="CommandCompleteEventArgs.cs" />
     <Compile Include="Configuration\ShellConfiguration.cs" />
