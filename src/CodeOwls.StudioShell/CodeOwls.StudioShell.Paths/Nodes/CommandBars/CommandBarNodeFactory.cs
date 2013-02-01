@@ -141,12 +141,11 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
         #region Implementation of INewItem
 
         private const string ButtonTypeName = "button";
-        private const string ComboBoxTypeName = "combobox";
         private const string PopupTypeName = "popup";
 
         public IEnumerable<string> NewItemTypeNames
         {
-            get { return new[] {ButtonTypeName, ComboBoxTypeName, PopupTypeName}; }
+            get { return new[] {ButtonTypeName, PopupTypeName}; }
         }
 
         public object NewItemParameters
@@ -156,89 +155,66 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
 
         public IPathNode NewItem(IContext context, string path, string itemTypeName, object newItemValue)
         {
-            var validValueTypes = new[] {typeof (ScriptBlock), typeof (string), typeof (string[])};
-            if (!validValueTypes.Contains(newItemValue.GetType()))
-            {
-                var validNames = String.Join(", ", validValueTypes.ToList().ConvertAll(t => t.FullName).ToArray());
-                throw new ArgumentException("new item values must be one of the following types: " + validNames);
-            }
+            itemTypeName = itemTypeName ?? ButtonTypeName;
 
             var p = context.DynamicParameters as NewItemDynamicParameters;
-            MsoControlType type = MsoControlType.msoControlButton;
-            object id = p.Id != 0 ? p.Id : Type.Missing;
-            object param = p.Parameter ?? Type.Missing;
-            object index = p.Index != 0 ? p.Index : Type.Missing;
             string caption = p.Caption ?? path;
 
-            CommandBarControl ctl = null;
-            switch (itemTypeName)
+            CommandBarControl ctrl = null;
+            switch (itemTypeName.ToLowerInvariant())
             {
-                case (ComboBoxTypeName):
+                case( PopupTypeName ):
                     {
-                        type = MsoControlType.msoControlComboBox;
-                        break;
-                    }
-                case (PopupTypeName):
+                        object id = p.Id != 0 ? p.Id : Type.Missing;
+                        object param = p.Parameter ?? Type.Missing;
+                        object index = p.Index != 0 ? p.Index : Type.Missing;
 
-                    {
-                        type = MsoControlType.msoControlPopup;
+                        ctrl = NewPopup(context, caption, id, param, index);
                         break;
                     }
-                case (ButtonTypeName):
+                case( ButtonTypeName):
                 default:
                     {
-                        return NewButton(context, path, itemTypeName, newItemValue);
-                    }
-            }
-
-            ctl = _popup.Controls.Add(type, id, param, index, Type.Missing);
-
-            switch (itemTypeName)
-            {
-                case (ComboBoxTypeName):
-                    {
-                        var items = newItemValue as string[];
-                        if (null == items)
-                        {
-                            break;
-                        }
-
-                        CommandBarComboBox cb = (CommandBarComboBox) ctl;
-                        items.ToList().ForEach(item => cb.AddItem(item, Type.Missing));
-
+                        ctrl = NewButton(context, caption, p.Index, p.Binding, newItemValue);
                         break;
                     }
             }
-
-            return CommandBarControlNodeFactory.Create(ctl).GetNodeValue();
+            
+            return CommandBarControlNodeFactory.Create(ctrl).GetNodeValue();
         }
 
-        public IPathNode NewButton(IContext context, string path, string itemTypeName, object newItemValue)
+        private CommandBarControl NewPopup(IContext context, string caption, object id, object o, object index)
+        {
+            var ctrl = _popup.Controls.Add(MsoControlType.msoControlPopup, id, o, index, Type.Missing);
+            ctrl.Caption = caption;
+            return ctrl;
+        }
+
+        public CommandBarControl NewButton(IContext context, string caption, int index, string binding, object newItemValue)
         {
             var validValueTypes = new[] {typeof (ScriptBlock), typeof (string)};
-            if (!validValueTypes.Contains(newItemValue.GetType()))
+            if (null == newItemValue || !validValueTypes.Contains(newItemValue.GetType()))
             {
                 var validNames = String.Join(", ", validValueTypes.ToList().ConvertAll(t => t.FullName).ToArray());
                 throw new ArgumentException(
                     "new item values for command bar buttons must be one of the following types: " + validNames);
             }
 
-            var p = context.DynamicParameters as NewItemDynamicParameters;
-            MsoControlType type = MsoControlType.msoControlButton;
-            object id = p.Id != 0 ? p.Id : Type.Missing;
-            object param = p.Parameter ?? Type.Missing;
-            int index = Math.Max(p.Index, 1);
-            string caption = p.Caption ?? path;
-
+            index = Math.Max(index, 1);
             ShellCommand shellCommand = CommandUtilities.GetOrCreateCommand(context, _popup.Application as DTE2, caption,
                                                                             newItemValue);
+            if ( !String.IsNullOrEmpty(binding))
+            {
+                shellCommand.Bindings = new[] { (object)binding };
+            }
+            
             Command command = shellCommand.AsCommand();
             string n = command.Name;
             var cid = command.ID;
             var guid = command.Guid;
             
-            var ctl = command.AddControl(_popup.CommandBar, index) as CommandBarControl;            
-            return CommandBarControlNodeFactory.Create(ctl).GetNodeValue();
+            var ctl = command.AddControl(_popup.CommandBar, index) as CommandBarControl;
+            return ctl;
         }
 
         #endregion
@@ -259,6 +235,9 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
 
             [Parameter]
             public string Caption { get; set; }
+
+            [Parameter]
+            public string Binding { get; set; }
         }
 
         #endregion
@@ -318,12 +297,11 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
         #region Implementation of INewItem
 
         private const string ButtonTypeName = "button";
-        private const string ComboBoxTypeName = "combobox";
         private const string PopupTypeName = "popup";
 
         public IEnumerable<string> NewItemTypeNames
         {
-            get { return new[] {ButtonTypeName, ComboBoxTypeName, PopupTypeName}; }
+            get { return new[] {ButtonTypeName, PopupTypeName}; }
         }
 
         public object NewItemParameters
@@ -331,68 +309,41 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             get { return new NewItemDynamicParameters(); }
         }
 
+
         public IPathNode NewItem(IContext context, string path, string itemTypeName, object newItemValue)
         {
-            var validValueTypes = new[] {typeof (ScriptBlock), typeof (string), typeof (string[])};
-            if (!validValueTypes.Contains(newItemValue.GetType()))
-            {
-                var validNames = String.Join(", ", validValueTypes.ToList().ConvertAll(t => t.FullName).ToArray());
-                throw new ArgumentException("new item values must be one of the following types: " + validNames);
-            }
+            itemTypeName = itemTypeName ?? ButtonTypeName;
 
             var p = context.DynamicParameters as NewItemDynamicParameters;
-            MsoControlType type = MsoControlType.msoControlButton;
-            object id = p.Id != 0 ? p.Id : Type.Missing;
-            object param = p.Parameter ?? Type.Missing;
-            object index = p.Index != 0 ? p.Index : Type.Missing;
             string caption = p.Caption ?? path;
 
             CommandBarControl ctl = null;
-            switch (itemTypeName)
+            switch (itemTypeName.ToLowerInvariant())
             {
-                case (ComboBoxTypeName):
-                    {
-                        type = MsoControlType.msoControlComboBox;
-                        break;
-                    }
                 case (PopupTypeName):
                     {
-                        type = MsoControlType.msoControlPopup;
+                        object id = p.Id != 0 ? p.Id : Type.Missing;
+                        object param = p.Parameter ?? Type.Missing;
+                        object index = p.Index != 0 ? p.Index : Type.Missing;
+            
+                        ctl = NewPopup(context, caption, id, param, index);
                         break;
                     }
                 case (ButtonTypeName):
                 default:
                     {
-                        return NewButton(context, path, itemTypeName, newItemValue);
-                    }
-            }
-
-            ctl = _commandBar.Controls.Add(type, id, param, index, Type.Missing);
-
-            switch (itemTypeName)
-            {
-                case (ComboBoxTypeName):
-                    {
-                        var items = newItemValue as string[];
-                        if (null == items)
-                        {
-                            break;
-                        }
-
-                        CommandBarComboBox cb = (CommandBarComboBox) ctl;
-                        items.ToList().ForEach(item => cb.AddItem(item, Type.Missing));
-
+                        ctl = NewButton(context, caption, p.Index, p.Binding, newItemValue);
                         break;
                     }
             }
 
             return CommandBarControlNodeFactory.Create(ctl).GetNodeValue();
         }
-
+/*
         public IPathNode NewButton(IContext context, string path, string itemTypeName, object newItemValue)
         {
             var validValueTypes = new[] {typeof (ScriptBlock), typeof (string)};
-            if (!validValueTypes.Contains(newItemValue.GetType()))
+            if (null == newItemValue || !validValueTypes.Contains(newItemValue.GetType()))
             {
                 var validNames = String.Join(", ", validValueTypes.ToList().ConvertAll(t => t.FullName).ToArray());
                 throw new ArgumentException(
@@ -421,6 +372,43 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             Command command = shellCommand.AsCommand();
             var ctl = command.AddControl(_commandBar, index) as CommandBarControl;
             return CommandBarControlNodeFactory.Create(ctl).GetNodeValue();
+        }
+*/
+
+
+        private CommandBarControl NewPopup(IContext context, string caption, object id, object o, object index)
+        {
+            var ctrl = _commandBar.Controls.Add(MsoControlType.msoControlPopup, id, o, index, Type.Missing);
+            ctrl.Caption = caption;
+            return ctrl;
+        }
+
+        public CommandBarControl NewButton(IContext context, string caption, int index, string binding, object newItemValue)
+        {
+            var validValueTypes = new[] { typeof(ScriptBlock), typeof(string) };
+            if (null == newItemValue || !validValueTypes.Contains(newItemValue.GetType()))
+            {
+                var validNames = String.Join(", ", validValueTypes.ToList().ConvertAll(t => t.FullName).ToArray());
+                throw new ArgumentException(
+                    "new item values for command bar buttons must be one of the following types: " + validNames);
+            }
+
+            index = Math.Max(index, 1);
+            ShellCommand shellCommand = CommandUtilities.GetOrCreateCommand(
+                context, 
+                _commandBar.Application as DTE2, 
+                caption,
+                newItemValue
+            );
+            
+            if (!String.IsNullOrEmpty(binding))
+            {
+                shellCommand.Bindings = new[] { (object)binding };
+            }
+            
+            Command command = shellCommand.AsCommand();
+            var ctl = command.AddControl(_commandBar, index) as CommandBarControl;
+            return ctl;
         }
 
         public class NewItemDynamicParameters
