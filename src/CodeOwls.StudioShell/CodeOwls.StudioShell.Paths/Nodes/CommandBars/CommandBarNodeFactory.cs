@@ -92,12 +92,23 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
         }
 
         #endregion
+       
     }
 
-    public class CommandBarButtonNodeFactory : CommandBarControlNodeFactory
+    public class CommandBarButtonNodeFactory : CommandBarControlNodeFactory, IInvokeItem
     {
+        private readonly CommandBarButton _button;
+
         public CommandBarButtonNodeFactory(CommandBarButton button) : base(button, false)
         {
+            _button = button;
+        }
+
+        public object InvokeItemParameters { get { return null; } }
+        public IEnumerable<object> InvokeItem(IContext context, string path)
+        {
+            _button.Execute();
+            return null;
         }
     }
 
