@@ -23,7 +23,7 @@
 # default prompt
 function prompt()
 {
-	"§ $pwd> ";
+	"§ $($pwd.providerPath)> ";
 }
            
 #additional profile and environment initialization scripts

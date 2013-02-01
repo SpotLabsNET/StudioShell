@@ -92,10 +92,10 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
                             projectName
                             );
                         var projectFileName = path;
-                        if (String.IsNullOrEmpty(Path.GetExtension(path)))
+                        /*if (String.IsNullOrEmpty(Path.GetExtension(path)))
                         {
                             projectFileName += GetProjectFileExtension(p.Language);
-                        }
+                        }*/
 
                         var t = sln.GetProjectTemplate(itemTypeName, p.Language);
                         _dte.Solution.AddFromTemplate(t, destinationPath, projectFileName, false);
