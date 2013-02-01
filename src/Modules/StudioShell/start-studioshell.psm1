@@ -19,7 +19,7 @@ write-debug "local module root path is $local:root"
 
 Write-Debug "updating environment...";
 
-$env:Path += ";$($local:root)\Scripts;$($local:root)\bin\Scripts"; #;C:\Program Files (x86)\Common Files\microsoft shared\MSEnv\PublicAssemblies";
+$env:Path += ";$($local:root)\bin\Scripts";
 $env:PSModulePath += ";$($local:root)";
 
 import-module PreferenceStack;
