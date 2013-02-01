@@ -15,66 +15,23 @@
 */
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Management.Automation;
 using System.Text.RegularExpressions;
 using CodeOwls.PowerShell.Host.Executors;
 using CodeOwls.PowerShell.Host.Utility;
 
 namespace CodeOwls.PowerShell.Host.AutoComplete
 {
-    
-    internal class PowerShellTabExpansion2AutoCompleteProvider : IAutoCompleteProvider
-    {
-        private readonly Executor _executor;
-        private const string TabExpansionScript = @"TabExpansion2 -input '{0}' -cur {1} | foreach {{
-        $i = $_.replacementindex;
-        $_.completionmatches | foreach {{
-            '{0}'.substring(0,$i) + $_.completiontext;
-        }}
-    }}";
-
-        private const string TabExpansionFunctionName = "TabExpansion2";
-        private const string InputParameterName = "InputScript";
-        private const string CursorPositionParameterName = "CursorColumn";
-
-        public PowerShellTabExpansion2AutoCompleteProvider( Executor executor )
-        {
-            _executor = executor;
-        }
-
-        public IEnumerable<string> GetSuggestions(string guess)
-        {
-            guess = ( guess ?? String.Empty ).Replace( "'", "`'");
-            
-            try
-            {
-                var script = String.Format(TabExpansionScript, guess, guess.Length);
-                Exception error;
-                var results = _executor.ExecuteCommand(script, null, out error,
-                                                       ExecutionOptions.None);
-                if (null == results)
-                {
-                    return new string[] { };
-                }
-               
-                return results.ToList().ConvertAll(pso => pso.ToStringValue());
-            }
-            catch
-            {
-            }
-            return null;
-            
-        }
-    }
-
-    internal class PowerShellTabExansionAutoCompleteProvider : IAutoCompleteProvider
+    internal class PowerShellTabExpansionAutoCompleteProvider : IAutoCompleteProvider
     {
         private const string TabExpansionFunctionName = "TabExpansion";
         private const string LineArgumentName = "line";
         private const string LastWordArgumentName = "lastWord";
         private readonly Executor _executor;
 
-        public PowerShellTabExansionAutoCompleteProvider(Executor executor)
+        public PowerShellTabExpansionAutoCompleteProvider(Executor executor)
         {
             _executor = executor;
         }
@@ -85,8 +42,24 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
         {
             try
             {
-                Dictionary<string, object> arguments = SplitGuessIntoArguments(guess);
                 Exception error;
+                Collection<PSParseError> errors;
+                
+                IEnumerable<PSToken> tokens = PSParser.Tokenize( guess, out errors );
+                
+                if (null == tokens || ! tokens.Any())
+                {
+                    return new string[] {};
+                }
+
+                var lastToken = tokens.Last();
+                var lastWord = lastToken.Content;
+                var arguments = new Dictionary<string, object>
+                                    {
+                                        {LineArgumentName, guess},
+                                        {LastWordArgumentName, lastWord}
+                                    };
+
                 var results = _executor.ExecuteCommand(TabExpansionFunctionName, arguments, out error,
                                                        ExecutionOptions.None);
                 if (null == results)
@@ -94,7 +67,11 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
                     return new string[] {};
                 }
 
-                return results.ToList().ConvertAll(pso => pso.ToStringValue());
+                //var regex = new Regex(Regex.Escape(lastWord) + @"$");
+
+                return results.ToList()
+                    .ConvertAll(pso => pso.ToStringValue())
+                    .ConvertAll(s=> guess.Remove( lastToken.Start ) + s);
             }
             catch
             {
@@ -106,8 +83,12 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
 
         private Dictionary<string, object> SplitGuessIntoArguments(string guess)
         {
+            Collection<PSParseError> errors;
+            var tokens = System.Management.Automation.PSParser.Tokenize(guess, out errors);
+
             Dictionary<string, object> args = new Dictionary<string, object>();
             args.Add(LineArgumentName, guess);
+            
             //todo: add more logic to split, handle quotations
             var lastWord = Regex.Split(guess, @"\s+").LastOrDefault();
             args.Add(LastWordArgumentName, lastWord);

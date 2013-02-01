@@ -22,7 +22,7 @@
 ModuleToProcess = 'bin/codeowls.studioshell.provider.dll'
 
 # Version number of this module.
-ModuleVersion = '1.2'
+ModuleVersion = '1.5.0.0'
 
 # ID used to uniquely identify this module
 GUID = '8714c9a1-1644-4770-9a7d-136f2907d153'

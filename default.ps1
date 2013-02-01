@@ -170,12 +170,17 @@ task CleanModule -depends __CreateModulePackageDirectory -description "clears th
 
 task PackageModule -depends CleanModule,Build,__CreateModulePackageDirectory -description "assembles module distribution file hive" -action {
 	$mp = get-modulePackageDirectory;
-	
+	$md = join-path $targetPath -ChildPath $metadataAssembly;
+	$version = ( get-item $md | select -exp versioninfo | select -exp productversion )
+    
 	# copy module src hive to distribution hive
 	Copy-Item $moduleSource -container -recurse -Destination $mp -Force;
 	
 	# copy bins to module bin area
 	ls $targetPath | copy-item -dest "$mp\StudioShell\bin" -recurse -force;
+    
+    $psd = ls $mp/studioshell/studioshell.psd1 | get-content;
+    $psd -replace "ModuleVersion = '[\d\.]+'","ModuleVersion = '$version'" | out-file $mp/studioshell/studioshell.psd1;
 } -postaction {
 	assemble-moduleDocumentation;
 }

@@ -1,3 +1,0 @@
-This file only exists to enable use of the NuGet Install.ps1 and Uninstall.ps1 scripts for the StudioShell package.
-
-You can safely remove this file from your project.
