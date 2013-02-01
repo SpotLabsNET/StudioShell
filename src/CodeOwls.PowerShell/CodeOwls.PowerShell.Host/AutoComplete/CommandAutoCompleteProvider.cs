@@ -104,7 +104,7 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
         {
             var words = BreakIntoWords(guess);
             var guessTemplate = words.LastOrDefault();
-            var re = new Regex(Regex.Escape(guessTemplate) + ".+$");
+            var re = new Regex(Regex.Escape(guessTemplate) + ".*?$");
             var commandFormat = re.Replace( guess, "{0}");
             guessTemplate = guessTemplate.TrimStart('\'', '"').TrimEnd('\'', '"');
             if (! guessTemplate.Contains("*"))
