@@ -177,7 +177,7 @@ namespace CodeOwls.PowerShell.Host
                                             {
                                                 new AutoCompleteProviderChain(
                                                     new PowerShellTabExpansion2AutoCompleteProvider(_commandExecutor),
-                                                    new PowerShellTabExansionAutoCompleteProvider(_commandExecutor),
+                                                    new PowerShellTabExpansionAutoCompleteProvider(_commandExecutor),
                                                     new CompositeAutoCompleteProvider(
                                                         new ProviderPathAutoCompleteProvider(_commandExecutor),
                                                         new CommandListAutoCompleteProvider(_commandExecutor)

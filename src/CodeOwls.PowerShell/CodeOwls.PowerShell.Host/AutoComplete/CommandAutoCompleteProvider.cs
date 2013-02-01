@@ -15,7 +15,9 @@
 */
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Management.Automation;
 using System.Text.RegularExpressions;
 using CodeOwls.PowerShell.Host.Executors;
 using CodeOwls.PowerShell.Host.Utility;
@@ -65,14 +67,21 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
 
         protected string[] BreakIntoWords(string guess)
         {
-            guess = guess.Trim();
-            Regex re = new Regex(@"('[^']+(?:'|$))|(""[^""]+(?:""|$))|([^\s'""]+)");
-            var matches = re.Matches(guess);
+            Collection<PSParseError> errors;
+            var tokens = PSParser.Tokenize( guess, out errors );
+            var parts = from token in tokens
+                        select token.Content;
 
-            return (from Match match in matches
-                    let value =
-                        String.IsNullOrEmpty(match.Groups[1].Value) ? match.Groups[0].Value : match.Groups[1].Value
-                    select value).ToArray();
+            return parts.ToArray();
+
+            //guess = guess.Trim();
+            //Regex re = new Regex(@"('[^']+(?:'|$))|(""[^""]+(?:""|$))|([^\s'""]+)");
+            //var matches = re.Matches(guess);
+
+            //return (from Match match in matches
+            //        let value =
+            //            String.IsNullOrEmpty(match.Groups[1].Value) ? match.Groups[0].Value : match.Groups[1].Value
+            //        select value).ToArray();
 
             /*return Regex.Split(guess, @"\s+");
             /*char[] quotes = new char[] {'\'', '"'};
@@ -93,9 +102,10 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
 
         protected virtual FormattedGuessInformation FormatGuessInfo(string guess)
         {
-            var guessTemplate = BreakIntoWords(guess).LastOrDefault();
-
-            var commandFormat = guess.Replace(guessTemplate, "{0}");
+            var words = BreakIntoWords(guess);
+            var guessTemplate = words.LastOrDefault();
+            var re = new Regex(Regex.Escape(guessTemplate) + ".+$");
+            var commandFormat = re.Replace( guess, "{0}");
             guessTemplate = guessTemplate.TrimStart('\'', '"').TrimEnd('\'', '"');
             if (! guessTemplate.Contains("*"))
             {

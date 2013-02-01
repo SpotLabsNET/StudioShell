@@ -285,11 +285,7 @@ namespace CodeOwls.PowerShell.WinForms
                 {
                     return;
                 }
-                var m = Regex.Match(_tabExpansionInput, @"(\s+)\S+");
-                if (m.Success)
-                {
-                    cmd = Regex.Replace(_tabExpansionInput, @"(\s+)\S+", "$1" + cmd);
-                }
+                
                 Select(_promptPosition, EndOfLinePosition);
                 InsertText(cmd);
             }
@@ -515,6 +511,7 @@ namespace CodeOwls.PowerShell.WinForms
         private void DeleteSelection()
         {
             InsertText(String.Empty);
+            _tabExpansionInput = null;
         }
 
         public ConsoleKeyInfo ReadNextKey()

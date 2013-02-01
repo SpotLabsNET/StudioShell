@@ -592,7 +592,13 @@ namespace CodeOwls.StudioShell
             thread.Start();
         }
 
-        public static void RegisterRunspace(Runspace runspace )
+	    public static void ReloadAddins( object _dte )
+	    {
+	        EnvDTE.DTE dte = _dte as EnvDTE.DTE;
+            dte.AddIns.Update();
+	    }
+
+	    public static void RegisterRunspace(Runspace runspace )
         {
             if( null == Shell )
             {

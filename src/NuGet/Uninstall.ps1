@@ -64,35 +64,20 @@ try
 	{
 	}
 	
-		$modulePath = $toolsPath;	
-		$addinSpec = join-path $toolspath -child "StudioShell/bin/StudioShell.VS2010.AddIn";
-		$settingsSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/settings.txt";
-		$profileSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/profile.ps1";
-		$addinAssemblyPath = join-path $modulePath -child "StudioShell/bin/CodeOwls.StudioShell.dll";
+	$addinFolder = join-path $env:VisualStudioDir -child "Addins";
+	$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
+	Write-Debug "AddIn Folder: $addinFolder"
+	Write-Debug "AddIn File Path: $addinFilePath"
 
-		$addinFolder = "~/Documents/Visual Studio 2010/Addins";
-		$addinFilePath = join-path $addinFolder -child "StudioShell.addin";
-		$studioShellProfileFolder = "~/Documents/CodeOwlsLLC.StudioShell";
-		$profilePath = "~/Documents/CodeOwlsLLC.StudioShell/profile.ps1";
-		$settingsPath = "~/Documents/CodeOwlsLLC.StudioShell/settings.txt";
+	Remove-Item $addinFilePath -force;
+	Write-Debug "Disconnecting StudioShell Add-In";
+	[AddInConnector]::Disconnect( $dte );
 
-		Write-Debug "Tools Path: $toolspath"
-		Write-Debug "Module Path: $modulePath"
-		Write-Debug "AddIn Folder: $addinFolder"
-		Write-Debug "AddIn File Path: $addinFilePath"
-		Write-Debug "StudioShell Profile Folder: $studioShellProfileFolder"
-		Write-Debug "StudioShell Profile Path: $profilePath"
-		Write-Debug "Settings Path: $settingsPath"
-
-		Remove-Item $addinFilePath -force;
-		Write-Debug "Disconnecting StudioShell Add-In";
-		[AddInConnector]::Disconnect( $dte );
-
-		if( Get-Module StudioShell )
-		{			
-			Write-Debug "Removing existing StudioShell module";
-			Remove-Module studioshell;			
-		}
+	if( Get-Module StudioShell )
+	{			
+		Write-Debug "Removing existing StudioShell module";
+		Remove-Module studioshell;			
+	}
 }
 finally
 {
