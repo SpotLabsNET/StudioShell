@@ -26,5 +26,10 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
         public ProviderPathAutoCompleteProvider(Executor executor) : base(Command, executor)
         {
         }
+
+        public override System.Collections.Generic.IEnumerable<string> GetSuggestions(string guess)
+        {
+            return base.GetSuggestions(guess);
+        }
     }
 }
