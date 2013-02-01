@@ -23,7 +23,7 @@
 # default prompt
 function prompt()
 {
-	"§ $($pwd.providerPath)> ";
+	"§ $( $pwd -replace '^.+::','' )> ";
 }
            
 #additional profile and environment initialization scripts
