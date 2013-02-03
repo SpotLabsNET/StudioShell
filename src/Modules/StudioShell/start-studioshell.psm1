@@ -26,7 +26,7 @@ import-module PreferenceStack;
 get-studioShellSettings.ps1 | push-preference;
 
 $cmdline = [environment]::commandLine;
-if( $cmdline -match 'powershell.exe' )
+if( $cmdline -match 'powershell(_ise)?\.exe' )
 {
 	Write-Debug "Commandline [$cmdline] appears to be a general powershell console";
 
@@ -55,7 +55,7 @@ if( $cmdline -match 'powershell.exe' )
 			$dte = $null;
 		}
 	}
-}
+}get-m
 
 if( ( $cmdline -match "devenv.exe" -or [environment]::$cmdline -match "ssms.exe" ) )
 {	

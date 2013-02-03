@@ -47,7 +47,7 @@ namespace CodeOwls.PowerShell.WinForms.Utility
                     {ConsoleColor.DarkGreen, Color.DarkGreen},
                     {ConsoleColor.DarkMagenta, Color.DarkMagenta},
                     {ConsoleColor.DarkRed, Color.DarkRed},
-                    {ConsoleColor.DarkYellow, Color.DarkKhaki},
+                    {ConsoleColor.DarkYellow, Color.DarkOrange},
                     {ConsoleColor.Gray, Color.Gray},
                     {ConsoleColor.Green, Color.Green},
                     {ConsoleColor.Magenta, Color.Magenta},
