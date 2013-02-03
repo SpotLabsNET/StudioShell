@@ -729,32 +729,15 @@ namespace CodeOwls.StudioShell
         }
 
         ConsoleColor GetConsoleColor(uint ucolor, ConsoleColor defaultColor)
-        {            
-            if (0 != (ucolor & (uint) __VSCOLORTYPE.CT_RAW))
+        {
+            try
             {
                 var bytes = BitConverter.GetBytes(ucolor);
                 var color = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
                 return color.ToConsoleColor();
             }
-            if (0 != (ucolor & (uint)__VSCOLORTYPE.CT_VSCOLOR))
+            catch (Exception)
             {
-                var sp = Locator.Get<IServiceProvider>();
-                var uiShell = sp.GetService(typeof (IVsUIShell2)) as IVsUIShell2;
-                if (null != uiShell)
-                {
-                    int colorIndex = (int)ucolor;
-                    int colorIndex2 = (int)( ( ~((uint)__VSCOLORTYPE.CT_VSCOLOR) & ucolor ) );
-                    var hr = uiShell.GetVSSysColorEx(colorIndex, out ucolor);
-                    if (VSConstants.S_OK != hr)
-                    {
-                        hr = uiShell.GetVSSysColorEx(colorIndex2, out ucolor);
-                    }
-
-                    var bytes = BitConverter.GetBytes(ucolor);
-                    var color = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
-                    return color.ToConsoleColor();
-                }
-                return defaultColor;
             }
             return defaultColor;
         }
@@ -766,20 +749,39 @@ namespace CodeOwls.StudioShell
 	        var props = _applicationObject.get_Properties("FontsAndColors", "TextEditor");
 	        settings.FontName = props.Item("FontFamily").Value.ToString();
 	        settings.FontSize = Convert.ToInt32(props.Item("FontSize").Value.ToString());
+	     
+	        var colors = props.Item("FontsAndColorsItems").Object as FontsAndColorsItems;
+            if (null == colors)
+            {
+                return settings;
+            }
+	        var item = colors.Item("Plain Text");
+            settings.ForegroundColor = GetConsoleColor(item.Foreground, settings.ForegroundColor);
+            settings.BackgroundColor = GetConsoleColor(item.Background, settings.BackgroundColor);
+
+	        item = colors.Item("Error");
+            if (null == item)
+            {
+                item = colors.Item("Compiler Error");
+            }
+	        settings.ErrorForegroundColor = GetConsoleColor(item.Foreground, settings.ErrorForegroundColor);
+	        settings.ErrorBackgroundColor = GetConsoleColor(item.Background, settings.ErrorBackgroundColor);
 	        
-	        var colors = props.Item("FontsAndColorsItems").Object as FontsAndColorsItems;	        
+	        item = colors.Item("Warning");
+	        if (null == item)
+	        {
+	            item = colors.Item("Compiler Warning");
+	        }
+	        settings.WarningForegroundColor = GetConsoleColor(item.Foreground, settings.WarningForegroundColor);
+            settings.WarningBackgroundColor = GetConsoleColor(item.Background, settings.WarningBackgroundColor);
 
-            settings.ForegroundColor = GetConsoleColor(colors.Item("Plain Text").Foreground, settings.ForegroundColor);
-            settings.BackgroundColor = GetConsoleColor(colors.Item("Plain Text").Background, settings.BackgroundColor);
+            item = colors.Item("String");
+            settings.DebugForegroundColor = GetConsoleColor(item.Foreground, settings.DebugForegroundColor);
+            settings.DebugBackgroundColor = GetConsoleColor(item.Background, settings.DebugBackgroundColor);
 
-            settings.ErrorForegroundColor = GetConsoleColor(colors.Item("Error").Foreground, settings.ErrorForegroundColor );
-            settings.ErrorBackgroundColor = GetConsoleColor(colors.Item("Error").Background, settings.ErrorBackgroundColor );
-            settings.WarningForegroundColor = GetConsoleColor(colors.Item("Warning").Foreground, settings.WarningForegroundColor);
-            settings.WarningBackgroundColor = GetConsoleColor(colors.Item("Warning").Background, settings.WarningBackgroundColor);
-            settings.DebugForegroundColor = GetConsoleColor(colors.Item("String").Foreground, settings.DebugForegroundColor);
-            settings.DebugBackgroundColor = GetConsoleColor(colors.Item("String").Background, settings.DebugBackgroundColor);
-            settings.VerboseForegroundColor = GetConsoleColor(colors.Item("Comment").Foreground, settings.VerboseForegroundColor);
-            settings.VerboseBackgroundColor = GetConsoleColor(colors.Item("Comment").Background, settings.VerboseBackgroundColor);
+	        item = colors.Item("Comment");
+            settings.VerboseForegroundColor = GetConsoleColor(item.Foreground, settings.VerboseForegroundColor);
+            settings.VerboseBackgroundColor = GetConsoleColor(item.Background, settings.VerboseBackgroundColor);
 
             return settings;
 	    }
