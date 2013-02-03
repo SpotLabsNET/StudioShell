@@ -55,7 +55,7 @@ if( $cmdline -match 'powershell(_ise)?\.exe' )
 			$dte = $null;
 		}
 	}
-}get-m
+}
 
 if( ( $cmdline -match "devenv.exe" -or [environment]::$cmdline -match "ssms.exe" ) )
 {	

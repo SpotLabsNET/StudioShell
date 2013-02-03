@@ -736,6 +736,26 @@ namespace CodeOwls.StudioShell
                 var color = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
                 return color.ToConsoleColor();
             }
+            if (0 != (ucolor & (uint)__VSCOLORTYPE.CT_VSCOLOR))
+            {
+                var sp = Locator.Get<IServiceProvider>();
+                var uiShell = sp.GetService(typeof (IVsUIShell2)) as IVsUIShell2;
+                if (null != uiShell)
+                {
+                    int colorIndex = (int)ucolor;
+                    int colorIndex2 = (int)( ( ~((uint)__VSCOLORTYPE.CT_VSCOLOR) & ucolor ) );
+                    var hr = uiShell.GetVSSysColorEx(colorIndex, out ucolor);
+                    if (VSConstants.S_OK != hr)
+                    {
+                        hr = uiShell.GetVSSysColorEx(colorIndex2, out ucolor);
+                    }
+
+                    var bytes = BitConverter.GetBytes(ucolor);
+                    var color = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
+                    return color.ToConsoleColor();
+                }
+                return defaultColor;
+            }
             return defaultColor;
         }
 
