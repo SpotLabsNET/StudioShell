@@ -82,17 +82,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                                                      cancelTimer = null;
                                                  }
                                              };
-                pipeline.StopAsync();
-                //TODO: migrate to event-based timeout
-                /*DateTime expiry = DateTime.Now + TimeSpan.FromMilliseconds(timeoutInMilliseconds);
-                while (
-                    (-1 == timeoutInMilliseconds || DateTime.Now <= expiry) &&
-                    activeStates.Contains(pipeline.PipelineStateInfo.State))
-                {
-                    DoWait();
-                }
-
-                return inactiveStates.Contains(pipeline.PipelineStateInfo.State);*/
+                pipeline.StopAsync();                
             }
 
             return true;
@@ -282,6 +272,7 @@ namespace CodeOwls.PowerShell.Host.Executors
             {
                 case( PipelineState.Completed ):
                 case( PipelineState.Failed) :
+                case( PipelineState.Stopped ):
                     {
                         ((Pipeline)sender).StateChanged -= OnPipelineStateChange;
 

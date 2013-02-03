@@ -39,6 +39,7 @@ using CodeOwls.StudioShell.Provider.Variables;
 using Extensibility;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.CommandBars;
 using System.Resources;
 using System.Globalization;
@@ -46,6 +47,7 @@ using CodeOwls.StudioShell.Configuration;
 using CodeOwls.PowerShell.WinForms.Utility;
 using CodeOwls.StudioShell.Utility;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using stdole;
 using Command=EnvDTE.Command;
 using Debugger = System.Diagnostics.Debugger;
@@ -455,7 +457,7 @@ namespace CodeOwls.StudioShell
 	    {
 	        if (null != Executor)
 	        {
-	            if( ! Executor.CancelCurrentExecution( 15000 ) )
+	            if( ! Executor.CancelCurrentExecution( 3000 ) )
 	            {
 	                PromptForForceCommandCancel();
 	            }
@@ -726,6 +728,17 @@ namespace CodeOwls.StudioShell
             ExecuteStudioShellCommand();
         }
 
+        ConsoleColor GetConsoleColor(uint ucolor, ConsoleColor defaultColor)
+        {            
+            if (0 != (ucolor & (uint) __VSCOLORTYPE.CT_RAW))
+            {
+                var bytes = BitConverter.GetBytes(ucolor);
+                var color = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
+                return color.ToConsoleColor();
+            }
+            return defaultColor;
+        }
+
 	    private UISettings GetUISettings()
 	    {
 	        UISettings settings = new UISettings();
@@ -734,10 +747,21 @@ namespace CodeOwls.StudioShell
 	        settings.FontName = props.Item("FontFamily").Value.ToString();
 	        settings.FontSize = Convert.ToInt32(props.Item("FontSize").Value.ToString());
 	        
-	        var colors = props.Item("FontsAndColorsItems").Object as FontsAndColorsItems;
-	        settings.ForegroundColor = Color.FromArgb( (int)colors.Item("Plain Text").Foreground ).ToConsoleColor();
-	        settings.BackgroundColor = Color.FromArgb((int)colors.Item("Plain Text").Background).ToConsoleColor();
-	        return settings;
+	        var colors = props.Item("FontsAndColorsItems").Object as FontsAndColorsItems;	        
+
+            settings.ForegroundColor = GetConsoleColor(colors.Item("Plain Text").Foreground, settings.ForegroundColor);
+            settings.BackgroundColor = GetConsoleColor(colors.Item("Plain Text").Background, settings.BackgroundColor);
+
+            settings.ErrorForegroundColor = GetConsoleColor(colors.Item("Error").Foreground, settings.ErrorForegroundColor );
+            settings.ErrorBackgroundColor = GetConsoleColor(colors.Item("Error").Background, settings.ErrorBackgroundColor );
+            settings.WarningForegroundColor = GetConsoleColor(colors.Item("Warning").Foreground, settings.WarningForegroundColor);
+            settings.WarningBackgroundColor = GetConsoleColor(colors.Item("Warning").Background, settings.WarningBackgroundColor);
+            settings.DebugForegroundColor = GetConsoleColor(colors.Item("String").Foreground, settings.DebugForegroundColor);
+            settings.DebugBackgroundColor = GetConsoleColor(colors.Item("String").Background, settings.DebugBackgroundColor);
+            settings.VerboseForegroundColor = GetConsoleColor(colors.Item("Comment").Foreground, settings.VerboseForegroundColor);
+            settings.VerboseBackgroundColor = GetConsoleColor(colors.Item("Comment").Background, settings.VerboseBackgroundColor);
+
+            return settings;
 	    }
 
 	    private DTE2 _applicationObject;
@@ -771,5 +795,5 @@ namespace CodeOwls.StudioShell
                 return _settings;
             }
         }
-    }
+	}
 }

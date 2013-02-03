@@ -37,7 +37,12 @@ namespace CodeOwls.PowerShell.Host.Configuration
 
         public UISettings()
         {
-            BackgroundColor = ConsoleColor.Black;
+            BackgroundColor =
+                VerboseBackgroundColor =
+                DebugBackgroundColor =
+                WarningBackgroundColor =
+                ErrorBackgroundColor =
+                ConsoleColor.Black;
 
             ForegroundColor = ConsoleColor.White;
             ErrorForegroundColor = ConsoleColor.Red;

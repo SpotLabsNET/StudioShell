@@ -12,7 +12,11 @@ CHANGE LOG
 
 1.5
   Resolved Issues
-	Fixed rename-item implementation to work against multiple matched path nodes.
+    Canceling a running pipeline (CTRL+SHIFT+C) doesn't require you to Tonya 
+    Harding the entire runspace anymore.    
+	
+    Fixed rename-item implementation to work against multiple matched path 
+    nodes.
 
 	Fixed CanGet property logic in ShellCodeProperty2.
 
@@ -21,14 +25,66 @@ CHANGE LOG
 
 	Fixed initialization script errors related to stricter variable interpolation
 	rules introduces in PowerShell v3.
+    
+    Addressed several issues with command bars; in particular, comboboxes have 
+    been removed as a control option since you can't create them via automation 
+    anyway.
+    
+    Buttons are now the default itemtype for new-item when working in the 
+    commandbars path node.
+    
+    The default StudioShell prompt was updated to remove the PowerShell 
+    Provider Path preamble in v3 hosts.
+    
+    42: Massive changes to NuGet init.ps1 logic.  NuGet package now verifies 
+    the state of your Visual Studio session, as well as checking for installed 
+    versions of StudioShell before attempting a module install.
+    
+    New-Item in solution/projects no longer appends project file extension to 
+    project name.  This can cause the VS template mechanism to fail in some 
+    situations and seems to set off VS2012 in a big way.    
+    
+    26: Tab expansion behaves closer to the console standard.
+    
+    The StudioShell module no longer adds its internal Scripts folder to the 
+    path.  This was causing commands to be discovered as both functions of the 
+    module and script files, and generally mucking up the help for these 
+    script-based commands.
+    
+    MSI installer now modifies Visual Studio current user registry settings, 
+    rather than machine-wide settings.
+    
+    27: Importing into the ISE is now functional.
 		
   Added Features
-	Add-in and build install support for VS 2012.
+	43: Add-in and build install support for VS 2012.
 
-	Support for PowerShell v3.
+	Support for PowerShell v3 hosts.
+    
+    Support for PowerShell v3 tab expansion mechanisms.       
+    
+    Invoke-Item now supported on commandbar buttons (menu items with actions, 
+    but not popups).  Note that an error is raised if the commandbar button 
+    is disabled when invoked; because of this, buttons linked to scriptblocks 
+    are not immediately invokable, since these buttons are disabled when the 
+    StudioShell runspace is unavailable (such as during a call to invoke-item). 
+    
+    Cache templates are now listed in the dte:/templates hive.
 
-	Added Pester unit tests to source hive.
-
+	StudioShell console attempts to match colors configured for the Text Editor
+    category of the Fonts as Colors options page, as follows:
+        Console text is mapped to the Plain Text color
+        Error text is mapped to the Error color
+        Warning text is mapped to the Warning color
+        Verbose text is mapped to the Comment color
+        Debug text is mapped to the String color
+    In addition, these mappings are adapted to members of the ConsoleColor 
+    enumeration by calculating the least-squared-distance from the original 
+    color to the console color value.  This mapping is necessary as 
+    ConsoleColor is used by the PowerShell host API.
+    
+    Added Pester unit tests to source hive.       
+    
 1.3
   Resolved Issues
     1.3.1
