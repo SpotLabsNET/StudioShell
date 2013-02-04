@@ -70,19 +70,7 @@ CHANGE LOG
     StudioShell runspace is unavailable (such as during a call to invoke-item). 
     
     Cache templates are now listed in the dte:/templates hive.
-
-	StudioShell console attempts to match colors configured for the Text Editor
-    category of the Fonts as Colors options page, as follows:
-        Console text is mapped to the Plain Text color
-        Error text is mapped to the Error color
-        Warning text is mapped to the Warning color
-        Verbose text is mapped to the Comment color
-        Debug text is mapped to the String color
-    In addition, these mappings are adapted to members of the ConsoleColor 
-    enumeration by calculating the least-squared-distance from the original 
-    color to the console color value.  This mapping is necessary as 
-    ConsoleColor is used by the PowerShell host API.
-    
+	
     Added Pester unit tests to source hive.       
     
 1.3
