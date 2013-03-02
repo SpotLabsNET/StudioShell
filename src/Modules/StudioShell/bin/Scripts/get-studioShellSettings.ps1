@@ -21,23 +21,16 @@ param(
 	$asHashTable
 )
 
-pushd $env:HOMEDRIVE;
-try
-{
-	$settingsFile = "~/documents/codeowlsllc.studioshell/settings.txt";
+$mydocs = [environment]::getFolderPath( 'mydocuments' );
+$settingsFile = $mydocs | join-path -child 'codeowlsllc.studioshell/settings.txt';
 
-	if( -not ( test-path $settingsFile ) )
-	{
-		mkdir ( $settingsFile | Split-Path ) | out-null;
-		$myInvocation.MyCommand.Path | split-path | Join-Path -ChildPath "..\UserProfile\settings.txt" | cp -Destination $settingsFile | Out-Null;
-	}
-
-	$settings = ( $settingsFile | resolve-path | Get-Content ) -join "`n" | ConvertFrom-StringData;
-}
-finally
+if( -not ( test-path $settingsFile ) )
 {
-	popd;
+	mkdir ( $settingsFile | Split-Path ) | out-null;
+	$myInvocation.MyCommand.Path | split-path | Join-Path -ChildPath "..\UserProfile\settings.txt" | cp -Destination $settingsFile | Out-Null;
 }
+
+$settings = ( $settingsFile | resolve-path | Get-Content ) -join "`n" | ConvertFrom-StringData;
 
 if( -not $settings )
 {

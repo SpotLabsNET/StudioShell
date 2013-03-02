@@ -24,43 +24,29 @@ param(
 
 begin
 {
-	pushd $env:HOMEDRIVE;
-	try
-	{
-		$script:profileDir = '~/documents/codeowlsllc.studioshell';
-		$script:profileFile = $script:profileDir | join-path -child 'settings.txt';
+	$mydocs = [environment]::getFolderPath( 'mydocuments' );
+    
+	$script:profileDir = $mydocs | join-path -child 'codeowlsllc.studioshell';
+	$script:profileFile = $script:profileDir | join-path -child 'settings.txt';
 
-		if( -not (test-path $script:profileDir) )
-		{
-			mkdir $script:profileDir
-		}
-	}
-	finally
+	if( -not (test-path $script:profileDir) )
 	{
-		popd;
+		mkdir $script:profileDir
 	}
 }
 
 process
 {
-	pushd $env:HOMEDRIVE;
-	try
-	{
-		$settings | Get-Member -MemberType Properties | foreach{ 
-			$name = $_.name; 
-			$value = $settings."$name";
-			if( $value -match 'false' )
-			{
-				$value = $null;
-			}
-			
-			"$name=" + $value;
-		} | Out-File -filepath $script:profileFile
-	}
-	finally
-	{
-		popd;
-	}
+	$settings | Get-Member -MemberType Properties | foreach{ 
+		$name = $_.name; 
+		$value = $settings."$name";
+		if( $value -match 'false' )
+		{
+			$value = $null;
+		}
+		
+		"$name=" + $value;
+	} | Out-File -filepath $script:profileFile
 }
 
 <#
