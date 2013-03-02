@@ -2,5 +2,5 @@
 <Include>
   <?define StudioShellModuleRootPath = "C:\Users\beefarino\documents\project\cppstest\bin\release\Modules\StudioShell" ?>
   <?define ResourcePath = "C:\Users\beefarino\documents\project\cppstest\src\Installer\Resources" ?>
-  <?define StudioShellVersion = "1.5.0.0" ?>
+  <?define StudioShellVersion = "1.5.0.1" ?>
 </Include>
