@@ -36,8 +36,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
 
         public class NewItemDynamicParameters
         {
-            [Parameter(ParameterSetName = "FromTemplate", ValueFromPipelineByPropertyName = true)]
-            [Parameter(ParameterSetName = "FromFile", ValueFromPipelineByPropertyName = true)]
+            [Parameter(ParameterSetName = "FromTemplate", ValueFromPipelineByPropertyName = true)]           
             [Parameter(ParameterSetName = "nameSet", ValueFromPipelineByPropertyName = true)]
             [Parameter(ParameterSetName = "pathSet", ValueFromPipelineByPropertyName = true)]
             [Alias("Language")]
@@ -48,6 +47,12 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
             [Parameter(ParameterSetName = "pathSet", ValueFromPipelineByPropertyName = true)]
             [Alias("FilePath")]
             public string ItemFilePath { get; set; }
+
+            [Parameter(ParameterSetName = "FromProjFile", ValueFromPipelineByPropertyName = true)]
+            [Parameter(ParameterSetName = "nameSet", ValueFromPipelineByPropertyName = true)]
+            [Parameter(ParameterSetName = "pathSet", ValueFromPipelineByPropertyName = true)]
+            [Alias("ProjectPath")]
+            public string ProjectFilePath { get; set; }
         }
 
         #endregion
@@ -93,6 +98,10 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
                 {
                     AddFromItemFilePath(project, items, p);
                 }
+                else if (!String.IsNullOrEmpty(p.ProjectFilePath))
+                {
+                    AddFromProjectFilePath(project, items, p);
+                }
             }
             finally
             {
@@ -106,17 +115,14 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
             return factory.GetNodeValue();
         }
 
+        private static void AddFromProjectFilePath(Project project, ProjectItems items, NewItemDynamicParameters p)
+        {
+            items.AddFromFile(p.ProjectFilePath);
+        }
+
         private static void AddFromItemFilePath(Project project, ProjectItems items, NewItemDynamicParameters p)
         {
-            if (project.Object is SolutionFolder)
-            {
-                var folder = project.Object as SolutionFolder;
-                folder.AddFromFile(p.ItemFilePath);
-            }
-            else
-            {
-                items.AddFromFileCopy(p.ItemFilePath);
-            }
+            items.AddFromFileCopy(p.ItemFilePath);
         }
 
         private static void AddFromItemTypeName(Project project, ProjectItems items, string path, string itemTypeName,
