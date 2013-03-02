@@ -25,10 +25,11 @@ if( '2008','2010','2012' -notcontains $vsversion )
 }
 
 # verify or create home-based module path
-$modulePath = $env:PSModulePath -split ';' -match [regex]::escape( $home ) | select -First 1;
+$mydocs = [environment]::getFolderPath( 'mydocuments' );
+$modulePath = $env:PSModulePath -split ';' -match [regex]::escape( $mydocs ) | select -First 1;
 if( -not $modulePath )
 {
-	$modulePath = "~/documents/windowspowershell/modules" | resolve-path;
+	$modulePath = "$mydocs/windowspowershell/modules";
 	if( -not( Test-Path $modulePath ) )
 	{
 		mkdir $modulePath;
@@ -47,9 +48,9 @@ $addinAssemblyPath = join-path $modulePath -child "StudioShell/bin/CodeOwls.Stud
 # configure paths - destinations for spec file installations.
 $addinFolder = join-path $env:VisualStudioDir -child "Addins";
 $addinFilePath = join-path $addinFolder -child "StudioShell.addin";
-$studioShellProfileFolder = "~/Documents/CodeOwlsLLC.StudioShell";
-$profilePath = "~/Documents/CodeOwlsLLC.StudioShell/profile.ps1";
-$settingsPath = "~/Documents/CodeOwlsLLC.StudioShell/settings.txt";
+$studioShellProfileFolder = $mydocs | join-path -child 'CodeOwlsLLC.StudioShell';
+$profilePath = $mydocs | join-path -child 'CodeOwlsLLC.StudioShell/profile.ps1';
+$settingsPath = $mydocs | join-path -child 'CodeOwlsLLC.StudioShell/settings.txt';
 
 $packageVersion = $package.version.version;
     
