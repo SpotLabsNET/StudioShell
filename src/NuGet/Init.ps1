@@ -24,7 +24,7 @@ if( 9,10,11 -notcontains $vsversion )
     return;
 }
 
-$vsVersionName = @{ 9 = "2008"; 10='2010'; 11='2012' }[ $vsversion ]
+$vsVersionName = @{ '9' = "2008"; '10'='2010'; '11'='2012' }[ $vsversion ]
 # verify or create home-based module path
 $mydocs = [environment]::getFolderPath( 'mydocuments' );
 $modulePath = $env:PSModulePath -split ';' -match [regex]::escape( $mydocs ) | select -First 1;
@@ -70,7 +70,7 @@ write-debug "Attempting install of StudioShell package version $packageVersion";
 function test-studioShellImported
 {    
     $existingModuleVersion = $null;
-    $loadedAssembly = [appdomain]::currentDomain.getAssemblies() | where { $_.fullname -match 'codeowls\.studioshell' }
+    $loadedAssembly = [appdomain]::currentDomain.getAssemblies() | where { $_.fullname -match 'codeowls\.studioshell' } | select -first 1;
     $existingModule = get-module studioshell;
     
     if( $loadedAssembly )
