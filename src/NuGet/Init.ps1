@@ -16,14 +16,15 @@
 param($installPath, $toolsPath, $package, $project)
 
 # verify Visual Studio version support
-$vsversion = $env:visualStudioDir -split '\s+' | select -last 1;
-if( '2008','2010','2012' -notcontains $vsversion )
+$vsversion = $env:visualStudioVersion -split '\.' | select -first 1;
+if( 9,10,11 -notcontains $vsversion )
 {
     uninstall-package $package.id
     write-error "The current version of Visual Studio ($vsversion) is not supported";
     return;
 }
 
+$vsVersionName = @{ 9 = "2008"; 10='2010'; 11='2012' }[ $vsversion ]
 # verify or create home-based module path
 $mydocs = [environment]::getFolderPath( 'mydocuments' );
 $modulePath = $env:PSModulePath -split ';' -match [regex]::escape( $mydocs ) | select -First 1;
@@ -40,7 +41,7 @@ if( -not $modulePath )
 }
 
 # configure specs - locations of files to be installed
-$addinSpec = join-path $toolspath -child "StudioShell/bin/StudioShell.VS${vsversion}.AddIn";
+$addinSpec = join-path $toolspath -child "StudioShell/bin/StudioShell.VS${vsversionname}.AddIn";
 $settingsSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/settings.txt";
 $profileSpec = join-path $toolspath -child "StudioShell/bin/UserProfile/profile.ps1";
 $addinAssemblyPath = join-path $modulePath -child "StudioShell/bin/CodeOwls.StudioShell.dll";
@@ -128,7 +129,7 @@ The higher version of StudioShell will be imported into this session.
             }
             
             $modulebase = $existingModule.ModuleBase;
-            $addinSpec = join-path $modulebase -child "bin/StudioShell.VS${vsversion}.AddIn";
+            $addinSpec = join-path $modulebase -child "bin/StudioShell.VS${vsversionname}.AddIn";
             $addinAssemblyPath = join-path $modulebase -child "bin/CodeOwls.StudioShell.dll";
             
             write-debug "AddIn spec file path is now: $addinspec"

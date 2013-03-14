@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Code Owls LLC")]
-[assembly: AssemblyCopyright("Copyright © 2011 Code Owls LLC, All Rights Reserved")]
+[assembly: AssemblyCopyright("Copyright © 2013 Code Owls LLC, All Rights Reserved")]
 
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
