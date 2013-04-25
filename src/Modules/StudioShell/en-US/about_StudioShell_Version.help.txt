@@ -12,6 +12,12 @@ CHANGE LOG
 
 1.5
   Resolved Issues
+    You can now add a reference to a project by its name when the project is 
+    contained in a solution folder.
+
+    The installer no longer assumes default install locations, and instead
+    uses paths from the registry to locate prerequisites.
+
     Canceling a running pipeline (CTRL+SHIFT+C) doesn't require you to Tonya 
     Harding the entire runspace anymore.    
 	
@@ -57,7 +63,9 @@ CHANGE LOG
     27: Importing into the ISE is now functional.
 		
   Added Features
-	43: Add-in and build install support for VS 2012.
+    Added StudioShellVersion entry to existing psversiontable variable.    
+
+    43: Add-in and build install support for VS 2012.
 
 	Support for PowerShell v3 hosts.
     
