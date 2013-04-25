@@ -97,19 +97,25 @@
       </DirectorySearch>
     </Property>
     <Property Id="VS2012_AVAILABLE">
-      <DirectorySearch Id="_ff7cb7369b3f418ca02f92800f3f5929" Path="[ProgramFilesFolder]\Microsoft Visual Studio 11.0\common7\ide" Depth="0">
-        <FileSearch Id="_ff7cb7369b3f418ca02f92800f3f5929" Name="devenv.exe" MinVersion="11.0.0.0" />
-      </DirectorySearch>
+      <RegistrySearch Id="R_ff7cb7369b3f418ca02f92800f3f5929" Key="software\microsoft\visualstudio\11.0" Name="InstallDir" Root="HKLM" Type="directory" Win64="no">
+        <DirectorySearch Id="D_ff7cb7369b3f418ca02f92800f3f5929" Path="[R_ff7cb7369b3f418ca02f92800f3f5929]" Depth="0">
+            <FileSearch Id="F_ff7cb7369b3f418ca02f92800f3f5929" Name="devenv.exe" MinVersion="11.0.0.0" />
+        </DirectorySearch>
+      </RegistrySearch>
     </Property>
     <Property Id="VS2010_AVAILABLE">
-      <DirectorySearch Id="_133BEEFA917543F084AE3165315689C2" Path="[ProgramFilesFolder]\Microsoft Visual Studio 10.0\common7\ide" Depth="0">
-        <FileSearch Id="_133BEEFA917543F084AE3165315689C2" Name="devenv.exe" MinVersion="10.0.0.0" />
-      </DirectorySearch>
+      <RegistrySearch Id="R_133BEEFA917543F084AE3165315689C2" Key="software\microsoft\visualstudio\10.0" Name="InstallDir" Root="HKLM" Type="directory" Win64="no">
+        <DirectorySearch Id="D_133BEEFA917543F084AE3165315689C2" Path="[R_133BEEFA917543F084AE3165315689C2]" Depth="0">
+            <FileSearch Id="F_133BEEFA917543F084AE3165315689C2" Name="devenv.exe" MinVersion="10.0.0.0" />
+        </DirectorySearch>
+      </RegistrySearch>
     </Property>
     <Property Id="VS2008_AVAILABLE">
-      <DirectorySearch Id="_233BEEFA917543F084AE3165315689C2" Path="[ProgramFilesFolder]\Microsoft Visual Studio 9.0\common7\ide" Depth="0">
-        <FileSearch Id="_233BEEFA917543F084AE3165315689C2" Name="devenv.exe" MinVersion="9.0.0.0" />
-      </DirectorySearch>
+      <RegistrySearch Id="R_233BEEFA917543F084AE3165315689C2" Key="software\microsoft\visualstudio\9.0" Name="InstallDir" Root="HKLM" Type="file" Win64="no">
+        <DirectorySearch Id="D_233BEEFA917543F084AE3165315689C2" Path="[R_233BEEFA917543F084AE3165315689C2]" Depth="0">
+            <FileSearch Id="F_233BEEFA917543F084AE3165315689C2" Name="devenv.exe" MinVersion="9.0.0.0" />
+        </DirectorySearch>
+      </RegistrySearch>
     </Property>
     <Property Id="SSMS2010_AVAILABLE">
       <DirectorySearch Id="_433BEEFA917543F084AE3165315689C2" Path="[ProgramFilesFolder]\Microsoft SQL Server\110\Tools\Binn\ManagementStudio" Depth="0">
