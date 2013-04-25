@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Management.Automation;
 using CodeOwls.PowerShell.Provider.Attributes;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
@@ -121,16 +122,62 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
 
         internal Project ResolveProjectFromName(string name)
         {
-            foreach (Project project in _dte.Solution.Projects)
+            var projects = GetAllProjects();
+            var project = from proj in projects
+                          where StringComparer.InvariantCultureIgnoreCase.Equals(name, proj.Name)
+                          select proj;
+            return project.FirstOrDefault();
+        }
+
+        IEnumerable<Project> GetAllProjects()
+        {
+            Projects projects = _dte.Solution.Projects;
+            List<Project> list = new List<Project>();
+            foreach( var item in projects )
             {
-                if (StringComparer.InvariantCultureIgnoreCase.Equals(project.Name, name))
+                var project = item as Project;
+                if (project == null)
                 {
-                    return project;
+                    continue;
+                }
+
+                if (project.Kind == ProjectKinds.vsProjectKindSolutionFolder)
+                {
+                    list.AddRange(GetAllProjectsFromSolutionFolder(project));
+                }
+                else
+                {
+                    list.Add(project);
                 }
             }
 
-            return null;
+            return list;
         }
+
+        private IEnumerable<Project> GetAllProjectsFromSolutionFolder(Project solutionFolder)
+        {
+            var list = new List<Project>();
+            for (var i = 1; i <= solutionFolder.ProjectItems.Count; i++)
+            {
+                var subProject = solutionFolder.ProjectItems.Item(i).SubProject;
+                if (subProject == null)
+                {
+                    continue;
+                }
+
+                if (subProject.Kind == ProjectKinds.vsProjectKindSolutionFolder)
+                {
+                    list.AddRange(GetAllProjectsFromSolutionFolder(subProject));
+                }
+                else
+                {
+                    list.Add(subProject);
+                }
+            }
+
+            return list;
+        }
+
 
         private string GetProjectFileExtension(string language)
         {
