@@ -19,6 +19,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
+using System.Reflection;
 using System.Text;
 using CodeOwls.PowerShell.Paths.Processors;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
@@ -100,8 +101,31 @@ namespace CodeOwls.StudioShell.Provider
             AddRunspaceVariables(sessionState);
         }
 
+        static Version GetAssemblyFileVersion()
+        {
+            return (
+                from AssemblyFileVersionAttribute attr in
+                    Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false)
+                select new Version(attr.Version.Replace(".*", ""))
+            ).First();
+        }
+
         private void AddRunspaceVariables(SessionState sessionState)
         {
+            try
+            {
+                sessionState.InvokeCommand.InvokeScript(
+                    String.Format(
+                        "$psversiontable['StudioShellVersion'] = [version]'{0}'",
+                        GetAssemblyFileVersion()
+                        )
+                    );
+            }
+            catch (Exception e)
+            {
+                
+            }
+
             PSVariable[] psv = GetStudioShellPSVariables();
 
             var warns = new List<string>();
