@@ -59,8 +59,11 @@ namespace CodeOwls.StudioShell
 	/// <seealso class='IDTExtensibility2' />
 	public class Connect : IDTExtensibility2, IDTCommandTarget
 	{
+	    private static Logger Logger;
+        
         static Connect()
         {
+            Logger = LogManager.GetLogger(typeof(Connect));
             EnvironmentConfiguration.UpdateEnvironmentForHost();
         }
 
@@ -76,6 +79,8 @@ namespace CodeOwls.StudioShell
 		/// <seealso class='IDTExtensibility2' />
 		public void OnConnection(object application, ext_ConnectMode connectMode, object addInInst, ref Array custom)
 		{
+            Logger.DebugFormat( "> OnConnection: connect mode [{0}]", connectMode);
+
 		    AddIn addIn = addInInst as AddIn;
 		    var name = addIn.Name;
 		    var progid = addIn.ProgID;
@@ -113,7 +118,8 @@ namespace CodeOwls.StudioShell
                 
                 default:
                     break;
-            }            
+            }
+            Logger.DebugFormat("< OnConnection: connect mode [{0}]", connectMode);
 		}
 
         void RemoveScriptCommands()
@@ -268,6 +274,8 @@ namespace CodeOwls.StudioShell
 		/// <seealso class='IDTExtensibility2' />
 		public void OnDisconnection(ext_DisconnectMode disconnectMode, ref Array custom)
 		{
+            Logger.DebugFormat("> OnDicsonnection [{0}]", disconnectMode );
+            
             var shell = Shell;
 
             if (null != shell)
@@ -276,6 +284,8 @@ namespace CodeOwls.StudioShell
             }
 
 	        RemoveScriptCommands();
+            
+            Logger.DebugFormat("< OnDicsonnection [{0}]", disconnectMode);
 		}
 
 		/// <summary>Implements the OnAddInsUpdate method of the IDTExtensibility2 interface. Receives notification when the collection of Add-ins has changed.</summary>
@@ -297,6 +307,8 @@ namespace CodeOwls.StudioShell
 		/// <seealso class='IDTExtensibility2' />
 		public void OnBeginShutdown(ref Array custom)
 		{
+            Logger.Debug("> OnBeginShutdown");
+
             if (_toolWindow != null)
             {
                 _toolWindow.Close(vsSaveChanges.vsSaveChangesYes);
@@ -313,6 +325,8 @@ namespace CodeOwls.StudioShell
                 Shell.Dispose();
                 Shell = null;
             }
+
+            Logger.Debug("< OnBeginShutdown");
 		}
 		
 		/// <summary>Implements the QueryStatus method of the IDTCommandTarget interface. This is called when the command's availability is updated</summary>
@@ -323,6 +337,7 @@ namespace CodeOwls.StudioShell
 		/// <seealso class='Exec' />
 		public void QueryStatus(string commandName, vsCommandStatusTextWanted neededText, ref vsCommandStatus status, ref object commandText)
 		{
+            Logger.DebugFormat("> QueryStatus [{0}] [{1}]", commandName, neededText );
 			if(neededText == vsCommandStatusTextWanted.vsCommandStatusTextWantedNone)
 			{
 				if(commandName == StudioShellCommandName)
@@ -378,6 +393,7 @@ namespace CodeOwls.StudioShell
                     status = vsCommandStatus.vsCommandStatusSupported | vsCommandStatus.vsCommandStatusEnabled;
                 }
 			}
+            Logger.DebugFormat("< QueryStatus [{0}] [{1}]", commandName, neededText);
 		}
 
 		/// <summary>Implements the Exec method of the IDTCommandTarget interface. This is called when the command is invoked.</summary>
@@ -389,67 +405,87 @@ namespace CodeOwls.StudioShell
 		/// <seealso class='Exec' />
 		public void Exec(string commandName, vsCommandExecOption executeOption, ref object varIn, ref object varOut, ref bool handled)
 		{
-			handled = false;
-			if(executeOption == vsCommandExecOption.vsCommandExecOptionDoDefault)
-			{
-                if (commandName == StudioShellCommandName)
-				{
-                    ExecuteStudioShellCommand();
+            Logger.DebugFormat("> Exec [{0}] [{1}]", commandName, executeOption);
 
-				    handled = true;
-					return;
-				}
+		    try
+		    {
+		        handled = false;
+		        if (executeOption == vsCommandExecOption.vsCommandExecOptionDoDefault)
+		        {
+		            if (commandName == StudioShellCommandName)
+		            {
+		                ExecuteStudioShellCommand();
 
-                if( commandName == StudioShellRestartCommandName)
-                {
-                    RestartShell();
-                    handled = true;
-                    return;
-                }
+		                handled = true;
+		                return;
+		            }
 
-                if (commandName == StudioShellExecuteCommandName)
-                {
-                    varOut = ExecuteStudioShellExecuteCommand(varIn);
-                    handled = true;
-                    return;
-                }
+		            if (commandName == StudioShellRestartCommandName)
+		            {
+		                RestartShell();
+		                handled = true;
+		                return;
+		            }
 
-                if (commandName == StudioShellCancelCommandName)
-                {
-                    ExecuteStudioShellCancelCommand();
-                    handled = true;
-                    return;
-                }
+		            if (commandName == StudioShellExecuteCommandName)
+		            {
+		                varOut = ExecuteStudioShellExecuteCommand(varIn);
+		                handled = true;
+		                return;
+		            }
 
-                if (commandName.EndsWith( "_1"))
-                {
-                    handled = true;
-                    return;
-                }
+		            if (commandName == StudioShellCancelCommandName)
+		            {
+		                ExecuteStudioShellCancelCommand();
+		                handled = true;
+		                return;
+		            }
 
-                if (FunctionUtilities.IsPowerShellCommandName(commandName))
-                {
-                    varOut = null;
-                    handled = true;
-                    object input = varIn;
-                    ThreadPool.QueueUserWorkItem( ctx=> ExecuteStudioShellPowerShellCommand(commandName, input) );
-                    return;
-                }
-			}
+		            if (commandName.EndsWith("_1"))
+		            {
+		                handled = true;
+		                return;
+		            }
 
-            
+		            if (FunctionUtilities.IsPowerShellCommandName(commandName))
+		            {
+		                varOut = null;
+		                handled = true;
+		                object input = varIn;
+		                ThreadPool.QueueUserWorkItem(ctx => ExecuteStudioShellPowerShellCommand(commandName, input));
+		                return;
+		            }
+		        }
+
+		    }
+		    catch (Exception x)
+		    {
+		        Logger.Error("An exception was raised while attempting to execute command " + commandName, x);
+		        throw;
+		    }
+
+		    Logger.DebugFormat("< Exec [{0}] [{1}]", commandName, executeOption);
 		}
 
 	    private object ExecuteStudioShellPowerShellCommand(string commandName, object varIn)
 	    {
 	        object varOut = null;
-	        if (null != Shell)
+	        try
 	        {
-	            string command = commandName;
-	            var args = new Dictionary<string, object>();
-	            args["varIn"] = varIn;
-	            varOut = Shell.Execute(command, args);
+	            if (null != Shell)
+	            {
+	                string command = commandName;
+	                var args = new Dictionary<string, object>();
+	                args["varIn"] = varIn;
+	                varOut = Shell.Execute(command, args);
+	            }
 	        }
+	        catch (Exception x)
+	        {
+	            Logger.Error("An exception was raised while attempting to execure the PowerShell-based command " + commandName, x);
+	            throw;
+	        }
+
 	        return varOut;
 	    }
 
