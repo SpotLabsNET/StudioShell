@@ -214,7 +214,11 @@
                 <Component Id="cmp265532F5F4489C9AF24922AA6E7FADA1" Guid="414D65F8-81B5-4D02-A1DF-23E4EA6390BC">
                     <File Id="filDDBA239E7C9ED139FAEAD311B35381E4" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Cmdlets.pdb" />
                 </Component>
-                <Component Id="cmp01C7705D531E49EB375EBB4DF70D298D" Guid="9C51B4F9-4703-4B29-A051-FC3FBB3CF662">
+              <Component Id="cmp730C2103CAEADCAFDC21309A3A9932F6" Guid="E80EC46B-B232-49A1-8737-DA5432BD1C2F">
+                <File Id="filDEEC7D742DB93B7F8E88E6BD10A8C021" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\log4net.dll" />                
+              </Component>
+
+              <Component Id="cmp01C7705D531E49EB375EBB4DF70D298D" Guid="9C51B4F9-4703-4B29-A051-FC3FBB3CF662">
                     <Class Id="{4531A98B-A1E7-32B9-B648-D28714D7B5BA}" Context="InprocServer32" Description="CodeOwls.StudioShell.Common.Exceptions.StudioShellException" ThreadingModel="both" ForeignServer="mscoree.dll">
                         <ProgId Id="CodeOwls.StudioShell.Common.Exceptions.StudioShellException" Description="CodeOwls.StudioShell.Common.Exceptions.StudioShellException" />
                     </Class>
@@ -845,6 +849,7 @@
             <ComponentRef Id="cmp66AAEB02822998B72653E0638DE34C8A" />
             <ComponentRef Id="cmp566D3604E657BBDFEAFC8760489C73B7" />
             <ComponentRef Id="cmp2291BB688010619DC72BA1BB29E13B5C" />
+            <ComponentRef Id="cmp730C2103CAEADCAFDC21309A3A9932F6" />
         </ComponentGroup>
     </Fragment>
 </Wix>
