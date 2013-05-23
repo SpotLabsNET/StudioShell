@@ -91,10 +91,6 @@ namespace CodeOwls.PowerShell.Host.Executors
         public string ExecuteAndGetStringResult(string command, out Exception exceptionThrown)
         {
             var results = ExecuteCommand(command, out exceptionThrown, ExecutionOptions.None);
-            if (null != exceptionThrown)
-            {
-                return null;
-            }
 
             if (null == results || ! results.Any())
             {
@@ -224,7 +220,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                         // WaitWhilePipelineIsRunning(tempPipeline);                    
 
                         collection = tempPipeline.Output.ReadToEnd(); 
-                        exception = GetPipelineError(options, tempPipeline);
+                         exception = GetPipelineError(options, tempPipeline);
                     }
                     catch( Exception e )
                     {
@@ -327,16 +323,16 @@ namespace CodeOwls.PowerShell.Host.Executors
                 pipelineException = error as Exception;
                 if (null == pipelineException)
                 {
-                    pipelineException = ((ErrorRecord) error).Exception;
+                    pipelineException = ((ErrorRecord) (error.ToPSObject()).BaseObject ).Exception;
                 }
             }
 
-            if (null != pipelineException &&
-                0 == (options & ExecutionOptions.AddOutputter))
+            /*if (null != pipelineException &&
+                0 != (options & ExecutionOptions.DoNotThrowPipelineException))
             {
                 throw pipelineException;
-            }
-
+            }*/            
+            
             return pipelineException;
         }
     }

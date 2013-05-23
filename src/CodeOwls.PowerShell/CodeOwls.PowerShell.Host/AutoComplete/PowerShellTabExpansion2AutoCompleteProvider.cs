@@ -65,6 +65,12 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
             Exception error;
             bool enabled;
             var result = _executor.ExecuteAndGetStringResult("test-path function:/tabexpansion2", out error);
+            if (null != error)
+            {
+                _enabled = false;
+                return;
+            }
+            
             bool.TryParse(result, out enabled);
             _enabled = enabled;
         }

@@ -290,7 +290,9 @@ namespace CodeOwls.PowerShell.Host
         {
             this._commandExecutor.RunspaceReady.WaitOne(); 
             Exception error;
+            _commandExecutor.PipelineException -= OnPipelineException;
             var prompt = _commandExecutor.ExecuteAndGetStringResult("prompt", out error) ?? String.Empty;
+            _commandExecutor.PipelineException += OnPipelineException;
             prompt = prompt.Trim(); 
             WritePrompt(prompt);
         }
@@ -384,7 +386,7 @@ namespace CodeOwls.PowerShell.Host
 
         private void OnPipelineException(object sender, EventArgs<Exception> e)
         {
-            //_host.UI.WriteErrorLine(e.Data.ToString());
+            _host.UI.WriteErrorLine(e.Data.ToString());
         }
 
         private void NotifyProgress(object sender, ProgressRecordEventArgs e)
