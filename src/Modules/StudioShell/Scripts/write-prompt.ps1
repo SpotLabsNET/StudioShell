@@ -14,9 +14,27 @@
 #   limitations under the License.
 #
 
-
 write-host;
-prompt | write-host -nonewline;
+
+# note 05.24.2013 beef
+#
+# in order to completely silence errors from console apps like git or hg, it is necessary
+# to defer prompt string processing to the StudioShell host Shell object.
+#
+# I wish there was a cleaner way, I've tried the following without success:
+# trap{}...
+# &{ $erroractionpreference='silentlycontinue'; prompt 2>&1 }
+# try{ prompt } catch {}
+#
+# none of these approaches swallows errors such as using hg outside of a repository
+
+$shell = [CodeOwls.StudioShell.Common.IoC.Locator]::Get( 'CodeOwls.PowerShell.Host.Shell' );
+if( -not $shell )
+{
+    return;
+}
+
+$shell.queueWritePrompt();
 
 <#
 .SYNOPSIS
