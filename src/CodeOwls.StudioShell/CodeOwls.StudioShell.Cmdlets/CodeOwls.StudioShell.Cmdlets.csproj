@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSObjectBindingList.cs" />
+    <Compile Include="WritePromptCmdlet.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DataPaneControls\DataChartControl.resx">
@@ -103,6 +104,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CodeOwls.PowerShell\CodeOwls.PowerShell.Host\CodeOwls.PowerShell.Host.csproj">
+      <Project>{B975EFD5-7A18-4BD0-8711-38734C6F8EB1}</Project>
+      <Name>CodeOwls.PowerShell.Host</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeOwls.StudioShell.Common\CodeOwls.StudioShell.Common.csproj">
       <Project>{C7F94204-C1EC-4FC8-AF93-01C5E9E63671}</Project>
       <Name>CodeOwls.StudioShell.Common</Name>

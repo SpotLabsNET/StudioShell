@@ -45,12 +45,24 @@ namespace CodeOwls.PowerShell.Host
         private bool _disposed;
         private Thread _thread;
         private readonly ManualResetEvent _threadStopEvent;
+        private readonly ManualResetEvent _writePromptEvent;
 
         public Shell(IConsole consoleWindow, ShellConfiguration shellConfiguration)
         {
             _threadStopEvent = new ManualResetEvent(false);
+            _writePromptEvent = new ManualResetEvent(false);
             _consoleWindow = consoleWindow;
             _shellConfiguration = shellConfiguration;
+        }
+
+        public void QueueWritePrompt()
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            _writePromptEvent.Set();
         }
 
         public void Dispose()
@@ -60,6 +72,8 @@ namespace CodeOwls.PowerShell.Host
                 return;
             }
             _disposed = true;
+
+            _writePromptEvent.Close();
             _threadStopEvent.Set();                                    
         }
 
@@ -200,7 +214,8 @@ namespace CodeOwls.PowerShell.Host
                                                _host.ExitWaitHandle,
                                                _consoleWindow.CommandEnteredEvent,
                                                Queue.WaitHandle,
-                                               _threadStopEvent
+                                               _threadStopEvent,
+                                               _writePromptEvent
                                            }.ToList().Where( f=>f != null).ToArray();
 
                 int index = WaitHandle.WaitAny(handles);
@@ -220,6 +235,10 @@ namespace CodeOwls.PowerShell.Host
                         _runspace.Dispose();
                         _threadStopEvent.Close();
                         return;
+                    case (4):
+                        WritePrompt();
+                        _writePromptEvent.Reset();
+                        break;
 
                     default:
                         break;
@@ -286,7 +305,7 @@ namespace CodeOwls.PowerShell.Host
             WritePrompt();
         }
 
-        private void WritePrompt()
+        void WritePrompt()
         {
             this._commandExecutor.RunspaceReady.WaitOne(); 
             Exception error;
@@ -470,3 +489,4 @@ namespace CodeOwls.PowerShell.Host
         #endregion
     }
 }
+

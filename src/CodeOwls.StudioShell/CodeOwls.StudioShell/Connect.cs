@@ -657,6 +657,8 @@ namespace CodeOwls.StudioShell
 	        shell.CommandCancelTimeout += (s, a) => PromptForForceCommandCancel();
 
             Shell = shell;
+            Locator.Set<Shell>( shell );
+
             Shell.Run();            
         }
 
