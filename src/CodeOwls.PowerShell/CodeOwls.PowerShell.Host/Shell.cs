@@ -73,7 +73,6 @@ namespace CodeOwls.PowerShell.Host
             }
             _disposed = true;
 
-            _writePromptEvent.Close();
             _threadStopEvent.Set();                                    
         }
 
@@ -112,7 +111,7 @@ namespace CodeOwls.PowerShell.Host
 
         public void Run()
         {
-            var thread = new Thread(_Run);
+            var thread = new Thread(RunRepl);
 
             var existing = Interlocked.CompareExchange(ref _thread, thread, null);
             if (null != existing)
@@ -153,7 +152,7 @@ namespace CodeOwls.PowerShell.Host
             }
         }
 
-        private void _Run(object o)
+        private void RunRepl(object o)
         {
             try
             {
@@ -234,6 +233,7 @@ namespace CodeOwls.PowerShell.Host
                     case( 3 ):
                         _runspace.Dispose();
                         _threadStopEvent.Close();
+                        _writePromptEvent.Close();
                         return;
                     case (4):
                         WritePrompt();
@@ -265,11 +265,11 @@ namespace CodeOwls.PowerShell.Host
 
         private Collection<PSObject> ExecuteCommand(string command, Dictionary<string, object> parameters, ExecutionOptions executionOptions)
         {
-            Exception e;
+            IEnumerable<ErrorRecord> e;
             var r = ExecuteCommand(command, parameters, executionOptions, out e);
             if( null != e )
             {
-                throw e;
+                throw e.First().Exception;
             }
             return r;
         }
@@ -282,24 +282,32 @@ namespace CodeOwls.PowerShell.Host
             _autoCompleteWalker.Reset();
 
             var input = _consoleWindow.ReadLine();
-            Exception e;
+            IEnumerable<ErrorRecord> e;
 
-            ExecuteCommand(input, ExecutionOptions.AddToHistory | ExecutionOptions.AddOutputter, out e);
-            if( e is IncompleteParseException )
+            const ExecutionOptions options = ExecutionOptions.AddToHistory | ExecutionOptions.AddOutputter |
+                                             ExecutionOptions.DoNotRaisePipelineException;
+            ExecuteCommand(input, options, out e);
+            var exception = ( from i in e select i.Exception ).FirstOrDefault();
+            if( exception is IncompleteParseException )
             {
-                var lastInput = "+";
-                while (e is IncompleteParseException)
+                while (exception is IncompleteParseException)
                 {
                     WritePrompt(">> ");
                     _consoleWindow.CommandEnteredEvent.WaitOne();
-                    lastInput = _consoleWindow.ReadLine();
+                    var lastInput = _consoleWindow.ReadLine();
                     if( String.IsNullOrEmpty( lastInput ))
                     {
-                        ExecuteCommand(input, ExecutionOptions.AddToHistory | ExecutionOptions.AddOutputter, out e);
+                        ExecuteCommand(input, options, out e);
+                        exception = (from i in e select i.Exception).FirstOrDefault();
                     }
 
                     input += Environment.NewLine + lastInput;
                 }
+            }
+
+            if (null != e)
+            {
+                OutputPipelineException( e );
             }
 
             WritePrompt();
@@ -307,11 +315,11 @@ namespace CodeOwls.PowerShell.Host
 
         void WritePrompt()
         {
-            this._commandExecutor.RunspaceReady.WaitOne(); 
-            Exception error;
-            _commandExecutor.PipelineException -= OnPipelineException;
+            this._commandExecutor.RunspaceReady.WaitOne();
+
+            IEnumerable<ErrorRecord> error;
             var prompt = _commandExecutor.ExecuteAndGetStringResult("prompt", out error) ?? String.Empty;
-            _commandExecutor.PipelineException += OnPipelineException;
+            
             prompt = prompt.Trim(); 
             WritePrompt(prompt);
         }
@@ -326,7 +334,7 @@ namespace CodeOwls.PowerShell.Host
             _consoleWindow.WritePrompt(prompt);
         }
 
-        private Collection<PSObject> ExecuteCommand(string input, ExecutionOptions executionOptions, out Exception error)
+        private Collection<PSObject> ExecuteCommand(string input, ExecutionOptions executionOptions, out IEnumerable<ErrorRecord> error )
         {
             error = null;
             var onx = CommandExecutionStateChange;
@@ -350,7 +358,7 @@ namespace CodeOwls.PowerShell.Host
 
 
         private Collection<PSObject> ExecuteCommand(string command, Dictionary<string, object> arguments,
-                                                    ExecutionOptions options, out Exception error)
+                                                    ExecutionOptions options, out IEnumerable<ErrorRecord> error)
         {
             error = null;
             var onx = CommandExecutionStateChange;
@@ -395,17 +403,24 @@ namespace CodeOwls.PowerShell.Host
             _runspace.Open();
 
             _commandExecutor = new Executor(_runspace);
-            _commandExecutor.PipelineException += OnPipelineException;
-
-
+            
             _shellConfiguration.InitialVariables.ToList().ForEach(pair =>
                                                                   _runspace.SessionStateProxy.PSVariable.Set(pair)
                 );
         }
 
-        private void OnPipelineException(object sender, EventArgs<Exception> e)
+        private void OutputPipelineException(IEnumerable<ErrorRecord> errors)
         {
-            _host.UI.WriteErrorLine(e.Data.ToString());
+            errors.ToList().ForEach(OutputPipelineException);
+        }
+
+        private void OutputPipelineException(ErrorRecord e)
+        {
+            //_host.UI.WriteErrorLine(e.ToString());
+            PSObject er = new PSObject( e );
+            er.Properties.Add(new PSNoteProperty("writeErrorStream", true));
+            IEnumerable<ErrorRecord> errors;
+            _commandExecutor.OutputObjects( new object[]{er}, out errors, ExecutionOptions.AddOutputter);
         }
 
         private void NotifyProgress(object sender, ProgressRecordEventArgs e)
@@ -434,9 +449,15 @@ namespace CodeOwls.PowerShell.Host
                     continue;
                 }
 
-                Exception error;
-                _commandExecutor.ExecuteCommand(fileInfo.ToDotSource(), out error, ExecutionOptions.AddOutputter);
+                ExecuteStartupCommandAndOutputErrors(fileInfo.ToDotSource());
             }
+        }
+
+        void ExecuteStartupCommandAndOutputErrors(string command)
+        {
+            IEnumerable<ErrorRecord> errors;
+            _commandExecutor.ExecuteCommand(command, out errors, ExecutionOptions.AddOutputter);
+            OutputPipelineException( errors );
         }
 
         private void RunInitializationScripts()
@@ -448,8 +469,7 @@ namespace CodeOwls.PowerShell.Host
 
             foreach (ScriptConfigurationEntry entry in _shellConfiguration.RunspaceConfiguration.InitializationScripts)
             {
-                Exception error;
-                _commandExecutor.ExecuteCommand(entry.Definition, out error, ExecutionOptions.AddOutputter);
+                ExecuteStartupCommandAndOutputErrors(entry.Definition);
             }
         }
 

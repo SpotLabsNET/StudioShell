@@ -45,8 +45,8 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
             }
 
             var info = FormatGuessInfo(guess);
-            Exception error;
-            var items = _executor.ExecuteCommand(GetCommand(info), out error, ExecutionOptions.None);
+            IEnumerable<ErrorRecord> error;
+            var items = _executor.ExecuteCommand(GetCommand(info), out error, ExecutionOptions.DoNotRaisePipelineException);
             if (null == items)
             {
                 return new string[] {};
@@ -72,18 +72,20 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
             var parts = from token in tokens
                         select token.Content;
 
-            return parts.ToArray();
+            if (parts.Any())
+            {
+                return parts.ToArray();
+            }
 
-            //guess = guess.Trim();
-            //Regex re = new Regex(@"('[^']+(?:'|$))|(""[^""]+(?:""|$))|([^\s'""]+)");
-            //var matches = re.Matches(guess);
+            guess = guess.Trim();
+            Regex re = new Regex(@"('[^']+(?:'|$))|(""[^""]+(?:""|$))|([^\s'""]+)");
+            var matches = re.Matches(guess);
+            return (from Match match in matches
+                    let value =
+                        String.IsNullOrEmpty(match.Groups[1].Value) ? match.Groups[0].Value : match.Groups[1].Value
+                    select value).ToArray();
 
-            //return (from Match match in matches
-            //        let value =
-            //            String.IsNullOrEmpty(match.Groups[1].Value) ? match.Groups[0].Value : match.Groups[1].Value
-            //        select value).ToArray();
-
-            /*return Regex.Split(guess, @"\s+");
+            //return Regex.Split(guess, @"\s+");
             /*char[] quotes = new char[] {'\'', '"'};
             
             if( (-1) != guess.IndexOfAny( quotes ))

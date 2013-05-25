@@ -43,7 +43,7 @@ namespace CodeOwls.PowerShell.Host.Executors
             }
         }
 
-        public event EventHandler<EventArgs<Exception>> PipelineException;
+        public event EventHandler<EventArgs<ErrorRecord>> PipelineError;
 
         public bool CancelCurrentPipeline(int timeoutInMilliseconds, Action pipelineCancelFailCallback )
         {
@@ -88,7 +88,7 @@ namespace CodeOwls.PowerShell.Host.Executors
             return true;
         }
 
-        public string ExecuteAndGetStringResult(string command, out Exception exceptionThrown)
+        public string ExecuteAndGetStringResult(string command, out IEnumerable<ErrorRecord> exceptionThrown)
         {
             var results = ExecuteCommand(command, out exceptionThrown, ExecutionOptions.None);
 
@@ -109,8 +109,21 @@ namespace CodeOwls.PowerShell.Host.Executors
             return pso.BaseObject.ToString();
         }
 
+        public Collection<PSObject> OutputObjects(IEnumerable<object> inputs,
+                                                   out IEnumerable<ErrorRecord> error, ExecutionOptions options)
+        {
+            var pipe = _runspace.CreatePipeline();
+            
+            if (null != inputs && inputs.Any())
+            {
+                pipe.Input.Write(inputs, true);
+            }
+
+            return ExecuteCommandHelper(pipe, out error, options);
+        }
+
         public Collection<PSObject> ExecuteCommand(string command, Dictionary<string, object> inputs,
-                                                   out Exception error, ExecutionOptions options)
+                                                   out IEnumerable<ErrorRecord> error, ExecutionOptions options)
         {
             var isscript = null == inputs || !inputs.Any();
             var cmd = new Command(command, isscript, false);
@@ -128,23 +141,23 @@ namespace CodeOwls.PowerShell.Host.Executors
             return ExecuteCommandHelper(pipe, out error, options);
         }
 
-        public Collection<PSObject> ExecuteCommand(string command, out Exception error, ExecutionOptions options)
+        public Collection<PSObject> ExecuteCommand(string command, out IEnumerable<ErrorRecord> error, ExecutionOptions options)
         {
             var pipe = _runspace.CreatePipeline(command,
                                                 ExecutionOptions.None != (ExecutionOptions.AddToHistory & options));
             return ExecuteCommandHelper(pipe, out error, options);
         }
 
-        private void RaisePipelineExceptionEvent(Exception e)
+        private void RaisePipelineExceptionEvent(ErrorRecord e)
         {
-            EventHandler<EventArgs<Exception>> handler = PipelineException;
+            EventHandler<EventArgs<ErrorRecord>> handler = PipelineError;
             if (handler != null)
             {
-                handler(this, new EventArgs<Exception>(e));
+                handler(this, new EventArgs<ErrorRecord>(e));
             }
         }
 
-        private Collection<PSObject> ExecuteCommandHelper(Pipeline tempPipeline, out Exception exceptionThrown,
+        private Collection<PSObject> ExecuteCommandHelper(Pipeline tempPipeline, out IEnumerable<ErrorRecord> exceptionThrown,
                                                           ExecutionOptions options)
         {
             exceptionThrown = null;
@@ -168,7 +181,7 @@ namespace CodeOwls.PowerShell.Host.Executors
         }
 
         private Collection<PSObject> ExecutePipeline(ExecutionOptions options, Pipeline tempPipeline,
-                                                     Collection<PSObject> collection, out Exception exceptionThrown)
+                                                     Collection<PSObject> collection, out IEnumerable<ErrorRecord> exceptionThrown)
         {
             exceptionThrown = null;
             try
@@ -183,7 +196,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                 {
                     _currentPipeline = tempPipeline;
 
-                    Exception exception = null;
+                    IEnumerable<ErrorRecord> exception = null;
                     try
                     {
                         WaitWhileRunspaceIsBusy();
@@ -194,7 +207,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                             ExecutePipeline(options, tempPipeline);
                         }
                         catch (PSInvalidOperationException ioe)
-                        {                            
+                        {
                             /*
                              * HACK: there seems to be some lag between the toggle of the runspace
                              * availability state and the clearing of the runspace's current
@@ -209,9 +222,9 @@ namespace CodeOwls.PowerShell.Host.Executors
                              * on a DoWait while the pipeline is not in the completed or failed state;
                              * however this seems to slow the execution down considerably.  
                              */
-                            if ( tempPipeline.PipelineStateInfo.State == PipelineState.NotStarted )
+                            if (tempPipeline.PipelineStateInfo.State == PipelineState.NotStarted)
                             {
-                                Thread.Sleep( 333 );
+                                Thread.Sleep(333);
                                 ExecutePipeline(options, tempPipeline);
                             }
                         }
@@ -219,12 +232,23 @@ namespace CodeOwls.PowerShell.Host.Executors
 
                         // WaitWhilePipelineIsRunning(tempPipeline);                    
 
-                        collection = tempPipeline.Output.ReadToEnd(); 
-                         exception = GetPipelineError(options, tempPipeline);
+                        collection = tempPipeline.Output.ReadToEnd();
+                        if (null != tempPipeline.PipelineStateInfo.Reason)
+                        {
+                            throw tempPipeline.PipelineStateInfo.Reason;
+                        }
+                        exception = GetPipelineErrors(options, tempPipeline);
+                    }
+                    catch( RuntimeException re )
+                    {
+                        exception = new ErrorRecord[]{re.ErrorRecord};
                     }
                     catch( Exception e )
                     {
-                        exception = e;
+                        exception = new ErrorRecord[]
+                                        {
+                                            new ErrorRecord( e, e.GetType().FullName, ErrorCategory.NotSpecified, null), 
+                                        };
                     }
                     finally
                     {
@@ -233,7 +257,10 @@ namespace CodeOwls.PowerShell.Host.Executors
 
                     if (null != exception)
                     {
-                        RaisePipelineExceptionEvent(exception);
+                        if (!options.HasFlag(ExecutionOptions.DoNotRaisePipelineException))
+                        {
+                            exception.ToList().ForEach( RaisePipelineExceptionEvent );
+                        }
                         exceptionThrown = exception;
                     }
                 }
@@ -242,9 +269,12 @@ namespace CodeOwls.PowerShell.Host.Executors
                     Monitor.Exit(_runspace);
                 }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                exceptionThrown = exception;
+                exceptionThrown = new ErrorRecord[]
+                                        {
+                                            new ErrorRecord( ex, ex.GetType().FullName, ErrorCategory.NotSpecified, null), 
+                                        };
             }
             return collection;
         }
@@ -308,32 +338,26 @@ namespace CodeOwls.PowerShell.Host.Executors
 
         }
 
-        private Exception GetPipelineError(ExecutionOptions options, Pipeline tempPipeline)
+        private IEnumerable<ErrorRecord> GetPipelineErrors(ExecutionOptions options, Pipeline tempPipeline)
         {
-            Exception pipelineException = null;
-
-            if (null != tempPipeline.PipelineStateInfo.Reason)
-            {
-                return tempPipeline.PipelineStateInfo.Reason;
-            }
+            List<ErrorRecord> pipelineErrors = new List<ErrorRecord>();
 
             if ( 0 < tempPipeline.Error.Count)
             {
                 var error = tempPipeline.Error.Read();
-                pipelineException = error as Exception;
-                if (null == pipelineException)
+                var errorRecord = error.ToPSObject().BaseObject as ErrorRecord;
+                if (null == errorRecord)
                 {
-                    pipelineException = ((ErrorRecord) (error.ToPSObject()).BaseObject ).Exception;
+                    errorRecord = new ErrorRecord( error  as Exception, "", ErrorCategory.CloseError, null);
+                }
+
+                if (null != errorRecord)
+                {
+                    pipelineErrors.Add(errorRecord);
                 }
             }
-
-            /*if (null != pipelineException &&
-                0 != (options & ExecutionOptions.DoNotThrowPipelineException))
-            {
-                throw pipelineException;
-            }*/            
             
-            return pipelineException;
+            return pipelineErrors;
         }
     }
 }

@@ -14,7 +14,9 @@
    limitations under the License.
 */
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Management.Automation;
 using System.Threading;
 using CodeOwls.PowerShell.Host.Executors;
 
@@ -108,8 +110,8 @@ namespace CodeOwls.PowerShell.Host.History
             }
 
             _history = new HistoryStack();
-            Exception error;
-            var items = _executor.ExecuteCommand("get-history", out error, ExecutionOptions.None);
+            IEnumerable<ErrorRecord> error;
+            var items = _executor.ExecuteCommand("get-history", out error, ExecutionOptions.DoNotRaisePipelineException);
             if (null == items)
             {
                 return false;

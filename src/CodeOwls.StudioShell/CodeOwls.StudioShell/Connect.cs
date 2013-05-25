@@ -273,6 +273,7 @@ namespace CodeOwls.StudioShell
             if (null != shell)
             {
                 shell.Stop();
+                shell.Dispose();
             }
 
 	        RemoveScriptCommands();

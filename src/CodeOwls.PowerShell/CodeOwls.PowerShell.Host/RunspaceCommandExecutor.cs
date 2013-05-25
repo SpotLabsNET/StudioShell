@@ -14,6 +14,7 @@
    limitations under the License.
 */
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
@@ -88,10 +89,10 @@ namespace CodeOwls.PowerShell.Host
             Collection<PSObject> results = null;
             try
             {
-                Exception error = null;
+                IEnumerable<ErrorRecord> error = null;
                 results = _executor.ExecuteCommand(asynResult.Command, asynResult.Parameters, out error,
                                                    asynResult.ExecutionOptions);
-                asynResult.SetComplete(results, false, error);
+                asynResult.SetComplete(results, false, null);
             }
             catch (Exception e)
             {
