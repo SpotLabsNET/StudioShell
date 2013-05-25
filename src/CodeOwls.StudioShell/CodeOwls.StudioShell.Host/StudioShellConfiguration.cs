@@ -14,7 +14,9 @@
    limitations under the License.
 */
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
@@ -45,6 +47,58 @@ namespace CodeOwls.StudioShell.Host
             InitialVariables = initialVariables;
             RunspaceConfiguration = runspaceConfiguration;
             UISettings = uiSettings;
+
+            var blacklist = new List<string>
+                                                 {
+                                                     "cmd",
+                                                     "cmd.exe",
+                                                     "diskpart",
+                                                     "diskpart.exe",
+                                                     "edit.com",
+                                                     "netsh",
+                                                     "netsh.exe",
+                                                     "nslookup",
+                                                     "nslookup.exe",
+                                                     "powershell",
+                                                     "powershell.exe",
+                                                     "vim",
+                                                     "vim.exe"
+                                                 };
+
+            UnsupportedConsoleApplications = blacklist;
+            UnsupportedConsoleApplicationsVariableName = UpdateableBlacklist.VariableName;
+            UnsupportedConsoleApplicationsHelpTopicName = "about_StudioShell_UnsupportedApplications";
+            initialVariables.Add(new UpdateableBlacklist( this ));
+        }
+
+        class UpdateableBlacklist : PSVariable
+        {
+            private readonly ShellConfiguration _config;
+
+            public UpdateableBlacklist(ShellConfiguration config)
+                : base(VariableName)
+            {
+                _config = config;
+            }
+
+            public const string VariableName = "psUnsupportedConsoleApplications";
+
+            public override object Value
+            {
+                get { return _config.UnsupportedConsoleApplications; }
+                set
+                {
+                    var values = PSObject.AsPSObject(value).BaseObject as object[];
+                    if (null == values)
+                    {
+                        _config.UnsupportedConsoleApplications = null;
+                        return;
+                    }
+                    
+                    _config.UnsupportedConsoleApplications = 
+                        values.Where(v=>null != v).ToList().ConvertAll( v=>v.ToString() );
+                }
+            }
         }
     }
 }

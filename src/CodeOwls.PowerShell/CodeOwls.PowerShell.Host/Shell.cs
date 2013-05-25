@@ -281,12 +281,12 @@ namespace CodeOwls.PowerShell.Host
             _historyStackWalker.Reset();
             _autoCompleteWalker.Reset();
 
-            var input = _consoleWindow.ReadLine();
+            var scriptLine = _consoleWindow.ReadLine();
             IEnumerable<ErrorRecord> e;
 
             const ExecutionOptions options = ExecutionOptions.AddToHistory | ExecutionOptions.AddOutputter |
                                              ExecutionOptions.DoNotRaisePipelineException;
-            ExecuteCommand(input, options, out e);
+            ExecuteCommand(scriptLine, options, out e);
             var exception = ( from i in e select i.Exception ).FirstOrDefault();
             if( exception is IncompleteParseException )
             {
@@ -297,11 +297,11 @@ namespace CodeOwls.PowerShell.Host
                     var lastInput = _consoleWindow.ReadLine();
                     if( String.IsNullOrEmpty( lastInput ))
                     {
-                        ExecuteCommand(input, options, out e);
+                        ExecuteCommand(scriptLine, options, out e);
                         exception = (from i in e select i.Exception).FirstOrDefault();
                     }
 
-                    input += Environment.NewLine + lastInput;
+                    scriptLine += Environment.NewLine + lastInput;
                 }
             }
 
@@ -334,9 +334,32 @@ namespace CodeOwls.PowerShell.Host
             _consoleWindow.WritePrompt(prompt);
         }
 
-        private Collection<PSObject> ExecuteCommand(string input, ExecutionOptions executionOptions, out IEnumerable<ErrorRecord> error )
+        private Collection<PSObject> ExecuteCommand(string script, ExecutionOptions executionOptions, out IEnumerable<ErrorRecord> error )
         {
             error = null;
+
+            if (IsUnsupportedApplication(script))
+            {
+                error = new ErrorRecord[]
+                            {
+                                new ErrorRecord( 
+                                    new NotSupportedException(
+                                        String.Format(
+@"The application ""{0}"" cannot be started because it is in the list of unsupported applications for this host.
+To view or modify the list of unsupported applications for this host, see the ${1} variable, or type ""get-help {2}"".
+Alternatively, you may try running the application as a unique process using the Start-Process cmdlet.",
+                                            script,
+                                            _shellConfiguration.UnsupportedConsoleApplicationsVariableName,
+                                            _shellConfiguration.UnsupportedConsoleApplicationsHelpTopicName)
+                                    ),
+                                    "UnsupportedApplication",
+                                    ErrorCategory.ResourceUnavailable, 
+                                    script)
+                            };
+
+                return null;
+            }
+
             var onx = CommandExecutionStateChange;
             if (null != onx)
             {
@@ -344,7 +367,7 @@ namespace CodeOwls.PowerShell.Host
             }
 
             var results = _commandExecutor.ExecuteCommand(
-                input,
+                script,
                 out error,
                 executionOptions
                 );
@@ -355,7 +378,6 @@ namespace CodeOwls.PowerShell.Host
             }
             return results;
         }
-
 
         private Collection<PSObject> ExecuteCommand(string command, Dictionary<string, object> arguments,
                                                     ExecutionOptions options, out IEnumerable<ErrorRecord> error)
@@ -416,7 +438,6 @@ namespace CodeOwls.PowerShell.Host
 
         private void OutputPipelineException(ErrorRecord e)
         {
-            //_host.UI.WriteErrorLine(e.ToString());
             PSObject er = new PSObject( e );
             er.Properties.Add(new PSNoteProperty("writeErrorStream", true));
             IEnumerable<ErrorRecord> errors;
@@ -481,6 +502,20 @@ namespace CodeOwls.PowerShell.Host
                 ev(this, EventArgs.Empty);
             }
         }
+
+        private bool IsUnsupportedApplication(string script)
+        {
+            if (null == _shellConfiguration.UnsupportedConsoleApplications)
+            {
+                return false;
+            }
+
+            return this._shellConfiguration.UnsupportedConsoleApplications.Contains(
+                script.Trim(),
+                StringComparer.InvariantCultureIgnoreCase
+            );
+        }
+
         #region Nested type: StartupState
 
         private class StartupState
