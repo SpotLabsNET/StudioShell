@@ -38,5 +38,10 @@ namespace CodeOwls.PowerShell.Host.Configuration
         public IProfileInfo ProfileScripts { get; set; }
 
         public List<CmdletConfigurationEntry> Cmdlets { get; set; }
+
+        public IEnumerable<string> UnsupportedConsoleApplications { get; set; }
+
+        public string UnsupportedConsoleApplicationsVariableName { get; set; }
+        public string UnsupportedConsoleApplicationsHelpTopicName { get; set; }
     }
 }
