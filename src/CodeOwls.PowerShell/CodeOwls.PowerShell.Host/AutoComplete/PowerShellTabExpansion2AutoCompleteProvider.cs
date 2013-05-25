@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Automation;
 using CodeOwls.PowerShell.Host.Executors;
 using CodeOwls.PowerShell.Host.Utility;
 
@@ -43,8 +44,8 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
             try
             {
                 var script = String.Format(TabExpansionScript, guess, guess.Length);
-                Exception error;
-                var results = _executor.ExecuteCommand(script, null, out error,
+                IEnumerable<ErrorRecord> error;
+                var results = _executor.ExecuteCommand(script, out error,
                                                        ExecutionOptions.None);
                 if (null == results)
                 {
@@ -62,7 +63,7 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
 
         private void InitializeEnabled()
         {
-            Exception error;
+            IEnumerable<ErrorRecord> error;
             bool enabled;
             var result = _executor.ExecuteAndGetStringResult("test-path function:/tabexpansion2", out error);
             if (null != error)

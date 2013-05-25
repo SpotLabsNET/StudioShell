@@ -42,7 +42,7 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
         {
             try
             {
-                Exception error;
+                IEnumerable<ErrorRecord> error;
                 Collection<PSParseError> errors;
                 
                 IEnumerable<PSToken> tokens = PSParser.Tokenize( guess, out errors );

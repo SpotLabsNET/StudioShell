@@ -24,6 +24,6 @@ namespace CodeOwls.PowerShell.Host.Executors
         AddOutputter = 1,
         AddToHistory = 2,
         Synchronous = 4,
-        DoNotThrowPipelineException = 8,
+        DoNotRaisePipelineException = 8,
     }
 }

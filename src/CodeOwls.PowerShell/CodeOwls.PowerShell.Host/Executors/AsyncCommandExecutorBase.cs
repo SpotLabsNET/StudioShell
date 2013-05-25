@@ -87,7 +87,8 @@ namespace CodeOwls.PowerShell.Host.Executors
         public IAsyncResult BeginExecute(string command, Dictionary<string, object> parameters, bool outputToConsole,
                                          AsyncCallback callback, object asyncState)
         {
-            ExecutionOptions options = outputToConsole ? ExecutionOptions.AddOutputter : ExecutionOptions.None;
+            ExecutionOptions options = ExecutionOptions.DoNotRaisePipelineException | (
+                outputToConsole ? ExecutionOptions.AddOutputter : ExecutionOptions.None );
             return BeginExecute(command, parameters, options, callback, asyncState);
         }
 
