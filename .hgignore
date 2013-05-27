@@ -14,3 +14,4 @@ NDepend
 \.cache
 ~$
 _local
+src\Installer\Variables.wxi
