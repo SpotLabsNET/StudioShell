@@ -16,7 +16,13 @@
 param($installPath, $toolsPath, $package, $project)
 
 # verify Visual Studio version support
-$vsversion = $env:visualStudioVersion -split '\.' | select -first 1;
+$vsversion = ( [environment]::getCommandLineArgs() | 
+        select -first 1 | 
+        get-item |
+        select -exp VersionInfo |
+        select -exp ProductVersion 
+    ) -split '\.' | select -first 1
+    
 if( 9,10,11 -notcontains $vsversion )
 {
     uninstall-package $package.id
@@ -25,6 +31,7 @@ if( 9,10,11 -notcontains $vsversion )
 }
 
 $vsVersionName = @{ '9' = "2008"; '10'='2010'; '11'='2012' }[ $vsversion ]
+
 # verify or create home-based module path
 $mydocs = [environment]::getFolderPath( 'mydocuments' );
 $modulePath = $env:PSModulePath -split ';' -match [regex]::escape( $mydocs ) | select -First 1;
