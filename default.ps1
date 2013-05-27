@@ -61,6 +61,11 @@ function get-modulePackageDirectory
     return "." | resolve-path | join-path -child "/bin/$config/Modules";
 }
 
+function get-targetOutputDirectory
+{
+    return $targetPath | resolve-path | join-path -child $config;
+}
+
 function create-PackageDirectory( [Parameter(ValueFromPipeline=$true)]$packageDirectory )
 {
     process
@@ -133,6 +138,22 @@ function assemble-moduleDocumentation
 	$help.Save( $providerHelpPath );
 }
 
+function get-nugetPackagePath
+{
+    $output = get-packageDirectory;
+    $ngp = get-nugetPackageDirectory;
+    $tools = join-path $ngp 'tools';
+	$content = Join-Path $ngp 'content';
+    $md = join-path $tools "StudioShell\bin\$metadataAssembly";
+    
+	#prepare the nuget distribution area
+	Write-Verbose "preparing nuget distribution hive ...";
+	
+	$version = ( get-item $md | select -exp versioninfo | select -exp productversion );
+	
+    "$output\StudioShell.$version.nupkg";    
+}
+
 # primary targets
 
 task Build -depends __VerifyConfiguration -description "builds any outdated dependencies from source" {
@@ -150,6 +171,13 @@ task Clean -depends __VerifyConfiguration,CleanNuGet,CleanModule -description "d
 task Rebuild -depends Clean,Build -description "runs a clean build";
 
 task Package -depends PackageModule,PackageNuGet,PackageMSI -description "assembles distributions in the source hive"
+
+task Publish -depends _PublishNugetPackage -description "Publishes pacakges to various places" 
+
+task _PublishNugetPackage -depends PackageNuget {
+    $package = get-nugetPackagePath
+    nuget push $package
+}
 
 # clean tasks
 
