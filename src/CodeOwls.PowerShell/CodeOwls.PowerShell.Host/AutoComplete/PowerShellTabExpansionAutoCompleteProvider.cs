@@ -54,6 +54,12 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
 
                 var lastToken = tokens.Last();
                 var lastWord = lastToken.Content;
+                
+                if (PSTokenType.Variable == lastToken.Type)
+                {
+                    lastWord = "$" + lastWord;
+                }
+                
                 var arguments = new Dictionary<string, object>
                                     {
                                         {LineArgumentName, guess},
