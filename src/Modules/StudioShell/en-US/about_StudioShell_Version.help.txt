@@ -12,6 +12,22 @@ CHANGE LOG
 
 1.5
   Resolved Issues
+  1.5.1
+    55: Visual Studio version detection in nuget install script now uses product version 
+    of the environment command line.  
+
+    55: Installer now checks for OLE object definitions in HKCR to verify existence
+    of Visual Studio installations.
+
+    Tab expansion works again for variable names.
+
+    50: Error management and reporting has been revamped in several ways.  First, 
+    exceptions explicitly thrown from the console are now reported rather than silently
+    disappearing.  Second, errors that occur during non-interactive use of the runspace,
+    such as calculating the prompt or running a scriptblock as part of a menu item, no 
+    longer propagate out to the Visual Studio process as exceptions.
+
+  1.5.0
     You can now add a reference to a project by its name when the project is 
     contained in a solution folder.
 
@@ -63,6 +79,12 @@ CHANGE LOG
     27: Importing into the ISE is now functional.
 		
   Added Features
+  1.5.1:
+    51: Added intercept for unsupported console applications.  Attempting to
+    run an known interactive console application from the StudioShell console
+    will result in an error as it does in the ISE console.
+
+  1.5.0:
     Added StudioShellVersion entry to existing psversiontable variable.    
 
     43: Add-in and build install support for VS 2012.
