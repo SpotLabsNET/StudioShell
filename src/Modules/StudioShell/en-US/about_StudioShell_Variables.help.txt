@@ -13,6 +13,7 @@ LONG DESCRIPTION
   General
   
 	$dte : the root EnvDTE.DTE object exposed by Visual Studio
+	$psUnsupportedConsoleApplications : a list of applications the StudioShell console is prohibited to run
 	
   Current Selections
 
@@ -97,5 +98,5 @@ LONG DESCRIPTION
 							                           
 SEE ALSO
     about_StudioShell
-
+    about_StudioShell_UnsupportedApplications
 

@@ -337,21 +337,13 @@ namespace CodeOwls.PowerShell.Host
         private Collection<PSObject> ExecuteCommand(string script, ExecutionOptions executionOptions, out IEnumerable<ErrorRecord> error )
         {
             error = null;
-
-            if (IsUnsupportedApplication(script))
+            Exception exception;
+            if (_shellConfiguration.IsUnsupportedConsoleApplication( script, out exception ))
             {
                 error = new ErrorRecord[]
                             {
                                 new ErrorRecord( 
-                                    new NotSupportedException(
-                                        String.Format(
-@"The application ""{0}"" cannot be started because it is in the list of unsupported applications for this host.
-To view or modify the list of unsupported applications for this host, see the ${1} variable, or type ""get-help {2}"".
-Alternatively, you may try running the application as a unique process using the Start-Process cmdlet.",
-                                            script,
-                                            _shellConfiguration.UnsupportedConsoleApplicationsVariableName,
-                                            _shellConfiguration.UnsupportedConsoleApplicationsHelpTopicName)
-                                    ),
+                                    exception,
                                     "UnsupportedApplication",
                                     ErrorCategory.ResourceUnavailable, 
                                     script)
@@ -501,19 +493,6 @@ Alternatively, you may try running the application as a unique process using the
             {
                 ev(this, EventArgs.Empty);
             }
-        }
-
-        private bool IsUnsupportedApplication(string script)
-        {
-            if (null == _shellConfiguration.UnsupportedConsoleApplications)
-            {
-                return false;
-            }
-
-            return this._shellConfiguration.UnsupportedConsoleApplications.Contains(
-                script.Trim(),
-                StringComparer.InvariantCultureIgnoreCase
-            );
         }
 
         #region Nested type: StartupState

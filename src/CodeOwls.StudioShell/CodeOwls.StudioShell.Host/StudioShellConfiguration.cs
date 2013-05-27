@@ -62,20 +62,25 @@ namespace CodeOwls.StudioShell.Host
                                                      "powershell",
                                                      "powershell.exe",
                                                      "vim",
-                                                     "vim.exe"
+                                                     "vim.exe",
+                                                     "wmic",
+                                                     "wmic.exe"
                                                  };
 
-            UnsupportedConsoleApplications = blacklist;
-            UnsupportedConsoleApplicationsVariableName = UpdateableBlacklist.VariableName;
-            UnsupportedConsoleApplicationsHelpTopicName = "about_StudioShell_UnsupportedApplications";
-            initialVariables.Add(new UpdateableBlacklist( this ));
+            UnsupportedConsoleApplicationConfiguration = new UnsupportedConsoleApplicationConfiguration(
+                blacklist, 
+                UpdateableBlacklistVariable.VariableName, 
+                "about_StudioShell_UnsupportedApplications"
+            );
+
+            initialVariables.Add(new UpdateableBlacklistVariable( UnsupportedConsoleApplicationConfiguration ));
         }
 
-        class UpdateableBlacklist : PSVariable
+        class UpdateableBlacklistVariable : PSVariable
         {
-            private readonly ShellConfiguration _config;
+            private readonly UnsupportedConsoleApplicationConfiguration _config;
 
-            public UpdateableBlacklist(ShellConfiguration config)
+            public UpdateableBlacklistVariable(UnsupportedConsoleApplicationConfiguration config)
                 : base(VariableName)
             {
                 _config = config;

@@ -28,6 +28,7 @@ namespace CodeOwls.PowerShell.Host.Configuration
             UISettings = new UISettings();
             InitialVariables = new List<PSVariable>();
             Cmdlets = new List<CmdletConfigurationEntry>();
+            UnsupportedConsoleApplicationConfiguration = new UnsupportedConsoleApplicationConfiguration();
         }
 
         public string ShellName { get; set; }
@@ -36,12 +37,17 @@ namespace CodeOwls.PowerShell.Host.Configuration
         public UISettings UISettings { get; set; }
         public RunspaceConfiguration RunspaceConfiguration { get; set; }
         public IProfileInfo ProfileScripts { get; set; }
-
         public List<CmdletConfigurationEntry> Cmdlets { get; set; }
+        public UnsupportedConsoleApplicationConfiguration UnsupportedConsoleApplicationConfiguration { get; set; }
 
-        public IEnumerable<string> UnsupportedConsoleApplications { get; set; }
-
-        public string UnsupportedConsoleApplicationsVariableName { get; set; }
-        public string UnsupportedConsoleApplicationsHelpTopicName { get; set; }
+        public bool IsUnsupportedConsoleApplication(string script, out Exception exception)
+        {
+            exception = null;
+            if (null == UnsupportedConsoleApplicationConfiguration)
+            {
+                return false;
+            }
+            return UnsupportedConsoleApplicationConfiguration.IsUnsupportedConsoleApplication(script, out exception);
+        }
     }
 }

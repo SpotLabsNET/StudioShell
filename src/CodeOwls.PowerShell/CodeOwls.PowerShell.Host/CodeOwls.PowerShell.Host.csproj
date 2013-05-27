@@ -62,9 +62,12 @@
     <Compile Include="CommandCompleteEventArgs.cs" />
     <Compile Include="Configuration\ShellConfiguration.cs" />
     <Compile Include="Configuration\UISettings.cs" />
+    <Compile Include="Configuration\UnsupportedConsoleApplicationConfiguration.cs" />
     <Compile Include="Console\ConsoleControlKeyStates.cs" />
     <Compile Include="Console\ConsoleKeyInfo.cs" />
     <Compile Include="Console\ConsoleSize.cs" />
+    <Compile Include="Exceptions\HostException.cs" />
+    <Compile Include="Exceptions\InvalidUnsupportedConsoleConfigurationException.cs" />
     <Compile Include="Executors\AsyncCommandExecutorBase.cs" />
     <Compile Include="Executors\AsyncCommandResult.cs" />
     <Compile Include="Executors\CommandExecutorState.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Utility\PSObjectExtensions.cs" />
     <Compile Include="Utility\SyncQueue.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
