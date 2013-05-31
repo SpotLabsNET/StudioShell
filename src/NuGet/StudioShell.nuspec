@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>StudioShell.Beta</id>
+    <id>StudioShell</id>
     <version>$id$</version>
     <authors>Code Owls LLC</authors>
     <owners>Code Owls LLC</owners>

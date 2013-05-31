@@ -38,7 +38,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StudioShellScripts", "StudioShellScripts", "{DD04F128-DC25-442D-9B99-C75C63429289}"
 	ProjectSection(SolutionItems) = preProject
 		StudioShellScripts\add-fileheader.ps1 = StudioShellScripts\add-fileheader.ps1
-		enable-debuggery.ps1 = enable-debuggery.ps1
 		StudioShellScripts\update-projectFrameworkVersion.ps1 = StudioShellScripts\update-projectFrameworkVersion.ps1
 	EndProjectSection
 EndProject
