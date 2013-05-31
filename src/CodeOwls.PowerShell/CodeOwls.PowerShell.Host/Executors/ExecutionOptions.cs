@@ -26,4 +26,12 @@ namespace CodeOwls.PowerShell.Host.Executors
         Synchronous = 4,
         DoNotRaisePipelineException = 8,
     }
+
+    public static class ExecutionOptionExtensions
+    {
+        public static bool HasFlag(this ExecutionOptions options, ExecutionOptions flag)
+        {
+            return flag == (options & flag);
+        }
+    }
 }
