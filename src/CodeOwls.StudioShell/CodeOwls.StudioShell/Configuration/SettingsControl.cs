@@ -59,10 +59,8 @@ namespace CodeOwls.StudioShell.Configuration
         {
             var map = new Dictionary<ConsoleChoice, RadioButton>
                           {
-                              {ConsoleChoice.None, radioButtonNoConsole},
                               {ConsoleChoice.OldSkool, radioButtonOldSkoolConsole},
-                              {ConsoleChoice.StudioShell, radioButtonDefaultConsole},
-                              {ConsoleChoice.VSCommand, radioButtonExecCommandConsole}
+                              {ConsoleChoice.StudioShell, radioButtonDefaultConsole}
                           };
 
             map[_settings.ConsoleChoice].Checked = true;
@@ -70,6 +68,7 @@ namespace CodeOwls.StudioShell.Configuration
             checkBoxLoadPowerShellProfiles.Checked = _settings.LoadPowerShellProfiles;
             checkBoxLoadStudioShellProfileScripts.Checked = _settings.LoadStudioShellProfiles;
             checkBoxLoadSolutionProfileScripts.Checked = _settings.AutoManagePerSolutionModules;
+            checkBoxStartStudioShellWhenVsStarts.Checked = _settings.RunStudioShellOnStartup;
 
             comboBox1.SelectedIndex = (int) _settings.StartupLogLevel;
 
@@ -88,17 +87,14 @@ namespace CodeOwls.StudioShell.Configuration
 
         public void OnOK()
         {
-            _settings.ConsoleChoice = radioButtonNoConsole.Checked
-                                          ? ConsoleChoice.None
-                                          : radioButtonOldSkoolConsole.Checked
+            _settings.ConsoleChoice = radioButtonOldSkoolConsole.Checked
                                                 ? ConsoleChoice.OldSkool
-                                                : radioButtonExecCommandConsole.Checked
-                                                      ? ConsoleChoice.VSCommand
-                                                      : ConsoleChoice.StudioShell;
+                                                : ConsoleChoice.StudioShell;
 
             _settings.LoadPowerShellProfiles = checkBoxLoadPowerShellProfiles.Checked;
             _settings.LoadStudioShellProfiles = checkBoxLoadStudioShellProfileScripts.Checked;
             _settings.AutoManagePerSolutionModules = checkBoxLoadSolutionProfileScripts.Checked;
+            _settings.RunStudioShellOnStartup = checkBoxStartStudioShellWhenVsStarts.Checked;
 
             _settings.StartupLogLevel = StartupLogLevel.None;
 
@@ -127,7 +123,6 @@ namespace CodeOwls.StudioShell.Configuration
 
         private void OnSelectedConsoleChanged(object sender, EventArgs e)
         {
-            textBoxVSCommand.Enabled = radioButtonExecCommandConsole.Checked;
             comboBox1.Enabled = ( radioButtonDefaultConsole.Checked || radioButtonOldSkoolConsole.Checked );
         }
 
