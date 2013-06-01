@@ -109,6 +109,10 @@ namespace CodeOwls.StudioShell
                 case (ext_ConnectMode.ext_cm_Startup):
                 case( ext_ConnectMode.ext_cm_AfterStartup):
                     RemoveScriptCommands();
+                    if (Settings.RunStudioShellOnStartup)
+                    {
+                        ExecuteStudioShellCommand();
+                    }
                     break;
                 
                 default:

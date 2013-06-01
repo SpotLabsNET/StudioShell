@@ -49,7 +49,6 @@ namespace CodeOwls.StudioShell.Configuration
             this.components = new System.ComponentModel.Container();
             this.radioButtonDefaultConsole = new System.Windows.Forms.RadioButton();
             this.radioButtonOldSkoolConsole = new System.Windows.Forms.RadioButton();
-            this.radioButtonExecCommandConsole = new System.Windows.Forms.RadioButton();
             this.textBoxVSCommand = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -61,7 +60,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.restartNotice = new System.Windows.Forms.Label();
-            this.radioButtonNoConsole = new System.Windows.Forms.RadioButton();
+            this.checkBoxStartStudioShellWhenVsStarts = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -94,21 +93,6 @@ namespace CodeOwls.StudioShell.Configuration
             this.radioButtonOldSkoolConsole.UseVisualStyleBackColor = true;
             this.radioButtonOldSkoolConsole.CheckedChanged += new System.EventHandler(this.OnSelectedConsoleChanged);
             // 
-            // radioButtonExecCommandConsole
-            // 
-            this.radioButtonExecCommandConsole.AutoSize = true;
-            this.radioButtonExecCommandConsole.Location = new System.Drawing.Point(28, 91);
-            this.radioButtonExecCommandConsole.Name = "radioButtonExecCommandConsole";
-            this.radioButtonExecCommandConsole.Size = new System.Drawing.Size(95, 17);
-            this.radioButtonExecCommandConsole.TabIndex = 4;
-            this.radioButtonExecCommandConsole.TabStop = true;
-            this.radioButtonExecCommandConsole.Text = "VS Command: ";
-            this.toolTip.SetToolTip(this.radioButtonExecCommandConsole, "Runs the specified Visual Studio command when the StudioShell console is requeste" +
-        "d.");
-            this.radioButtonExecCommandConsole.UseVisualStyleBackColor = true;
-            this.radioButtonExecCommandConsole.Visible = false;
-            this.radioButtonExecCommandConsole.CheckedChanged += new System.EventHandler(this.OnSelectedConsoleChanged);
-            // 
             // textBoxVSCommand
             // 
             this.textBoxVSCommand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -123,8 +107,6 @@ namespace CodeOwls.StudioShell.Configuration
             this.groupBox1.Controls.Add(this.radioButtonDefaultConsole);
             this.groupBox1.Controls.Add(this.textBoxVSCommand);
             this.groupBox1.Controls.Add(this.radioButtonOldSkoolConsole);
-            this.groupBox1.Controls.Add(this.radioButtonExecCommandConsole);
-            this.groupBox1.Controls.Add(this.radioButtonNoConsole);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(385, 74);
@@ -138,7 +120,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.checkBoxLoadPowerShellProfiles.Location = new System.Drawing.Point(28, 20);
             this.checkBoxLoadPowerShellProfiles.Name = "checkBoxLoadPowerShellProfiles";
             this.checkBoxLoadPowerShellProfiles.Size = new System.Drawing.Size(173, 17);
-            this.checkBoxLoadPowerShellProfiles.TabIndex = 0;
+            this.checkBoxLoadPowerShellProfiles.TabIndex = 4;
             this.checkBoxLoadPowerShellProfiles.Text = "Load PowerShell Profile Scripts";
             this.toolTip.SetToolTip(this.checkBoxLoadPowerShellProfiles, "Enable this option to load your standard PowerShell console profile scripts when " +
         "StudioShell is initialized.");
@@ -150,7 +132,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.checkBoxLoadStudioShellProfileScripts.Location = new System.Drawing.Point(28, 43);
             this.checkBoxLoadStudioShellProfileScripts.Name = "checkBoxLoadStudioShellProfileScripts";
             this.checkBoxLoadStudioShellProfileScripts.Size = new System.Drawing.Size(173, 17);
-            this.checkBoxLoadStudioShellProfileScripts.TabIndex = 1;
+            this.checkBoxLoadStudioShellProfileScripts.TabIndex = 5;
             this.checkBoxLoadStudioShellProfileScripts.Text = "Load StudioShell Profile Scripts";
             this.toolTip.SetToolTip(this.checkBoxLoadStudioShellProfileScripts, "Enable this option to load StudioShell profile scripts when StudioShell is initia" +
         "lized.");
@@ -162,7 +144,7 @@ namespace CodeOwls.StudioShell.Configuration
             this.checkBoxLoadSolutionProfileScripts.Location = new System.Drawing.Point(28, 66);
             this.checkBoxLoadSolutionProfileScripts.Name = "checkBoxLoadSolutionProfileScripts";
             this.checkBoxLoadSolutionProfileScripts.Size = new System.Drawing.Size(134, 17);
-            this.checkBoxLoadSolutionProfileScripts.TabIndex = 2;
+            this.checkBoxLoadSolutionProfileScripts.TabIndex = 6;
             this.checkBoxLoadSolutionProfileScripts.Text = "Load Solution Modules";
             this.toolTip.SetToolTip(this.checkBoxLoadSolutionProfileScripts, "Enable this option to allow StudioShell to automatically locate and load Solution" +
         " Profile scripts.");
@@ -176,12 +158,13 @@ namespace CodeOwls.StudioShell.Configuration
             this.groupBox2.Location = new System.Drawing.Point(3, 83);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(385, 93);
-            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Profile Options";
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.checkBoxStartStudioShellWhenVsStarts);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.comboBox1);
             this.groupBox3.Location = new System.Drawing.Point(6, 182);
@@ -194,7 +177,7 @@ namespace CodeOwls.StudioShell.Configuration
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 35);
+            this.label1.Location = new System.Drawing.Point(22, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 1;
@@ -207,10 +190,10 @@ namespace CodeOwls.StudioShell.Configuration
             "None",
             "Debug Only",
             "Verbose"});
-            this.comboBox1.Location = new System.Drawing.Point(101, 32);
+            this.comboBox1.Location = new System.Drawing.Point(101, 46);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(229, 21);
-            this.comboBox1.TabIndex = 0;
+            this.comboBox1.TabIndex = 8;
             // 
             // restartNotice
             // 
@@ -221,20 +204,17 @@ namespace CodeOwls.StudioShell.Configuration
             this.restartNotice.TabIndex = 9;
             this.restartNotice.Text = "Note: Changes will not take effect until you restart Visual Studio.";
             // 
-            // radioButtonNoConsole
+            // checkBoxStartStudioShellWhenVsStarts
             // 
-            this.radioButtonNoConsole.AutoSize = true;
-            this.radioButtonNoConsole.Location = new System.Drawing.Point(28, 68);
-            this.radioButtonNoConsole.Name = "radioButtonNoConsole";
-            this.radioButtonNoConsole.Size = new System.Drawing.Size(80, 17);
-            this.radioButtonNoConsole.TabIndex = 3;
-            this.radioButtonNoConsole.TabStop = true;
-            this.radioButtonNoConsole.Text = "No Console";
-            this.toolTip.SetToolTip(this.radioButtonNoConsole, "Choose this option if you are using StudioShell from another PowerShell console, " +
-        "such as NuGet or PowerGUI VSX.");
-            this.radioButtonNoConsole.UseVisualStyleBackColor = true;
-            this.radioButtonNoConsole.Visible = false;
-            this.radioButtonNoConsole.CheckedChanged += new System.EventHandler(this.OnSelectedConsoleChanged);
+            this.checkBoxStartStudioShellWhenVsStarts.AutoSize = true;
+            this.checkBoxStartStudioShellWhenVsStarts.Location = new System.Drawing.Point(25, 23);
+            this.checkBoxStartStudioShellWhenVsStarts.Name = "checkBoxStartStudioShellWhenVsStarts";
+            this.checkBoxStartStudioShellWhenVsStarts.Size = new System.Drawing.Size(225, 17);
+            this.checkBoxStartStudioShellWhenVsStarts.TabIndex = 7;
+            this.checkBoxStartStudioShellWhenVsStarts.Text = "Run StudioShell when Visual Studio Starts";
+            this.toolTip.SetToolTip(this.checkBoxStartStudioShellWhenVsStarts, "Enable this option to allow StudioShell to automatically locate and load Solution" +
+        " Profile scripts.");
+            this.checkBoxStartStudioShellWhenVsStarts.UseVisualStyleBackColor = true;
             // 
             // SettingsControl
             // 
@@ -261,7 +241,6 @@ namespace CodeOwls.StudioShell.Configuration
 
         private System.Windows.Forms.RadioButton radioButtonDefaultConsole;
         private System.Windows.Forms.RadioButton radioButtonOldSkoolConsole;
-        private System.Windows.Forms.RadioButton radioButtonExecCommandConsole;
         private System.Windows.Forms.TextBox textBoxVSCommand;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolTip toolTip;
@@ -273,6 +252,6 @@ namespace CodeOwls.StudioShell.Configuration
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label restartNotice;
-        private System.Windows.Forms.RadioButton radioButtonNoConsole;
+        private System.Windows.Forms.CheckBox checkBoxStartStudioShellWhenVsStarts;
     }
 }
