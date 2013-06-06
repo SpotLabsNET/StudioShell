@@ -283,6 +283,7 @@ namespace CodeOwls.PowerShell.WinForms
 
                 if (String.IsNullOrEmpty(cmd))
                 {
+                    Select(EndOfLinePosition, EndOfLinePosition);
                     return;
                 }
                 
@@ -321,6 +322,7 @@ namespace CodeOwls.PowerShell.WinForms
                 string cmd = HistoryStackWalker.NextDown();
                 if (String.IsNullOrEmpty(cmd))
                 {
+                    MoveCaretEOL(false);
                     return;
                 }
                 InsertHistoryItem(cmd.Trim());
