@@ -3,4 +3,4 @@ ConsoleChoice=StudioShell
 LoadPowerShellProfiles=True
 LoadStudioShellProfiles=True
 StartupLogLevel=None
-RunStudioShellOnStartup=False
+RunStudioShellOnStartup=
