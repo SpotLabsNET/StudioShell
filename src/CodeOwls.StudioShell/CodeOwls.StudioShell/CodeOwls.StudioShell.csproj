@@ -173,6 +173,9 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="StudioShell.VS2013.AddIn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\PSIconRestart.bmp" />
     <None Include="Resources\PSIconReset.bmp" />
     <Content Include="StudioShell.SSMS.AddIn">
