@@ -180,14 +180,17 @@ namespace CodeOwls.PowerShell.Host.Executors
             }
         }
 
+        private static uint CommandIndex = 0;
+
         private Collection<PSObject> ExecutePipeline(ExecutionOptions options, Pipeline tempPipeline,
-                                                     Collection<PSObject> collection, out IEnumerable<ErrorRecord> exceptionThrown)
+                                                     Collection<PSObject> collection,
+                                                     out IEnumerable<ErrorRecord> exceptionThrown)
         {
             exceptionThrown = null;
             try
             {
                 bool acquired = Monitor.TryEnter(_runspace);
-                if (! acquired)
+                if (!acquired)
                 {
                     return null;
                 }
@@ -239,15 +242,16 @@ namespace CodeOwls.PowerShell.Host.Executors
                         }
                         exception = GetPipelineErrors(options, tempPipeline);
                     }
-                    catch( RuntimeException re )
+                    catch (RuntimeException re)
                     {
-                        exception = new ErrorRecord[]{re.ErrorRecord};
+                        exception = new ErrorRecord[] {re.ErrorRecord};
                     }
-                    catch( Exception e )
+                    catch (Exception e)
                     {
                         exception = new ErrorRecord[]
                                         {
-                                            new ErrorRecord( e, e.GetType().FullName, ErrorCategory.NotSpecified, null), 
+                                            new ErrorRecord(e, e.GetType().FullName, ErrorCategory.NotSpecified,
+                                                            null),
                                         };
                     }
                     finally
@@ -259,7 +263,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                     {
                         if (!options.HasFlag(ExecutionOptions.DoNotRaisePipelineException))
                         {
-                            exception.ToList().ForEach( RaisePipelineExceptionEvent );
+                            exception.ToList().ForEach(RaisePipelineExceptionEvent);
                         }
                         exceptionThrown = exception;
                     }
@@ -272,10 +276,12 @@ namespace CodeOwls.PowerShell.Host.Executors
             catch (Exception ex)
             {
                 exceptionThrown = new ErrorRecord[]
-                                        {
-                                            new ErrorRecord( ex, ex.GetType().FullName, ErrorCategory.NotSpecified, null), 
-                                        };
+                                      {
+                                          new ErrorRecord(ex, ex.GetType().FullName, ErrorCategory.NotSpecified,
+                                                          null),
+                                      };
             }
+
             return collection;
         }
 

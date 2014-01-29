@@ -30,6 +30,7 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
         private const string LineArgumentName = "line";
         private const string LastWordArgumentName = "lastWord";
         private readonly Executor _executor;
+        private bool? _enabled;
 
         public PowerShellTabExpansionAutoCompleteProvider(Executor executor)
         {
@@ -42,6 +43,16 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
         {
             try
             {
+                if (!_enabled.HasValue)
+                {
+                    InitializeEnabled();
+                }
+
+                if (!_enabled.GetValueOrDefault())
+                {
+                    return new string[] {};
+                }
+
                 IEnumerable<ErrorRecord> error;
                 Collection<PSParseError> errors;
                 
@@ -83,6 +94,21 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
             {
             }
             return null;
+        }
+
+        private void InitializeEnabled()
+        {
+            IEnumerable<ErrorRecord> error;
+            bool enabled;
+            var result = _executor.ExecuteAndGetStringResult("test-path function:/tabexpansion", out error);
+            if (null != error && error.Any())
+            {
+                _enabled = false;
+                return;
+            }
+
+            bool.TryParse(result, out enabled);
+            _enabled = enabled;
         }
 
         #endregion
