@@ -120,22 +120,24 @@ task __CreateLocalDataDirectory -description $private {
 
 function assemble-moduleDocumentation
 {
-	$helpPath = get-modulePackageDirectory | Join-Path -ChildPath "StudioShell\en-US";
-	$cmdletTopicPath = $helpPath | Join-Path -ChildPath "ProviderCmdlets";
-	$providerHelpPath = $helpPath | Join-Path -ChildPath "CodeOwls.StudioShell.Provider.dll-help.xml";
+    'StudioShell','StudioShell.Provider' | foreach {
+	    $helpPath = get-modulePackageDirectory | Join-Path -ChildPath "$_\en-US";
+	    $cmdletTopicPath = $helpPath | Join-Path -ChildPath "ProviderCmdlets";
+	    $providerHelpPath = $helpPath | Join-Path -ChildPath "CodeOwls.StudioShell.Provider.dll-help.xml";
 
-	$help = New-Object xml;
-	$help.Load( $providerHelpPath );
-	$helpNode = $help.selectSingleNode( '//CmdletHelpPaths' );
+	    $help = New-Object xml;
+	    $help.Load( $providerHelpPath );
+	    $helpNode = $help.selectSingleNode( '//CmdletHelpPaths' );
 	
-	ls $cmdletTopicPath | %{ 
-		$node = [xml] ($_ | gc);
-		$node = $help.importNode( $node.CmdletHelpPath, $true );
-		$helpNode.AppendChild( $node ) | Out-Null;		
-	};
+	    ls $cmdletTopicPath | %{ 
+		    $node = [xml] ($_ | gc);
+		    $node = $help.importNode( $node.CmdletHelpPath, $true );
+		    $helpNode.AppendChild( $node ) | Out-Null;		
+	    };
 	
-	ri $cmdletTopicPath -Force -Recurse;
-	$help.Save( $providerHelpPath );
+	    ri $cmdletTopicPath -Force -Recurse;
+	    $help.Save( $providerHelpPath );
+    }
 }
 
 function get-nugetPackagePath
@@ -206,9 +208,15 @@ task PackageModule -depends CleanModule,Build,__CreateModulePackageDirectory -de
 	
 	# copy bins to module bin area
 	ls $targetPath | copy-item -dest "$mp\StudioShell\bin" -recurse -force;
+    ls $targetPath | copy-item -dest "$mp\StudioShell.Provider\bin" -recurse -force;
     
     $psd = ls $mp/studioshell/studioshell.psd1 | get-content;
     $psd -replace "ModuleVersion = '[\d\.]+'","ModuleVersion = '$version'" | out-file $mp/studioshell/studioshell.psd1;
+
+    $psd = ls $mp/studioshell.provider/studioshell.provider.psd1 | get-content;
+    write-host $psd
+    $psd -replace "ModuleVersion = '[\d\.]+'","ModuleVersion = '$version'" | out-file $mp/studioshell.provider/studioshell.provider.psd1;
+
 } -postaction {
 	assemble-moduleDocumentation;
 }

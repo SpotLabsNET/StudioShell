@@ -175,7 +175,8 @@ namespace CodeOwls.PowerShell.Host.Executors
                 {
                     tempPipeline.Commands[0].MergeMyResults(PipelineResultTypes.Error, PipelineResultTypes.Output);
                 }
-                var item = new Command("Out-Default", false, true);
+                //var item = new Command("Out-Default", false, true);
+                var item = new Command("Out-Default");
                 tempPipeline.Commands.Add(item);
             }
         }
@@ -183,7 +184,7 @@ namespace CodeOwls.PowerShell.Host.Executors
         private Collection<PSObject> ExecutePipeline(ExecutionOptions options, Pipeline tempPipeline,
                                                      Collection<PSObject> collection, out IEnumerable<ErrorRecord> exceptionThrown)
         {
-            exceptionThrown = null;
+            exceptionThrown = new List<ErrorRecord>();
             try
             {
                 bool acquired = Monitor.TryEnter(_runspace);
@@ -196,7 +197,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                 {
                     _currentPipeline = tempPipeline;
 
-                    IEnumerable<ErrorRecord> exception = null;
+                    List<ErrorRecord> exception = new List<ErrorRecord>();
                     try
                     {
                         WaitWhileRunspaceIsBusy();
@@ -237,26 +238,24 @@ namespace CodeOwls.PowerShell.Host.Executors
                         {
                             throw tempPipeline.PipelineStateInfo.Reason;
                         }
-                        exception = GetPipelineErrors(options, tempPipeline);
+                        exception.AddRange( GetPipelineErrors(options, tempPipeline) );
                     }
                     catch( RuntimeException re )
                     {
-                        exception = new ErrorRecord[]{re.ErrorRecord};
+                        exception.Add(re.ErrorRecord);
                     }
                     catch( Exception e )
                     {
-                        exception = new ErrorRecord[]
-                                        {
-                                            new ErrorRecord( e, e.GetType().FullName, ErrorCategory.NotSpecified, null), 
-                                        };
+                        exception.Add(new ErrorRecord( e, e.GetType().FullName, ErrorCategory.NotSpecified, null));
                     }
                     finally
                     {
                         _currentPipeline = null;
                     }
 
-                    if (null != exception)
+                    if (exception.Any() )
                     {
+                        
                         if (!options.HasFlag(ExecutionOptions.DoNotRaisePipelineException))
                         {
                             exception.ToList().ForEach( RaisePipelineExceptionEvent );
@@ -338,7 +337,7 @@ namespace CodeOwls.PowerShell.Host.Executors
 
         }
 
-        private IEnumerable<ErrorRecord> GetPipelineErrors(ExecutionOptions options, Pipeline tempPipeline)
+        private List<ErrorRecord> GetPipelineErrors(ExecutionOptions options, Pipeline tempPipeline)
         {
             List<ErrorRecord> pipelineErrors = new List<ErrorRecord>();
 
@@ -351,10 +350,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                     errorRecord = new ErrorRecord( error  as Exception, "", ErrorCategory.CloseError, null);
                 }
 
-                if (null != errorRecord)
-                {
-                    pipelineErrors.Add(errorRecord);
-                }
+                pipelineErrors.Add(errorRecord);                
             }
             
             return pipelineErrors;

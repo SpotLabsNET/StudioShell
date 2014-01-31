@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
@@ -267,7 +268,7 @@ namespace CodeOwls.PowerShell.Host
         {
             IEnumerable<ErrorRecord> e;
             var r = ExecuteCommand(command, parameters, executionOptions, out e);
-            if( null != e )
+            if( null != e && e.Any() )
             {
                 throw e.First().Exception;
             }

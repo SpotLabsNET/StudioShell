@@ -662,8 +662,6 @@ namespace CodeOwls.StudioShell
 	        shell.CommandCancelTimeout += (s, a) => PromptForForceCommandCancel();
 
             Shell = shell;
-            Locator.Set<Shell>( shell );
-
             Shell.Run();            
         }
 
@@ -806,15 +804,25 @@ namespace CodeOwls.StudioShell
         internal const string ToolWindowGuid = "{e9ce9b2a-88d1-48aa-843d-efded9cb8056}";
 	    private const string StudioshellResources = "CodeOwls.StudioShell.Resources";
 
-        private static IRunnableCommandExecutor Shell;
-	    private string StudioShellCommandName = "CodeOwls.StudioShell.Connect.StudioShell";
-        private string StudioShellRestartCommandName = "CodeOwls.StudioShell.Connect.ResetRunspace";
-        private string StudioShellDoNothingCommandName = "CodeOwls.StudioShell.Connect.DoNothing";
-	    private string StudioShellCancelCommandName = "CodeOwls.StudioShell.Connect.Cancel";
-	    private string StudioShellExecuteCommandName = "CodeOwls.StudioShell.Connect.Execute";
-	    public static DTE2 ApplicationObject { get; private set; }
- 
-        internal static AddIn AddInInstance{ get; private set; }
+	    private static IRunnableCommandExecutor _shell = null;
+	    private static IRunnableCommandExecutor Shell
+	    {
+	        get { return _shell; }
+	        set
+	        {
+	            _shell = value;
+	            Locator.Set(value);
+	        }
+	    }
+
+	    private const string StudioShellCommandName = "CodeOwls.StudioShell.Connect.StudioShell";
+	    private const string StudioShellRestartCommandName = "CodeOwls.StudioShell.Connect.ResetRunspace";
+	    private const string StudioShellDoNothingCommandName = "CodeOwls.StudioShell.Connect.DoNothing";
+	    private const string StudioShellCancelCommandName = "CodeOwls.StudioShell.Connect.Cancel";
+	    private const string StudioShellExecuteCommandName = "CodeOwls.StudioShell.Connect.Execute";
+	    private static DTE2 ApplicationObject { get; set; }
+
+        private static AddIn AddInInstance{ get; set; }
         internal static ICommandExecutor Executor { get { return Shell; } }
         
         Settings Settings 

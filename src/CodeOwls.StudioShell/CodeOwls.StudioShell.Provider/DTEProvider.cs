@@ -21,6 +21,8 @@ using System.Management.Automation;
 using System.Management.Automation.Provider;
 using System.Reflection;
 using System.Text;
+using CodeOwls.PowerShell.Host;
+using CodeOwls.PowerShell.Host.Executors;
 using CodeOwls.PowerShell.Paths.Processors;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.StudioShell.Common.IoC;
@@ -28,6 +30,7 @@ using CodeOwls.StudioShell.Common.Utility;
 using CodeOwls.StudioShell.Provider.Variables;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
 
 namespace CodeOwls.StudioShell.Provider
 {
@@ -70,7 +73,18 @@ namespace CodeOwls.StudioShell.Provider
         {
             ConfigureRunspace( this.SessionState );
 
-            return base.Start(providerInfo);
+            return base.Start(providerInfo);               
+        }
+
+        protected override void Stop()
+        {
+            var executor = Locator.Get<IRunnableCommandExecutor>();
+            if (null != executor)
+            {
+                executor.Stop();
+            }
+
+            base.Stop();
         }
 
         protected override PSDriveInfo NewDrive(PSDriveInfo drive)
@@ -98,7 +112,21 @@ namespace CodeOwls.StudioShell.Provider
 
         void ConfigureRunspace(SessionState sessionState)
         {
-            AddRunspaceVariables(sessionState);
+            var applicationObject = AddRunspaceVariables(sessionState);
+            if (null != applicationObject)
+            {
+                var sp = new ServiceProvider(applicationObject as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
+
+                Locator.Set<DTE2>(applicationObject);
+                Locator.Set<IServiceProvider>(sp);
+                var runspace = sessionState.GetRunspace();
+                if (null != runspace)
+                {
+                    var executor = new RunspaceCommandExecutor(runspace);
+                    executor.Run();
+                    Locator.Set<IRunnableCommandExecutor>( executor );
+                }
+            }
         }
 
         static Version GetAssemblyFileVersion()
@@ -110,7 +138,7 @@ namespace CodeOwls.StudioShell.Provider
             ).First();
         }
 
-        private void AddRunspaceVariables(SessionState sessionState)
+        private DTE2 AddRunspaceVariables(SessionState sessionState)
         {
             try
             {
@@ -126,16 +154,34 @@ namespace CodeOwls.StudioShell.Provider
                 
             }
 
-            PSVariable[] psv = GetStudioShellPSVariables();
+            DTE2 dte2 = DTEProvider.DTE2;
+            if (null == dte2)
+            {
+                try
+                {
+                    var value = sessionState.PSVariable.GetValue("dte",null);
+                    dte2 = value as DTE2;
+                }
+                catch (Exception e)
+                {
+                }   
+            }
 
+            PSVariable[] psv = GetStudioShellPSVariables( dte2 );
+            DTE2 dteReference = null;
             var warns = new List<string>();
             psv.ToList().ForEach(v =>
                                      {
-                                         if (null != sessionState.PSVariable.Get(v.Name))
+                                         var variable = sessionState.PSVariable.Get(v.Name);
+                                         if (null != variable)
                                          {
                                              if ("dte" != v.Name)
                                              {
                                                  warns.Add(v.Name);
+                                             }
+                                             else
+                                             {
+                                                 dteReference = PSObject.AsPSObject( variable.Value ).BaseObject as DTE2;
                                              }
                                              return;
                                          }
@@ -151,13 +197,15 @@ namespace CodeOwls.StudioShell.Provider
                         )
                     );
             }
+
+            return dteReference;
         }
 
         private static DTEEventSource EventSource;
 
-        private PSVariable[] GetStudioShellPSVariables()
+        private PSVariable[] GetStudioShellPSVariables( DTE2 dte2 )
         {
-            var dte2 = DTEProvider.DTE2;
+            
             var events = dte2.Events as Events2;
             if (null == EventSource)
             {

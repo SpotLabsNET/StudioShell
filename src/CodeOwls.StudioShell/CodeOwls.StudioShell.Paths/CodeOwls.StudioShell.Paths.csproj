@@ -206,6 +206,10 @@
     <Compile Include="Utility\WindowKinds.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CodeOwls.PowerShell\CodeOwls.PowerShell.Host\CodeOwls.PowerShell.Host.csproj">
+      <Project>{B975EFD5-7A18-4BD0-8711-38734C6F8EB1}</Project>
+      <Name>CodeOwls.PowerShell.Host</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CodeOwls.PowerShell\CodeOwls.PowerShell.Paths\CodeOwls.PowerShell.Paths.csproj">
       <Project>{ED0453C7-C25A-4354-AC7A-046846D5E7FF}</Project>
       <Name>CodeOwls.PowerShell.Paths</Name>

@@ -18,11 +18,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
+using CodeOwls.PowerShell.Host.Executors;
 using CodeOwls.PowerShell.Paths.Extensions;
 using CodeOwls.PowerShell.Provider.Attributes;
 using CodeOwls.PowerShell.Provider.PathNodeProcessors;
 using CodeOwls.PowerShell.Provider.PathNodes;
 using CodeOwls.StudioShell.Common;
+using CodeOwls.StudioShell.Common.IoC;
 using CodeOwls.StudioShell.Common.Utility;
 using CodeOwls.StudioShell.Paths.Items;
 using CodeOwls.StudioShell.Paths.Items.CommandBars;
@@ -201,7 +203,8 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             return ctrl;
         }
 
-        public CommandBarControl NewButton(IContext context, string caption, int index, string binding, object newItemValue)
+        public CommandBarControl NewButton(IContext context, string caption, int index, string binding,
+                                           object newItemValue)
         {
             var validValueTypes = new[] {typeof (ScriptBlock), typeof (string)};
             if (null == newItemValue || !validValueTypes.Contains(newItemValue.GetType()))
@@ -212,19 +215,30 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             }
 
             index = Math.Max(index, 1);
-            ShellCommand shellCommand = CommandUtilities.GetOrCreateCommand(context, _popup.Application as DTE2, caption,
-                                                                            newItemValue);
-            if ( !String.IsNullOrEmpty(binding))
-            {
-                shellCommand.Bindings = new[] { (object)binding };
-            }
+
+            var ctl = _popup.CommandBar.Controls.Add(MsoControlType.msoControlButton, index, String.Empty, index, true);
+            var btn = ctl as CommandBarButton;
             
-            Command command = shellCommand.AsCommand();
-            string n = command.Name;
-            var cid = command.ID;
-            var guid = command.Guid;
-            
-            var ctl = command.AddControl(_popup.CommandBar, index) as CommandBarControl;
+            btn.Caption = caption;
+            btn.Enabled = true;
+
+            btn.Click += delegate(CommandBarButton ctrl, ref bool cancelDefault)
+                             {
+                                 cancelDefault = false;
+                                 var executor = Locator.Get<IRunnableCommandExecutor>();
+                                 if (null == executor)
+                                 {
+                                     return;
+                                 }
+
+                                 try
+                                 {
+                                     executor.Execute(newItemValue.ToString());
+                                 }
+                                 catch
+                                 {
+                                 }
+                             };
             return ctl;
         }
 
@@ -404,6 +418,8 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
                     "new item values for command bar buttons must be one of the following types: " + validNames);
             }
 
+            
+
             index = Math.Max(index, 1);
             ShellCommand shellCommand = CommandUtilities.GetOrCreateCommand(
                 context, 
@@ -419,6 +435,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             
             Command command = shellCommand.AsCommand();
             var ctl = command.AddControl(_commandBar, index) as CommandBarControl;
+            
             return ctl;
         }
 

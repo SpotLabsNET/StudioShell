@@ -64,7 +64,7 @@ namespace CodeOwls.PowerShell.Host.Host
         public override Size BufferSize
         {
             get
-            {
+            {                
                 return new Size(
                     _control.ConsoleSizeInCharacters.Width,
                     9999

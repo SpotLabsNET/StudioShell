@@ -73,6 +73,7 @@ StartupLogLevel                None
 ConsoleChoice                  OldSkool
 LoadStudioShellProfiles        True
 AutoManagePerSolutionModules   True
+RunStudioShellOnStartup        False
 
 .LINK
 about_StudioShell

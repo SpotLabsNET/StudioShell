@@ -65,6 +65,7 @@
     <Compile Include="Utility\EventArgs.cs" />
     <Compile Include="Utility\NodeNames.cs" />
     <Compile Include="Utility\Scripts.cs" />
+    <Compile Include="Utility\SessionStateExtensions.cs" />
     <Compile Include="Utility\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>
