@@ -567,10 +567,13 @@
                 <Component Id="cmpC61004657061AAE878D2616EBA37D031" Guid="8054856D-B506-41C6-8FCA-4B51B98EF5D1">
                     <File Id="filA236382F1656B316CAF7F699FCC2416E" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.VS2010.AddIn" />
                 </Component>
-                <Component Id="cmp7FAD6E1424C44B735856B85B0F52017F" Guid="A85BBAD9-8793-4511-B630-A716D5C009B8">
-                    <File Id="fil82C368ACE9A366515628AA1D8968BC32" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.VS2012.AddIn" />
-                </Component>
-                <Component Id="cmp292E121FC6BDE40F9E50A691D8A5D91E" Guid="17F694B5-57B0-4316-9E86-98E769F04013">
+              <Component Id="cmp7FAD6E1424C44B735856B85B0F52017F" Guid="A85BBAD9-8793-4511-B630-A716D5C009B8">
+                <File Id="fil82C368ACE9A366515628AA1D8968BC32" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.VS2012.AddIn" />
+              </Component>
+              <Component Id="cmp450e170a128a4824876c1fc0431e1901" Guid="450e170a128a4824876c1fc0431e1901">
+                <File Id="fil450e170a128a4824876c1fc0431e1901" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.VS2013.AddIn" />
+              </Component>
+              <Component Id="cmp292E121FC6BDE40F9E50A691D8A5D91E" Guid="17F694B5-57B0-4316-9E86-98E769F04013">
                     <File Id="filDE5227B513FE0BAB51C78CCD51A6CE75" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\System.Windows.Forms.DataVisualization.dll" />
                 </Component>
                 <Directory Id="dirE3EC6BCC14C9078A9DA255DD60623277" Name="Resources">
@@ -845,6 +848,7 @@
             <ComponentRef Id="cmp66AAEB02822998B72653E0638DE34C8A" />
             <ComponentRef Id="cmp566D3604E657BBDFEAFC8760489C73B7" />
             <ComponentRef Id="cmp2291BB688010619DC72BA1BB29E13B5C" />
+            <ComponentRef Id="cmp450e170a128a4824876c1fc0431e1901" />
         </ComponentGroup>
     </Fragment>
 </Wix>

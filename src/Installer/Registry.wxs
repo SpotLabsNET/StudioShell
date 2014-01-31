@@ -7,7 +7,19 @@
         <Environment Id="envA7C0114BDF5E4E80AB3AAE2A261A1F41" Action="set" Part="last" Permanent="no" System="yes" Name="PSModulePath" Value="[ProgramFilesFolder]\[CompanyFolderName]" />
       </Component>
     </ComponentGroup>
-    
+
+    <ComponentGroup Id="VS2013RegistryComponentGroup">
+      <Component Id="C_REG_VS2013" Guid="4e690bf3ee4b4e76bf75bbf412a2171a" Directory="StudioShellApplicationFolder">
+        <RegistryValue Id="VS2013RegistryValue0"
+                       KeyPath="yes"
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\VisualStudio\12.0\AutomationOptions\LookInFolders"
+                       Value=""
+                       Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
+                       Type="string"/>
+      </Component>
+    </ComponentGroup>
     <ComponentGroup Id="VS2012RegistryComponentGroup">
       <Component Id="C_REG_VS2012" Guid="78dd33c7b9aa42409ae3da8923047935" Directory="StudioShellApplicationFolder">        
         <RegistryValue Id="VS2012RegistryValue0"

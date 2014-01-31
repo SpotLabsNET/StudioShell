@@ -308,7 +308,7 @@ task Uninstall -description "uninstalls the module from the local user module re
 	pushd $env:HOMEDRIVE;
 	try
 	{
-        '2008','2010','2012' | ?{ test-path "~/documents/visual studio $_" } | %{
+        '2008','2010','2012','2013' | ?{ test-path "~/documents/visual studio $_" } | %{
 		        $addinFolder = "~/Documents/Visual Studio $_/Addins";
 		        $addinFilePath = join-path $addinFolder -child "StudioShell.addin";
 
@@ -357,12 +357,15 @@ task InstallAddin -depends InstallModule -description "installs the Visual Studi
 
 		mkdir $studioShellProfileFolder -erroraction silentlycontinue;
 
-        '2008','2010','2012', '9','10','11' | where { test-path "~/documents/Visual Studio $_" }  | % { 
-            $n = @{ '9'='2008'; '10'='2010'; '11'='2012' }[ $_ ], $_ | select -first 1;
+        '2008','2010','2012','2013', '9','10','11','12' | where { test-path "~/documents/Visual Studio $_" }  | % { 
+            $n = @{ '9'='2008'; '10'='2010'; '11'='2012'; '12'='2013' }[ $_ ], $_ | select -first 1;
             $addinFolder = "~/Documents/Visual Studio $_/Addins";
 		    $addinFilePath = join-path $addinFolder -child "StudioShell.addin";
 		    $addinSpec = join-path $addInInstallPath -child "StudioShell.VS${n}.AddIn";
         
+		write-verbose $addinFolder
+		write-verbose $addinFilePath
+		write-verbose $addinSpec
             mkdir $addinFolder -erroraction silentlycontinue;
 		    ( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
         }

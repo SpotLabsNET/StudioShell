@@ -13,7 +13,7 @@ LONG DESCRIPTION
 	Note that the session using StudioShell must have the following properties:
 	
 	1. the machine on which the session is running has 
-		Visual Studio 2008 or 2010, or SSMS 2012 installed.  
+		Visual Studio 2008, 2010, 2012, 2013, or SSMS 2012 installed.  
 	2. the Visual Studio shell has the StudioShell add-in loaded.
 	3. the PowerShell host's System.Management.Automation.Host.PSHost 
 		implementation supports the IHostSupportsInteractiveSession 
@@ -22,12 +22,12 @@ LONG DESCRIPTION
 	
 USING STUDIOSHELL IN OTHER HOSTS (e.g., NuGet, PowerShell.exe)
 	Assuming the StudioShell module is in your PSModulePath, you can add 
-	StudioShell	features to your session by typing the following:
+	StudioShell features to your session by typing the following:
 	
 		import-module StudioShell
 		
 	Several StudioShell features are enabled by default in the 
-	StudioShell	host, but are disabled by default in other hosts.  For
+	StudioShell host, but are disabled by default in other hosts.  For
 	more information, type:
 
 	get-help about_StudioShell_NuGet
