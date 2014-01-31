@@ -28,7 +28,7 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
         private readonly Executor _executor;
         private const string TabExpansionScript = @"TabExpansion2 -input '{0}' -cur {1} | foreach {{
         $i = $_.replacementindex;
-        $_.completionmatches | foreach {{
+        $_.completionmatches | foreach {{            
             '{0}'.substring(0,$i) + $_.completiontext;
         }}
     }}";
@@ -49,7 +49,7 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
                 InitializeEnabled();
             }
 
-            if (! _enabled.Value )
+            if (! _enabled.GetValueOrDefault() )
             {
                 return new string[] {};
             }
@@ -57,7 +57,7 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
             guess = ( guess ?? String.Empty ).Replace( "'", "`'");
             
             try
-            {
+            {               
                 var script = String.Format(TabExpansionScript, guess, guess.Length);
                 IEnumerable<ErrorRecord> error;
                 var results = _executor.ExecuteCommand(script, out error,
@@ -81,7 +81,7 @@ namespace CodeOwls.PowerShell.Host.AutoComplete
             IEnumerable<ErrorRecord> error;
             bool enabled;
             var result = _executor.ExecuteAndGetStringResult("test-path function:/tabexpansion2", out error);
-            if (null != error)
+            if (null != error && error.Any() )
             {
                 _enabled = false;
                 return;

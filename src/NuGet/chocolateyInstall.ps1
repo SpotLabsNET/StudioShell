@@ -44,8 +44,8 @@ try
 
 		mkdir $studioShellProfileFolder -erroraction silentlycontinue;
 
-        '2008','2010','2012', '9','10','11' | where { test-path "~/documents/Visual Studio $_" }  | % { 
-            $n = @{ '9'='2008'; '10'='2010'; '11'='2012' }[ $_ ], $_ | select -first 1;
+        '2008','2010','2012', '9','10','11','12' | where { test-path "~/documents/Visual Studio $_" }  | % { 
+            $n = @{ '9'='2008'; '10'='2010'; '11'='2012';'12'='2013' }[ $_ ], $_ | select -first 1;
             $addinFolder = "$mydocs/Visual Studio $_/Addins";
 		    $addinFilePath = join-path $addinFolder -child "StudioShell.addin";
 		    $addinSpec = join-path $addInInstallPath -child "StudioShell.VS${n}.AddIn";

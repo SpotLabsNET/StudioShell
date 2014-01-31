@@ -28,6 +28,10 @@
       <Feature Id="ConsoleFeature" AllowAdvertise="yes" Absent="allow" Title="PowerShell Console Integration" Level="1">
         <ComponentGroupRef Id="ConsoleRegistryComponentGroup"/>
       </Feature>
+      <Feature Id="VS2013Feature" AllowAdvertise="yes" Absent="allow" Title="Visual Studio 2013 Integration" Level="1">
+        <Condition Level="0">VS2013_AVAILABLE="NOT_INSTALLED"</Condition>
+        <ComponentGroupRef Id="VS2013RegistryComponentGroup"/>
+      </Feature>
       <Feature Id="VS2012Feature" AllowAdvertise="yes" Absent="allow" Title="Visual Studio 2012 Integration" Level="1">
         <Condition Level="0">VS2012_AVAILABLE="NOT_INSTALLED"</Condition>
         <ComponentGroupRef Id="VS2012RegistryComponentGroup"/>
@@ -74,7 +78,7 @@
     <Property Id="VSDAllowLaterFrameworkVersions" Value="False" />
     <Property Id="ARPCONTACT" Value="Code Owls LLC" />
     <Property Id="ARPCOMMENTS" Value="Deeply integrated PowerShell module for Visual Studio" />
-    <Property Id="ARPURLINFOABOUT" Value="http://www.studioshell.org" />
+    <Property Id="ARPURLINFOABOUT" Value="http://studioshell.codeplex.com" />
     <Property Id="ARPPRODUCTICON" Value="_SSIcon" />
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
     <Property Id="NEWERPRODUCTFOUND" Secure="yes" />
@@ -100,6 +104,9 @@
       <DirectorySearch Id="LOCATE_POWERSHELL_V3" Path="[SystemFolder]\windowspowershell\v1.0" Depth="0">
         <FileSearch Id="LOCATE_POWERSHELL_V3_EXE" Name="powershell.exe" MinVersion="6.2.0.0" />
       </DirectorySearch>
+    </Property>
+    <Property Id="VS2013_AVAILABLE" Value="NOT_INSTALLED">
+      <RegistrySearch Id="R_3c261f71c3264c00a77a7fb76c5880f9" Key="VisualStudio.DTE.12.0" Root="HKCR" Type="raw" Win64="no" />
     </Property>
     <Property Id="VS2012_AVAILABLE" Value="NOT_INSTALLED">
       <RegistrySearch Id="R_133BEEFA917543F084AE3165315689C2" Key="VisualStudio.DTE.11.0" Root="HKCR" Type="raw" Win64="no" />
@@ -136,7 +143,7 @@
       <UpgradeVersion
           Property="OLD_VERSION_FOUND"
           Minimum="1.0.0.0"
-          Maximum="1.5.0.0"
+          Maximum="1.6.0.0"
           IncludeMinimum="yes"
           IncludeMaximum="no"
           OnlyDetect="no"
@@ -152,6 +159,7 @@
       <RemoveExistingProducts After="InstallInitialize" />
       <InstallExecute After="RemoveExistingProducts" />
       
+      <Custom Action="actionResetAddinVS2013" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2013Feature=3</Custom>
       <Custom Action="actionResetAddinVS2012" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2012Feature=3</Custom>
       <Custom Action="actionResetAddinVS2010" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2010Feature=3</Custom>
       <Custom Action="actionResetAddinVS2008" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2008Feature=3</Custom>

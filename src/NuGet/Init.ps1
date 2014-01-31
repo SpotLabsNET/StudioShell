@@ -23,14 +23,14 @@ $vsversion = ( [environment]::getCommandLineArgs() |
         select -exp ProductVersion 
     ) -split '\.' | select -first 1
     
-if( 9,10,11 -notcontains $vsversion )
+if( 9,10,11,12 -notcontains $vsversion )
 {
     uninstall-package $package.id
     write-error "The current version of Visual Studio ($vsversion) is not supported";
     return;
 }
 
-$vsVersionName = @{ '9' = "2008"; '10'='2010'; '11'='2012' }[ $vsversion ]
+$vsVersionName = @{ '9' = "2008"; '10'='2010'; '11'='2012'; '12'='2013' }[ $vsversion ]
 
 # verify or create home-based module path
 $mydocs = [environment]::getFolderPath( 'mydocuments' );
