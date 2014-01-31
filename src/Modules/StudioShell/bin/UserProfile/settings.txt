@@ -1,0 +1,6 @@
+﻿AutoManagePerSolutionModules=True
+ConsoleChoice=StudioShell
+LoadPowerShellProfiles=True
+LoadStudioShellProfiles=True
+StartupLogLevel=None
+RunStudioShellOnStartup=
