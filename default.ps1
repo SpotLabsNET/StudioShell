@@ -156,7 +156,7 @@ function get-nugetPackagePath
 	
 	$version = ( get-item $md | select -exp versioninfo | select -exp productversion );
 	
-    "$output\StudioShell.$version.nupkg";    
+    "$output\StudioShell.Provider.$version.nupkg";    
 }
 
 # primary targets
@@ -181,6 +181,7 @@ task Publish -depends _PublishNugetPackage -description "Publishes pacakges to v
 
 task _PublishNugetPackage -depends PackageNuget {
     $package = get-nugetPackagePath
+    
     nuget push $package
 }
 
@@ -218,6 +219,8 @@ task PackageModule -depends CleanModule,Build,__CreateModulePackageDirectory -de
 
     $psd = ls $mp/studioshell.provider/studioshell.provider.psd1 | get-content;
     $psd -replace "ModuleVersion = '[\d\.]+'","ModuleVersion = '$version'" | out-file $mp/studioshell.provider/studioshell.provider.psd1;
+
+    copy-item $mp/studioshell.provider -dest $mp/studioshell -Container -Recurse
 
 } -postaction {
 	assemble-moduleDocumentation;
@@ -394,6 +397,6 @@ task Harvest -depends PackageModule -description "Harvests the packaged module i
     $packagePath = get-modulePackageDirectory | Join-Path -ChildPath StudioShell;
     $output = $local | resolve-path | select -exp path;
     $harvestXslt = join-path $wixProjectPath -child 'harvest.xslt' | resolve-path | select -exp path;
-    $harvestXslt;
+
     heat dir $packagePath -srd -var var.StudioShellModuleRootPath -gg -g1 -sfrag -cg StudioShellApplicationComponentGroup -t "$harvestXslt" -out "$output\harvest.wxs"
 }
