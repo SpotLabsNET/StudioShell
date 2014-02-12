@@ -2,13 +2,25 @@
     about_StudioShell_Version
 
 VERSION
-    You are running version 1.5 of StudioShell.
+    You are running version 1.6 of StudioShell.
 
 CHANGE LOG
   Description
     The changelog documents the changes placed in each release of 
 	StudioShell.  Each item is identified by its codeplex work item 
 	number(s) if available.
+
+1.6
+  Resolved Issues
+  1.6.1
+    60: fixed autocompelte of variable names (regression)
+
+  Added Features
+  1.6.1
+    Broke out StudioShell.Provider module for explicit NuGet package manager console use.
+
+  1.6.0
+    Added support for VS 2013.
 
 1.5
   Resolved Issues

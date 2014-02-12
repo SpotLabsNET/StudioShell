@@ -30,17 +30,6 @@ LONG DESCRIPTION
 		. ~/CodeOwlsLLC.StudioShell/profile.ps1
 		popd
 	
-  USING SOLUTION MODULES
-	Solution modules are not automatically loaded and unloaded when using the 
-	StudioShell module in other hosts.  
-	
-	To enable this feature,	you can run the following script after importing 
-	the StudioShell module:
-	
-		. ( get-module StudioShell | `
-			select -expand ModuleBase | `
-			join-path -child '..\InitializationScripts\register-solutionevents.ps1' )
-
 SPECIAL NOTES FOR POWERSHELL USERS
   VISUAL STUDIO INSTANCE
 	When used from the PowerShell host, a hidden instance of Visual Studio is 

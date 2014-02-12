@@ -48,7 +48,7 @@ PROVIDER CMDLET SUPPORT
 	using the encoding described above.  Additional notes are provided were 
 	necessary to further elaborate on cmdlet operations.
 	
-	Path Node			 Operations	 Notes
+	Path Node            Operations	 Notes
 	-------------------- ----------- ------------------------------------------
 	Add-In				  <				
 	Attribute (code)	 d< +     i	 invoke-item navigates to the code item

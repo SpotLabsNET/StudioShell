@@ -7,69 +7,125 @@ SHORT DESCRIPTION
 	package manager console and package scripts.
 
 LONG DESCRIPTION
-	Assuming the StudioShell module is in your PSModulePath, you can add 
-	StudioShell	features to your NuGet session by typing the following:
-	
-		import-module StudioShell
+    The recommended way to leverage StudioShell from NuGet is by installing 
+    the StudioShell.Provider NuGet package to your solution.  This will enable
+    the DTE: drive in your package manager console.
 		
-	This will load the StudioShell PSDTE provider and create the DTE: drive
-	in your Package Manager console session.
+GETTING STARTED
+
+    Once the StudioShell module is loaded, you can start poking around by 
+	typing the following:
+	
+		cd dte:
+				
+	This will change your current directory to the dte: drive, which represents
+	the root of the Visual Studio IDE.  Then type:
+	
+		dir
 		
-	Several StudioShell features are enabled by default in the 
-	StudioShell	host, but are disabled by default in the NuGet host.
+	to get a list of the major areas of Visual Studio you can access from 
+	the console:
 	
-  LOADING PROFILES
-	The StudioShell host user profile script is NOT loaded when the StudioShell
-	module is imported directly.  
-	
-	In non-default hosts this profile script must be executed explicitly by 
-	dot-sourcing the profile script:
-	
-		pushd $env:HOMEDRIVE
-		. ~/CodeOwlsLLC.StudioShell/profile.ps1
-		popd
-	
-  USING SOLUTION MODULES
-	Solution modules are not automatically loaded and unloaded when using the 
-	StudioShell module in other hosts.  
-	
-	To enable this feature,	you can run the following script after importing 
-	the StudioShell module:
-	
-		. ( get-module StudioShell | `
-			select -expand ModuleBase | `
-			join-path -child '..\InitializationScripts\register-solutionevents.ps1' )
 
-SPECIAL NOTES FOR NUGET USERS
-  STUDIOSHELL.README.TXT
-    In order to take advantage of NuGet's uninstall.ps1 script feature, the 
-	NuGet package Content folder must contain at least one item.  So, the
-	StudioShell.ReadMe.txt file is an innocuous text file that is added to
-	your project by NuGet when you install the StudioShell package.  You
-	can safely remove this file at any time without impacting your project,
-	StudioShell, or NuGet.
-	
-  STUDIOSHELL ADD-IN
-	Some features of StudioShell require an Add-In to be loaded by Visual 
-	Studio.  This add-in is configured and loaded when you install the 
-	StudioShell NuGet package.  Add-Ins are managed outside of the
-	NuGet packaging system - once installed the StudioShell Add-In will be 
-	loaded by all instances of Visual Studio regardless of whether the 
-	loaded solution relies on the StudioShell NuGet package.
+	    Container: PSDTE::\
 
-  UNINSTALLING THE STUDIOSHELL PACKAGE
-	Because the StudioShell package relies on a managed Add-In assembly,
-	uninstalling the package produces a myriad of Access Denied errors
-	as the binary files are locked by the Visual Studio process.  To fully
-	remove the StudioShell package contents, you will need to manually remove
-	the StudioShell folder from your solution packages folder once you close
-	Visual Studio.	
+		           Name                    
+		---------- ----                    
+		d  <       AddIns                  
+		d+ <       CommandBars             
+		d+ <       Commands                
+		d  <       Debugger                
+		d+ <       Errors                  
+		d+ <       OutputPanes             
+		d  <       Properties              
+		d  <       SelectedItems           
+		d  <       Solution                
+		d+ <       Tasks                   
+		d  <       Templates               
+		d+ <       WindowConfigurations    
+		d  <       Windows                 
+
+	
+	StudioShell leverages common PowerShell cmdlets whenever possible.  One 
+	thing you should note is the sequence of characters in the left-most
+	column.  This column indicates what common cmdlets are available at each 
+	node location.  This column is used throughout the StudioShell DTE: drive
+	as a way of indicating what nodes support what operations.
+	
+	The available cmdlets are encoded as follows:
+	
+		d : the node can contain child elements, and you can use the 
+			set-location and get-childitems cmdlets on this node.			
+		+ : the node supports the new-item cmdlet.		
+		~ : the node supports the remove-item cmdlet.		
+		< : the node supports the get-item cmdlet.		
+		> : the node supports the set-item cmdlet.		
+		0 : the node supports the clear-item cmdlet.		
+		c : the node supports the copy-item cmdlet.		
+		m : the node supports the move-item cmdlet.		
+		r : the node supports the rename-item cmdlet.	
+		i : the node supports the invoke-item cmdlet.
+		
+	In short, the same cmdlets you would use to work with files will also
+	work with your projects, the menus, your code, etc.  For example, this
+	command will create a new file:
+	
+		new-item -path c:\myfile.txt -type file -value "Hello World!"
+		
+	and this command will create a new menu item:
+	
+		new-item -path "dte:\commandBars\menu Bar\help\MyMenuItem" -value {}
+	
+	While there are not many new cmdlets to learn, some common cmdlets can
+	accept parameters specific to the path with which you're trying to work.
+	These parameters are documented for StudioShell paths - simply call 
+	get-help for the cmdlet you wish to use, and specify the path in the cmdlet's
+	path parameter:
+	
+		get-help new-item -path dte:\commandBars\menuBar\help
+	
+	For a complete list of StudioShell-specific commands, type:
+	
+		get-command -module StudioShell	
+
+NOTES
+    Most StudioShell features are enabled by default in the 
+    StudioShell host, but are disabled by default in the NuGet host.
+
+  PROFILE SCRIPTS
+	The StudioShell host user profile script IS NOT loaded when the 
+        StudioShell.Provider module is imported directly.  Instead you must
+	use the NuGet profile script.
+	
+  SOLUTION MODULES
+	Solution modules are automatically loaded and unloaded when using the
+	StudioShell.Provider package.  The AutoManagePerSolutionModules setting
+    in the settings.txt file has no impact on this behavior.
+
+  MENU ITEMS
+	In previous releases of StudioShell, customizing the menus of Visual 
+	Studio was not supported from the package manager console; as of 
+	release 1.6.1 of StudioShell.Provider, this feature is supported in 
+	the package manager console.
+
+  PROMPT
+    The default Package Manager prompt makes it difficult to navigate the 
+    DTE drive.  It is recommended that you modify your Package Manager prompt
+    to display your current location:
+
+    function prompt() {
+        "PM $pwd> "
+    }
 
 SEE ALSO
 	about_modules
 	about_StudioShell    
-	about_StudioShell_Hosts
+    about_StudioShell_License
 	about_StudioShell_PowerShell
-	about_StudioShell_SSMS
 	about_StudioShell_Solution_Modules
-	start-studioShell.ps1
+    about_StudioShell_Version
+    about_StudioShell_Profiles
+    about_StudioShell_Settings
+    about_StudioShell_Drives
+    about_StudioShell_Variables
+    PSDTE

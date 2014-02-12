@@ -16,7 +16,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
@@ -181,8 +180,6 @@ namespace CodeOwls.PowerShell.Host.Executors
             }
         }
 
-        private static uint CommandIndex = 0;
-
         private Collection<PSObject> ExecutePipeline(ExecutionOptions options, Pipeline tempPipeline,
                                                      Collection<PSObject> collection,
                                                      out IEnumerable<ErrorRecord> exceptionThrown)
@@ -234,8 +231,6 @@ namespace CodeOwls.PowerShell.Host.Executors
                         }
                         tempPipeline.Input.Close();
 
-                        // WaitWhilePipelineIsRunning(tempPipeline);                    
-
                         collection = tempPipeline.Output.ReadToEnd();
                         if (null != tempPipeline.PipelineStateInfo.Reason)
                         {
@@ -245,23 +240,11 @@ namespace CodeOwls.PowerShell.Host.Executors
                     }
                     catch (RuntimeException re)
                     {
-<<<<<<< local
                         exception.Add(re.ErrorRecord);
-=======
-                        exception = new ErrorRecord[] {re.ErrorRecord};
->>>>>>> other
                     }
                     catch (Exception e)
                     {
-<<<<<<< local
                         exception.Add(new ErrorRecord( e, e.GetType().FullName, ErrorCategory.NotSpecified, null));
-=======
-                        exception = new ErrorRecord[]
-                                        {
-                                            new ErrorRecord(e, e.GetType().FullName, ErrorCategory.NotSpecified,
-                                                            null),
-                                        };
->>>>>>> other
                     }
                     finally
                     {
@@ -297,14 +280,7 @@ namespace CodeOwls.PowerShell.Host.Executors
 
         private static void ExecutePipeline(ExecutionOptions options, Pipeline tempPipeline)
         {
-            //if (options.HasFlag(ExecutionOptions.Synchronous))
-            //{
-            //    tempPipeline.Invoke();
-            //}
-            //else
-            {
-                tempPipeline.InvokeAsync();
-            }
+            tempPipeline.InvokeAsync();
         }
 
         public readonly ManualResetEvent RunspaceReady = new ManualResetEvent(false);
@@ -332,15 +308,6 @@ namespace CodeOwls.PowerShell.Host.Executors
             }
         }
 
-        private void WaitWhilePipelineIsRunning(Pipeline tempPipeline)
-        {
-            while( tempPipeline.PipelineStateInfo.State != PipelineState.Completed &&
-                tempPipeline.PipelineStateInfo.State != PipelineState.Failed )
-            {
-                DoWait();
-            }
-        }
-
         private void WaitWhileRunspaceIsBusy()
         {
             while (IsRunspaceBusy)
@@ -351,7 +318,7 @@ namespace CodeOwls.PowerShell.Host.Executors
 
         private void DoWait()
         {
-
+            // no-op
         }
 
         private List<ErrorRecord> GetPipelineErrors(ExecutionOptions options, Pipeline tempPipeline)

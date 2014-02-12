@@ -17,28 +17,4 @@
 
 # mount common drives
 
-$local:driveData = DATA { @'
-	commands = dte:/commands
-	commandBars = dte:/commandBars
-	windows = dte:/windows
-	tasks = dte:/tasks
-	projects = dte:/solution/projects
-'@ | convertfrom-stringdata
-};
-
-# define functions for root drive access points
-write-debug "mounting common DTE drives ..."
-
-$local:driveData.keys | foreach {
-	
-	$local:path = $local:driveData[$_];
-	$local:driveName = ( $_ + ':' );
-	
-	write-verbose "mounting drive ${_}: at path $local:path";
-	new-psdrive -name $_ -psprovider PSDTE -root $path | out-null;
-	
-	write-verbose "defining shortcut function ${_}:";
-	new-item -path function: -name $local:driveName -value "set-location $($local:driveName)" | out-null;
-};
-
 new-item -path function: -name "dte:" -value "set-location dte:" | out-null;

@@ -217,10 +217,6 @@
       <Project>{B975EFD5-7A18-4BD0-8711-38734C6F8EB1}</Project>
       <Name>CodeOwls.PowerShell.Host</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CodeOwls.PowerShell\CodeOwls.PowerShell.Provider\CodeOwls.PowerShell.Provider.csproj">
-      <Project>{B352375B-7C58-4943-95C0-14871E17A208}</Project>
-      <Name>CodeOwls.PowerShell.Provider</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CodeOwls.StudioShell.Cmdlets\CodeOwls.StudioShell.Cmdlets.csproj">
       <Project>{CC11A6DB-0F1E-42D3-9352-B4A3C42DE5E4}</Project>
       <Name>CodeOwls.StudioShell.Cmdlets</Name>
