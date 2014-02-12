@@ -29,5 +29,3 @@ ls $local:root/scripts | foreach {
 	write-verbose $local:fxn
 	invoke-expression $local:fxn;
 }
-
-

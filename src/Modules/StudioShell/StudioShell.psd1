@@ -19,10 +19,10 @@
 @{
 
 # Script module or binary module file associated with this manifest
-ModuleToProcess = 'bin/codeowls.studioshell.provider.dll'
+ModuleToProcess = ''
 
 # Version number of this module.
-ModuleVersion = '1.5.0.0'
+ModuleVersion = '1.6.1.0'
 
 # ID used to uniquely identify this module
 GUID = '8714c9a1-1644-4770-9a7d-136f2907d153'
@@ -70,24 +70,11 @@ ScriptsToProcess = @()
 TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
-FormatsToProcess = 'formats\_Root.Formats.ps1xml', 
-				'formats\AddIns.Formats.ps1xml',
-				'formats\CodeModel.Formats.ps1xml', 
-               'formats\CommandBars.Formats.ps1xml', 
-               'formats\Commands.Formats.ps1xml', 
-               'formats\Debugger.Formats.ps1xml',
-               'formats\Errors.Formats.ps1xml',
-               'formats\FontsAndColors.Formats.ps1xml', 
-               'formats\OutputPanes.Formats.ps1xml',
-               'formats\Project.Formats.ps1xml', 
-               'formats\Settings.Formats.ps1xml', 
-               'formats\Tasks.Formats.ps1xml',
-			   'formats\Templates.Formats.ps1xml',
-               'formats\Window.Formats.ps1xml', 
-               'formats\WindowConfiguration.Formats.ps1xml'
+FormatsToProcess = @()
 
 # Modules to import as nested modules of the module specified in ModuleToProcess
-NestedModules = 'bin/codeowls.studioshell.cmdlets.dll',
+NestedModules = './StudioShell.Provider',
+                'bin/codeowls.studioshell.cmdlets.dll',                
 				'start-studioshell.psm1'
 
 # Functions to export from this module

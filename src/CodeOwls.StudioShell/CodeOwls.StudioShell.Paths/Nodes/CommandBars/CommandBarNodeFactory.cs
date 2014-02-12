@@ -408,7 +408,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             return ctrl;
         }
 
-        public CommandBarControl NewButton(IContext context, string caption, int index, string binding, object newItemValue)
+        public CommandBarControl NewButtonObsolete(IContext context, string caption, int index, string binding, object newItemValue)
         {
             var validValueTypes = new[] { typeof(ScriptBlock), typeof(string) };
             if (null == newItemValue || !validValueTypes.Contains(newItemValue.GetType()))
@@ -439,6 +439,44 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
             return ctl;
         }
 
+        public CommandBarControl NewButton(IContext context, string caption, int index, string binding,
+                                   object newItemValue)
+        {
+            var validValueTypes = new[] { typeof(ScriptBlock), typeof(string) };
+            if (null == newItemValue || !validValueTypes.Contains(newItemValue.GetType()))
+            {
+                var validNames = String.Join(", ", validValueTypes.ToList().ConvertAll(t => t.FullName).ToArray());
+                throw new ArgumentException(
+                    "new item values for command bar buttons must be one of the following types: " + validNames);
+            }
+
+            index = Math.Max(index, 1);
+
+            var ctl = _commandBar.Controls.Add(MsoControlType.msoControlButton, index, String.Empty, index, true);
+            var btn = ctl as CommandBarButton;
+
+            btn.Caption = caption;
+            btn.Enabled = true;
+
+            btn.Click += delegate(CommandBarButton ctrl, ref bool cancelDefault)
+            {
+                cancelDefault = false;
+                var executor = Locator.Get<IRunnableCommandExecutor>();
+                if (null == executor)
+                {
+                    return;
+                }
+
+                try
+                {
+                    executor.Execute(newItemValue.ToString());
+                }
+                catch
+                {
+                }
+            };
+            return ctl;
+        }
         public class NewItemDynamicParameters
         {
             [Parameter]

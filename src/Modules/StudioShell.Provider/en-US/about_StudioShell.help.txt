@@ -101,9 +101,9 @@ LONG DESCRIPTION
 	designed to provide access to the Visual Studio extensibility features
 	in any PowerShell console.
 	
-    For more information type:
-    
-        get-help about_StudioShell_Hosts
+    	For more information type:
+    	
+        	get-help about_StudioShell_Hosts
 			
 USING STUDIOSHELL
 
@@ -206,7 +206,7 @@ GETTING STARTED
 		
 	and this command will create a new menu item:
 	
-		new-item -path dte:\commandBars\menuBar\help\MyMenuItem
+		new-item -path "dte:\commandBars\menu Bar\help\MyMenuItem" -value {}
 	
 	While there are not many new cmdlets to learn, some common cmdlets can
 	accept parameters specific to the path with which you're trying to work.
@@ -244,5 +244,5 @@ SEE ALSO
     about_StudioShell_Variables
     about_StudioShell_Data_Panes
     about_StudioShell_Hosts
-	about_StudioShell_Solution_Modules
+    about_StudioShell_Solution_Modules
     PSDTE

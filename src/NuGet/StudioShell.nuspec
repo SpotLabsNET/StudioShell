@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>StudioShell</id>
+    <id>StudioShell.Provider</id>
     <version>$id$</version>
     <authors>Code Owls LLC</authors>
     <owners>Code Owls LLC</owners>
@@ -13,7 +13,7 @@
     <releaseNotes><![CDATA[
         $relnotes$
         ]]></releaseNotes>
-    <copyright>Copyright (c) 2011 Code Owls LLC, All Rights Reserved</copyright>
+    <copyright>Copyright (c) 2014 Code Owls LLC, All Rights Reserved</copyright>
     <tags>StudioShell PowerShell VisualStudio DTE</tags>    
   </metadata>
 </package>

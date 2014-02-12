@@ -30,10 +30,12 @@ properties {
 		'./src/StudioShell.sln'
 	);	
     $targetPath = "./src/CodeOwls.StudioShell/CodeOwls.StudioShell/bin";
+    $providerTargetPath = "./src/CodeOwls.StudioShell/CodeOwls.StudioShell.Provider/bin";
     $nugetSource = "./src/NuGet";
 	$moduleSource = "./src/Modules";
     $metadataAssembly = 'CodeOwls.StudioShell.dll'
-    $currentReleaseNotesPath = '.\src\Modules\StudioShell\en-US\about_StudioShell_Version.help.txt'
+    $currentReleaseNotesPath = '.\src\Modules\StudioShell.Provider\en-US\about_StudioShell_Version.help.txt'
+    $currentReadmePath = '.\src\Modules\StudioShell.Provider\en-US\about_StudioShell_NuGet.help.txt'
 	$wixResourcePath = ".\src\Installer\Resources";
 	$wixProjectPath = ".\src\Installer";
 };
@@ -120,7 +122,7 @@ task __CreateLocalDataDirectory -description $private {
 
 function assemble-moduleDocumentation
 {
-    'StudioShell','StudioShell.Provider' | foreach {
+    'StudioShell.Provider' | foreach {
 	    $helpPath = get-modulePackageDirectory | Join-Path -ChildPath "$_\en-US";
 	    $cmdletTopicPath = $helpPath | Join-Path -ChildPath "ProviderCmdlets";
 	    $providerHelpPath = $helpPath | Join-Path -ChildPath "CodeOwls.StudioShell.Provider.dll-help.xml";
@@ -138,6 +140,7 @@ function assemble-moduleDocumentation
 	    ri $cmdletTopicPath -Force -Recurse;
 	    $help.Save( $providerHelpPath );
     }
+
 }
 
 function get-nugetPackagePath
@@ -208,13 +211,12 @@ task PackageModule -depends CleanModule,Build,__CreateModulePackageDirectory -de
 	
 	# copy bins to module bin area
 	ls $targetPath | copy-item -dest "$mp\StudioShell\bin" -recurse -force;
-    ls $targetPath | copy-item -dest "$mp\StudioShell.Provider\bin" -recurse -force;
+    ls $providerTargetPath/$config | copy-item -dest "$mp\StudioShell.Provider\bin" -recurse -force;
     
     $psd = ls $mp/studioshell/studioshell.psd1 | get-content;
     $psd -replace "ModuleVersion = '[\d\.]+'","ModuleVersion = '$version'" | out-file $mp/studioshell/studioshell.psd1;
 
     $psd = ls $mp/studioshell.provider/studioshell.provider.psd1 | get-content;
-    write-host $psd
     $psd -replace "ModuleVersion = '[\d\.]+'","ModuleVersion = '$version'" | out-file $mp/studioshell.provider/studioshell.provider.psd1;
 
 } -postaction {
@@ -260,7 +262,7 @@ task PackageNuGet -depends PackageModule,__CreateNuGetPackageDirectory,CleanNuGe
     $tools = join-path $ngp 'tools';
 	$content = Join-Path $ngp 'content';
     $md = join-path $tools "StudioShell\bin\$metadataAssembly";
-    $spec = join-path $ngp 'studioshell.nuspec'
+    $spec = join-path $ngp 'studioshell.nuspec'    
     
 	#prepare the nuget distribution area
 	Write-Verbose "preparing nuget distribution hive ...";
@@ -269,11 +271,13 @@ task PackageNuGet -depends PackageModule,__CreateNuGetPackageDirectory,CleanNuGe
     ls $mp | copy-item -dest $tools -recurse -force;
 	# copy nuget source scripts to tools folder
     ls $nugetSource -filter *.ps1 | copy-item -dest $tools -force;
-	# copy nuget reame to content folder
+	# copy nuget readme to content folder
     ls $nugetSource -filter *.txt | copy-item -dest $content -force;
 	# copy nuget nuspec file to nuget package folder
     ls $nugetSource -filter *.nuspec | copy-item -dest $ngp -force;
     
+    copy-item $currentReadmePath -dest $ngp/readme.txt -force;
+
 	#update the releasenotes and version info in the nuspec file
 	Write-Verbose "updating release notes and version info in nuspec file...";
 	
@@ -363,9 +367,9 @@ task InstallAddin -depends InstallModule -description "installs the Visual Studi
 		    $addinFilePath = join-path $addinFolder -child "StudioShell.addin";
 		    $addinSpec = join-path $addInInstallPath -child "StudioShell.VS${n}.AddIn";
         
-		write-verbose $addinFolder
-		write-verbose $addinFilePath
-		write-verbose $addinSpec
+		    write-verbose $addinFolder
+		    write-verbose $addinFilePath
+		    write-verbose $addinSpec
             mkdir $addinFolder -erroraction silentlycontinue;
 		    ( gc $addinSpec ) -replace '<Assembly>.+?</Assembly>',"<Assembly>$addinAssemblyPath</Assembly>" | out-file $addinFilePath;
         }
