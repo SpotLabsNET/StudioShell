@@ -16,8 +16,11 @@ CHANGE LOG
     60: fixed autocompelte of variable names (regression)
 
   Added Features
+  1.6.2
+    StudioShell module now makes direct use of StudioShell.Provider module.
+
   1.6.1
-    Broke out StudioShell.Provider module for explicit NuGet package manager console use.
+    Broke out StudioShell.Provider module for explicit NuGet package manager console use.    
 
   1.6.0
     Added support for VS 2013.
