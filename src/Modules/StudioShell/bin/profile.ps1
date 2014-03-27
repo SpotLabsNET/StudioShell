@@ -38,4 +38,4 @@ write-debug "profile initialization script repository path is $local:root";
 #. $local:root/register-contextMenuItems.ps1;
 
 # scaffolds the solution event handlers for per-solution module management
-#. $local:root/register-solutionevents.ps1;
+. $local:root/../studioshell.provider/initializationscripts/register-solutionevents.ps1;

@@ -12,6 +12,10 @@ CHANGE LOG
 
 1.6
   Resolved Issues
+  1.6.3
+    76: solution modules now run when using the standard console (regression 
+        introduced in 1.6.2)
+
   1.6.1
     60: fixed autocompelte of variable names (regression)
 
