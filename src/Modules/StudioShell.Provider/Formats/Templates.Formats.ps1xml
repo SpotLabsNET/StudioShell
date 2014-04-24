@@ -79,7 +79,7 @@
                         <PropertyName>SSItemMode</PropertyName>
                       </TableColumnItem>
                       <TableColumnItem>
-                        <ScriptBlock>$_.Language | split-path -leaf</ScriptBlock>
+                        <PropertyName>Language</PropertyName>
                       </TableColumnItem>
                       <TableColumnItem>
                         <PropertyName>PSChildName</PropertyName>

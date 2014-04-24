@@ -210,6 +210,7 @@ task PackageModule -depends CleanModule,Build,__CreateModulePackageDirectory -de
 	# copy module src hive to distribution hive
 	Copy-Item $moduleSource -container -recurse -Destination $mp -Force;
 	
+    mkdir "$mp\studioshell\bin","$mp\studioshell.provider\bin" -force | out-null;
 	# copy bins to module bin area
 	ls $targetPath | copy-item -dest "$mp\StudioShell\bin" -recurse -force;
     ls $providerTargetPath/$config | copy-item -dest "$mp\StudioShell.Provider\bin" -recurse -force;
