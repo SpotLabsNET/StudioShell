@@ -63,6 +63,7 @@ function get-modulePackageDirectory
     return "." | resolve-path | join-path -child "/bin/$config/Modules";
 }
 
+
 function get-targetOutputDirectory
 {
     return $targetPath | resolve-path | join-path -child $config;
@@ -215,6 +216,8 @@ task PackageModule -depends CleanModule,Build,__CreateModulePackageDirectory -de
 	ls $targetPath | copy-item -dest "$mp\StudioShell\bin" -recurse -force;
     ls $providerTargetPath/$config | copy-item -dest "$mp\StudioShell.Provider\bin" -recurse -force;
     
+    assemble-moduleDocumentation;
+
     $psd = ls $mp/studioshell/studioshell.psd1 | get-content;
     $psd -replace "ModuleVersion = '[\d\.]+'","ModuleVersion = '$version'" | out-file $mp/studioshell/studioshell.psd1;
 
@@ -223,8 +226,6 @@ task PackageModule -depends CleanModule,Build,__CreateModulePackageDirectory -de
 
     copy-item $mp/studioshell.provider -dest $mp/studioshell -Container -Recurse
 
-} -postaction {
-	assemble-moduleDocumentation;
 }
 
 task PackageMSI -depends PackageModule -description "assembles the MSI distribution" {
