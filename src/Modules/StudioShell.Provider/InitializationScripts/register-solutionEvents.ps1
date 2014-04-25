@@ -85,7 +85,7 @@ function import-solutionModule
 	
 	write-verbose "importing module at '$local:slnModulePath' ...";
 
-	$global:currentSolutionModule = import-module $local:slnModulePath -passthru;
+	$global:currentSolutionModule = import-module $local:slnModulePath -scope global -passthru;
     write-debug "Current solution module: $global:currentSolutionModule"
 }
 
@@ -176,7 +176,7 @@ function import-solutionModule
 	
 	                write-verbose "importing module at '$local:slnModulePath' ...";
 
-	                $global:currentSolutionModule = import-module $local:slnModulePath -passthru;
+	                $global:currentSolutionModule = import-module $local:slnModulePath -scope global -passthru;
                     write-debug "Current solution module: $global:currentSolutionModule"
                 }
 
