@@ -12,6 +12,9 @@ CHANGE LOG
 
 1.6
   Resolved Issues
+  1.6.5
+    Addressed regression inside of installer around VS 2013.
+
   1.6.4
     Fixed bug in PS3/PS4 where using select-object -first in a pipeline with
         the PSDTE provider would cause strange behavior.

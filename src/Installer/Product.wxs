@@ -136,7 +136,7 @@
     </Property>
 
     <Condition Message="There are no StudioShell-compatible hosts installed on your local machine.  Please install a compatible version of Visual Studio or SQL Management Studio and rerun this installer.">
-      <![CDATA[VS2012_AVAILABLE<>"NOT_INSTALLED" OR VS2010_AVAILABLE<>"NOT_INSTALLED" OR VS2008_AVAILABLE<>"NOT_INSTALLED" OR SSMS2010_AVAILABLE<>"NOT_INSTALLED"]]>
+      <![CDATA[VS2013_AVAILABLE<>"NOT_INSTALLED" OR VS2012_AVAILABLE<>"NOT_INSTALLED" OR VS2010_AVAILABLE<>"NOT_INSTALLED" OR VS2008_AVAILABLE<>"NOT_INSTALLED" OR SSMS2010_AVAILABLE<>"NOT_INSTALLED"]]>
     </Condition>
 
     <Upgrade Id="{D4680797-1E5D-442A-A513-C2648FB53805}">

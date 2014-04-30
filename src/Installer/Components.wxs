@@ -818,59 +818,6 @@
                     <Component Id="cmp97C29D3DA2147047DC118A7B8B5D7192" Guid="A7939E74-FB23-4EEE-ABD5-392449E45ABA">
                         <File Id="fil3BC751D3CDA16A13CAC6CC5D739490E4" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\CodeOwls.StudioShell.Provider.dll-help.xml" />
                     </Component>
-                    <Directory Id="dir6B08BFCA01EE7EED55E0CAA1241E5DDA" Name="ProviderCmdlets">
-                        <Component Id="cmp393D19C9906321F518D9827757632120" Guid="DFAFBFDC-1A52-4DF5-8321-AC33B0553807">
-                            <File Id="fil6BA42876416E19F05A8FD0E65E540DCD" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\BreakpointCollection.xml" />
-                        </Component>
-                        <Component Id="cmp29C128B715A4ABB83D71C6A87CD2C23C" Guid="E6004BD8-AF62-42B3-9E87-AFD447FF6F52">
-                            <File Id="fil8CFAF5D2BD0C9C496B2317A9B537AA79" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CodeClass.xml" />
-                        </Component>
-                        <Component Id="cmpEDA088D93EB1377B7D290B90B71779AB" Guid="9EC9CAAA-0099-4655-AF4E-D218E7A68612">
-                            <File Id="filD2AE8FB03962226C63F3D89C9DEB487F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CodeEnum.xml" />
-                        </Component>
-                        <Component Id="cmpFF8EB8C08C5F150D47861FB37F58729A" Guid="F43AFD76-695B-45F3-9251-018694A2C059">
-                            <File Id="fil8686B0A95C3F4BF1D83D49E7F508E0EC" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CodeEvent.xml" />
-                        </Component>
-                        <Component Id="cmpD4A3D0C2CF8BCABC1C42CC7F437C8AA5" Guid="2E74B28D-BA0A-45B5-965D-A49EEC6241CB">
-                            <File Id="fil700DA7D8F51C18B468DF0F9831210E6F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CodeFile.xml" />
-                        </Component>
-                        <Component Id="cmpA0B138853692A3FE94AFAB617C5F5495" Guid="477DF879-EED8-4A11-9404-16269E7A5CC7">
-                            <File Id="fil4A63937EE17BCC382F84D02099E860B0" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CodeInterface.xml" />
-                        </Component>
-                        <Component Id="cmpFE07132A7168DDA0FE421E585C420201" Guid="8AD7B9B1-3A01-4BEF-8FAB-DE27A76BA5A6">
-                            <File Id="fil136D376C180ECCA7A312A1955564DF87" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CodeMethod.xml" />
-                        </Component>
-                        <Component Id="cmpDB49D77C17ED33E6D78BFCF0EDAD4497" Guid="7E5C7455-D75F-4BF4-B5C6-9BC89319BDBF">
-                            <File Id="filE1C2A66E95B20D77865827AD065DFA18" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CodeNamespace.xml" />
-                        </Component>
-                        <Component Id="cmpDCFEB2AAF5212157B7FC43416B183692" Guid="309CB61C-F608-43EA-B26F-BA761C7D072D">
-                            <File Id="fil657018778495FBA6BE0D288CA2C3679D" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\Command.xml" />
-                        </Component>
-                        <Component Id="cmp3C42217D746650C3AC119F068D471BE1" Guid="43CCD983-7B6D-4931-BB2C-8F80B15ADD8D">
-                            <File Id="fil1B3FD7A7A9729376F127D888FFDB2784" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CommandBarCollection.xml" />
-                        </Component>
-                        <Component Id="cmp87FE5EAEAFA5694FB5AAB7537F6BC25D" Guid="C9D86A52-CDC8-471C-AD24-B220EF3C9401">
-                            <File Id="filB6F4C04063BDDDA0357F46C7889E05D9" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CommandBarControl.xml" />
-                        </Component>
-                        <Component Id="cmpA08EE354D18B63E27333A3668F538E6F" Guid="2C74CE2B-B2C2-4947-A250-E0130A166834">
-                            <File Id="fil721F8C663168C505E6350FB89821DD2D" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\CommandCollection.xml" />
-                        </Component>
-                        <Component Id="cmp69933751E7C9BE76503F01AC37A74CDB" Guid="85898198-1FC1-430E-8764-0E02D3F67A59">
-                            <File Id="fil8D97607A531DC0A859D28FA9677FE82A" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\ErrorTaskCollection.xml" />
-                        </Component>
-                        <Component Id="cmpD573C4E5BFE2307D939683C90FEC8D6E" Guid="2DE0552E-0D2F-40C0-88FF-9F474838EA8A">
-                            <File Id="fil66157F78ECB5DC9C72694D4E2E4F972E" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\Project.xml" />
-                        </Component>
-                        <Component Id="cmp53430E4262F30BC3856EBD1B582D0D02" Guid="48251FF2-5872-4BF4-AB01-5A0DF94DB8AF">
-                            <File Id="fil7064FB1FE563A4F5BB843D759ACD5803" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\ReferenceCollection.xml" />
-                        </Component>
-                        <Component Id="cmp913D9D778336EC24A1F92F4E212B298A" Guid="786A40EC-CE0B-4A52-A3B8-FA88A7D43069">
-                            <File Id="fil027E00D54ACAEAE67CB0542BE0702CF4" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\SolutionProjects.xml" />
-                        </Component>
-                        <Component Id="cmp883AFEDF517F7A4A9FC1798B67BA96C4" Guid="9D4D754D-8896-47FF-9F74-CA0EFB04DCC6">
-                            <File Id="fil23FD7B3978AC4F99F1D5EF081D9C77C8" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\en-US\ProviderCmdlets\TaskCollection.xml" />
-                        </Component>
-                    </Directory>
                 </Directory>
                 <Directory Id="dir26E1E08EC5E3B9A2CC7308C650C77654" Name="Formats">
                     <Component Id="cmpF9DCE8E28E116104F3AD24BDA818F9ED" Guid="DD3B784B-BBC7-411D-9C50-26D239EDDC48">
@@ -1031,23 +978,6 @@
             <ComponentRef Id="cmp8A0CB605A6C9B81B10961C56E953EA15" />
             <ComponentRef Id="cmp688C55856065AB5F7DB17D86352A211B" />
             <ComponentRef Id="cmp97C29D3DA2147047DC118A7B8B5D7192" />
-            <ComponentRef Id="cmp393D19C9906321F518D9827757632120" />
-            <ComponentRef Id="cmp29C128B715A4ABB83D71C6A87CD2C23C" />
-            <ComponentRef Id="cmpEDA088D93EB1377B7D290B90B71779AB" />
-            <ComponentRef Id="cmpFF8EB8C08C5F150D47861FB37F58729A" />
-            <ComponentRef Id="cmpD4A3D0C2CF8BCABC1C42CC7F437C8AA5" />
-            <ComponentRef Id="cmpA0B138853692A3FE94AFAB617C5F5495" />
-            <ComponentRef Id="cmpFE07132A7168DDA0FE421E585C420201" />
-            <ComponentRef Id="cmpDB49D77C17ED33E6D78BFCF0EDAD4497" />
-            <ComponentRef Id="cmpDCFEB2AAF5212157B7FC43416B183692" />
-            <ComponentRef Id="cmp3C42217D746650C3AC119F068D471BE1" />
-            <ComponentRef Id="cmp87FE5EAEAFA5694FB5AAB7537F6BC25D" />
-            <ComponentRef Id="cmpA08EE354D18B63E27333A3668F538E6F" />
-            <ComponentRef Id="cmp69933751E7C9BE76503F01AC37A74CDB" />
-            <ComponentRef Id="cmpD573C4E5BFE2307D939683C90FEC8D6E" />
-            <ComponentRef Id="cmp53430E4262F30BC3856EBD1B582D0D02" />
-            <ComponentRef Id="cmp913D9D778336EC24A1F92F4E212B298A" />
-            <ComponentRef Id="cmp883AFEDF517F7A4A9FC1798B67BA96C4" />
             <ComponentRef Id="cmpF9DCE8E28E116104F3AD24BDA818F9ED" />
             <ComponentRef Id="cmp1E2E7E242312B73DF776B2B2FC51C6F6" />
             <ComponentRef Id="cmp50A30EB3AD024B5266CDB1CA2BF200CB" />
