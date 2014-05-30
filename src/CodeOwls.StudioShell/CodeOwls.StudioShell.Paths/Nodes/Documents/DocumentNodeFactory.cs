@@ -9,7 +9,7 @@ using EnvDTE;
 
 namespace CodeOwls.StudioShell.Paths.Nodes
 {
-    public class DocumentNodeFactory : NodeFactoryBase, IInvokeItem, IRemoveItem, IClearItem, IGetItemContent
+    public class DocumentNodeFactory : NodeFactoryBase, IInvokeItem, IRemoveItem, IClearItem, IGetItemContent, ISetItemContent
     {
         private readonly Document _document;
         private readonly TextDocument _textDocument;
@@ -68,7 +68,10 @@ namespace CodeOwls.StudioShell.Paths.Nodes
         public IContentReader GetContentReader(IContext context)
         {
             var selection = _textDocument.Selection;
-            return new DocumentContentReader( selection );
+            var currentPoint = selection.AnchorPoint.LineCharOffset;
+            selection.StartOfDocument();
+
+            return new TextSelectionContentReader( selection, currentPoint );
         }
 
         public object GetContentReaderDynamicParameters(IContext context)
@@ -76,56 +79,18 @@ namespace CodeOwls.StudioShell.Paths.Nodes
             return null;
         }
 
-        class DocumentContentReader : IContentReader
+        public IContentWriter GetContentWriter(IContext context)
         {
-            struct Point
-            {
-                public int Line;
-                public int Char;
-            }
-            private readonly TextSelection _selection;
-            private int _lineIndex;
-            private readonly int _currentEditPoint;
+            var selection = _textDocument.Selection;
+            selection.EndOfDocument();
+            selection.StartOfDocument(true);
+            selection.Text = "";
+            return new TextSelectionContentWriter( selection );
+        }
 
-            public DocumentContentReader(TextSelection selection)
-            {
-                _selection = selection;
-                _currentEditPoint = _selection.AnchorPoint.AbsoluteCharOffset;
-                _selection.StartOfDocument();
-                _lineIndex = 0;
-                
-            }
-
-            public void Dispose()
-            {                
-            }
-
-            public IList Read(long readCount)
-            {
-                var lines = new ArrayList();
-                while (0 <= --readCount && ! _selection.AnchorPoint.AtEndOfDocument)
-                {
-                    _selection.GotoLine(++_lineIndex, true); 
-                    var text = _selection.Text;
-                    lines.Add(text);
-                }
-                return lines;
-            }
-
-            public void Seek(long offset, SeekOrigin origin)
-            {
-                long lineNumber = offset;
-                if (origin == SeekOrigin.Current)
-                {
-                    lineNumber += _selection.CurrentLine;
-                }
-                _selection.MoveToLineAndOffset( (int) lineNumber, 0, false );       
-            }
-
-            public void Close()
-            {
-                _selection.MoveToAbsoluteOffset(_currentEditPoint, false);
-            }
+        public object GetContentWriterDynamicParameters(IContext context)
+        {
+            return null;
         }
     }
 }
