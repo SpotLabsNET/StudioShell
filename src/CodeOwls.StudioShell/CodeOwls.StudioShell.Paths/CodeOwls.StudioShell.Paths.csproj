@@ -150,6 +150,7 @@
     <Compile Include="Nodes\CommandBars\CommandBarNodeFactory.cs" />
     <Compile Include="Nodes\Commands\CommandCollectionPathNodeFactory.cs" />
     <Compile Include="Nodes\Commands\CommandNodeFactory.cs" />
+    <Compile Include="Nodes\Configurations\ConfigurationsCollectionNodeFactory.cs" />
     <Compile Include="Nodes\Debugger\BreakpointCollectionNodeFactory.cs" />
     <Compile Include="Nodes\Debugger\BreakpointNodeFactory.cs" />
     <Compile Include="Nodes\Debugger\DebuggerNodeFactory.cs" />
@@ -182,7 +183,6 @@
     <Compile Include="Nodes\ProjectModel\ProjectItemNodeFactoryBase.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectItemTemplateCollectionNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ProjectNodeFactory.cs" />
-    <Compile Include="Nodes\ProjectModel\ProjectNodeFactoryBase.cs" />
     <Compile Include="Nodes\ProjectModel\ReferenceCollectionNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\ReferenceNodeFactory.cs" />
     <Compile Include="Nodes\ProjectModel\SolutionCodeModelNodeFactory.cs" />
