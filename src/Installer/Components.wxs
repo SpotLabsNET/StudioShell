@@ -250,6 +250,13 @@
                 <Component Id="cmp265532F5F4489C9AF24922AA6E7FADA1" Guid="CBE23E9D-C664-4C50-A2CE-2CEB782C020C">
                     <File Id="filDDBA239E7C9ED139FAEAD311B35381E4" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Cmdlets.pdb" />
                 </Component>
+
+              <Component Id="cmp730C2103CAEADCAFDC21309A3A9932F6" Guid="E80EC46B-B232-49A1-8737-DA5432BD1C2F">
+                <File Id="filDEEC7D742DB93B7F8E88E6BD10A8C021" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\log4net.dll" />                
+              </Component>
+
+              <Component Id="cmp01C7705D531E49EB375EBB4DF70D298D" Guid="9C51B4F9-4703-4B29-A051-FC3FBB3CF662">
+                    <Class Id="{4531A98B-A1E7-32B9-B648-D28714D7B5BA}" Context="InprocServer32" Description="CodeOwls.StudioShell.Common.Exceptions.StudioShellException" ThreadingModel="both" ForeignServer="mscoree.dll">
                 <Component Id="cmp01C7705D531E49EB375EBB4DF70D298D" Guid="4BAD9654-055C-4ED8-8AC6-822E5C346C73">
                     <Class Id="{102047D2-7F16-3506-B7F8-BBB3B73FCCCB}" Context="InprocServer32" Description="CodeOwls.StudioShell.Common.Configuration.Settings" ThreadingModel="both" ForeignServer="mscoree.dll">
                         <ProgId Id="CodeOwls.StudioShell.Common.Configuration.Settings" Description="CodeOwls.StudioShell.Common.Configuration.Settings" />

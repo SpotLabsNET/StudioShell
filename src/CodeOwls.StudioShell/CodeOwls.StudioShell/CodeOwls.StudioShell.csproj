@@ -148,6 +148,7 @@
     <Compile Include="StatusBarAnimationState.cs" />
     <Compile Include="Utility\FunctionUtilities.cs" />
     <Compile Include="Utility\ImageAdapter.cs" />
+    <Compile Include="Utility\LogManager.cs" />
     <Compile Include="Utility\Scripts.cs" />
   </ItemGroup>
   <ItemGroup>
