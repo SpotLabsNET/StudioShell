@@ -59,6 +59,9 @@
     <Compile Include="Exceptions\NodeDoesNotSupportCmdletException.cs" />
     <Compile Include="Exceptions\ProviderException.cs" />
     <Compile Include="Extensions\PathStringExtensions.cs" />
+    <Compile Include="IClearItemContent.cs" />
+    <Compile Include="IGetItemContent.cs" />
+    <Compile Include="ISetItemContent.cs" />
     <Compile Include="Processors\Context.cs" />
     <Compile Include="Processors\IContext.cs" />
     <Compile Include="Processors\IPathNodeProcessor.cs" />
