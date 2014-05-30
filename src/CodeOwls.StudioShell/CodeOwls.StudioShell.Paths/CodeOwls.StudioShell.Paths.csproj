@@ -159,8 +159,12 @@
     <Compile Include="Nodes\Debugger\ProcessNodeFactory.cs" />
     <Compile Include="Nodes\Debugger\StackFrameNodeFactory.cs" />
     <Compile Include="Nodes\Debugger\ThreadNodeFactory.cs" />
+    <Compile Include="Nodes\Documents\EditPointContentWriter.cs" />
+    <Compile Include="Nodes\Documents\StringContentReader.cs" />
+    <Compile Include="Nodes\Documents\TextSelectionContentReader.cs" />
     <Compile Include="Nodes\Documents\DocumentNodeFactory.cs" />
     <Compile Include="Nodes\Documents\DocumentsCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\Documents\TextSelectionContentWriter.cs" />
     <Compile Include="Nodes\DTE\AddInNodeCollectionFactory.cs" />
     <Compile Include="Nodes\DTE\AddInNodeFactory.cs" />
     <Compile Include="Nodes\DTE\RootNodeFactory.cs" />
