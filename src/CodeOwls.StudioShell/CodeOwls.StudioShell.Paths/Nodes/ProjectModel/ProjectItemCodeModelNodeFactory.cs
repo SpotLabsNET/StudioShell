@@ -55,7 +55,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
             return factories;
         }
 
-        public IEnumerable<string> NewItemTypeNames
+        public virtual IEnumerable<string> NewItemTypeNames
         {
             get
             {
@@ -67,7 +67,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
             }
         }
 
-        public object NewItemParameters
+        public virtual object NewItemParameters
         {
             get
             {
@@ -79,7 +79,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
             }
         }
 
-        public IPathNode NewItem(IContext context, string path, string itemTypeName, object newItemValue)
+        public virtual IPathNode NewItem(IContext context, string path, string itemTypeName, object newItemValue)
         {
             if( null == _codeModelNodeFactory )
             {

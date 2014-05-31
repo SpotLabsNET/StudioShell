@@ -34,12 +34,9 @@
   <ItemGroup>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="EnvDTE90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.PowerShell.ConsoleHost, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Shell, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -50,10 +47,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\WindowsPowerShell\v1.0\System.Management.Automation.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -61,9 +54,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="VSLangProj80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="VSLangProj90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
   </ItemGroup>
@@ -100,6 +90,7 @@
     <Compile Include="Items\CommandBars\ShellCommandBarComboBox.cs" />
     <Compile Include="Items\CommandBars\ShellCommandBarPopup.cs" />
     <Compile Include="Items\Commands\ShellCommand.cs" />
+    <Compile Include="Items\Configurations\ShellConfiguration.cs" />
     <Compile Include="Items\Debugger\ShellBreakpoint.cs" />
     <Compile Include="Items\Debugger\ShellDebugger.cs" />
     <Compile Include="Items\Debugger\ShellExpression.cs" />
@@ -150,7 +141,9 @@
     <Compile Include="Nodes\CommandBars\CommandBarNodeFactory.cs" />
     <Compile Include="Nodes\Commands\CommandCollectionPathNodeFactory.cs" />
     <Compile Include="Nodes\Commands\CommandNodeFactory.cs" />
+    <Compile Include="Nodes\Configurations\ConfigurationNodeFactory.cs" />
     <Compile Include="Nodes\Configurations\ConfigurationsCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\Configurations\PropertyNodeFactory.cs" />
     <Compile Include="Nodes\Debugger\BreakpointCollectionNodeFactory.cs" />
     <Compile Include="Nodes\Debugger\BreakpointNodeFactory.cs" />
     <Compile Include="Nodes\Debugger\DebuggerNodeFactory.cs" />

@@ -136,7 +136,6 @@ namespace CodeOwls.StudioShell.Cmdlets
         private readonly Dictionary<string, Type> _cache = new Dictionary<string, Type>();
         private readonly PSPropertyInfo _psPropertyInfo;
         private readonly bool _useNativeTypes;
-        private object _value;
         private Type _type;
 
         public PSPropertyInfoDescriptor(PSPropertyInfo psPropertyInfo, bool useNativeTypes) : 

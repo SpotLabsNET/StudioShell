@@ -207,7 +207,7 @@ namespace CodeOwls.PowerShell.Host.Executors
                         {
                             ExecutePipeline(options, tempPipeline);
                         }
-                        catch (PSInvalidOperationException ioe)
+                        catch (PSInvalidOperationException)
                         {
                             /*
                              * HACK: there seems to be some lag between the toggle of the runspace
