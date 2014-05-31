@@ -832,8 +832,14 @@
                     <Component Id="cmpC5122C36777F02AB78F669D30B18940F" Guid="0341F834-2063-4308-B08B-09F5765427FA">
                         <File Id="fil34DCC5D45098B836EED97A77D6FFA647" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\Formats\Commands.Formats.ps1xml" />
                     </Component>
+                    <Component Id="cmp46ec4a0a87684ca1b54192f60f6b61a1" Guid="7e82b478489144b6a47fd32b11bb48b9">
+                        <File Id="fil46ec4a0a87684ca1b54192f60f6b61a1" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\Formats\Configurations.Formats.ps1xml" />
+                    </Component>
                     <Component Id="cmp058566EE275BD95E9D2EE74FC58B5A50" Guid="CFE6BD34-F51A-434E-93EC-7D503215180D">
                         <File Id="fil717F8BD7DA4A77E12FCEFE58A43B01C7" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\Formats\Debugger.Formats.ps1xml" />
+                    </Component>
+                    <Component Id="cmpddc8596ad02443aea9669cfe649e07cf" Guid="ddc8596a-d024-43ae-a966-9cfe649e07cf">
+                        <File Id="filddc8596ad02443aea9669cfe649e07cf" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\Formats\Documents.Formats.ps1xml" />
                     </Component>
                     <Component Id="cmp5EB98E03FA20A1B88D733BAE26B41815" Guid="CBDB2AF3-88EB-4527-A862-8268A46B598B">
                         <File Id="filC876B0D1F8DFBA908970CE480DB73012" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\studioshell.provider\Formats\Errors.Formats.ps1xml" />
@@ -1001,6 +1007,8 @@
             <ComponentRef Id="cmp2FB5BDABBD348B7FAB1F3758BA1A6083" />
             <ComponentRef Id="cmp93F429817418DE0E13B676188031B486" />
             <ComponentRef Id="cmp64379022B3A10778BABA559C450F59D0" />
+            <ComponentRef Id="cmp46ec4a0a87684ca1b54192f60f6b61a1" />
+            <ComponentRef Id="cmpddc8596ad02443aea9669cfe649e07cf" />
         </ComponentGroup>
     </Fragment>
 </Wix>
