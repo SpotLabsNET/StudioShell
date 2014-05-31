@@ -26,7 +26,6 @@ using CodeOwls.StudioShell.Common.Utility;
 using CodeOwls.StudioShell.Paths.Items;
 using EnvDTE;
 using EnvDTE80;
-using CodeOwls.PowerShell.Provider.PathNodes;
 
 namespace CodeOwls.StudioShell.Paths.Nodes.ProjectModel
 {

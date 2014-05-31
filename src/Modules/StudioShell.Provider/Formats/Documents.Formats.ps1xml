@@ -67,19 +67,19 @@
             <Width>5</Width>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Type</Label>
-            <Alignment>left</Alignment>
-            <Width>8</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>Language</Label>
             <Alignment>Left</Alignment>
             <Width>8</Width>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Path</Label>
+            <Alignment>left</Alignment>
+            <Width>25</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Name</Label>
             <Alignment>left</Alignment>
-            <Width>35</Width>
+            <Width>15</Width>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -92,7 +92,7 @@
                 <ScriptBlock>if($_.Saved){'*'}</ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Type</PropertyName>
+                <PropertyName>Path</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Language</PropertyName>

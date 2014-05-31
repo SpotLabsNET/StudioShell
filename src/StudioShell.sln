@@ -2,11 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionResources", "SolutionResources", "{4A18610A-DE9A-49CE-B480-BDD332E557CA}"
-	ProjectSection(SolutionItems) = preProject
-		..\Resources\csheader.txt = ..\Resources\csheader.txt
-		..\Resources\psheader.txt = ..\Resources\psheader.txt
-		..\Resources\xmlheader.txt = ..\Resources\xmlheader.txt
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOwls.PowerShell.WinForms", "CodeOwls.PowerShell\CodeOwls.PowerShell.WinForms\CodeOwls.PowerShell.WinForms.csproj", "{91F5B843-B1BC-4F80-BBD5-245878D7329F}"
 EndProject
@@ -29,17 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOwls.StudioShell.Host", "CodeOwls.StudioShell\CodeOwls.StudioShell.Host\CodeOwls.StudioShell.Host.csproj", "{8226949E-1E8C-4D81-8ED6-9C4BD7CAEA1F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{BE050775-73E5-4ABA-AD53-CB2055EA34C4}"
-	ProjectSection(SolutionItems) = preProject
-		CodeOwls.AssemblyInfo.cs = CodeOwls.AssemblyInfo.cs
-		CodeOwls.PowerShell.AssemblyInfo.cs = CodeOwls.PowerShell.AssemblyInfo.cs
-		CodeOwls.StudioShell.AssemblyInfo.cs = CodeOwls.StudioShell.AssemblyInfo.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StudioShellScripts", "StudioShellScripts", "{DD04F128-DC25-442D-9B99-C75C63429289}"
-	ProjectSection(SolutionItems) = preProject
-		StudioShellScripts\add-fileheader.ps1 = StudioShellScripts\add-fileheader.ps1
-		StudioShellScripts\update-projectFrameworkVersion.ps1 = StudioShellScripts\update-projectFrameworkVersion.ps1
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

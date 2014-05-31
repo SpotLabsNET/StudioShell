@@ -2,7 +2,7 @@
     about_StudioShell_Version
 
 VERSION
-    You are running version 1.6 of StudioShell.
+    You are running version 1.7 of StudioShell.
 
 CHANGE LOG
   Description
@@ -10,6 +10,27 @@ CHANGE LOG
 	StudioShell.  Each item is identified by its codeplex work item 
 	number(s) if available.
 
+1.7
+  Resolved Issues
+  1.7.0 
+    Installer condition logic hardened to prevent spurious triggering of "no hosts" 
+	error
+
+  Added Features
+  1.7.0
+    DTE drive now hosts the \Documents node, giving access to the open documents in 
+	the IDE.  Initial support includes get/set-content.
+
+    DTE drive includes \selectedItems\activeDocument node to allow quick access to 
+	the currently selected document.
+
+    DTE drive includes \solution\projects\configurations node, providing item-cmdlet
+	access to build configurations.  each configuration includes build properties
+	as child items.
+
+    All code model nodes now support the get- and set-content cmdlets, allowing you
+	to direct read/write access to the contents of any code element.
+ 
 1.6
   Resolved Issues
   1.6.5

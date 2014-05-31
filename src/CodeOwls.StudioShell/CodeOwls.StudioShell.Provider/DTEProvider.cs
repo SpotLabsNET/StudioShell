@@ -149,9 +149,8 @@ namespace CodeOwls.StudioShell.Provider
                         )
                     );
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                
             }
 
             DTE2 dte2 = DTEProvider.DTE2;
@@ -162,7 +161,7 @@ namespace CodeOwls.StudioShell.Provider
                     var value = sessionState.PSVariable.GetValue("dte",null);
                     dte2 = value as DTE2;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }   
             }

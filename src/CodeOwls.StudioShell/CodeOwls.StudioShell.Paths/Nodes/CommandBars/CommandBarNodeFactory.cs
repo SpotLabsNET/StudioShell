@@ -33,7 +33,6 @@ using CodeOwls.StudioShell.Paths.Utility;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.CommandBars;
-using CodeOwls.PowerShell.Provider.PathNodes;
 
 namespace CodeOwls.StudioShell.Paths.Nodes.CommandBars
 {
