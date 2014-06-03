@@ -31,6 +31,11 @@ namespace CodeOwls.StudioShell.Paths.Items.Configurations
             get { return _dependency.Project; }
         }
 
+        public string Name
+        {
+            get { return Project.Name; }
+        }
+
         public object RequiredProjects
         {
             get { return _dependency.RequiredProjects; }

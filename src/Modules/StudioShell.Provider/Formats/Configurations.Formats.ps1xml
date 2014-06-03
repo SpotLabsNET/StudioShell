@@ -68,6 +68,84 @@
         </CustomEntries>
       </CustomControl>
     </Control>
+    <Control>
+      <Name>BuildDependency-GroupingFormat</Name>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Frame>
+                <LeftIndent>4</LeftIndent>
+                <CustomItem>
+                  <Text>Location: </Text>
+                  <ExpressionBinding>
+                    <PropertyName>PSParentPath</PropertyName>
+                  </ExpressionBinding>
+                  <NewLine/>
+                  <Text>Available Operations: </Text>
+                  <ExpressionBinding>
+                    <ScriptBlock>(get-item $_.PSParentPath).SSItemMode</ScriptBlock>
+                  </ExpressionBinding>
+                  <NewLine/>
+                </CustomItem>
+              </Frame>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </Control>
+    <Control>
+      <Name>SolutionConfiguration-GroupingFormat</Name>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Frame>
+                <LeftIndent>4</LeftIndent>
+                <CustomItem>
+                  <Text>Location: </Text>
+                  <ExpressionBinding>
+                    <PropertyName>PSParentPath</PropertyName>
+                  </ExpressionBinding>
+                  <NewLine/>
+                  <Text>Available Operations: </Text>
+                  <ExpressionBinding>
+                    <ScriptBlock>(get-item $_.PSParentPath).SSItemMode</ScriptBlock>
+                  </ExpressionBinding>
+                  <NewLine/>
+                </CustomItem>
+              </Frame>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </Control>
+    <Control>
+      <Name>SolutionContext-GroupingFormat</Name>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Frame>
+                <LeftIndent>4</LeftIndent>
+                <CustomItem>
+                  <Text>Location: </Text>
+                  <ExpressionBinding>
+                    <PropertyName>PSParentPath</PropertyName>
+                  </ExpressionBinding>
+                  <NewLine/>
+                  <Text>Available Operations: </Text>
+                  <ExpressionBinding>
+                    <ScriptBlock>(get-item $_.PSParentPath).SSItemMode</ScriptBlock>
+                  </ExpressionBinding>
+                  <NewLine/>
+                </CustomItem>
+              </Frame>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </Control>
   </Controls>
 
   <ViewDefinitions>
@@ -161,6 +239,138 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>BuildDependency</Name>
+      <ViewSelectedBy>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.Configurations.ShellConfigurationProperty</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>PSParentPath</PropertyName>
+        <CustomControlName>BuildDependency-GroupingFormat</CustomControlName>
+      </GroupBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>          </Label>
+            <Alignment>Left</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Project</Label>
+            <Alignment>Left</Alignment>
+            <Width>25</Width>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>SSItemMode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>SolutionConfiguration</Name>
+      <ViewSelectedBy>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.Configurations.ShellSolutionConfiguration</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>PSParentPath</PropertyName>
+        <CustomControlName>SolutionConfiguration-GroupingFormat</CustomControlName>
+      </GroupBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>          </Label>
+            <Alignment>Left</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Project</Label>
+            <Alignment>Left</Alignment>
+            <Width>25</Width>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>SSItemMode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>SolutionContext</Name>
+      <ViewSelectedBy>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.Configurations.ShellSolutionContext</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>PSParentPath</PropertyName>
+        <CustomControlName>SolutionConfiguration-GroupingFormat</CustomControlName>
+      </GroupBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>          </Label>
+            <Alignment>Left</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Project</Label>
+            <Alignment>Left</Alignment>
+            <Width>25</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Platform</Label>
+            <Alignment>Left</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Configuration</Label>
+            <Alignment>Left</Alignment>
+            <Width>13</Width>          
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+            <Alignment>Left</Alignment>
+            <Width>4</Width>          
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>SSItemMode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ProjectName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PlatformName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ConfigurationName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

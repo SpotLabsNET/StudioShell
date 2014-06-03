@@ -47,6 +47,7 @@
                 <TypeName>CodeOwls.StudioShell.Paths.Items.Debugger.ShellDebugger</TypeName>
                 <TypeName>CodeOwls.StudioShell.Paths.Items.ShellContainer</TypeName>
                 <TypeName>CodeOwls.StudioShell.Paths.Items.ShellDocuments.ShellDocument</TypeName>
+                <TypeName>CodeOwls.StudioShell.Paths.Items.Configuration.ShellSolutionBuild</TypeName>
             </ViewSelectedBy>
             <GroupBy>
                 <PropertyName>PSParentPath</PropertyName>
