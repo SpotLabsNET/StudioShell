@@ -69,6 +69,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CodeModel
             foreach (CodeElement e in _codeModel.CodeElements)
             {
                 var factory = CreateNodeFactoryFromCodeElement(e);
+
                 yield return factory;
             }
         }
@@ -154,8 +155,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.CodeModel
             return CreateNodeFactoryFromTextPoint(textPoint, codeElementType);
         }
 
-        internal static CodeElementNodeFactory CreateNodeFactoryFromTextPoint(TextPoint textPoint,
-                                                                              vsCMElement codeElementType)
+        internal static CodeElementNodeFactory CreateNodeFactoryFromTextPoint(TextPoint textPoint, vsCMElement codeElementType)
         {
             var codeElement = textPoint.get_CodeElement(codeElementType);
             if (null == codeElement)
