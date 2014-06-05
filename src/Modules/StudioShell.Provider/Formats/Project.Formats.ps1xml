@@ -96,7 +96,7 @@
               <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellProject</TypeName>
               <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellVSProject2</TypeName>
               <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellReference</TypeName>
-              <TypeName>CodeOwls.StudioShell.Paths.Items.ShellContainer</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ShellContainer</TypeName>              
             </ViewSelectedBy>
             <GroupBy>
                 <PropertyName>PSParentPath</PropertyName>

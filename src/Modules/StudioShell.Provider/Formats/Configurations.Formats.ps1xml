@@ -248,7 +248,7 @@
     <View>
       <Name>BuildDependency</Name>
       <ViewSelectedBy>
-        <TypeName>CodeOwls.StudioShell.Paths.Items.Configurations.ShellConfigurationProperty</TypeName>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.Configurations.ShellBuildDependency</TypeName>
       </ViewSelectedBy>
       <GroupBy>
         <PropertyName>PSParentPath</PropertyName>
@@ -264,7 +264,7 @@
           <TableColumnHeader>
             <Label>Project</Label>
             <Alignment>Left</Alignment>
-            <Width>25</Width>
+            <Width>45</Width>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -298,9 +298,9 @@
             <Width>10</Width>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Project</Label>
+            <Label>Name</Label>
             <Alignment>Left</Alignment>
-            <Width>25</Width>
+            <Width>45</Width>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
