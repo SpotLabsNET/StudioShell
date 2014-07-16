@@ -244,6 +244,16 @@ namespace CodeOwls.PowerShell.WinForms
             }
         }
 
+        protected override bool ProcessCmdKey(ref Message m, Keys keyData)
+        {
+            if (Focused && Keys.Escape == keyData)
+            {
+                HandleEscape();
+            }
+
+            return base.ProcessCmdKey(ref m, keyData);
+        }
+
         private void HandleKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && !( e.Shift || e.Alt ) )
@@ -255,9 +265,7 @@ namespace CodeOwls.PowerShell.WinForms
             e.Handled = true;
             if (Keys.Escape == e.KeyCode)
             {
-                Select(_promptPosition, EndOfLinePosition);
-                UpdateCountsAndDeleteSelection();
-                FlushInputBuffer();
+                HandleEscape();
             }
             else if (Keys.Enter == e.KeyCode)
             {
@@ -363,6 +371,13 @@ namespace CodeOwls.PowerShell.WinForms
             {
                 e.Handled = false;
             }
+        }
+
+        private void HandleEscape()
+        {
+            Select(_promptPosition, EndOfLinePosition);
+            UpdateCountsAndDeleteSelection();
+            FlushInputBuffer();
         }
 
         private void HandleControlKeyDown(object sender, KeyEventArgs e)
