@@ -200,6 +200,7 @@
     <Compile Include="Nodes\PropertyModel\PropertyCollectionNodeFactory.cs" />
     <Compile Include="Nodes\PropertyModel\PropertyNodeFactory.cs" />
     <Compile Include="Nodes\PropertyModel\PropertyPageNodeFactory.cs" />
+    <Compile Include="Nodes\RenamedNodeFactoryDecorator.cs" />
     <Compile Include="Nodes\UI\ErrorListItemNodeFactory.cs" />
     <Compile Include="Nodes\UI\ErrorListNodeFactory.cs" />
     <Compile Include="Nodes\UI\OutputPaneCollectionNodeFactory.cs" />
