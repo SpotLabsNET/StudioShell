@@ -75,6 +75,8 @@
     <Compile Include="Variables\SelectedCodeElementVariable.cs" />
     <Compile Include="Variables\SelectedProjectItems.cs" />
     <Compile Include="Variables\SelectedProjects.cs" />
+    <Compile Include="Variables\StudioShellEnvironment.cs" />
+    <Compile Include="Variables\StudioShellVariable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CodeOwls.PowerShell\CodeOwls.PowerShell.Host\CodeOwls.PowerShell.Host.csproj">
