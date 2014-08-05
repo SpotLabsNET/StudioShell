@@ -214,7 +214,7 @@ namespace CodeOwls.StudioShell.Provider
             return new PSVariable[]
 	                   {
 	                       new PSVariable("dte", dte2),
-
+                           new StudioShellVariable(dte2), 
                            // adding each individual event container as a unique variable seems silly,
                            //   but it is apparantly necessary to have the types recognized as event-supporting
                            //   .NET COM wrappers in the powershell session

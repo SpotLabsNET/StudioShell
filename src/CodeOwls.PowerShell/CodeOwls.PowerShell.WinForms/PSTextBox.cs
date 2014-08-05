@@ -69,6 +69,7 @@ namespace CodeOwls.PowerShell.WinForms
 
             // This call is required by the Windows.Forms Form Designer.
             InitializeComponent();
+            
 
             _commandEnteredEvent = new AutoResetEvent(false);
             IsInputEntryModeEnabled = true;
