@@ -905,5 +905,29 @@ namespace CodeOwls.StudioShell.Provider.Variables
                 return new VsPublishState();
             }
         }
+
+        public _CodeModelLanguageConstants CodeModelLanguageConstants
+        {
+            get
+            {
+                return new _CodeModelLanguageConstants();
+            }
+        }
+
+        public Variables._CodeModelLanguageConstants2 CodeModelLanguageConstants2
+        {
+            get
+            {
+                return new _CodeModelLanguageConstants2();
+            }
+        }
+        public Variables._Constants Constants
+        {
+            get
+            {
+                return new _Constants();
+            }
+        }
+        
     }
 }
