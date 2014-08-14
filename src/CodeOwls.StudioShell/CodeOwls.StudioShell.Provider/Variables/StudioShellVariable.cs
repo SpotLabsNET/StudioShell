@@ -3233,7 +3233,7 @@ namespace CodeOwls.StudioShell.Provider.Variables
         {
             get
             {
-                return default(EnvDTE._vsIndentStyle);
+                return EnvDTE._vsIndentStyle.vsIndentStyleNone;
             }
         }
 
@@ -3241,16 +3241,13 @@ namespace CodeOwls.StudioShell.Provider.Variables
         {
             get
             {
-                return default(EnvDTE._vsIndentStyle);
+                return EnvDTE._vsIndentStyle.vsIndentStyleDefault;
             }
         }
 
         public EnvDTE._vsIndentStyle vsIndentStyleSmart
         {
-            get
-            {
-                return default(EnvDTE._vsIndentStyle);
-            }
+            get { return EnvDTE._vsIndentStyle.vsIndentStyleSmart; }
         }
     }
 
