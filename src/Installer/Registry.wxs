@@ -2,9 +2,9 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
     <ComponentGroup Id="ConsoleRegistryComponentGroup">
-      <Component Id="cmpA7C0114BDF5E4E80AB3AAE2A261A1F41" Directory="StudioShellApplicationFolder" Guid="{8168376D-8376-4AA2-AF59-EC482F1053B5}">        
+      <Component Id="cmpA7C0114BDF5E4E80AB3AAE2A261A1F41" Directory="StudioShellApplicationFolder" Guid="{8168376D-8376-4AA2-AF59-EC482F1053B5}">
         <RegistryValue Id="regConsoleIntegration" KeyPath="yes" Action="write" Root="HKCU" Key="SOFTWARE\Code Owls LLC\StudioShell\InstallState" Name="ConsoleIntegration" Value="1" Type="integer"/>
-        <Environment Id="envA7C0114BDF5E4E80AB3AAE2A261A1F41" Action="set" Part="last" Permanent="no" System="yes" Name="PSModulePath" Value="[ProgramFilesFolder]\[CompanyFolderName]" />
+        <Environment Id="envA7C0114BDF5E4E80AB3AAE2A261A1F41" Action="set" Part="last" Permanent="no" System="yes" Name="PSModulePath" Value="[ProgramFilesFolder][CompanyFolderName]" />
       </Component>
     </ComponentGroup>
 
@@ -21,7 +21,7 @@
       </Component>
     </ComponentGroup>
     <ComponentGroup Id="VS2012RegistryComponentGroup">
-      <Component Id="C_REG_VS2012" Guid="78dd33c7b9aa42409ae3da8923047935" Directory="StudioShellApplicationFolder">        
+      <Component Id="C_REG_VS2012" Guid="78dd33c7b9aa42409ae3da8923047935" Directory="StudioShellApplicationFolder">
         <RegistryValue Id="VS2012RegistryValue0"
                        KeyPath="yes"
                        Action="write"
@@ -33,7 +33,7 @@
       </Component>
     </ComponentGroup>
     <ComponentGroup Id="VS2010RegistryComponentGroup">
-      <Component Id="C_REG_VS2010" Guid="f0e7b95242c7482d99281abee1cc5bc2" Directory="StudioShellApplicationFolder">        
+      <Component Id="C_REG_VS2010" Guid="f0e7b95242c7482d99281abee1cc5bc2" Directory="StudioShellApplicationFolder">
         <RegistryValue Id="VS2010RegistryValue0"
                        KeyPath="yes"
                        Action="write"
@@ -65,7 +65,7 @@
                        Key="Software\Microsoft\SQL Server Management Studio\11.0\AutomationOptions\LookInFolders"
                        Value=""
                        Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
-                       Type="string"/>        
+                       Type="string"/>
       </Component>
     </ComponentGroup>
   </Fragment>
