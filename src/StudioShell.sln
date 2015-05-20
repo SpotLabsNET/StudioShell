@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionResources", "SolutionResources", "{4A18610A-DE9A-49CE-B480-BDD332E557CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOwls.PowerShell.WinForms", "CodeOwls.PowerShell\CodeOwls.PowerShell.WinForms\CodeOwls.PowerShell.WinForms.csproj", "{91F5B843-B1BC-4F80-BBD5-245878D7329F}"
@@ -26,6 +28,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{BE050775-73E5-4ABA-AD53-CB2055EA34C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StudioShellScripts", "StudioShellScripts", "{DD04F128-DC25-442D-9B99-C75C63429289}"
+	ProjectSection(SolutionItems) = preProject
+		StudioShellScripts\add-fileheader.ps1 = StudioShellScripts\add-fileheader.ps1
+		StudioShellScripts\new-enumValueWrapperClass.ps1 = StudioShellScripts\new-enumValueWrapperClass.ps1
+		StudioShellScripts\update-projectFrameworkVersion.ps1 = StudioShellScripts\update-projectFrameworkVersion.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
