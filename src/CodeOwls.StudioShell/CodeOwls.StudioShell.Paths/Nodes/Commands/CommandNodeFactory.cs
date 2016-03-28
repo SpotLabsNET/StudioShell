@@ -30,8 +30,12 @@ using CodeOwls.PowerShell.Provider.PathNodes;
 using EnvDTE80;
 using Command = EnvDTE.Command;
 
+using SvcBadException = CodeOwls.StudioShell.Common.Exceptions.ServiceUnavailableException;
+
 namespace CodeOwls.StudioShell.Paths.Nodes.Commands
 {
+    using Microsoft.VisualStudio.Shell;
+
     [CmdletHelpPathID("Command")]
     public class CommandNodeFactory : NodeFactoryBase, IRemoveItem, IInvokeItem, ISetItem
     {
@@ -88,7 +92,7 @@ namespace CodeOwls.StudioShell.Paths.Nodes.Commands
             DTE2 dte = Locator.Get<DTE2>();
             if( null == dte )
             {
-                throw new ServiceUnavailableException( typeof( DTE2 ) );
+                throw new SvcBadException( typeof( DTE2 ) );
             }
 
             dte.Commands.Raise(_command.Guid, _command.ID, ref ino, ref outo);
