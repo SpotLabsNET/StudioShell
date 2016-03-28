@@ -235,6 +235,7 @@
     <Content Include="StudioShell.VS2013.AddIn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\PSIconRestart.bmp" />
     <None Include="Resources\PSIconReset.bmp" />
